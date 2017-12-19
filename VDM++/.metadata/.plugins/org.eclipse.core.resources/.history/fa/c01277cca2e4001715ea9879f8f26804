@@ -1,0 +1,6 @@
+class Prescription
+instance variables
+  medicament:set of (Medicament);
+  code:?;
+
+end Prescription

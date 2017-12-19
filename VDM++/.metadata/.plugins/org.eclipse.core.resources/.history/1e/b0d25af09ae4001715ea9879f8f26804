@@ -1,0 +1,5 @@
+class Doctor is subclass of MedicalAssociated
+instance variables
+  specialty:set of (Specialty);
+
+end Doctor

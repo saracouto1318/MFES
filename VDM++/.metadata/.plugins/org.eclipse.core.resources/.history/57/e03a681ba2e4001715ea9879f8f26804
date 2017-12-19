@@ -1,0 +1,27 @@
+class Person
+
+types
+	public String = seq of (char);
+instance variables
+  public address: String;
+  public firstName: String;
+  public lastName: String;
+  
+operations
+	public Person: String * String * String ==> Person
+		Person(a, fn, ln) == ( address := a; firstName := fn; lastName := ln; return self)
+	post address = a and firstName = fn and lastName = ln;
+	
+	pure public getAddress : () ==> String
+		getAddress() == (return address);
+		
+	pure public getName : () ==> String
+		getName() == (return firstName union lastName);
+		
+	pure public getFirstName : () ==> String
+		getFirstName() == (return firstName);
+		
+	pure public getLastName : () ==> String
+		getLastName() == (return lastName);
+
+end Person

@@ -1,0 +1,7 @@
+class Person
+instance variables
+  city:City;
+  firstName:seq of (char);
+  lastName:seq of (char);
+
+end Person

@@ -1,0 +1,35 @@
+class Training
+
+types 
+	public Purpose = <Training> | <AddSkills>;
+	
+instance variables
+  public medicalAssociated:set of (MedicalAssociated);
+  public purpose:Purpose;
+  public schedule:Schedule;
+  
+  inv card medicalAssociated > 1 and card medicalAssociated < 10;
+operations
+	public Training: Purpose * Schedule ==> Training
+		Training(p, s) == (purpose := p; schedule := s; medicalAssociated := {}; return self)
+	post purpose = p and schedule = s and medicalAssociated = {};
+	
+	pure public getSchedule : () ==> Schedule
+		getSchedule() == (return schedule);
+		
+	pure public getPurpose : () ==> Purpose
+		getPurpose() == (return purpose);
+		
+	pure public addMedicalAssociated: MedicalAssociated ==> set of (MedicalAssociated)
+		addMedicalAssociated(m) == (return medicalAssociated union {m});
+		
+	pure public removeMedicalAssociated: MedicalAssociated ==> set of (MedicalAssociated)
+		removeMedicalAssociated(m) == (return medicalAssociated \ {m});
+		
+	public setSchedule : Schedule ==> ()
+		setSchedule(s) == (schedule := s);
+	
+	public setPurpose : Purpose ==> ()
+		setPurpose(p) == (pupose := p);
+
+end Training

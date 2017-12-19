@@ -1,0 +1,10 @@
+class Person
+
+types
+	public String = seq of (char);
+instance variables
+  address: String;
+  firstName: String;
+  lastName: String;
+
+end Person

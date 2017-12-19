@@ -1,0 +1,10 @@
+class Doctor is subclass of MedicalAssociated
+types
+
+instance variables
+  
+operations
+	public Doctor: () ==> Surgeon
+		Doctor() == (return self);
+
+end Doctor

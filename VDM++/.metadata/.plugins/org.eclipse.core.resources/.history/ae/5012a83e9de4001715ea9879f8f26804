@@ -1,0 +1,12 @@
+class Doctor is subclass of MedicalAssociated
+types
+
+instance variables
+  specialty:set of (Specialty);
+  
+operations
+	public Doctor: set of(Specialty) ==> Doctor
+		Doctor(s) == (specialty := s; return self)
+	post specialty = s;
+
+end Doctor

@@ -1,0 +1,7 @@
+class NormalDoctor is subclass of Doctor
+
+operations
+	public NormalDoctor: () ==> NormalDoctor
+		NormalDoctor() == (return self);
+		
+end NormalDoctor

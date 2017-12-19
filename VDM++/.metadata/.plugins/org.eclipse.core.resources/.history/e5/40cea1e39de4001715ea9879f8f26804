@@ -1,0 +1,6 @@
+class HospitalTreatment
+instance variables
+  technician:Technician;
+  name:seq of (char);
+
+end HospitalTreatment

@@ -1,0 +1,13 @@
+class NormalDoctor is subclass of Doctor
+
+instance variables
+	public patients : set of(Patient);
+operations
+	public NormalDoctor: () ==> NormalDoctor
+		NormalDoctor() == (patients := {}; return self);
+	post patient = {};
+	
+	public addPatient : Patient ==> set of(Patient)
+		addPatient(p) == (return patients union {p});
+		
+end NormalDoctor

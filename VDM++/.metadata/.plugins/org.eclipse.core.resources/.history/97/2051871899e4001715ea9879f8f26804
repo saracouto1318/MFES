@@ -1,0 +1,6 @@
+class Appointment
+instance variables
+  doctor:Doctor;
+  prescription:set of (Prescription);
+
+end Appointment

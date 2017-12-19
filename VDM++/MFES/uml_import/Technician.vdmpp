@@ -1,0 +1,8 @@
+class Technician is subclass of MedicalAssociated
+instance variables
+ 
+operations
+	public Technician : () ==> Technician
+		Technician() == (return self);
+
+end Technician

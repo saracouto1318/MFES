@@ -1,0 +1,313 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<uml:Model xmi:version="2.1" xmlns:xmi="http://schema.omg.org/spec/XMI/2.1" xmlns:uml="http://www.eclipse.org/uml2/3.0.0/UML" xmi:id="_jUmwwOQhEeeSOuCZUnt2qA" name="mfes">
+  <eAnnotations xmi:id="_jUmwweQhEeeSOuCZUnt2qA" source="Objing">
+    <contents xmi:type="uml:Property" xmi:id="_jUmwwuQhEeeSOuCZUnt2qA" name="exporterVersion">
+      <defaultValue xmi:type="uml:LiteralString" xmi:id="_jUmww-QhEeeSOuCZUnt2qA" value="3.0.0"/>
+    </contents>
+  </eAnnotations>
+  <packagedElement xmi:type="uml:Class" xmi:id="_jUmwxOQhEeeSOuCZUnt2qA" name="Hospital">
+    <ownedAttribute xmi:id="_jUmwxeQhEeeSOuCZUnt2qA" name="city" visibility="public" type="_jUnX8uQhEeeSOuCZUnt2qA" association="_jUmwyuQhEeeSOuCZUnt2qA"/>
+    <ownedAttribute xmi:id="_jUmwxuQhEeeSOuCZUnt2qA" name="medicalAssociated" visibility="public" type="_jUnYN-QhEeeSOuCZUnt2qA" association="_jUmwz-QhEeeSOuCZUnt2qA">
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_jUmwx-QhEeeSOuCZUnt2qA" value="*"/>
+    </ownedAttribute>
+    <ownedAttribute xmi:id="_jUmwyOQhEeeSOuCZUnt2qA" name="name" aggregation="composite">
+      <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+    </ownedAttribute>
+    <ownedAttribute xmi:id="_jUmwyeQhEeeSOuCZUnt2qA" name="address" aggregation="composite">
+      <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+    </ownedAttribute>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Association" xmi:id="_jUmwyuQhEeeSOuCZUnt2qA" memberEnd="_jUmwxeQhEeeSOuCZUnt2qA _jUmwy-QhEeeSOuCZUnt2qA">
+    <ownedEnd xmi:id="_jUmwy-QhEeeSOuCZUnt2qA" visibility="public" type="_jUmwxOQhEeeSOuCZUnt2qA" association="_jUmwyuQhEeeSOuCZUnt2qA">
+      <ownedComment xmi:id="_jUmwzOQhEeeSOuCZUnt2qA">
+        <body>&lt;Enter note text here></body>
+      </ownedComment>
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_jUmwzeQhEeeSOuCZUnt2qA" value="*"/>
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_jUmwzuQhEeeSOuCZUnt2qA"/>
+    </ownedEnd>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Association" xmi:id="_jUmwz-QhEeeSOuCZUnt2qA" memberEnd="_jUmwxuQhEeeSOuCZUnt2qA _jUmw0OQhEeeSOuCZUnt2qA">
+    <ownedEnd xmi:id="_jUmw0OQhEeeSOuCZUnt2qA" visibility="public" type="_jUmwxOQhEeeSOuCZUnt2qA" association="_jUmwz-QhEeeSOuCZUnt2qA">
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_jUmw0eQhEeeSOuCZUnt2qA" value="*"/>
+    </ownedEnd>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Class" xmi:id="_jUmw0uQhEeeSOuCZUnt2qA" name="Doctor">
+    <generalization xmi:id="_jUmw0-QhEeeSOuCZUnt2qA" general="_jUnYN-QhEeeSOuCZUnt2qA"/>
+    <ownedAttribute xmi:id="_jUmw1OQhEeeSOuCZUnt2qA" name="specialty" visibility="public" type="_jUmw3eQhEeeSOuCZUnt2qA" association="_jUmw1uQhEeeSOuCZUnt2qA">
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_jUmw1eQhEeeSOuCZUnt2qA" value="*"/>
+    </ownedAttribute>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Association" xmi:id="_jUmw1uQhEeeSOuCZUnt2qA" memberEnd="_jUmw1OQhEeeSOuCZUnt2qA _jUmw1-QhEeeSOuCZUnt2qA">
+    <ownedEnd xmi:id="_jUmw1-QhEeeSOuCZUnt2qA" visibility="public" type="_jUmw0uQhEeeSOuCZUnt2qA" association="_jUmw1uQhEeeSOuCZUnt2qA">
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_jUmw2OQhEeeSOuCZUnt2qA" value="*"/>
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_jUmw2eQhEeeSOuCZUnt2qA"/>
+    </ownedEnd>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Class" xmi:id="_jUmw2uQhEeeSOuCZUnt2qA" name="Patient">
+    <generalization xmi:id="_jUmw2-QhEeeSOuCZUnt2qA" general="_jUnX3eQhEeeSOuCZUnt2qA"/>
+    <ownedAttribute xmi:id="_jUmw3OQhEeeSOuCZUnt2qA" name="healthNumber" aggregation="composite">
+      <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/EcorePrimitiveTypes.library.uml#ELong"/>
+    </ownedAttribute>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Class" xmi:id="_jUmw3eQhEeeSOuCZUnt2qA" name="Specialty">
+    <ownedComment xmi:id="_jUmw3uQhEeeSOuCZUnt2qA">
+      <body>&lt;Enter note text here></body>
+    </ownedComment>
+    <ownedAttribute xmi:id="_jUmw3-QhEeeSOuCZUnt2qA" name="name" aggregation="composite">
+      <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+    </ownedAttribute>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Class" xmi:id="_jUmw4OQhEeeSOuCZUnt2qA" name="Prescription">
+    <ownedAttribute xmi:id="_jUmw4eQhEeeSOuCZUnt2qA" name="medicament" visibility="public" type="_jUnX1OQhEeeSOuCZUnt2qA" association="_jUnX0eQhEeeSOuCZUnt2qA">
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_jUmw4uQhEeeSOuCZUnt2qA" value="*"/>
+    </ownedAttribute>
+    <ownedAttribute xmi:id="_jUnX0OQhEeeSOuCZUnt2qA" name="code" aggregation="composite">
+      <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/EcorePrimitiveTypes.library.uml#ELong"/>
+    </ownedAttribute>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Association" xmi:id="_jUnX0eQhEeeSOuCZUnt2qA" memberEnd="_jUmw4eQhEeeSOuCZUnt2qA _jUnX0uQhEeeSOuCZUnt2qA">
+    <ownedEnd xmi:id="_jUnX0uQhEeeSOuCZUnt2qA" visibility="public" type="_jUmw4OQhEeeSOuCZUnt2qA" association="_jUnX0eQhEeeSOuCZUnt2qA">
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_jUnX0-QhEeeSOuCZUnt2qA"/>
+    </ownedEnd>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Class" xmi:id="_jUnX1OQhEeeSOuCZUnt2qA" name="Medicament">
+    <ownedAttribute xmi:id="_jUnX1eQhEeeSOuCZUnt2qA" name="restrictions" visibility="public" type="_jUnYHeQhEeeSOuCZUnt2qA" association="_jUnX2eQhEeeSOuCZUnt2qA">
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_jUnX1uQhEeeSOuCZUnt2qA" value="*"/>
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_jUnX1-QhEeeSOuCZUnt2qA"/>
+    </ownedAttribute>
+    <ownedAttribute xmi:id="_jUnX2OQhEeeSOuCZUnt2qA" name="name" aggregation="composite">
+      <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+    </ownedAttribute>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Association" xmi:id="_jUnX2eQhEeeSOuCZUnt2qA" memberEnd="_jUnX1eQhEeeSOuCZUnt2qA _jUnX2uQhEeeSOuCZUnt2qA">
+    <ownedEnd xmi:id="_jUnX2uQhEeeSOuCZUnt2qA" visibility="public" type="_jUnX1OQhEeeSOuCZUnt2qA" association="_jUnX2eQhEeeSOuCZUnt2qA">
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_jUnX2-QhEeeSOuCZUnt2qA" value="*"/>
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_jUnX3OQhEeeSOuCZUnt2qA"/>
+    </ownedEnd>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Class" xmi:id="_jUnX3eQhEeeSOuCZUnt2qA" name="Person">
+    <ownedComment xmi:id="_jUnX3uQhEeeSOuCZUnt2qA">
+      <body>&lt;Enter note text here></body>
+    </ownedComment>
+    <ownedAttribute xmi:id="_jUnX3-QhEeeSOuCZUnt2qA" name="city" visibility="public" type="_jUnX8uQhEeeSOuCZUnt2qA" association="_jUnX4uQhEeeSOuCZUnt2qA"/>
+    <ownedAttribute xmi:id="_jUnX4OQhEeeSOuCZUnt2qA" name="firstName" aggregation="composite">
+      <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+    </ownedAttribute>
+    <ownedAttribute xmi:id="_jUnX4eQhEeeSOuCZUnt2qA" name="lastName" aggregation="composite">
+      <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+    </ownedAttribute>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Association" xmi:id="_jUnX4uQhEeeSOuCZUnt2qA" memberEnd="_jUnX3-QhEeeSOuCZUnt2qA _jUnX4-QhEeeSOuCZUnt2qA">
+    <ownedEnd xmi:id="_jUnX4-QhEeeSOuCZUnt2qA" visibility="public" type="_jUnX3eQhEeeSOuCZUnt2qA" association="_jUnX4uQhEeeSOuCZUnt2qA">
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_jUnX5OQhEeeSOuCZUnt2qA" value="*"/>
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_jUnX5eQhEeeSOuCZUnt2qA"/>
+    </ownedEnd>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Class" xmi:id="_jUnX5uQhEeeSOuCZUnt2qA" name="Nurse">
+    <generalization xmi:id="_jUnX5-QhEeeSOuCZUnt2qA" general="_jUnYN-QhEeeSOuCZUnt2qA"/>
+    <ownedAttribute xmi:id="_jUnX6OQhEeeSOuCZUnt2qA" name="specialty" visibility="public" type="_jUmw3eQhEeeSOuCZUnt2qA" association="_jUnX6uQhEeeSOuCZUnt2qA">
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_jUnX6eQhEeeSOuCZUnt2qA" value="*"/>
+    </ownedAttribute>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Association" xmi:id="_jUnX6uQhEeeSOuCZUnt2qA" memberEnd="_jUnX6OQhEeeSOuCZUnt2qA _jUnX6-QhEeeSOuCZUnt2qA">
+    <ownedEnd xmi:id="_jUnX6-QhEeeSOuCZUnt2qA" visibility="public" type="_jUnX5uQhEeeSOuCZUnt2qA" association="_jUnX6uQhEeeSOuCZUnt2qA">
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_jUnX7OQhEeeSOuCZUnt2qA" value="*"/>
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_jUnX7eQhEeeSOuCZUnt2qA"/>
+    </ownedEnd>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Class" xmi:id="_jUnX7uQhEeeSOuCZUnt2qA" name="NormalDoctor">
+    <generalization xmi:id="_jUnX7-QhEeeSOuCZUnt2qA" general="_jUmw0uQhEeeSOuCZUnt2qA"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Class" xmi:id="_jUnX8OQhEeeSOuCZUnt2qA" name="Surgeon">
+    <generalization xmi:id="_jUnX8eQhEeeSOuCZUnt2qA" general="_jUmw0uQhEeeSOuCZUnt2qA"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Class" xmi:id="_jUnX8uQhEeeSOuCZUnt2qA" name="City">
+    <ownedComment xmi:id="_jUnX8-QhEeeSOuCZUnt2qA">
+      <body>&lt;Enter note text here></body>
+    </ownedComment>
+    <ownedAttribute xmi:id="_jUnX9OQhEeeSOuCZUnt2qA" name="name" aggregation="composite">
+      <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+    </ownedAttribute>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Class" xmi:id="_jUnX9eQhEeeSOuCZUnt2qA" name="Schedule">
+    <ownedAttribute xmi:id="_jUnX9uQhEeeSOuCZUnt2qA" name="start" aggregation="composite">
+      <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/EcorePrimitiveTypes.library.uml#EDate"/>
+    </ownedAttribute>
+    <ownedAttribute xmi:id="_jUnX9-QhEeeSOuCZUnt2qA" name="end" aggregation="composite">
+      <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/EcorePrimitiveTypes.library.uml#EDate"/>
+    </ownedAttribute>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Class" xmi:id="_jUnX-OQhEeeSOuCZUnt2qA" name="HospitalTreatment">
+    <ownedComment xmi:id="_jUnX-eQhEeeSOuCZUnt2qA">
+      <body>&lt;Enter note text here></body>
+    </ownedComment>
+    <generalization xmi:id="_jUnX-uQhEeeSOuCZUnt2qA" general="_jUnYOuQhEeeSOuCZUnt2qA"/>
+    <ownedAttribute xmi:id="_jUnX--QhEeeSOuCZUnt2qA" name="technician" visibility="public" type="_jUnYAeQhEeeSOuCZUnt2qA" association="_jUnX_eQhEeeSOuCZUnt2qA"/>
+    <ownedAttribute xmi:id="_jUnX_OQhEeeSOuCZUnt2qA" name="name" aggregation="composite">
+      <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+    </ownedAttribute>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Association" xmi:id="_jUnX_eQhEeeSOuCZUnt2qA" memberEnd="_jUnX--QhEeeSOuCZUnt2qA _jUnX_uQhEeeSOuCZUnt2qA">
+    <ownedEnd xmi:id="_jUnX_uQhEeeSOuCZUnt2qA" visibility="public" type="_jUnX-OQhEeeSOuCZUnt2qA" association="_jUnX_eQhEeeSOuCZUnt2qA">
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_jUnX_-QhEeeSOuCZUnt2qA" value="*"/>
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_jUnYAOQhEeeSOuCZUnt2qA"/>
+    </ownedEnd>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Class" xmi:id="_jUnYAeQhEeeSOuCZUnt2qA" name="Technician">
+    <generalization xmi:id="_jUnYAuQhEeeSOuCZUnt2qA" general="_jUnYN-QhEeeSOuCZUnt2qA"/>
+    <ownedAttribute xmi:id="_jUnYA-QhEeeSOuCZUnt2qA" name="specialty" visibility="public" type="_jUmw3eQhEeeSOuCZUnt2qA" association="_jUnYBeQhEeeSOuCZUnt2qA">
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_jUnYBOQhEeeSOuCZUnt2qA" value="*"/>
+    </ownedAttribute>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Association" xmi:id="_jUnYBeQhEeeSOuCZUnt2qA" memberEnd="_jUnYA-QhEeeSOuCZUnt2qA _jUnYBuQhEeeSOuCZUnt2qA">
+    <ownedEnd xmi:id="_jUnYBuQhEeeSOuCZUnt2qA" visibility="public" type="_jUnYAeQhEeeSOuCZUnt2qA" association="_jUnYBeQhEeeSOuCZUnt2qA">
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_jUnYB-QhEeeSOuCZUnt2qA" value="*"/>
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_jUnYCOQhEeeSOuCZUnt2qA"/>
+    </ownedEnd>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Class" xmi:id="_jUnYCeQhEeeSOuCZUnt2qA" name="Surgery">
+    <generalization xmi:id="_jUnYCuQhEeeSOuCZUnt2qA" general="_jUnYOuQhEeeSOuCZUnt2qA"/>
+    <ownedAttribute xmi:id="_jUnYC-QhEeeSOuCZUnt2qA" name="mainDoctor" visibility="public" type="_jUmw0uQhEeeSOuCZUnt2qA" association="_jUnYEeQhEeeSOuCZUnt2qA"/>
+    <ownedAttribute xmi:id="_jUnYDOQhEeeSOuCZUnt2qA" name="secondaryDoctors" visibility="public" type="_jUmw0uQhEeeSOuCZUnt2qA" association="_jUnYFeQhEeeSOuCZUnt2qA">
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_jUnYDeQhEeeSOuCZUnt2qA" value="*"/>
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_jUnYDuQhEeeSOuCZUnt2qA"/>
+    </ownedAttribute>
+    <ownedAttribute xmi:id="_jUnYD-QhEeeSOuCZUnt2qA" name="nurse" visibility="public" type="_jUnX5uQhEeeSOuCZUnt2qA" association="_jUnYGeQhEeeSOuCZUnt2qA">
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_jUnYEOQhEeeSOuCZUnt2qA" value="*"/>
+    </ownedAttribute>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Association" xmi:id="_jUnYEeQhEeeSOuCZUnt2qA" memberEnd="_jUnYC-QhEeeSOuCZUnt2qA _jUnYEuQhEeeSOuCZUnt2qA">
+    <ownedEnd xmi:id="_jUnYEuQhEeeSOuCZUnt2qA" visibility="public" type="_jUnYCeQhEeeSOuCZUnt2qA" association="_jUnYEeQhEeeSOuCZUnt2qA">
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_jUnYE-QhEeeSOuCZUnt2qA" value="*"/>
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_jUnYFOQhEeeSOuCZUnt2qA"/>
+    </ownedEnd>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Association" xmi:id="_jUnYFeQhEeeSOuCZUnt2qA" memberEnd="_jUnYDOQhEeeSOuCZUnt2qA _jUnYFuQhEeeSOuCZUnt2qA">
+    <ownedEnd xmi:id="_jUnYFuQhEeeSOuCZUnt2qA" visibility="public" type="_jUnYCeQhEeeSOuCZUnt2qA" association="_jUnYFeQhEeeSOuCZUnt2qA">
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_jUnYF-QhEeeSOuCZUnt2qA" value="*"/>
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_jUnYGOQhEeeSOuCZUnt2qA"/>
+    </ownedEnd>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Association" xmi:id="_jUnYGeQhEeeSOuCZUnt2qA" memberEnd="_jUnYD-QhEeeSOuCZUnt2qA _jUnYGuQhEeeSOuCZUnt2qA">
+    <ownedEnd xmi:id="_jUnYGuQhEeeSOuCZUnt2qA" visibility="public" type="_jUnYCeQhEeeSOuCZUnt2qA" association="_jUnYGeQhEeeSOuCZUnt2qA">
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_jUnYG-QhEeeSOuCZUnt2qA" value="*"/>
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_jUnYHOQhEeeSOuCZUnt2qA"/>
+    </ownedEnd>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Class" xmi:id="_jUnYHeQhEeeSOuCZUnt2qA" name="Restrictions">
+    <ownedAttribute xmi:id="_jUnYHuQhEeeSOuCZUnt2qA" name="hour" aggregation="composite">
+      <ownedComment xmi:id="_jUnYH-QhEeeSOuCZUnt2qA">
+        <body>&lt;Enter note text here></body>
+      </ownedComment>
+      <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/EcorePrimitiveTypes.library.uml#EDate"/>
+    </ownedAttribute>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Class" xmi:id="_jUnYIOQhEeeSOuCZUnt2qA" name="Training">
+    <ownedAttribute xmi:id="_jUnYIeQhEeeSOuCZUnt2qA" name="medicalAssociated" visibility="public" type="_jUnYN-QhEeeSOuCZUnt2qA" association="_jUnYJuQhEeeSOuCZUnt2qA">
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_jUnYIuQhEeeSOuCZUnt2qA" value="*"/>
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_jUnYI-QhEeeSOuCZUnt2qA"/>
+    </ownedAttribute>
+    <ownedAttribute xmi:id="_jUnYJOQhEeeSOuCZUnt2qA" name="purpose" visibility="public" type="_jUnYMOQhEeeSOuCZUnt2qA" association="_jUnYKuQhEeeSOuCZUnt2qA"/>
+    <ownedAttribute xmi:id="_jUnYJeQhEeeSOuCZUnt2qA" name="schedule" visibility="public" type="_jUnX9eQhEeeSOuCZUnt2qA" association="_jUnYLuQhEeeSOuCZUnt2qA"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Association" xmi:id="_jUnYJuQhEeeSOuCZUnt2qA" memberEnd="_jUnYIeQhEeeSOuCZUnt2qA _jUnYJ-QhEeeSOuCZUnt2qA">
+    <ownedEnd xmi:id="_jUnYJ-QhEeeSOuCZUnt2qA" visibility="public" type="_jUnYIOQhEeeSOuCZUnt2qA" association="_jUnYJuQhEeeSOuCZUnt2qA">
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_jUnYKOQhEeeSOuCZUnt2qA" value="*"/>
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_jUnYKeQhEeeSOuCZUnt2qA"/>
+    </ownedEnd>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Association" xmi:id="_jUnYKuQhEeeSOuCZUnt2qA" memberEnd="_jUnYJOQhEeeSOuCZUnt2qA _jUnYK-QhEeeSOuCZUnt2qA">
+    <ownedEnd xmi:id="_jUnYK-QhEeeSOuCZUnt2qA" visibility="public" type="_jUnYIOQhEeeSOuCZUnt2qA" association="_jUnYKuQhEeeSOuCZUnt2qA">
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_jUnYLOQhEeeSOuCZUnt2qA" value="*"/>
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_jUnYLeQhEeeSOuCZUnt2qA"/>
+    </ownedEnd>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Association" xmi:id="_jUnYLuQhEeeSOuCZUnt2qA" memberEnd="_jUnYJeQhEeeSOuCZUnt2qA _jUnYL-QhEeeSOuCZUnt2qA">
+    <ownedEnd xmi:id="_jUnYL-QhEeeSOuCZUnt2qA" visibility="public" type="_jUnYIOQhEeeSOuCZUnt2qA" association="_jUnYLuQhEeeSOuCZUnt2qA"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Enumeration" xmi:id="_jUnYMOQhEeeSOuCZUnt2qA" name="Purpose">
+    <ownedLiteral xmi:id="_jUnYMeQhEeeSOuCZUnt2qA" name="Add Skills"/>
+    <ownedLiteral xmi:id="_jUnYMuQhEeeSOuCZUnt2qA" name="Training"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Enumeration" xmi:id="_jUnYM-QhEeeSOuCZUnt2qA" name="Priority">
+    <ownedLiteral xmi:id="_jUnYNOQhEeeSOuCZUnt2qA" name="High"/>
+    <ownedLiteral xmi:id="_jUnYNeQhEeeSOuCZUnt2qA" name="Medium"/>
+    <ownedLiteral xmi:id="_jUnYNuQhEeeSOuCZUnt2qA" name="Low"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Class" xmi:id="_jUnYN-QhEeeSOuCZUnt2qA" name="MedicalAssociated">
+    <generalization xmi:id="_jUnYOOQhEeeSOuCZUnt2qA" general="_jUnX3eQhEeeSOuCZUnt2qA"/>
+    <ownedAttribute xmi:id="_jUnYOeQhEeeSOuCZUnt2qA" name="medicalNumber" aggregation="composite">
+      <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/EcorePrimitiveTypes.library.uml#ELong"/>
+    </ownedAttribute>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Class" xmi:id="_jUnYOuQhEeeSOuCZUnt2qA" name="Task">
+    <ownedAttribute xmi:id="_jUnYO-QhEeeSOuCZUnt2qA" name="schedule" visibility="public" type="_jUnX9eQhEeeSOuCZUnt2qA" association="_jUnYQOQhEeeSOuCZUnt2qA"/>
+    <ownedAttribute xmi:id="_jUnYPOQhEeeSOuCZUnt2qA" name="patient" visibility="public" type="_jUmw2uQhEeeSOuCZUnt2qA" association="_jUnYROQhEeeSOuCZUnt2qA"/>
+    <ownedAttribute xmi:id="_jUnYPeQhEeeSOuCZUnt2qA" name="hospital" visibility="public" type="_jUmwxOQhEeeSOuCZUnt2qA" association="_jUnYSOQhEeeSOuCZUnt2qA">
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_jUnYPuQhEeeSOuCZUnt2qA" value="*"/>
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_jUnYP-QhEeeSOuCZUnt2qA"/>
+    </ownedAttribute>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Association" xmi:id="_jUnYQOQhEeeSOuCZUnt2qA" memberEnd="_jUnYO-QhEeeSOuCZUnt2qA _jUnYQeQhEeeSOuCZUnt2qA">
+    <ownedEnd xmi:id="_jUnYQeQhEeeSOuCZUnt2qA" visibility="public" type="_jUnYOuQhEeeSOuCZUnt2qA" association="_jUnYQOQhEeeSOuCZUnt2qA">
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_jUnYQuQhEeeSOuCZUnt2qA" value="*"/>
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_jUnYQ-QhEeeSOuCZUnt2qA"/>
+    </ownedEnd>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Association" xmi:id="_jUnYROQhEeeSOuCZUnt2qA" memberEnd="_jUnYPOQhEeeSOuCZUnt2qA _jUnYReQhEeeSOuCZUnt2qA">
+    <ownedEnd xmi:id="_jUnYReQhEeeSOuCZUnt2qA" visibility="public" type="_jUnYOuQhEeeSOuCZUnt2qA" association="_jUnYROQhEeeSOuCZUnt2qA">
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_jUnYRuQhEeeSOuCZUnt2qA" value="*"/>
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_jUnYR-QhEeeSOuCZUnt2qA"/>
+    </ownedEnd>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Association" xmi:id="_jUnYSOQhEeeSOuCZUnt2qA" memberEnd="_jUnYPeQhEeeSOuCZUnt2qA _jUnYSeQhEeeSOuCZUnt2qA">
+    <ownedEnd xmi:id="_jUnYSeQhEeeSOuCZUnt2qA" visibility="public" type="_jUnYOuQhEeeSOuCZUnt2qA" association="_jUnYSOQhEeeSOuCZUnt2qA">
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_jUnYSuQhEeeSOuCZUnt2qA" value="*"/>
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_jUnYS-QhEeeSOuCZUnt2qA"/>
+    </ownedEnd>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Class" xmi:id="_jUnYTOQhEeeSOuCZUnt2qA" name="NursingTreatment">
+    <generalization xmi:id="_jUnYTeQhEeeSOuCZUnt2qA" general="_jUnYOuQhEeeSOuCZUnt2qA"/>
+    <ownedAttribute xmi:id="_jUnYTuQhEeeSOuCZUnt2qA" name="nurse" visibility="public" type="_jUnX5uQhEeeSOuCZUnt2qA" association="_jUnYT-QhEeeSOuCZUnt2qA"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Association" xmi:id="_jUnYT-QhEeeSOuCZUnt2qA" memberEnd="_jUnYTuQhEeeSOuCZUnt2qA _jUnYUOQhEeeSOuCZUnt2qA">
+    <ownedEnd xmi:id="_jUnYUOQhEeeSOuCZUnt2qA" visibility="public" type="_jUnYTOQhEeeSOuCZUnt2qA" association="_jUnYT-QhEeeSOuCZUnt2qA">
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_jUnYUeQhEeeSOuCZUnt2qA" value="*"/>
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_jUnYUuQhEeeSOuCZUnt2qA"/>
+    </ownedEnd>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Class" xmi:id="_jUnYU-QhEeeSOuCZUnt2qA" name="Appointment">
+    <generalization xmi:id="_jUnYVOQhEeeSOuCZUnt2qA" general="_jUnYOuQhEeeSOuCZUnt2qA"/>
+    <ownedAttribute xmi:id="_jUnYVeQhEeeSOuCZUnt2qA" name="doctor" visibility="public" type="_jUmw0uQhEeeSOuCZUnt2qA" association="_jUnYWeQhEeeSOuCZUnt2qA"/>
+    <ownedAttribute xmi:id="_jUnYVuQhEeeSOuCZUnt2qA" name="prescription" visibility="public" type="_jUmw4OQhEeeSOuCZUnt2qA" association="_jUnYXeQhEeeSOuCZUnt2qA">
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_jUnYV-QhEeeSOuCZUnt2qA" value="*"/>
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_jUnYWOQhEeeSOuCZUnt2qA"/>
+    </ownedAttribute>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Association" xmi:id="_jUnYWeQhEeeSOuCZUnt2qA" memberEnd="_jUnYVeQhEeeSOuCZUnt2qA _jUnYWuQhEeeSOuCZUnt2qA">
+    <ownedEnd xmi:id="_jUnYWuQhEeeSOuCZUnt2qA" visibility="public" type="_jUnYU-QhEeeSOuCZUnt2qA" association="_jUnYWeQhEeeSOuCZUnt2qA">
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_jUnYW-QhEeeSOuCZUnt2qA" value="*"/>
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_jUnYXOQhEeeSOuCZUnt2qA"/>
+    </ownedEnd>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Association" xmi:id="_jUnYXeQhEeeSOuCZUnt2qA" memberEnd="_jUnYVuQhEeeSOuCZUnt2qA _jUnYXuQhEeeSOuCZUnt2qA">
+    <ownedEnd xmi:id="_jUnYXuQhEeeSOuCZUnt2qA" visibility="public" type="_jUnYU-QhEeeSOuCZUnt2qA" association="_jUnYXeQhEeeSOuCZUnt2qA">
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_jUnYX-QhEeeSOuCZUnt2qA" value="*"/>
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_jUnYYOQhEeeSOuCZUnt2qA"/>
+    </ownedEnd>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Class" xmi:id="_jUnYYeQhEeeSOuCZUnt2qA" name="Urgencies">
+    <generalization xmi:id="_jUnYYuQhEeeSOuCZUnt2qA" general="_jUnYOuQhEeeSOuCZUnt2qA"/>
+    <ownedAttribute xmi:id="_jUnYY-QhEeeSOuCZUnt2qA" name="priority" visibility="public" type="_jUnYM-QhEeeSOuCZUnt2qA" association="_jUnYZeQhEeeSOuCZUnt2qA">
+      <ownedComment xmi:id="_jUnYZOQhEeeSOuCZUnt2qA">
+        <body>&lt;Enter note text here></body>
+      </ownedComment>
+    </ownedAttribute>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Association" xmi:id="_jUnYZeQhEeeSOuCZUnt2qA" memberEnd="_jUnYY-QhEeeSOuCZUnt2qA _jUnYZuQhEeeSOuCZUnt2qA">
+    <ownedEnd xmi:id="_jUnYZuQhEeeSOuCZUnt2qA" visibility="public" type="_jUnYYeQhEeeSOuCZUnt2qA" association="_jUnYZeQhEeeSOuCZUnt2qA">
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_jUnYZ-QhEeeSOuCZUnt2qA" value="*"/>
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_jUnYaOQhEeeSOuCZUnt2qA"/>
+    </ownedEnd>
+  </packagedElement>
+</uml:Model>

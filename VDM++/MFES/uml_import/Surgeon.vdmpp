@@ -1,0 +1,6 @@
+class Surgeon is subclass of Doctor
+
+operations
+	public Surgeon: () ==> Surgeon
+		Surgeon() == (return self);
+end Surgeon

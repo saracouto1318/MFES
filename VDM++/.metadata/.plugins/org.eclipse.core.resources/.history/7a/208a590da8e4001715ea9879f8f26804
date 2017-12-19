@@ -1,0 +1,3 @@
+class NormalDoctor is subclass of Doctor
+	
+end NormalDoctor

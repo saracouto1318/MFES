@@ -1,0 +1,5 @@
+class Nurse
+instance variables
+  specialty:set of (Specialty);
+
+end Nurse

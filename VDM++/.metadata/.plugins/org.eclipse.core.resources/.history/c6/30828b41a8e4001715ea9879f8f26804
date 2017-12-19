@@ -1,0 +1,9 @@
+class NormalDoctor is subclass of Doctor
+
+instance variables
+	public patients : set of(Patient);
+operations
+	public NormalDoctor: () ==> NormalDoctor
+		NormalDoctor() == (return self);
+		
+end NormalDoctor

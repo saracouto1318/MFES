@@ -1,0 +1,33 @@
+class Hospital
+types
+	public String = seq of(char);
+instance variables
+  public medicalAssociated: set of (MedicalAssociated);
+  public name: String;
+  public address: String;
+ 
+operations
+
+	public Hospital: String * String ==> Hospital
+		Hospital(n, a) == (name := n; address := a; medicalAssociated := {}; return self)
+	post name = n and address = a and medicalAssociated = {};
+	
+	pure public getName: () ==> String
+		getName() == (return name);
+	
+	pure public getAddress: () ==> String
+		getAddress() == (return address);
+		
+	pure public getMedicalAssociated: () ==> set of (MedicalAssociated)
+		getMedicalAssociated() == (return medicalAssociated);
+	
+	pure public getMedAssociated: String ==> MedicalAssociated
+		getMedAssociated(name) == (
+																			for all m in set medicalAssociated do
+																				if(m.getName() = name)
+																					then return m;
+																	);
+	
+	pure public addDoctor: Doctor ==> set of (MedicalAssociated)
+		addDoctor(d) == (return ({d} union medicalAssociated));
+end Hospital

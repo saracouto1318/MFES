@@ -1,0 +1,5 @@
+class Technician
+instance variables
+  specialty:set of (Specialty);
+
+end Technician

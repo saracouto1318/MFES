@@ -1,0 +1,15 @@
+class Appointment
+
+types
+
+instance variables
+  public doctor:Doctor;
+  public prescription:set of (Prescription);
+  
+operations
+	public Appointment: Doctor * set of(Prescription) ==> Appointment
+		Appointment(d, p) == (doctor := d; prescription := p; return self)
+	pre d <> nil
+	post doctor = d and prescription = p;
+
+end Appointment

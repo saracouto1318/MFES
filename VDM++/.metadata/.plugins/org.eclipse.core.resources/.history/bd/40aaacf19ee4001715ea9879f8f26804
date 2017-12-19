@@ -1,0 +1,8 @@
+class MedicalAssociated is subclass of Person
+
+types
+	public String = seq of (char);
+instance variables
+  medicalNumber: String;
+
+end MedicalAssociated

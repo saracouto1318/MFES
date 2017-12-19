@@ -1,0 +1,17 @@
+class MedicalAssociated is subclass of Person
+
+types
+	public String = seq of (char);
+instance variables
+  public medicalNumber: String;
+  public specialty:set of (Specialty);
+
+operations
+	public MedicalAssociated: String ==> MedicalAssociated
+		MedicalAssociated(s) == (medicalNumber := s; return self)
+	post medicalNumber = s;
+	
+	pure public getMedicalNumber: () ==> String
+		getMedicalNumber() == (return medicalNumber);
+
+end MedicalAssociated

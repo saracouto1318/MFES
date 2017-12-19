@@ -1,0 +1,5 @@
+class Restrictions
+instance variables
+  hour:?;
+
+end Restrictions

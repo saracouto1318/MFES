@@ -1,0 +1,8 @@
+class Hospital
+instance variables
+  city:City;
+  medicalAssociated:set of (MedicalAssociated);
+  name:seq of (char);
+  address:seq of (char);
+
+end Hospital
