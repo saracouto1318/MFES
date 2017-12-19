@@ -41,13 +41,10 @@ operations
 																			
 																			list := hospitals \ {h};
 																			for all m in set med do(
-																				for all l in set list do
-																					if(m in set l.getMedicalAssociated() and m.getType() = "Doctor" and m not in set doctors)
-																						then doctors := doctors union {m};
+																				if(m in set list and m.getType() = "Doctor" and m not in set doctors)
+																					then doctors := doctors union {m};
 																			);
 																		);
-																		
-																		return doctors;
 																	); 													
 		
 end SafetyNetHospital
