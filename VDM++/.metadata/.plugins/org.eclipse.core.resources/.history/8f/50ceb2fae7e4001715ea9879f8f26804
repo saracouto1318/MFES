@@ -67,22 +67,5 @@ operations
 															if(t.getType() = "Appointment")
 																then num := num + 1;
 														return num);
-														
-	pure public numDoctors: () ==> nat
-		numDoctors() == (
-														dcl num: nat;
-														num := 0;
-														for all t in set medicalAssociated do
-															if(t.getType() = "Doctor")
-																then num := num + 1;
-														return num);
 
-	pure public getDoctors: () ==> set of (Doctor)
-		getDoctors() == (
-											dcl doctors: set of (Doctor);
-											for all d in set medicalAssociated do
-												if(d.getType() = "Doctor")
-													then doctors := doctors union {d};
-													
-											return doctors);
 end Hospital

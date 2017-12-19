@@ -84,5 +84,5 @@ operations
 												if(d.getType() = "Doctor")
 													then doctors := doctors union {d};
 													
-											return doctors);
+											return doctors;
 end Hospital
