@@ -1,4 +1,4 @@
-class NursingTreatment
+class NursingTreatment is subclass of Task
 
 types
 	public String = seq of (char);
@@ -21,5 +21,8 @@ operations
 	
 	public getNurse : () ==> String
 		getNurse() == (return nurse.getName());
+		
+	pure public getType : () ==> seq of (char) 
+		getType() == (return "Nursing Treatment");
 
 end NursingTreatment

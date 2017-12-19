@@ -3,4 +3,7 @@ class Surgeon is subclass of Doctor
 operations
 	public Surgeon: () ==> Surgeon
 		Surgeon() == (return self);
+		
+	pure public getType : () ==> String
+		getType() == (return "Surgeon");
 end Surgeon

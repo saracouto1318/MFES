@@ -1,0 +1,37 @@
+class Task
+instance variables
+  public schedule:[Schedule];
+  public patient:[Patient];
+  public hospital:[Hospital];
+  
+  inv schedule <> nil;
+  inv patient <> nil;
+  inv hospital <> nil;
+  
+operations
+	public Task: Schedule * Patient * Hospital ==> Task
+		Task(s, p, h) == (schedule := s; patient := p; hospital := h; return self)
+	post schedule = s and patient = p and hospital = h;
+	
+	pure public getSchedule: () ==> Schedule
+		getSchedule() == (return schedule);
+		
+	pure public getPatient: () ==> Patient
+		getPatient() == (return patient);
+		
+	pure public getHospital: () ==> Hospital
+		getHospital() == (return hospital);
+		
+	public setSchedule : Schedule ==> ()
+		setSchedule(s) == (schedule := s);
+		
+	public setPatient : Patient ==> ()
+		setPatient(s) == (patient := s);
+		
+	public setHospital : Hospital ==> ()
+		setHospital(s) == (hospital := s);
+		
+	pure public getType : () ==> set of (char) 
+		getType() == (return "");
+
+end Task

@@ -6,5 +6,8 @@ instance variables
 operations
 	public Doctor: () ==> Doctor
 		Doctor() == (return self);
+	
+	pure public getType : () ==> String 
+		getType() == (return "Doctor");
 
 end Doctor

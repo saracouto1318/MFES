@@ -1,4 +1,4 @@
-class Surgery
+class Surgery is subclass of Task
 
 types
 
@@ -47,5 +47,8 @@ operations
 		
 	public getNurses : () ==> set of (Nurse)
 		getNurses() == (return nurses);
+		
+	pure public getType : () ==> seq of (char) 
+		getType() == (return "Surgery");
 
 end Surgery

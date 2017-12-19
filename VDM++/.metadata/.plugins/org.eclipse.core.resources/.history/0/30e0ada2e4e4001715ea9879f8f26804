@@ -1,0 +1,20 @@
+class Urgencies is subclass of Task
+
+types 
+	public Priority = <High> | <Medium> | <Low>
+instance variables
+  public priority : [Priority];
+ 
+ 	inv priority <> nil;
+operations
+	public Urgencies : Priority ==> Urgencies
+		Urgencies(p) == (priority := p; return self)
+	post priority = p;
+	
+	pure public getPriority: () ==> Priority
+		getPriority() == (return priority);
+		
+	public setPriority : Priority ==> ()
+		setPriority(p) == (priority := p);
+
+end Urgencies

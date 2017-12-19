@@ -18,5 +18,8 @@ operations
 		removePatient(p) == (return patients \ {p})
 	pre p in set patients
 	post p not in set patients;
+	
+	pure public getType : () ==> String
+		getType() == (return "Normal Doctor");
 		
 end NormalDoctor

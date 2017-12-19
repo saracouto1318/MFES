@@ -1,4 +1,4 @@
-class Urgencies
+class Urgencies is subclass of Task
 
 types 
 	public Priority = <High> | <Medium> | <Low>
@@ -16,5 +16,8 @@ operations
 		
 	public setPriority : Priority ==> ()
 		setPriority(p) == (priority := p);
+		
+	pure public getType : () ==> seq of (char) 
+		getType() == (return "Urgencies");
 
 end Urgencies

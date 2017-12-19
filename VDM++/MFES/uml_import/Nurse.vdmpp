@@ -7,5 +7,8 @@ operations
 	
 	public Nurse: () ==> Nurse
 		Nurse() == (return self);
+		
+	pure public getType : () ==> String
+		getType() == (return "Nurse");
 
 end Nurse

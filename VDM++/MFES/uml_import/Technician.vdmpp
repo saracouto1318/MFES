@@ -4,5 +4,8 @@ instance variables
 operations
 	public Technician : () ==> Technician
 		Technician() == (return self);
+		
+	pure public getType : () ==> String
+		getType() == (return "Technician");
 
 end Technician

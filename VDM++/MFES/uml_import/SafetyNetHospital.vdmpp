@@ -23,4 +23,19 @@ operations
 	pure public numHospitals : () ==> nat
 		numHospitals() == (return card hospitals);
 		
+	pure public getHospitalsMoreAppointments : () ==> Hospital
+		getHospitalsMoreAppointments() == (
+																				dcl max: nat, hosp: Hospital;
+																				max := 0;
+																				for all h in set hospitals do
+																					if(h.numAppointments() > max)
+																						then (max := h.numAppointments(); hosp := h);
+																				return hosp);
+	
+	pure public getDoctorsMoreHospitals : () ==> set of(Doctor)
+		getDoctorsMoreHospitals() == (
+																		dcl doctors: set of(Doctor);
+																		return doctors
+																		); 													
+		
 end SafetyNetHospital

@@ -1,0 +1,41 @@
+class Appointment is subclass of Task
+
+instance variables
+  public doctor: [Doctor];
+  public prescriptions:set of (Prescription);
+  
+  inv doctor <> nil;
+  inv card prescriptions >= 0;
+operations
+	public Appointment: Doctor ==> Appointment
+		Appointment(d) == (doctor := d; prescriptions := {}; return self)
+	post doctor = d and prescriptions = {};
+	
+	pure public getDoctorAppointment : () ==> Doctor
+		getDoctorAppointment() == (return doctor);
+		
+  pure public getPrescriptions : () ==> set of (Prescription)
+  	getPrescriptions() == (return prescriptions);
+  	
+  pure public getPrescription : seq of (char) ==> Prescription
+  	getPrescription(code) == (
+  														dcl prescription: Prescription;
+  															for all p in set prescriptions do
+  																if(p.compare(code))
+  																	then prescription := p;
+  															
+  															return prescription;
+  														)
+  pre code <> [];
+  
+  pure public addPrescription : Prescription ==> set of (Prescription)
+  	addPrescription(p) == (return prescriptions union {p})
+  pre p not in set prescriptions
+  post p in set prescriptions;
+  															
+	pure public removePrescription : Prescription ==> set of (Prescription)
+  	removePrescription(p) == (return prescriptions \ {p})
+  pre p in set prescriptions
+  post p not in set prescriptions;
+  	
+end Appointment

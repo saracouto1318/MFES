@@ -29,5 +29,8 @@ operations
 		addSpecialty(s) == (return specialties union {s})
 	pre s not in set specialties
 	post s in set specialties;
+	
+	pure public getType : () ==> String 
+		getType() == (return "");
 
 end MedicalAssociated

@@ -1,4 +1,4 @@
-class HospitalTreatment
+class HospitalTreatment is subclass of Task
 types
 	public String = seq of (char);
 instance variables
@@ -24,5 +24,8 @@ operations
 		
 	pure public getTechnicianName : () ==> String
 		getTechnicianName() == (return technician.getName());
+	
+	pure public getType : () ==> seq of (char) 
+		getType() == (return "Hospital Treatment");
 
 end HospitalTreatment

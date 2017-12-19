@@ -30,5 +30,8 @@ operations
 		
 	public setHospital : Hospital ==> ()
 		setHospital(s) == (hospital := s);
+		
+	pure public getType : () ==> seq of (char) 
+		getType() == (return "");
 
 end Task
