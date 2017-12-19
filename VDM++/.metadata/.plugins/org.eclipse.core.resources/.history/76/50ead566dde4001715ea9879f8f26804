@@ -1,0 +1,35 @@
+class Appointment
+
+instance variables
+  public doctor:Doctor;
+  public prescriptions:set of (Prescription);
+  
+operations
+	public Appointment: Doctor ==> Appointment
+		Appointment(d) == (doctor := d; prescriptions := {}; return self)
+	pre d < > nil
+	post doctor = d and prescriptions = {};
+	
+	pure public getDoctorAppointment : () ==> Doctor
+		getDoctorAppointment() == (return doctor);
+		
+  pure public getPrescriptions : () ==> set of (Prescription)
+  	getPrescriptions() == (return prescriptions);
+  	
+  pure public getPrescription : seq of (char) ==> Prescription
+  	getPrescription(code) == (
+  														dcl prescription: Prescription;
+  															for all p in set prescriptions do
+  																if(p.compare(code))
+  																	then prescription := p;
+  															
+  															return prescription;
+  														);
+  
+  pure public addPrescription : Prescription ==> set of (Prescription)
+  	addPrescription(p) == (return prescriptions union {p});
+  															
+	 pure public removePrescription : Prescription ==> set of (Prescription)
+  	removePrescription(p) == (return prescriptions \ {p});
+  	
+end Appointment

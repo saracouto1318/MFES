@@ -7,7 +7,9 @@ instance variables
   
 operations
 	public Specialty : String ==> Specialty
-		Specialty(n) == (name := n; return self);
+		Specialty(n) == (name := n; return self)
+	pre n <> []
+	post name = n;
 		
 	pure public getName : () ==> String
 		getName() == (return name);

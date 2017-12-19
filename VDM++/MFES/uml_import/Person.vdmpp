@@ -10,6 +10,7 @@ instance variables
 operations
 	public Person: String * String * String ==> Person
 		Person(a, fn, ln) == ( address := a; firstName := fn; lastName := ln; return self)
+	pre a <> [] and fn <> [] and ln <> []
 	post address = a and firstName = fn and lastName = ln;
 	
 	pure public getAddress : () ==> String

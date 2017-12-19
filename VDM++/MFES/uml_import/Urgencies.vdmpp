@@ -3,8 +3,9 @@ class Urgencies
 types 
 	public Priority = <High> | <Medium> | <Low>
 instance variables
-  public priority : Priority;
-  
+  public priority : [Priority];
+ 
+ 	inv priority <> nil;
 operations
 	public Urgencies : Priority ==> Urgencies
 		Urgencies(p) == (priority := p; return self)

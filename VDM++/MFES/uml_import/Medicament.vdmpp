@@ -8,6 +8,7 @@ instance variables
 operations
 	public Medicament: String ==> Medicament
 		Medicament(n) == (name := n; return self)
+	pre n <> []
 	post name = n;
 	
 	pure public getName: () ==> String

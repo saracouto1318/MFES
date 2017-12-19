@@ -11,13 +11,16 @@ operations
 		Schedule(d) == (startHour := d; return self);
 	
 	public setEndHour : Date ==> Date
-		setEndHour(d) == (endHour := d; return endHour);
+		setEndHour(d) == (endHour := d; return endHour)
+	pre startHour.compareDateLess(endHour);
 		
 	public setStartHour : Date ==> Date
-		setStartHour(d) == (startHour := d; return startHour);
-		
+		setStartHour(d) == (startHour := d; return startHour)
+	pre d.compareDateLess(endHour);
+	
 	public setSchedule : Date * Date ==> Schedule
-		setSchedule(d1, d2) == (startHour := d1; endHour := d2; return self);
+		setSchedule(d1, d2) == (startHour := d1; endHour := d2; return self)
+	pre d1.compareDateLess(d2);
 		
 	public getScheduleStart : () ==> Date
 		getScheduleStart() == (return startHour);

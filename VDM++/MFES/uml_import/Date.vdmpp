@@ -30,7 +30,7 @@ operations
 		getMin() == (return minutes);
 
 	pure public compareDateLess : Date ==> bool
-		compareDateLess(date) == (return (date.getYear() < year and date.getMonth() < month and date.getDay() < day and hour < date.getHour() and minutes < date.getMin()));
+		compareDateLess(date) == (return (year < date.getYear() and month < date.getMonth() and day < date.getDay() and hour < date.getHour() and minutes < date.getMin()));
 		
 	pure public compareDate : Date ==> bool
 		compareDate(date) == (return (date.getYear() = year and date.getMonth() = month and date.getDay() = day and hour = date.getHour() and minutes = date.getMin()));

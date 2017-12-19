@@ -1,0 +1,43 @@
+class Surgery
+
+types
+
+instance variables
+  public mainDoctor: [Surgeon];
+  public secondaryDoctors:set of (Surgeon);
+  public nurses:set of (Nurse);
+  
+  inv card secondaryDoctors >= 0;
+  inv card nurses >= 0;
+operations
+
+	public Surgery: Surgeon ==> Surgery
+		Surgery(s) == (mainDoctor := s; nurses := {}; secondaryDoctors := {}; return self)
+	pre s <> nil
+	post mainDoctor = s and nurses = {} and secondaryDoctors = {};
+	
+	pure public addSecondaryDoctor : Surgeon ==> set of (Surgeon)
+		addSecondaryDoctor(s) == (return secondaryDoctors union {s});
+		
+	pure public removeSecondaryDoctor : Surgeon ==> set of (Surgeon)
+		removeSecondaryDoctor(s) == (return secondaryDoctors \ {s});
+		
+	pure public addNurse : Nurse ==> set of (Nurse)
+		addNurse(s) == (return nurses union {s});
+		
+	pure public removeNurse : Nurse ==> set of (Nurse)
+		removeNurse(s) == (return nurses \ {s});
+		
+	public setMainDoctor : Surgeon ==> ()
+		setMainDoctor(s) == (mainDoctor := s);
+		
+	public getMainDoctor : () ==> Surgeon
+		getMainDoctor() == (return mainDoctor);
+		
+	public getSecondaryDoctors : () ==> set of (Surgeon)
+		getSecondaryDoctors() == (return secondaryDoctors);
+		
+	public getNurses : () ==> set of (Nurse)
+		getNurses() == (return nurses);
+
+end Surgery

@@ -2,13 +2,15 @@ class HospitalTreatment
 types
 	public String = seq of (char);
 instance variables
-  public technician: Technician;
+  public technician: [Technician];
   public name: String;
   
+  inv technician <> nil;
 operations
 
 	public HospitalTreatment: String ==> HospitalTreatment
 		HospitalTreatment(n) == (name := n; return self)
+	pre n <> []
 	post name = n;
 	
 	pure public getName: () ==> String

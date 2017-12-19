@@ -11,6 +11,7 @@ instance variables
 operations
 	public MedicalAssociated: String ==> MedicalAssociated
 		MedicalAssociated(s) == (medicalNumber := s; specialties := {}; return self)
+	pre s <> []
 	post medicalNumber = s and specialties = {};
 	
 	pure public getMedicalNumber: () ==> String
@@ -20,9 +21,13 @@ operations
 		getSpecialties() == (return specialties);
 		
 	pure public removeSpecialty: Specialty ==> set of(Specialty)
-		removeSpecialty(s) == (return specialties \ {s});
+		removeSpecialty(s) == (return specialties \ {s})
+	pre s in set specialties
+	post s not in set specialties;
 		
 	pure public addSpecialty: Specialty ==> set of(Specialty)
-		addSpecialty(s) == (return specialties union {s});
+		addSpecialty(s) == (return specialties union {s})
+	pre s not in set specialties
+	post s in set specialties;
 
 end MedicalAssociated

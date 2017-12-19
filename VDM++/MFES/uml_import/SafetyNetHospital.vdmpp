@@ -11,10 +11,14 @@ operations
 		SafetyNetHospital() == (return self);
 		
 	pure public addHospital : Hospital ==> set of (Hospital)
-		addHospital(h) == (return hospitals union {h});
+		addHospital(h) == (return hospitals union {h})
+	pre h not in set hospitals
+	post h in set hospitals;
 	
 	pure public removeHospital : Hospital ==> set of (Hospital)
-		removeHospital(h) == (return hospitals \ {h});
+		removeHospital(h) == (return hospitals \ {h})
+	pre h in set hospitals
+	post h not in set hospitals;
 	
 	pure public numHospitals : () ==> nat
 		numHospitals() == (return card hospitals);

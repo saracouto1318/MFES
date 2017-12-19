@@ -1,0 +1,26 @@
+class HospitalTreatment
+types
+	public String = seq of (char);
+instance variables
+  public technician: Technician;
+  public name: String;
+  
+operations
+
+	public HospitalTreatment: String ==> HospitalTreatment
+		HospitalTreatment(n) == (name := n; technician := nil; return self)
+	post name = n;
+	
+	pure public getName: () ==> String
+		getName() == (return name);
+		
+	public setTechnician: Technician ==> ()
+		setTechnician(t) == (technician := t; return);
+	
+	pure public getTechnician : () ==> Technician
+		getTechnician() == (return technician);
+		
+	pure public getTechnicianName : () ==> String
+		getTechnicianName() == (return technician.getName());
+
+end HospitalTreatment
