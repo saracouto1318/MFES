@@ -1,0 +1,54 @@
+\begin{vdmpp}[breaklines=true]
+class Prescription
+
+types
+
+instance variables
+  public medicaments:set of (Medicament);
+  public code:seq of (char);
+  
+operations
+(*@
+\label{Prescription:10}
+@*)
+ public Prescription: seq of (char) ==> Prescription
+  Prescription(c) == (code := c; medicaments := {}; return self)
+ pre c <> []
+ post code = c and medicaments = {};
+(*@
+\label{getCode:14}
+@*)
+ 
+ pure public getCode : () ==> seq of (char)
+  getCode() == (return code);
+(*@
+\label{addMedicament:17}
+@*)
+  
+ pure public addMedicament: Medicament ==> set of (Medicament)
+  addMedicament(m) == (return ({m} union medicaments))
+(*@
+\label{removeMedicament:20}
+@*)
+ pre m not in set medicaments
+ post m in set medicaments;
+  
+(*@
+\label{getMedicaments:23}
+@*)
+ pure public removeMedicament: Medicament ==> set of (Medicament)
+  removeMedicament(m) == (return (medicaments \ {m}))
+ pre m in set medicaments
+(*@
+\label{compare:26}
+@*)
+ post m not in set medicaments;
+  
+ pure public getMedicaments: () ==> set of (Medicament)
+  getMedicaments() == (return medicaments);
+  
+ pure public compare: seq of (char) ==> bool
+  compare(c) == (return c = code);
+
+end Prescription
+\end{vdmpp}

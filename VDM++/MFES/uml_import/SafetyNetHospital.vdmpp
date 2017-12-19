@@ -4,7 +4,7 @@ types
 instance variables
 	public hospitals: set of (Hospital);
 	
-	inv card hospitals > 1;
+	inv card hospitals >= 0;
 operations
 
 	public SafetyNetHospital : () ==> SafetyNetHospital
@@ -28,8 +28,8 @@ operations
 																				dcl max: nat, hosp: Hospital;
 																				max := 0;
 																				for all h in set hospitals do
-																					if(h.numAppointments() > max)
-																						then (max := h.numAppointments(); hosp := h);
+																					if(card (h.getAppointments()) > max)
+																						then (max := card (h.getAppointments()); hosp := h);
 																				return hosp);
 	
 	pure public getDoctorsMoreHospitals : () ==> set of(Doctor)

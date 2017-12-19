@@ -1,0 +1,30 @@
+\begin{vdmpp}[breaklines=true]
+class Doctor is subclass of MedicalAssociated
+types
+
+instance variables
+  
+operations
+(*@
+\label{Surgeon:7}
+@*)
+ public Doctor: () ==> Doctor
+(*@
+\label{Appointment:8}
+@*)
+(*@
+\label{Doctor:8}
+@*)
+  Doctor() == (return self);
+ 
+(*@
+\label{getType:10}
+@*)
+ pure public getType : () ==> String 
+  getType() == (return "Doctor");
+(*@
+\label{getSpecialties:12}
+@*)
+
+end Doctor
+\end{vdmpp}

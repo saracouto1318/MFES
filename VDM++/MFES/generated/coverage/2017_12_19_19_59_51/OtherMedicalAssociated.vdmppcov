@@ -1,0 +1,14 @@
+class OtherMedicalAssociated is subclass of MedicalAssociated
+
+types
+
+instance variables
+operations
+	
+	public OtherMedicalAssociated: () ==> OtherMedicalAssociated
+		OtherMedicalAssociated() == (return self);
+		
+	pure public getType : () ==> String
+		getType() == (return "Other");
+
+end OtherMedicalAssociated

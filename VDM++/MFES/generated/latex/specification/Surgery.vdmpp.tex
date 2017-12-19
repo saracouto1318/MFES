@@ -1,0 +1,98 @@
+\begin{vdmpp}[breaklines=true]
+class Surgery is subclass of Task
+
+types
+
+instance variables
+  public mainDoctor: [Surgeon];
+  public secondaryDoctors:set of (Surgeon);
+  public other:set of (OtherMedicalAssociated);
+  
+  inv mainDoctor <> nil;
+  inv card secondaryDoctors >= 0;
+(*@
+\label{Surgery:12}
+@*)
+  inv card other >= 0;
+operations
+
+ public Surgery: Surgeon ==> Surgery
+(*@
+\label{addSecondaryDoctor:16}
+@*)
+  Surgery(s) == (mainDoctor := s; other := {}; secondaryDoctors := {}; return self)
+ post mainDoctor = s and other = {} and secondaryDoctors = {};
+ 
+(*@
+\label{removeSecondaryDoctor:19}
+@*)
+ pure public addSecondaryDoctor : Surgeon ==> set of (Surgeon)
+  addSecondaryDoctor(s) == (return secondaryDoctors union {s})
+ pre s not in set secondaryDoctors
+(*@
+\label{addNurse:22}
+@*)
+ post s in set secondaryDoctors;
+  
+ pure public removeSecondaryDoctor : Surgeon ==> set of (Surgeon)
+(*@
+\label{removeNurse:25}
+@*)
+  removeSecondaryDoctor(s) == (return secondaryDoctors \ {s})
+ pre s in set secondaryDoctors
+ post s not in set secondaryDoctors;
+(*@
+\label{setMainDoctor:28}
+@*)
+  
+(*@
+\label{addOther:29}
+@*)
+ pure public addOther : OtherMedicalAssociated ==> set of (OtherMedicalAssociated)
+  addOther(s) == (return other union {s})
+(*@
+\label{getMainDoctor:31}
+@*)
+ pre s not in set other
+ post s in set other;
+  
+(*@
+\label{getSecondaryDoctor:34}
+@*)
+(*@
+\label{getSecondaryDoctors:34}
+@*)
+(*@
+\label{removeOther:34}
+@*)
+ pure public removeOther : OtherMedicalAssociated ==> set of (OtherMedicalAssociated)
+  removeOther(s) == (return other \ {s})
+ pre s in set other
+(*@
+\label{getNurses:37}
+@*)
+ post s not in set other;
+  
+ public setMainDoctor : Surgeon ==> ()
+  setMainDoctor(s) == (mainDoctor := s);
+  
+ public getMainDoctor : () ==> Surgeon
+  getMainDoctor() == (return mainDoctor);
+  
+ public getSecondaryDoctors : () ==> set of (Surgeon)
+  getSecondaryDoctors() == (return secondaryDoctors);
+  
+(*@
+\label{getOthers:48}
+@*)
+ public getOthers : () ==> set of (OtherMedicalAssociated)
+  getOthers() == (return other);
+  
+(*@
+\label{getType:51}
+@*)
+ pure public getType : () ==> seq of (char) 
+  getType() == (return "Surgery");
+
+end Surgery
+\end{vdmpp}

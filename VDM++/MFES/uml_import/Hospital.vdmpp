@@ -7,8 +7,8 @@ instance variables
   public address: String;
   public tasks: set of(Task);
  
- inv card medicalAssociated > 0;
- inv card tasks > 0;
+ inv card medicalAssociated >= 0;
+ inv card tasks >= 0;
 operations
 
 	public Hospital: String * String ==> Hospital
@@ -59,23 +59,29 @@ operations
 	pre d in set tasks
 	post d not in set tasks;
 	
-	pure public numAppointments: () ==> nat
-		numAppointments() == (
-														dcl num: nat;
-														num := 0;
+	pure public getAppointments: () ==> set of (Task)
+		getAppointments() == (
+														dcl tasks2: set of (Task);
 														for all t in set tasks do
 															if(t.getType() = "Appointment")
-																then num := num + 1;
-														return num);
+																then tasks2 := tasks2 union {t};
+														return tasks2);
 														
-	pure public numDoctors: () ==> nat
-		numDoctors() == (
-														dcl num: nat;
-														num := 0;
-														for all t in set medicalAssociated do
-															if(t.getType() = "Doctor")
-																then num := num + 1;
-														return num);
+	pure public getSurgeries: () ==> set of (Task)
+		getSurgeries() == (
+														dcl tasks2: set of (Task);
+														for all t in set tasks do
+															if(t.getType() = "Surgery")
+																then tasks2 := tasks2 union {t};
+														return tasks2);
+														
+	pure public getOther: () ==> set of (Task)
+		getOther() == (
+														dcl tasks2: set of (Task);
+														for all t in set tasks do
+															if(t.getType() = "Other")
+																then tasks2 := tasks2 union {t};
+														return tasks2);
 
 	pure public getDoctors: () ==> set of (Doctor)
 		getDoctors() == (
@@ -83,6 +89,13 @@ operations
 											for all d in set medicalAssociated do
 												if(d.getType() = "Doctor")
 													then doctors := doctors union {d};
-													
+											return doctors);
+											
+		pure public geNormalDoctors: () ==> set of (NormalDoctor)
+		geNormalDoctors() == (
+											dcl doctors: set of (Doctor);
+											for all d in set medicalAssociated do
+												if(d.getType() = "Normal Doctor")
+													then doctors := doctors union {d};
 											return doctors);
 end Hospital

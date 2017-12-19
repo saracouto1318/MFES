@@ -1,0 +1,28 @@
+\begin{vdmpp}[breaklines=true]
+class Nurse is subclass of MedicalAssociated
+
+types
+
+instance variables
+operations
+ 
+ public Nurse: () ==> Nurse
+  Nurse() == (return self);
+(*@
+\label{Medicament:10}
+@*)
+(*@
+\label{Nurse:10}
+@*)
+  
+(*@
+\label{getType:11}
+@*)
+ pure public getType : () ==> String
+  getType() == (return "Nurse");
+
+(*@
+\label{getName:14}
+@*)
+end Nurse
+\end{vdmpp}

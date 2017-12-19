@@ -1,0 +1,53 @@
+class SafetyNetHospital
+types
+
+instance variables
+	public hospitals: set of (Hospital);
+	
+	inv card hospitals > 1;
+operations
+
+	public SafetyNetHospital : () ==> SafetyNetHospital
+		SafetyNetHospital() == (return self);
+		
+	pure public addHospital : Hospital ==> set of (Hospital)
+		addHospital(h) == (return hospitals union {h})
+	pre h not in set hospitals
+	post h in set hospitals;
+	
+	pure public removeHospital : Hospital ==> set of (Hospital)
+		removeHospital(h) == (return hospitals \ {h})
+	pre h in set hospitals
+	post h not in set hospitals;
+	
+	pure public numHospitals : () ==> nat
+		numHospitals() == (return card hospitals);
+		
+	pure public getHospitalsMoreAppointments : () ==> Hospital
+		getHospitalsMoreAppointments() == (
+																				dcl max: nat, hosp: Hospital;
+																				max := 0;
+																				for all h in set hospitals do
+																					if(card (h.getAppointments()) > max)
+																						then (max := card (h.getAppointments()); hosp := h);
+																				return hosp);
+	
+	pure public getDoctorsMoreHospitals : () ==> set of(Doctor)
+		getDoctorsMoreHospitals() == (
+																		dcl doctors: set of(Doctor);
+																		for all h in set hospitals do (
+																			dcl med: set of (MedicalAssociated), list: set of(Hospital);
+																			med := h.getMedicalAssociated();
+																			
+																			list := hospitals \ {h};
+																			for all m in set med do(
+																				for all l in set list do
+																					if(m in set l.getMedicalAssociated() and m.getType() = "Doctor" and m not in set doctors)
+																						then doctors := doctors union {m};
+																			);
+																		);
+																		
+																		return doctors;
+																	); 													
+		
+end SafetyNetHospital

@@ -1,0 +1,19 @@
+\begin{vdmpp}[breaklines=true]
+class Technician is subclass of MedicalAssociated
+instance variables
+ 
+operations
+(*@
+\label{Technician:5}
+@*)
+ public Technician : () ==> Technician
+  Technician() == (return self);
+  
+(*@
+\label{getType:8}
+@*)
+ pure public getType : () ==> String
+  getType() == (return "Technician");
+
+end Technician
+\end{vdmpp}

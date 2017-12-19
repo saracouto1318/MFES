@@ -8,7 +8,7 @@ instance variables
   public purpose:[Purpose];
   public schedule:[Schedule];
   
-  inv card medicalAssociated > 1 and card medicalAssociated < 10;
+  inv card medicalAssociated >= 0 and card medicalAssociated < 10;
   inv purpose <> nil;
   inv schedule <> nil;
 operations
