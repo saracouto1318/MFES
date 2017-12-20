@@ -3,8 +3,8 @@ class Patient is subclass of Person
 types
 	public String = seq of (char);
 instance variables
-  healthNumber: String;
-  
+  public healthNumber: String;
+  inv healthNumber <> [];
 operations
 	public Patient: String ==> Patient
 		Patient(n) == ( healthNumber := n; return self)
@@ -13,6 +13,5 @@ operations
 	
 	pure public getHealthNumber : () ==> String
 		getHealthNumber() == (return healthNumber);
-		
 
 end Patient

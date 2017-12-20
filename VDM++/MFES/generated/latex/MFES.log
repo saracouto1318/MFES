@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.18 (MiKTeX 2.9.6500 64-bit) (preloaded format=pdflatex 2017.12.19)  20 DEC 2017 14:53
+This is pdfTeX, Version 3.14159265-2.6-1.40.18 (MiKTeX 2.9.6500 64-bit) (preloaded format=pdflatex 2017.12.19)  20 DEC 2017 18:44
 entering extended mode
 **./MFES.tex
 (MFES.tex
@@ -331,38 +331,37 @@ LaTeX Font Info:    Font shape `OT1/pcr/bx/n' in size <8> not available
 
 [1
 
-{C:/Users/ASUS/AppData/Local/MiKTeX/2.9/pdftex/config/pdftex.map}] [2])
-(specification/Date.vdmpp.tex) (specification/Hospital.vdmpp.tex [3] [4]
-[5]) (specification/MedicalAssociated.vdmpp.tex [6])
-(specification/Medicament.vdmpp.tex) (specification/Patient.vdmpp.tex) [7]
-(specification/Person.vdmpp.tex) (specification/Prescription.vdmpp.tex [8])
-(specification/SafetyNetHospital.vdmpp.tex [9])
-(specification/Schedule.vdmpp.tex [10]) (specification/Specialty.vdmpp.tex)
-(specification/Surgery.vdmpp.tex [11]) (specification/Task.vdmpp.tex [12])
-(specification/Training.vdmpp.tex [13]) (specification/Treatment.vdmpp.tex
-[14])
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 43.
- [15]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 43.
+{C:/Users/ASUS/AppData/Local/MiKTeX/2.9/pdftex/config/pdftex.map}]) [2]
+(specification/Hospital.vdmpp.tex [3]) [4]
+(specification/MedicalAssociated.vdmpp.tex [5])
+(specification/Medicament.vdmpp.tex) (specification/Patient.vdmpp.tex)
+(specification/Person.vdmpp.tex [6]) (specification/Prescription.vdmpp.tex
+[7]) (specification/SafetyNetHospital.vdmpp.tex [8])
+(specification/Schedule.vdmpp.tex [9]) (specification/Specialty.vdmpp.tex)
+(specification/Surgery.vdmpp.tex [10]) (specification/Task.vdmpp.tex [11])
+(specification/Treatment.vdmpp.tex [12])
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 39.
+ [13]
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 39.
  (MFES.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 43.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 43.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 39.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 39.
 Package rerunfilecheck Info: File `MFES.out' has not changed.
-(rerunfilecheck)             Checksum: A1AF1E7261CDC165B672AF683D776086;689.
+(rerunfilecheck)             Checksum: 7530440FDB1025C7C01F2C2B89955735;601.
 
 
 LaTeX Warning: There were multiply-defined labels.
 
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 43.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 39.
  ) 
 Here is how much of TeX's memory you used:
- 7428 strings out of 493312
- 112345 string characters out of 3130261
- 406258 words of memory out of 3000000
- 10104 multiletter control sequences out of 15000+200000
+ 7304 strings out of 493312
+ 110295 string characters out of 3130261
+ 407928 words of memory out of 3000000
+ 10075 multiletter control sequences out of 15000+200000
  16427 words of font info for 39 fonts, out of 3000000 for 9000
  1141 hyphenation exceptions out of 8191
- 33i,6n,48p,239b,1916s stack positions out of 5000i,500n,10000p,200000b,50000s
+ 33i,6n,48p,241b,1916s stack positions out of 5000i,500n,10000p,200000b,50000s
 {C:/Users/ASUS/AppData/Local/Programs/MiKTeX 2.9/fonts/enc/dvips/base/8r.enc}
 <C:/Users/ASUS/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/public/amsfonts/la
 txfont/lcircle1.pfb><C:/Users/ASUS/AppData/Local/Programs/MiKTeX 2.9/fonts/type
@@ -370,9 +369,9 @@ txfont/lcircle1.pfb><C:/Users/ASUS/AppData/Local/Programs/MiKTeX 2.9/fonts/type
 /type1/urw/courier/ucrr8a.pfb><C:/Users/ASUS/AppData/Local/Programs/MiKTeX 2.9/
 fonts/type1/urw/times/utmb8a.pfb><C:/Users/ASUS/AppData/Local/Programs/MiKTeX 2
 .9/fonts/type1/urw/times/utmr8a.pfb>
-Output written on MFES.pdf (15 pages, 193429 bytes).
+Output written on MFES.pdf (13 pages, 178688 bytes).
 PDF statistics:
- 1083 PDF objects out of 1200 (max. 8388607)
- 789 named destinations out of 1000 (max. 500000)
- 121 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 963 PDF objects out of 1000 (max. 8388607)
+ 700 named destinations out of 1000 (max. 500000)
+ 105 words of extra memory for PDF output out of 10000 (max. 10000000)
 

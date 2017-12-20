@@ -9,152 +9,143 @@ instance variables
   public tasks: set of(Task);
   public safetyNet: [SafetyNetHospital];
  
+ inv name <> [] and address <> [];
+ inv safetyNet <> nil; 
  inv card medicalAssociated >= 0;
- inv card tasks >= 0;
-operations
 (*@
 \label{Hospital:14}
 @*)
+ inv card tasks >= 0;
+operations
 
- public Hospital: String * String ==> Hospital
-  Hospital(n, a) == (name := n; address := a; medicalAssociated := {}; tasks := {}; return self)
- pre n <> [] and a <> []
- post name = n and address = a and medicalAssociated = {} and tasks = {};
+ public Hospital: String * String * SafetyNetHospital ==> Hospital
+  Hospital(n, a, s) == (name := n; address := a; safetyNet := s; medicalAssociated := {}; tasks := {}; return self)
 (*@
 \label{getName:19}
 @*)
+ pre n <> [] and a <> [] and safetyNet <> nil
+ post name = n and address = a and safetyNet = s and medicalAssociated = {} and tasks = {};
  
- pure public getName: () ==> String
-  getName() == (return name);
 (*@
 \label{getAddress:22}
 @*)
+ pure public getName: () ==> String
+  getName() == (return name);
  
- pure public getAddress: () ==> String
-  getAddress() == (return address);
 (*@
 \label{getMedicalAssociated:25}
 @*)
+ pure public getAddress: () ==> String
+  getAddress() == (return address);
   
- pure public getMedicalAssociated: () ==> set of (MedicalAssociated)
-  getMedicalAssociated() == (return medicalAssociated);
 (*@
 \label{getTasks:28}
 @*)
-  
- pure public getTasks: () ==> set of (Task)
-  getTasks() == (return tasks);
+ pure public getSafetyNet: () ==> SafetyNetHospital
+(*@
+\label{getSafetyNet:29}
+@*)
+  getSafetyNet() == (return safetyNet);
+ 
 (*@
 \label{getMedAssociated:31}
 @*)
- 
- pure public getMedAssociated: String ==> MedicalAssociated
-  getMedAssociated(n) == (
-                   dcl medical: MedicalAssociated;
-                   for all m in set medicalAssociated do
-                    if(m.getName() = n)
-                     then medical := m;
-                     
-                   return medical;
-                 )
- pre n <> [];
-(*@
-\label{addMedAssociated:42}
-@*)
- 
  pure public addMedAssociated: MedicalAssociated ==> set of (MedicalAssociated)
   addMedAssociated(d) == (return ({d} union medicalAssociated))
  pre d not in set medicalAssociated
  post d in set medicalAssociated;
-(*@
-\label{removeMedAssociated:47}
-@*)
   
  pure public removeMedAssociated: MedicalAssociated ==> set of (MedicalAssociated)
   removeMedAssociated(d) == (return (medicalAssociated \ {d}))
  pre d in set medicalAssociated
  post d not in set medicalAssociated;
-(*@
-\label{addTask:52}
-@*)
  
  public addTask: Task ==> set of (Task)
+(*@
+\label{addMedAssociated:42}
+@*)
   addTask(d) == (return ({d} union tasks))
  pre d not in set tasks and forall t in set tasks & 
   not (overlap(d, t) and not (d.getMedAssoc().getCC() <> t.getMedAssoc().getCC() and 
-(*@
-\label{removeTask:57}
-@*)
     d.getPatient().getCC() <> t.getPatient().getCC() and d.getMedAssoc().getCC() <> t.getPatient().getCC()
     and d.getPatient().getCC() <> t.getMedAssoc().getCC()))
+(*@
+\label{removeMedAssociated:47}
+@*)
  post d in set tasks;
   
  pure public removeTask: Task ==> set of (Task)
+  removeTask(d) == (return (tasks \ {d}))
+ pre d in set tasks
+(*@
+\label{addTask:52}
+@*)
+ post d not in set tasks;
+ 
+ pure public getTasksByType: () ==> seq of(set of (Task))
+  getTasksByType() == (
+              dcl tasksTotal: seq of(set of (Task)), tasks2: set of (Task), tasks3: set of(Task), tasks4: set of (Task), tasks5: set of(Task);
+(*@
+\label{removeTask:57}
+@*)
+              for all t in set tasks do(
+               if(t.getType() = "Appointment")
+                then tasks2 := tasks2 union {t}
+               else if(t.getType() = "Urgencies")
+                then tasks3 := tasks3 union {t}
 (*@
 \label{getAppointments:62}
 @*)
-  removeTask(d) == (return (tasks \ {d}))
+               else if(t.getType() = "Surgery")
 (*@
 \label{getTasksByType:63}
 @*)
- pre d in set tasks
- post d not in set tasks;
- 
- pure public getAppointments: () ==> set of (Task)
-  getAppointments() == (
-              dcl tasks2: set of (Task);
-              for all t in set tasks do
+                then tasks4 := tasks4 union {t}
+               else
+                tasks5 := tasks5 union {t}
+               );
+                
+              tasksTotal := tasksTotal ^ [tasks2] ^ [tasks3] ^ [tasks4] ^ [tasks5];
+              return tasksTotal);
 (*@
 \label{getSurgeries:70}
 @*)
-               if(t.getType() = "Appointment")
-                then tasks2 := tasks2 union {t};
-              return tasks2);
-              
- pure public getSurgeries: () ==> set of (Task)
-  getSurgeries() == (
-              dcl tasks2: set of (Task);
-              for all t in set tasks do
+
+ pure public getMedicalAssociatedByType: () ==> seq of(set of (MedicalAssociated))
+(*@
+\label{getMedicalAssociatedByType:72}
+@*)
+  getMedicalAssociatedByType() == (
+           dcl med: seq of(set of(MedicalAssociated)), doctors: set of (MedicalAssociated), surgeons: set of (MedicalAssociated), other: set of (MedicalAssociated);
+           for all d in set medicalAssociated do(
+            if(d.getType() = <Doctor>)
+             then doctors := doctors union {d}
+            else if(d.getType() = <Surgeon>)
 (*@
 \label{getOther:78}
 @*)
-               if(t.getType() = "Surgery")
-                then tasks2 := tasks2 union {t};
-              return tasks2);
-              
- pure public getOther: () ==> set of (Task)
-  getOther() == (
-              dcl tasks2: set of (Task);
-              for all t in set tasks do
+             then surgeons := surgeons union {d}
+            else
+             other := other union {d}
+            );
+            
+            med := med ^ [doctors] ^ [surgeons] ^ [other];
+           return med);
+           
 (*@
 \label{getDoctors:86}
 @*)
-               if(t.getType() = "Other")
-                then tasks2 := tasks2 union {t};
-              return tasks2);
-
- pure public getDoctors: () ==> set of (MedicalAssociated)
-  getDoctors() == (
-           dcl doctors: set of (MedicalAssociated);
-           for all d in set medicalAssociated do
+ pure public overlap: Task * Task ==> bool
+  overlap(t1, t2) == (
+             if(t1.getSchedule().compareDate(t1.getSchedule().getScheduleStart(), t2.getSchedule().getScheduleStart()) 
+              or (t1.getSchedule().compareDateLess(t1.getSchedule().getScheduleStart(), t2.getSchedule().getScheduleStart()) 
+              and not t1.getSchedule().compareDateLess(t1.getSchedule().getScheduleEnd(), t2.getSchedule().getScheduleStart()))
+              or (not t1.getSchedule().compareDateLess(t1.getSchedule().getScheduleStart(), t2.getSchedule().getScheduleStart()) 
+              and t1.getSchedule().compareDateLess(t1.getSchedule().getScheduleStart(), t2.getSchedule().getScheduleEnd())))
+              then return true
 (*@
 \label{geNormalDoctors:94}
 @*)
-            if(d.getType() = <Doctor>)
-             then doctors := doctors union {d};
-           return doctors);
-           
-(*@
-\label{overlap:98}
-@*)
- pure public overlap: Task * Task ==> bool
-  overlap(t1, t2) == (
-             if(t1.getSchedule().getScheduleStart().compareDate(t2.getSchedule().getScheduleStart()) 
-              or (t1.getSchedule().getScheduleStart().compareDateLess(t2.getSchedule().getScheduleStart()) 
-              and not t1.getSchedule().getScheduleEnd().compareDateLess(t2.getSchedule().getScheduleStart()))
-              or (not t1.getSchedule().getScheduleStart().compareDateLess(t2.getSchedule().getScheduleStart()) 
-              and t1.getSchedule().getScheduleStart().compareDateLess(t2.getSchedule().getScheduleEnd())))
-              then return true
              else
               return false);
               

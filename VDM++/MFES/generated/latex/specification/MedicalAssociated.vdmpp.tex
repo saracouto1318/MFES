@@ -15,57 +15,58 @@ instance variables
 @*)
  inv card patients >= 0;
   inv card specialties < 5;
-
+ inv medicalNumber <> [];
+ inv type <> nil;
 operations
- public MedicalAssociated: String * Type ==> MedicalAssociated
 (*@
 \label{getMedicalNumber:17}
 @*)
+ public MedicalAssociated: String * Type ==> MedicalAssociated
   MedicalAssociated(s, t) == (medicalNumber := s; type := t; specialties := {}; patients := {}; return self)
- pre s <> []
- post medicalNumber = s and type = t and specialties = {} and patients = {};
+ pre s <> [] and t <> nil
 (*@
 \label{getSpecialties:20}
 @*)
+ post medicalNumber = s and type = t and specialties = {} and patients = {};
  
  pure public getMedicalNumber: () ==> String
-  getMedicalNumber() == (return medicalNumber);
 (*@
 \label{removeSpecialty:23}
 @*)
+  getMedicalNumber() == (return medicalNumber);
  
  pure public getSpecialties: () ==> set of (Specialty)
   getSpecialties() == (return specialties);
- 
 (*@
 \label{getPatients:27}
 @*)
- pure public getPatients: () ==> set of (Patient)
+ 
 (*@
 \label{addSpecialty:28}
 @*)
+ pure public getPatients: () ==> set of (Patient)
   getPatients() == (return patients);
   
  pure public getType : () ==> Type
   getType() == (return type);
-  
 (*@
 \label{getType:33}
 @*)
+  
  pure public removeSpecialty: Specialty ==> set of(Specialty)
   removeSpecialty(s) == (return specialties \ {s})
- pre s in set specialties
 (*@
 \label{addPatient:36}
 @*)
+ pre s in set specialties
  post s not in set specialties;
   
  pure public addSpecialty: Specialty ==> set of(Specialty)
   addSpecialty(s) == (return specialties union {s})
- pre s not in set specialties
 (*@
 \label{removePatient:41}
 @*)
+ pre s not in set specialties
  post s in set specialties;
  
  public addPatient : Patient ==> set of(Patient)

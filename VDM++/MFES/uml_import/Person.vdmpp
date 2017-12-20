@@ -8,20 +8,18 @@ instance variables
   public lastName: String;
   public cc : String;
   public phoneNumber: String;
-  
+ 
+ 	inv address <> [] and firstName <> [] and lastName <> [] and cc <> [] and len cc = 9 and phoneNumber <> [] and len phoneNumber = 9;
 operations
 	public Person: String * String * String * String * String ==> Person
 		Person(a, fn, ln, c, pn) == ( address := a; firstName := fn; lastName := ln; cc := c; phoneNumber := pn; return self)
 	pre a <> [] and fn <> [] and ln <> [] and c <> [] and pn <> []
 	post address = a and firstName = fn and lastName = ln and cc = c and phoneNumber = pn;
-	
-	pure public getAddress : () ==> String
-		getAddress() == (return address);
-		
-	pure public getName : () ==> String
-		getName() == (return firstName ^ " " ^ lastName);
 		
 	pure public getCC : () ==> String
 		getCC() == (return cc);
+		
+	pure public getInfo: () ==> String
+		getInfo() == (return "Name: " ^ firstName ^ " " ^ lastName ^ "\nAddress: " ^ address ^ "\nPhone Number: " ^ phoneNumber ^ "\nCC: " ^ cc);
 
 end Person

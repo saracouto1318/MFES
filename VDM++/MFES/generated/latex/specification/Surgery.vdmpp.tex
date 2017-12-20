@@ -23,7 +23,7 @@ operations
 (*@
 \label{addSecondaryDoctor:19}
 @*)
- pre s not in set secondaryDoctors
+ pre s <> medicalAssoc and s.getType() = <Surgeon> and  s not in set secondaryDoctors
  post s in set secondaryDoctors;
   
  pure public removeSecondaryDoctor : MedicalAssociated ==> set of (MedicalAssociated)
@@ -31,7 +31,7 @@ operations
 (*@
 \label{removeSecondaryDoctor:24}
 @*)
- pre s in set secondaryDoctors
+ pre s.getType() = <Surgeon> and s in set secondaryDoctors
  post s not in set secondaryDoctors;
   
  pure public addOther : MedicalAssociated ==> set of (MedicalAssociated)
@@ -39,7 +39,7 @@ operations
 (*@
 \label{addOther:29}
 @*)
- pre s not in set other
+ pre s.getType() = <Nurse> and s not in set other
  post s in set other;
   
  pure public removeOther : MedicalAssociated ==> set of (MedicalAssociated)
@@ -47,38 +47,42 @@ operations
 (*@
 \label{removeOther:34}
 @*)
- pre s in set other
+ pre s.getType() = <Nurse> and s in set other
  post s not in set other;
   
  public setMainDoctor : MedicalAssociated ==> ()
-  setMainDoctor(s) == (medicalAssoc := s);
+  setMainDoctor(s) == (medicalAssoc := s)
 (*@
 \label{setMainDoctor:39}
 @*)
-  
+ pre s.getType() = <Surgeon> and s not in set secondaryDoctors;
+ 
+(*@
+\label{getSurgeryPersons:41}
+@*)
  public getMainDoctor : () ==> MedicalAssociated
-  getMainDoctor() == (return medicalAssoc);
 (*@
 \label{getMainDoctor:42}
 @*)
+  getMainDoctor() == (return medicalAssoc);
   
- public getSecondaryDoctors : () ==> set of (MedicalAssociated)
-  getSecondaryDoctors() == (return secondaryDoctors);
+ public getSurgeryPersons : () ==> seq of (set of (MedicalAssociated))
 (*@
 \label{getSecondaryDoctors:45}
 @*)
-  
- public getOthers : () ==> set of (MedicalAssociated)
-  getOthers() == (return other);
+  getSurgeryPersons() == (
+               dcl med : seq of (set of (MedicalAssociated));
+               med := med ^ [secondaryDoctors] ^ [other];
 (*@
 \label{getOthers:48}
 @*)
+               return med);
   
  pure public getType : () ==> seq of (char) 
-  getType() == (return "Surgery");
 (*@
 \label{getType:51}
 @*)
+  getType() == (return "Surgery");
 
 end Surgery
 \end{vdmpp}

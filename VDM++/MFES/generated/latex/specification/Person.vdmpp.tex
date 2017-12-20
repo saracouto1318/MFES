@@ -12,36 +12,34 @@ instance variables
 (*@
 \label{Person:11}
 @*)
-  
+ 
+  inv address <> [] and firstName <> [] and lastName <> [] and cc <> [] and len cc = 9 and phoneNumber <> [] and len phoneNumber = 9;
 operations
  public Person: String * String * String * String * String ==> Person
   Person(a, fn, ln, c, pn) == ( address := a; firstName := fn; lastName := ln; cc := c; phoneNumber := pn; return self)
- pre a <> [] and fn <> [] and ln <> [] and c <> [] and pn <> []
 (*@
 \label{getAddress:16}
 @*)
+ pre a <> [] and fn <> [] and ln <> [] and c <> [] and pn <> []
  post address = a and firstName = fn and lastName = ln and cc = c and phoneNumber = pn;
- 
- pure public getAddress : () ==> String
+  
 (*@
 \label{getName:19}
 @*)
-  getAddress() == (return address);
+ pure public getCC : () ==> String
+  getCC() == (return cc);
   
- pure public getName : () ==> String
 (*@
 \label{getFirstName:22}
 @*)
-  getName() == (return firstName ^ " " ^ lastName);
-  
+ pure public getInfo: () ==> String
+  getInfo() == (return "Name: " ^ firstName ^ " " ^ lastName ^ "\nAddress: " ^ address ^ "\nPhone Number: " ^ phoneNumber ^ "\nCC: " ^ cc);
 (*@
 \label{getCC:24}
 @*)
- pure public getCC : () ==> String
+
 (*@
 \label{getLastName:25}
 @*)
-  getCC() == (return cc);
-
 end Person
 \end{vdmpp}

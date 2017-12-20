@@ -8,13 +8,12 @@ instance variables
   inv schedule <> nil;
   inv patient <> nil;
   inv hospital <> nil;
-  inv medicalAssoc <> nil;
   inv medicalAssoc.getCC() <> patient.getCC();
   
 operations
 	public Task: Schedule * Patient * Hospital ==> Task
-		Task(s, p, h) == (schedule := s; patient := p; hospital := h; return self)
-	post schedule = s and patient = p and hospital = h;
+		Task(s, p, h) == (schedule := s; patient := p; hospital := h; medicalAssoc := nil; return self)
+	post schedule = s and patient = p and hospital = h and medicalAssoc = nil;
 	
 	pure public getSchedule: () ==> Schedule
 		getSchedule() == (return schedule);

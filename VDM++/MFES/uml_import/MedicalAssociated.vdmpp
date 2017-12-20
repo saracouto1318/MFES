@@ -11,11 +11,12 @@ instance variables
 	
 	inv card patients >= 0;
   inv card specialties < 5;
-
+	inv medicalNumber <> [];
+	inv type <> nil;
 operations
 	public MedicalAssociated: String * Type ==> MedicalAssociated
 		MedicalAssociated(s, t) == (medicalNumber := s; type := t; specialties := {}; patients := {}; return self)
-	pre s <> []
+	pre s <> [] and t <> nil
 	post medicalNumber = s and type = t and specialties = {} and patients = {};
 	
 	pure public getMedicalNumber: () ==> String

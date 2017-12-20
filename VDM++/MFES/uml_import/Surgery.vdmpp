@@ -16,35 +16,36 @@ operations
 	
 	pure public addSecondaryDoctor : MedicalAssociated ==> set of (MedicalAssociated)
 		addSecondaryDoctor(s) == (return secondaryDoctors union {s})
-	pre s not in set secondaryDoctors
+	pre s <> medicalAssoc and s.getType() = <Surgeon> and  s not in set secondaryDoctors
 	post s in set secondaryDoctors;
 		
 	pure public removeSecondaryDoctor : MedicalAssociated ==> set of (MedicalAssociated)
 		removeSecondaryDoctor(s) == (return secondaryDoctors \ {s})
-	pre s in set secondaryDoctors
+	pre s.getType() = <Surgeon> and s in set secondaryDoctors
 	post s not in set secondaryDoctors;
 		
 	pure public addOther : MedicalAssociated ==> set of (MedicalAssociated)
 		addOther(s) == (return other union {s})
-	pre s not in set other
+	pre s.getType() = <Nurse> and s not in set other
 	post s in set other;
 		
 	pure public removeOther : MedicalAssociated ==> set of (MedicalAssociated)
 		removeOther(s) == (return other \ {s})
-	pre s in set other
+	pre s.getType() = <Nurse> and s in set other
 	post s not in set other;
 		
 	public setMainDoctor : MedicalAssociated ==> ()
-		setMainDoctor(s) == (medicalAssoc := s);
-		
+		setMainDoctor(s) == (medicalAssoc := s)
+	pre s.getType() = <Surgeon> and s not in set secondaryDoctors;
+	
 	public getMainDoctor : () ==> MedicalAssociated
 		getMainDoctor() == (return medicalAssoc);
 		
-	public getSecondaryDoctors : () ==> set of (MedicalAssociated)
-		getSecondaryDoctors() == (return secondaryDoctors);
-		
-	public getOthers : () ==> set of (MedicalAssociated)
-		getOthers() == (return other);
+	public getSurgeryPersons : () ==> seq of (set of (MedicalAssociated))
+		getSurgeryPersons() == (
+															dcl med : seq of (set of (MedicalAssociated));
+															med := med ^ [secondaryDoctors] ^ [other];
+															return med);
 		
 	pure public getType : () ==> seq of (char) 
 		getType() == (return "Surgery");

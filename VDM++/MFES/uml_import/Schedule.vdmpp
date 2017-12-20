@@ -1,31 +1,49 @@
 class Schedule
+
+types
+	public Date :: 	year: nat1
+									month: nat1
+									day: nat1
+									hour: nat
+									min: nat
+	inv d == d.month <= 12 and d.day <= 31 and d.hour >= 0 and d.hour < 24 and d.min >= 0 and d.min < 60;
 instance variables
   public startHour: Date;
   public endHour: Date;
   
-  inv startHour.compareDateLess(endHour) = true;
-
+  inv compareDateLess(startHour, endHour) = true;
 operations
 
 	public Schedule: Date ==> Schedule
-		Schedule(d) == (startHour := d; return self);
+		Schedule(d) == (startHour := d; return self)
+	post startHour = d;
+	
+	public Schedule: Date * Date ==> Schedule
+		Schedule(d, d2) == (startHour := d; endHour := d2; return self)
+	post startHour = d and endHour = d2;
 	
 	public setEndHour : Date ==> Date
 		setEndHour(d) == (endHour := d; return endHour)
-	pre startHour.compareDateLess(endHour);
+	pre compareDateLess(startHour, d);
 		
 	public setStartHour : Date ==> Date
 		setStartHour(d) == (startHour := d; return startHour)
-	pre d.compareDateLess(endHour);
+	pre compareDateLess(d, endHour);
 	
 	public setSchedule : Date * Date ==> Schedule
 		setSchedule(d1, d2) == (startHour := d1; endHour := d2; return self)
-	pre d1.compareDateLess(d2);
+	pre compareDateLess(d1, d2);
 		
 	pure public getScheduleStart : () ==> Date
 		getScheduleStart() == (return startHour);
 		
 	pure public getScheduleEnd : () ==> Date
 		getScheduleEnd() == (return endHour);
+		
+	pure public compareDateLess : Date * Date ==> bool
+		compareDateLess(d1, d2) == (return (d1.year < d2.year and d1.month < d2.month and d1.day < d2.day and d1.hour < d2.hour and d1.min < d2.min));
+		
+	pure public compareDate : Date * Date ==> bool
+		compareDate(d1, d2) == (return (d1.year = d2.year and d1.month = d2.month and d1.day = d2.day and d1.hour = d2.hour and d1.min = d2.min));
 
 end Schedule

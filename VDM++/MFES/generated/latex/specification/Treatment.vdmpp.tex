@@ -3,10 +3,10 @@ class Treatment is subclass of Task
 types
  public String = seq of (char);
 instance variables
-  public technician: [MedicalAssociated];
+  public med: [MedicalAssociated];
   public name: String;
   
-  inv technician <> nil;
+  inv med.getType() = <Nurse> or med.getType() = <Technician>;
 operations
 
 (*@
@@ -16,7 +16,7 @@ operations
 \label{HospitalTreatment:11}
 @*)
  public Treatment: String ==> Treatment
-  Treatment(n) == (name := n; return self)
+  Treatment(n) == (name := n; med := nil; return self)
  pre n <> []
  post name = n;
  
@@ -35,38 +35,41 @@ operations
 (*@
 \label{setTechnician:19}
 @*)
- public setTechnician: MedicalAssociated ==> ()
-  setTechnician(t) == (technician := t; return);
+(*@
+\label{setMed:19}
+@*)
+ public setMed: MedicalAssociated ==> ()
+  setMed(t) == (med := t; return);
  
 (*@
 \label{getTechnician:22}
 @*)
 (*@
 \label{getTechnician:22}
+@*)
+(*@
+\label{getMed:22}
 @*)
 (*@
 \label{Treatment:22}
 @*)
- pure public getTechnician : () ==> MedicalAssociated
-  getTechnician() == (return technician);
-  
-(*@
-\label{getTechnicianName:25}
-@*)
-(*@
-\label{getTechnicianName:25}
-@*)
- pure public getTechnicianName : () ==> String
-  getTechnicianName() == (return technician.getName());
+ pure public getMed : () ==> MedicalAssociated
+  getMed() == (return med);
  
 (*@
-\label{getType:28}
+\label{getTechnicianName:25}
 @*)
 (*@
-\label{getType:28}
+\label{getTechnicianName:25}
 @*)
  pure public getType : () ==> seq of (char) 
   getType() == (return "Hospital Treatment");
 
+(*@
+\label{getType:28}
+@*)
+(*@
+\label{getType:28}
+@*)
 end Treatment
 \end{vdmpp}

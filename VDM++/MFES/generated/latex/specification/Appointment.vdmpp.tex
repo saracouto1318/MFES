@@ -12,66 +12,68 @@ instance variables
 \label{Appointment:10}
 @*)
   
+  inv type <> nil and priority <> nil;
   inv card prescriptions >= 0;
   inv medicalAssoc.getType() = <Doctor>;
-operations
 (*@
 \label{getDoctorAppointment:14}
 @*)
+operations
  public Appointment: MedicalAssociated * Type==> Appointment
   Appointment(d, t) == (medicalAssoc := d; type := t; priority := <Medium>; prescriptions := {}; return self)
- post medicalAssoc = d and type = t and prescriptions = {} and priority = <Medium>;
 (*@
 \label{getPrescriptions:17}
 @*)
+ post medicalAssoc = d and type = t and prescriptions = {} and priority = <Medium>;
  
  public Appointment: MedicalAssociated * Type * Priority ==> Appointment
-  Appointment(d, t, p) == (medicalAssoc := d; type := t; priority := p; prescriptions := {}; return self)
 (*@
 \label{getPrescription:20}
 @*)
+  Appointment(d, t, p) == (medicalAssoc := d; type := t; priority := p; prescriptions := {}; return self)
  post medicalAssoc = d and type = t and prescriptions = {} and priority = p;
- 
 (*@
 \label{getTypeAppointment:22}
 @*)
+ 
  pure public getTypeAppointment : () ==> Type
   getTypeAppointment() == (return type);
-  
 (*@
 \label{getPriority:25}
 @*)
+  
  pure public getPriority : () ==> Priority
   getPriority() == (return priority);
  
   pure public getPrescriptions : () ==> set of (Prescription)
    getPrescriptions() == (return prescriptions);
-   
 (*@
 \label{addPrescription:31}
 @*)
+   
   pure public getPrescription : seq of (char) ==> Prescription
    getPrescription(code) == (
                 dcl prescription: Prescription;
                  for all p in set prescriptions do
-                  if(p.compare(code))
 (*@
 \label{removePrescription:36}
 @*)
+                  if(p.compare(code))
                    then prescription := p;
                  
                  return prescription;
                 )
-  pre code <> [];
 (*@
 \label{getType:41}
 @*)
-  
+  pre code <> [];
 (*@
 \label{setPriority:42}
 @*)
+  
   public setPriority : Priority ==> ()
-   setPriority(p) == (priority := p);
+   setPriority(p) == (priority := p)
+  pre type = <Urgencies>;
   
   pure public addPrescription : Prescription ==> set of (Prescription)
    addPrescription(p) == (return prescriptions union {p})
