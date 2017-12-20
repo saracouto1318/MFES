@@ -1,6 +1,0 @@
-class Date
-instance variables
-  doctor:Doctor;
-  prescription:set of (Prescription);
-
-end Date

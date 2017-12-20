@@ -1,7 +1,0 @@
-class Task
-instance variables
-  schedule:Schedule;
-  patient:Patient;
-  hospital:set of (Hospital);
-
-end Task

@@ -1,9 +1,0 @@
-class Medicament
-
-types
-	public String = seq of (char);
-instance variables
-  public restrictions:set of (Restrictions);
-  public name:String;
-
-end Medicament

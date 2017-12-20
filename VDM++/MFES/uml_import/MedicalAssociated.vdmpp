@@ -2,23 +2,33 @@ class MedicalAssociated is subclass of Person
 
 types
 	public String = seq of (char);
+	public Type = <Doctor> | <Surgeon> | <Nurse> | <Technician>;
 instance variables
   public medicalNumber: String;
   public specialties:set of (Specialty);
-  
+  public patients : set of(Patient);
+	public type : Type;
+	
+	inv card patients >= 0;
   inv card specialties < 5;
 
 operations
-	public MedicalAssociated: String ==> MedicalAssociated
-		MedicalAssociated(s) == (medicalNumber := s; specialties := {}; return self)
+	public MedicalAssociated: String * Type ==> MedicalAssociated
+		MedicalAssociated(s, t) == (medicalNumber := s; type := t; specialties := {}; patients := {}; return self)
 	pre s <> []
-	post medicalNumber = s and specialties = {};
+	post medicalNumber = s and type = t and specialties = {} and patients = {};
 	
 	pure public getMedicalNumber: () ==> String
 		getMedicalNumber() == (return medicalNumber);
 	
 	pure public getSpecialties: () ==> set of (Specialty)
 		getSpecialties() == (return specialties);
+	
+	pure public getPatients: () ==> set of (Patient)
+		getPatients() == (return patients);
+		
+	pure public getType : () ==> Type
+		getType() == (return type);
 		
 	pure public removeSpecialty: Specialty ==> set of(Specialty)
 		removeSpecialty(s) == (return specialties \ {s})
@@ -30,7 +40,14 @@ operations
 	pre s not in set specialties
 	post s in set specialties;
 	
-	pure public getType : () ==> String 
-		getType() == (return "");
+	public addPatient : Patient ==> set of(Patient)
+		addPatient(p) == (return patients union {p})
+	pre p not in set patients
+	post p in set patients;
+	
+	public removePatient : Patient ==> set of(Patient)
+		removePatient(p) == (return patients \ {p})
+	pre p in set patients
+	post p not in set patients;
 
 end MedicalAssociated

@@ -6,6 +6,7 @@ instance variables
   public name: String;
   public address: String;
   public tasks: set of(Task);
+  public safetyNet: [SafetyNetHospital];
  
  inv card medicalAssociated >= 0;
  inv card tasks >= 0;
@@ -49,9 +50,12 @@ operations
 	pre d in set medicalAssociated
 	post d not in set medicalAssociated;
 	
-	pure public addTask: Task ==> set of (Task)
+	public addTask: Task ==> set of (Task)
 		addTask(d) == (return ({d} union tasks))
-	pre d not in set tasks
+	pre d not in set tasks and forall t in set tasks & 
+		not (overlap(d, t) and not (d.getMedAssoc().getCC() <> t.getMedAssoc().getCC() and 
+				d.getPatient().getCC() <> t.getPatient().getCC() and d.getMedAssoc().getCC() <> t.getPatient().getCC()
+				and d.getPatient().getCC() <> t.getMedAssoc().getCC()))
 	post d in set tasks;
 		
 	pure public removeTask: Task ==> set of (Task)
@@ -83,19 +87,23 @@ operations
 																then tasks2 := tasks2 union {t};
 														return tasks2);
 
-	pure public getDoctors: () ==> set of (Doctor)
+	pure public getDoctors: () ==> set of (MedicalAssociated)
 		getDoctors() == (
-											dcl doctors: set of (Doctor);
+											dcl doctors: set of (MedicalAssociated);
 											for all d in set medicalAssociated do
-												if(d.getType() = "Doctor")
+												if(d.getType() = <Doctor>)
 													then doctors := doctors union {d};
 											return doctors);
 											
-		pure public geNormalDoctors: () ==> set of (NormalDoctor)
-		geNormalDoctors() == (
-											dcl doctors: set of (Doctor);
-											for all d in set medicalAssociated do
-												if(d.getType() = "Normal Doctor")
-													then doctors := doctors union {d};
-											return doctors);
+	pure public overlap: Task * Task ==> bool
+		overlap(t1, t2) == (
+													if(t1.getSchedule().getScheduleStart().compareDate(t2.getSchedule().getScheduleStart()) 
+														or (t1.getSchedule().getScheduleStart().compareDateLess(t2.getSchedule().getScheduleStart()) 
+														and not t1.getSchedule().getScheduleEnd().compareDateLess(t2.getSchedule().getScheduleStart()))
+														or (not t1.getSchedule().getScheduleStart().compareDateLess(t2.getSchedule().getScheduleStart()) 
+														and t1.getSchedule().getScheduleStart().compareDateLess(t2.getSchedule().getScheduleEnd())))
+														then return true
+													else
+														return false);
+														
 end Hospital

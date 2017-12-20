@@ -1,8 +1,0 @@
-class MedicalAssociated
-
-types
-	public String = seq of (char);
-instance variables
-  medicalNumber: String;
-
-end MedicalAssociated

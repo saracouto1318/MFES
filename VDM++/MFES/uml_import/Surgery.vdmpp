@@ -3,49 +3,47 @@ class Surgery is subclass of Task
 types
 
 instance variables
-  public mainDoctor: [Surgeon];
-  public secondaryDoctors:set of (Surgeon);
-  public other:set of (OtherMedicalAssociated);
+  public secondaryDoctors:set of (MedicalAssociated);
+  public other:set of (MedicalAssociated);
   
-  inv mainDoctor <> nil;
   inv card secondaryDoctors >= 0;
   inv card other >= 0;
 operations
 
-	public Surgery: Surgeon ==> Surgery
-		Surgery(s) == (mainDoctor := s; other := {}; secondaryDoctors := {}; return self)
-	post mainDoctor = s and other = {} and secondaryDoctors = {};
+	public Surgery: MedicalAssociated ==> Surgery
+		Surgery(s) == (medicalAssoc := s ; other := {}; secondaryDoctors := {}; return self)
+	post medicalAssoc = s and other = {} and secondaryDoctors = {};
 	
-	pure public addSecondaryDoctor : Surgeon ==> set of (Surgeon)
+	pure public addSecondaryDoctor : MedicalAssociated ==> set of (MedicalAssociated)
 		addSecondaryDoctor(s) == (return secondaryDoctors union {s})
 	pre s not in set secondaryDoctors
 	post s in set secondaryDoctors;
 		
-	pure public removeSecondaryDoctor : Surgeon ==> set of (Surgeon)
+	pure public removeSecondaryDoctor : MedicalAssociated ==> set of (MedicalAssociated)
 		removeSecondaryDoctor(s) == (return secondaryDoctors \ {s})
 	pre s in set secondaryDoctors
 	post s not in set secondaryDoctors;
 		
-	pure public addOther : OtherMedicalAssociated ==> set of (OtherMedicalAssociated)
+	pure public addOther : MedicalAssociated ==> set of (MedicalAssociated)
 		addOther(s) == (return other union {s})
 	pre s not in set other
 	post s in set other;
 		
-	pure public removeOther : OtherMedicalAssociated ==> set of (OtherMedicalAssociated)
+	pure public removeOther : MedicalAssociated ==> set of (MedicalAssociated)
 		removeOther(s) == (return other \ {s})
 	pre s in set other
 	post s not in set other;
 		
-	public setMainDoctor : Surgeon ==> ()
-		setMainDoctor(s) == (mainDoctor := s);
+	public setMainDoctor : MedicalAssociated ==> ()
+		setMainDoctor(s) == (medicalAssoc := s);
 		
-	public getMainDoctor : () ==> Surgeon
-		getMainDoctor() == (return mainDoctor);
+	public getMainDoctor : () ==> MedicalAssociated
+		getMainDoctor() == (return medicalAssoc);
 		
-	public getSecondaryDoctors : () ==> set of (Surgeon)
+	public getSecondaryDoctors : () ==> set of (MedicalAssociated)
 		getSecondaryDoctors() == (return secondaryDoctors);
 		
-	public getOthers : () ==> set of (OtherMedicalAssociated)
+	public getOthers : () ==> set of (MedicalAssociated)
 		getOthers() == (return other);
 		
 	pure public getType : () ==> seq of (char) 

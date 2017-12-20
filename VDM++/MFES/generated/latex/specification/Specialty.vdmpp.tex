@@ -13,11 +13,11 @@ operations
  public Specialty : String ==> Specialty
   Specialty(n) == (name := n; return self)
  pre n <> []
-(*@
-\label{getName:12}
-@*)
  post name = n;
   
+(*@
+\label{getName:14}
+@*)
  pure public getName : () ==> String
   getName() == (return name);
 

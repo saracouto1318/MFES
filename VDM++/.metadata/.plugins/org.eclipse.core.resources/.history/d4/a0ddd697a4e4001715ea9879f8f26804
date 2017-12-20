@@ -1,9 +1,0 @@
-class Prescription
-
-types
-	public String = seq of (char);
-instance variables
-  public medicament:set of (Medicament);
-  public code:String;
-
-end Prescription

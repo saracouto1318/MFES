@@ -5,7 +5,7 @@ types
 instance variables
  public hospitals: set of (Hospital);
  
- inv card hospitals > 1;
+ inv card hospitals >= 0;
 operations
 
 (*@
@@ -20,19 +20,19 @@ operations
  pure public addHospital : Hospital ==> set of (Hospital)
   addHospital(h) == (return hospitals union {h})
  pre h not in set hospitals
-(*@
-\label{removeHospital:16}
-@*)
  post h in set hospitals;
  
- pure public removeHospital : Hospital ==> set of (Hospital)
 (*@
-\label{numHospitals:19}
+\label{removeHospital:18}
 @*)
+ pure public removeHospital : Hospital ==> set of (Hospital)
   removeHospital(h) == (return hospitals \ {h})
  pre h in set hospitals
  post h not in set hospitals;
  
+(*@
+\label{numHospitals:23}
+@*)
  pure public numHospitals : () ==> nat
   numHospitals() == (return card hospitals);
   
@@ -51,9 +51,9 @@ operations
 (*@
 \label{getDoctorsMoreHospitals:35}
 @*)
- pure public getDoctorsMoreHospitals : () ==> set of(Doctor)
+ pure public getDoctorsMoreHospitals : () ==> set of(MedicalAssociated)
   getDoctorsMoreHospitals() == (
-                  dcl doctors: set of(Doctor);
+                  dcl doctors: set of(MedicalAssociated);
                   for all h in set hospitals do (
                    dcl med: set of (MedicalAssociated), list: set of(Hospital);
                    med := h.getMedicalAssociated();
@@ -61,7 +61,7 @@ operations
                    list := hospitals \ {h};
                    for all m in set med do(
                     for all l in set list do
-                     if(m in set l.getMedicalAssociated() and m.getType() = "Doctor" and m not in set doctors)
+                     if(m in set l.getMedicalAssociated() and m.getType() = <Doctor> and m not in set doctors)
                       then doctors := doctors union {m};
                    );
                   );

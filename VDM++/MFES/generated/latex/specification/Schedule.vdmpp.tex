@@ -15,42 +15,36 @@ operations
   Schedule(d) == (startHour := d; return self);
  
 (*@
-\label{addEndHour:13}
-@*)
-(*@
 \label{setEndHour:13}
 @*)
  public setEndHour : Date ==> Date
   setEndHour(d) == (endHour := d; return endHour)
  pre startHour.compareDateLess(endHour);
-(*@
-\label{setStartHour:16}
-@*)
   
+(*@
+\label{setStartHour:17}
+@*)
  public setStartHour : Date ==> Date
   setStartHour(d) == (startHour := d; return startHour)
-(*@
-\label{setSchedule:19}
-@*)
  pre d.compareDateLess(endHour);
  
+(*@
+\label{setSchedule:21}
+@*)
  public setSchedule : Date * Date ==> Schedule
-(*@
-\label{getSchedule:22}
-@*)
-(*@
-\label{getScheduleStart:22}
-@*)
   setSchedule(d1, d2) == (startHour := d1; endHour := d2; return self)
  pre d1.compareDateLess(d2);
   
 (*@
-\label{getScheduleEnd:25}
+\label{getScheduleStart:25}
 @*)
- public getScheduleStart : () ==> Date
+ pure public getScheduleStart : () ==> Date
   getScheduleStart() == (return startHour);
   
- public getScheduleEnd : () ==> Date
+(*@
+\label{getScheduleEnd:28}
+@*)
+ pure public getScheduleEnd : () ==> Date
   getScheduleEnd() == (return endHour);
 
 end Schedule

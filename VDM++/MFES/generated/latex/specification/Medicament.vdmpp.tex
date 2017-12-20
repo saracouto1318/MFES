@@ -7,20 +7,17 @@ instance variables
   public name:String;
   
 operations
+(*@
+\label{Medicament:9}
+@*)
  public Medicament: String ==> Medicament
-(*@
-\label{MedicalAssociated:10}
-@*)
-(*@
-\label{Medicament:10}
-@*)
   Medicament(n) == (name := n; return self)
  pre n <> []
  post name = n;
-(*@
-\label{getName:13}
-@*)
  
+(*@
+\label{getName:14}
+@*)
  pure public getName: () ==> String
   getName() == (return name);
 

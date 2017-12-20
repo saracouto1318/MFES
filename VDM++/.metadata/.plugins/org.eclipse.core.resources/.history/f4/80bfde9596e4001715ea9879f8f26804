@@ -1,5 +1,0 @@
-class City
-instance variables
-  name:seq of (char);
-
-end City

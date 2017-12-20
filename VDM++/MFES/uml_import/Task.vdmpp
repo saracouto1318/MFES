@@ -3,10 +3,13 @@ instance variables
   public schedule:[Schedule];
   public patient:[Patient];
   public hospital:[Hospital];
+  public medicalAssoc:[MedicalAssociated];
   
   inv schedule <> nil;
   inv patient <> nil;
   inv hospital <> nil;
+  inv medicalAssoc <> nil;
+  inv medicalAssoc.getCC() <> patient.getCC();
   
 operations
 	public Task: Schedule * Patient * Hospital ==> Task
@@ -22,6 +25,9 @@ operations
 	pure public getHospital: () ==> Hospital
 		getHospital() == (return hospital);
 		
+	pure public getMedAssoc : () ==> MedicalAssociated
+		getMedAssoc() == (return medicalAssoc);
+		
 	public setSchedule : Schedule ==> ()
 		setSchedule(s) == (schedule := s);
 		
@@ -30,6 +36,9 @@ operations
 		
 	public setHospital : Hospital ==> ()
 		setHospital(s) == (hospital := s);
+	
+	public setMedAssoc : MedicalAssociated ==> ()
+		setMedAssoc(s) == (medicalAssoc := s);
 		
 	pure public getType : () ==> seq of (char) 
 		getType() == (return "");

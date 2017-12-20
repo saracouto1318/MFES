@@ -9,37 +9,31 @@ instance variables
   private hour: nat;
   private minutes : nat;
   
-(*@
-\label{Date:11}
-@*)
 operations
 
+(*@
+\label{Date:13}
+@*)
  public Date: nat * nat * nat * nat * nat ==> Date
  Date(y, m, d, h, min) == (year := y; month := m; day := d; hour := h; minutes := min; return self)
-(*@
-\label{getYear:15}
-@*)
  pre y > 0 and m > 0 and m <= 12 and d > 0 and d <= 31 and h >= 0 and h <= 23 and min >= 0 and min <= 59;
  
- pure public getYear : () ==> nat
 (*@
-\label{getMonth:18}
+\label{getYear:17}
 @*)
+ pure public getYear : () ==> nat
   getYear() == (return year);
   
- pure public getMonth : () ==> nat
 (*@
-\label{getDay:21}
+\label{getMonth:20}
 @*)
+ pure public getMonth : () ==> nat
   getMonth() == (return month);
   
+(*@
+\label{getDay:23}
+@*)
  pure public getDay : () ==> nat
-(*@
-\label{compareDate:24}
-@*)
-(*@
-\label{compareDateLess:24}
-@*)
   getDay() == (return day);
   
 (*@
@@ -54,9 +48,15 @@ operations
  pure public getMin : () ==> nat
   getMin() == (return minutes);
 
+(*@
+\label{compareDateLess:32}
+@*)
  pure public compareDateLess : Date ==> bool
   compareDateLess(date) == (return (year < date.getYear() and month < date.getMonth() and day < date.getDay() and hour < date.getHour() and minutes < date.getMin()));
   
+(*@
+\label{compareDate:35}
+@*)
  pure public compareDate : Date ==> bool
   compareDate(date) == (return (date.getYear() = year and date.getMonth() = month and date.getDay() = day and hour = date.getHour() and minutes = date.getMin()));
 end Date

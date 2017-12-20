@@ -7,48 +7,41 @@ instance variables
   public address: String;
   public firstName: String;
   public lastName: String;
-  
-operations
-(*@
-\label{Patient:11}
-@*)
+  public cc : String;
+  public phoneNumber: String;
 (*@
 \label{Person:11}
 @*)
- public Person: String * String * String ==> Person
-  Person(a, fn, ln) == ( address := a; firstName := fn; lastName := ln; return self)
- pre a <> [] and fn <> [] and ln <> []
- post address = a and firstName = fn and lastName = ln;
+  
+operations
+ public Person: String * String * String * String * String ==> Person
+  Person(a, fn, ln, c, pn) == ( address := a; firstName := fn; lastName := ln; cc := c; phoneNumber := pn; return self)
+ pre a <> [] and fn <> [] and ln <> [] and c <> [] and pn <> []
 (*@
-\label{getHealthNumber:15}
+\label{getAddress:16}
 @*)
-(*@
-\label{getAddress:15}
-@*)
+ post address = a and firstName = fn and lastName = ln and cc = c and phoneNumber = pn;
  
  pure public getAddress : () ==> String
-  getAddress() == (return address);
 (*@
-\label{getName:18}
+\label{getName:19}
 @*)
+  getAddress() == (return address);
   
  pure public getName : () ==> String
+(*@
+\label{getFirstName:22}
+@*)
   getName() == (return firstName ^ " " ^ lastName);
-(*@
-\label{getfirstName:21}
-@*)
-(*@
-\label{getFirstName:21}
-@*)
   
- pure public getFirstName : () ==> String
-  getFirstName() == (return firstName);
 (*@
-\label{getLastName:24}
+\label{getCC:24}
 @*)
-  
- pure public getLastName : () ==> String
-  getLastName() == (return lastName);
+ pure public getCC : () ==> String
+(*@
+\label{getLastName:25}
+@*)
+  getCC() == (return cc);
 
 end Person
 \end{vdmpp}

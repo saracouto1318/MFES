@@ -22,10 +22,10 @@ operations
 		setSchedule(d1, d2) == (startHour := d1; endHour := d2; return self)
 	pre d1.compareDateLess(d2);
 		
-	public getScheduleStart : () ==> Date
+	pure public getScheduleStart : () ==> Date
 		getScheduleStart() == (return startHour);
 		
-	public getScheduleEnd : () ==> Date
+	pure public getScheduleEnd : () ==> Date
 		getScheduleEnd() == (return endHour);
 
 end Schedule

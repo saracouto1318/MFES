@@ -15,38 +15,38 @@ operations
   Prescription(c) == (code := c; medicaments := {}; return self)
  pre c <> []
  post code = c and medicaments = {};
-(*@
-\label{getCode:14}
-@*)
  
+(*@
+\label{getCode:15}
+@*)
  pure public getCode : () ==> seq of (char)
   getCode() == (return code);
-(*@
-\label{addMedicament:17}
-@*)
   
+(*@
+\label{addMedicament:18}
+@*)
  pure public addMedicament: Medicament ==> set of (Medicament)
   addMedicament(m) == (return ({m} union medicaments))
-(*@
-\label{removeMedicament:20}
-@*)
  pre m not in set medicaments
  post m in set medicaments;
   
 (*@
-\label{getMedicaments:23}
+\label{removeMedicament:23}
 @*)
  pure public removeMedicament: Medicament ==> set of (Medicament)
   removeMedicament(m) == (return (medicaments \ {m}))
  pre m in set medicaments
-(*@
-\label{compare:26}
-@*)
  post m not in set medicaments;
   
+(*@
+\label{getMedicaments:28}
+@*)
  pure public getMedicaments: () ==> set of (Medicament)
   getMedicaments() == (return medicaments);
   
+(*@
+\label{compare:31}
+@*)
  pure public compare: seq of (char) ==> bool
   compare(c) == (return c = code);
 

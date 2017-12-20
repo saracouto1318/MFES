@@ -1,5 +1,0 @@
-class Doctor
-instance variables
-  specialty:set of (Specialty);
-
-end Doctor

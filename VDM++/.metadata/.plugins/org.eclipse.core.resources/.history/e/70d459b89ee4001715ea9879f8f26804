@@ -1,5 +1,0 @@
-class MedicalAssociated
-instance variables
-  medicalNumber:?;
-
-end MedicalAssociated

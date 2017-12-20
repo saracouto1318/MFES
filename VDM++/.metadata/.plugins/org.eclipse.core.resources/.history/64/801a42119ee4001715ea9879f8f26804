@@ -1,8 +1,0 @@
-class HospitalTreatment
-types
-	public String = seq of (char);
-instance variables
-  public technician: Technician;
-  public name: String;
-
-end HospitalTreatment

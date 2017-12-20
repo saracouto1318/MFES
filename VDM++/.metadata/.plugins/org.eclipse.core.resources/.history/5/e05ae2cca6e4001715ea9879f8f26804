@@ -1,6 +1,0 @@
-class Schedule
-instance variables
-  start:?;
-  end:?;
-
-end Schedule

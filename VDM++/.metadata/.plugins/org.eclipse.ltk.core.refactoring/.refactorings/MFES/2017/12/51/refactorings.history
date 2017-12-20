@@ -1,4 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<session version="1.0">
-<refactoring comment="Rename resource &apos;MFES/uml_import/Nurse.vdmpp&apos; to &apos;OtherMedicalAssociated.vdmpp&apos;" description="Rename resource &apos;Nurse.vdmpp&apos;" flags="7" id="org.eclipse.ltk.core.refactoring.rename.resource" input="uml_import/Nurse.vdmpp" name="OtherMedicalAssociated.vdmpp" stamp="1513711568554" updateReferences="true"/>
-</session>

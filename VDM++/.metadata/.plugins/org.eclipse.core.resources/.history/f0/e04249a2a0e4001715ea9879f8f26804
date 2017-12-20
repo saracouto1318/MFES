@@ -1,5 +1,0 @@
-class NursingTreatment
-instance variables
-  nurse:Nurse;
-
-end NursingTreatment

@@ -1,6 +1,0 @@
-class Medicament
-instance variables
-  restrictions:set of (Restrictions);
-  name:seq of (char);
-
-end Medicament

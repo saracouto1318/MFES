@@ -1,5 +1,0 @@
-class Urgencies
-instance variables
-  priority:Priority;
-
-end Urgencies

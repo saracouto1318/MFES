@@ -3,57 +3,80 @@ class MedicalAssociated is subclass of Person
 
 types
  public String = seq of (char);
+ public Type = <Doctor> | <Surgeon> | <Nurse> | <Technician>;
 instance variables
   public medicalNumber: String;
   public specialties:set of (Specialty);
-  
+  public patients : set of(Patient);
+ public type : Type;
+ 
 (*@
-\label{MedicalAssociated:9}
+\label{MedicalAssociated:12}
 @*)
-(*@
-\label{Doctor:9}
-@*)
+ inv card patients >= 0;
   inv card specialties < 5;
 
 operations
- public MedicalAssociated: String ==> MedicalAssociated
+ public MedicalAssociated: String * Type ==> MedicalAssociated
 (*@
-\label{getMedicalNumber:13}
+\label{getMedicalNumber:17}
 @*)
-(*@
-\label{getSpecialties:13}
-@*)
-  MedicalAssociated(s) == (medicalNumber := s; specialties := {}; return self)
+  MedicalAssociated(s, t) == (medicalNumber := s; type := t; specialties := {}; patients := {}; return self)
  pre s <> []
- post medicalNumber = s and specialties = {};
+ post medicalNumber = s and type = t and specialties = {} and patients = {};
+(*@
+\label{getSpecialties:20}
+@*)
  
  pure public getMedicalNumber: () ==> String
   getMedicalNumber() == (return medicalNumber);
+(*@
+\label{removeSpecialty:23}
+@*)
  
  pure public getSpecialties: () ==> set of (Specialty)
   getSpecialties() == (return specialties);
-  
- pure public removeSpecialty: Specialty ==> set of(Specialty)
+ 
 (*@
-\label{removeSpecialty:24}
+\label{getPatients:27}
 @*)
+ pure public getPatients: () ==> set of (Patient)
+(*@
+\label{addSpecialty:28}
+@*)
+  getPatients() == (return patients);
+  
+ pure public getType : () ==> Type
+  getType() == (return type);
+  
+(*@
+\label{getType:33}
+@*)
+ pure public removeSpecialty: Specialty ==> set of(Specialty)
   removeSpecialty(s) == (return specialties \ {s})
  pre s in set specialties
- post s not in set specialties;
 (*@
-\label{addSpecialty:27}
+\label{addPatient:36}
 @*)
+ post s not in set specialties;
   
  pure public addSpecialty: Specialty ==> set of(Specialty)
   addSpecialty(s) == (return specialties union {s})
  pre s not in set specialties
+(*@
+\label{removePatient:41}
+@*)
  post s in set specialties;
  
-(*@
-\label{getType:33}
-@*)
- pure public getType : () ==> String 
-  getType() == (return "");
+ public addPatient : Patient ==> set of(Patient)
+  addPatient(p) == (return patients union {p})
+ pre p not in set patients
+ post p in set patients;
+ 
+ public removePatient : Patient ==> set of(Patient)
+  removePatient(p) == (return patients \ {p})
+ pre p in set patients
+ post p not in set patients;
 
 end MedicalAssociated
 \end{vdmpp}

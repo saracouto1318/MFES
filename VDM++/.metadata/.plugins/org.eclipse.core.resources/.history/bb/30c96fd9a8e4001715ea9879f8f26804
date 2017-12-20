@@ -1,7 +1,0 @@
-class Surgery
-instance variables
-  mainDoctor: Surgeon;
-  secondaryDoctors:set of (Surgeon);
-  nurse:set of (Nurse);
-
-end Surgery

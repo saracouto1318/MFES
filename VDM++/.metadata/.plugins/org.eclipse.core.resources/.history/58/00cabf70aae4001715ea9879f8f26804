@@ -1,5 +1,0 @@
-class Technician is subclass of MedicalAssociated
-instance variables
-  specialty:set of (Specialty);
-
-end Technician

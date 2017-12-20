@@ -1,0 +1,72 @@
+\begin{vdmpp}[breaklines=true]
+class Treatment is subclass of Task
+types
+ public String = seq of (char);
+instance variables
+  public technician: [MedicalAssociated];
+  public name: String;
+  
+  inv technician <> nil;
+operations
+
+(*@
+\label{HospitalTreatment:11}
+@*)
+(*@
+\label{HospitalTreatment:11}
+@*)
+ public Treatment: String ==> Treatment
+  Treatment(n) == (name := n; return self)
+ pre n <> []
+ post name = n;
+ 
+(*@
+\label{getName:16}
+@*)
+(*@
+\label{getName:16}
+@*)
+ pure public getName: () ==> String
+  getName() == (return name);
+  
+(*@
+\label{setTechnician:19}
+@*)
+(*@
+\label{setTechnician:19}
+@*)
+ public setTechnician: MedicalAssociated ==> ()
+  setTechnician(t) == (technician := t; return);
+ 
+(*@
+\label{getTechnician:22}
+@*)
+(*@
+\label{getTechnician:22}
+@*)
+(*@
+\label{Treatment:22}
+@*)
+ pure public getTechnician : () ==> MedicalAssociated
+  getTechnician() == (return technician);
+  
+(*@
+\label{getTechnicianName:25}
+@*)
+(*@
+\label{getTechnicianName:25}
+@*)
+ pure public getTechnicianName : () ==> String
+  getTechnicianName() == (return technician.getName());
+ 
+(*@
+\label{getType:28}
+@*)
+(*@
+\label{getType:28}
+@*)
+ pure public getType : () ==> seq of (char) 
+  getType() == (return "Hospital Treatment");
+
+end Treatment
+\end{vdmpp}

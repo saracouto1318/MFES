@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.18 (MiKTeX 2.9.6500 64-bit) (preloaded format=pdflatex 2017.12.19)  19 DEC 2017 19:48
+This is pdfTeX, Version 3.14159265-2.6-1.40.18 (MiKTeX 2.9.6500 64-bit) (preloaded format=pdflatex 2017.12.19)  20 DEC 2017 14:53
 entering extended mode
 **./MFES.tex
 (MFES.tex
@@ -223,25 +223,28 @@ Package: longtable 2014/10/28 v4.11 Multi-page Table package (DPC)
 \LT@p@ftn=\toks16
 ) (MFES.aux
 
-LaTeX Warning: Label `Nurse:8' multiply defined.
+LaTeX Warning: Label `getName:19' multiply defined.
 
 
-LaTeX Warning: Label `Nurse:8' multiply defined.
+LaTeX Warning: Label `getName:14' multiply defined.
 
 
-LaTeX Warning: Label `getType:11' multiply defined.
+LaTeX Warning: Label `HospitalTreatment:11' multiply defined.
 
 
-LaTeX Warning: Label `getType:11' multiply defined.
+LaTeX Warning: Label `getName:16' multiply defined.
 
 
-LaTeX Warning: Label `getType:11' multiply defined.
+LaTeX Warning: Label `setTechnician:19' multiply defined.
 
 
-LaTeX Warning: Label `getName:13' multiply defined.
+LaTeX Warning: Label `getTechnician:22' multiply defined.
 
 
-LaTeX Warning: Label `Surgeon:4' multiply defined.
+LaTeX Warning: Label `getTechnicianName:25' multiply defined.
+
+
+LaTeX Warning: Label `getType:28' multiply defined.
 
 )
 \openout1 = `MFES.aux'.
@@ -317,9 +320,7 @@ LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <10> not available
 \openout4 = `MFES.toc'.
 
 
-(specification/Appointment.vdmpp.tex [1
-
-{C:/Users/ASUS/AppData/Local/MiKTeX/2.9/pdftex/config/pdftex.map}]
+(specification/Appointment.vdmpp.tex
 LaTeX Font Info:    Try loading font information for OT1+pcr on input line 1.
 
 ("C:\Users\ASUS\AppData\Local\Programs\MiKTeX 2.9\tex\latex\psnfss\ot1pcr.fd"
@@ -327,41 +328,41 @@ File: ot1pcr.fd 2001/06/04 font definitions for OT1/pcr.
 )
 LaTeX Font Info:    Font shape `OT1/pcr/bx/n' in size <8> not available
 (Font)              Font shape `OT1/pcr/b/n' tried instead on input line 2.
-) (specification/Date.vdmpp.tex [2]) (specification/Doctor.vdmpp.tex [3])
-(specification/Hospital.vdmpp.tex [4] [5])
-(specification/HospitalTreatment.vdmpp.tex)
-(specification/MedicalAssociated.vdmpp.tex [6])
-(specification/Medicament.vdmpp.tex [7]) (specification/NormalDoctor.vdmpp.tex)
-(specification/OtherMedicalAssociated.vdmpp.tex [8])
-(specification/Patient.vdmpp.tex) (specification/Person.vdmpp.tex [9])
-(specification/Prescription.vdmpp.tex [10])
-(specification/SafetyNetHospital.vdmpp.tex [11])
-(specification/Schedule.vdmpp.tex) (specification/Specialty.vdmpp.tex [12])
-(specification/Surgeon.vdmpp.tex) (specification/Surgery.vdmpp.tex [13])
-(specification/Task.vdmpp.tex [14]) (specification/Training.vdmpp.tex [15])
-(specification/Urgencies.vdmpp.tex)
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 53.
- [16]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 53.
+
+[1
+
+{C:/Users/ASUS/AppData/Local/MiKTeX/2.9/pdftex/config/pdftex.map}] [2])
+(specification/Date.vdmpp.tex) (specification/Hospital.vdmpp.tex [3] [4]
+[5]) (specification/MedicalAssociated.vdmpp.tex [6])
+(specification/Medicament.vdmpp.tex) (specification/Patient.vdmpp.tex) [7]
+(specification/Person.vdmpp.tex) (specification/Prescription.vdmpp.tex [8])
+(specification/SafetyNetHospital.vdmpp.tex [9])
+(specification/Schedule.vdmpp.tex [10]) (specification/Specialty.vdmpp.tex)
+(specification/Surgery.vdmpp.tex [11]) (specification/Task.vdmpp.tex [12])
+(specification/Training.vdmpp.tex [13]) (specification/Treatment.vdmpp.tex
+[14])
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 43.
+ [15]
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 43.
  (MFES.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 53.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 53.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 43.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 43.
 Package rerunfilecheck Info: File `MFES.out' has not changed.
-(rerunfilecheck)             Checksum: 7FA3524B0C41AA794824133102DCA18B;943.
+(rerunfilecheck)             Checksum: A1AF1E7261CDC165B672AF683D776086;689.
 
 
 LaTeX Warning: There were multiply-defined labels.
 
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 53.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 43.
  ) 
 Here is how much of TeX's memory you used:
- 7553 strings out of 493312
- 114819 string characters out of 3130261
- 374713 words of memory out of 3000000
- 10134 multiletter control sequences out of 15000+200000
+ 7428 strings out of 493312
+ 112345 string characters out of 3130261
+ 406258 words of memory out of 3000000
+ 10104 multiletter control sequences out of 15000+200000
  16427 words of font info for 39 fonts, out of 3000000 for 9000
  1141 hyphenation exceptions out of 8191
- 33i,6n,48p,239b,1785s stack positions out of 5000i,500n,10000p,200000b,50000s
+ 33i,6n,48p,239b,1916s stack positions out of 5000i,500n,10000p,200000b,50000s
 {C:/Users/ASUS/AppData/Local/Programs/MiKTeX 2.9/fonts/enc/dvips/base/8r.enc}
 <C:/Users/ASUS/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/public/amsfonts/la
 txfont/lcircle1.pfb><C:/Users/ASUS/AppData/Local/Programs/MiKTeX 2.9/fonts/type
@@ -369,9 +370,9 @@ txfont/lcircle1.pfb><C:/Users/ASUS/AppData/Local/Programs/MiKTeX 2.9/fonts/type
 /type1/urw/courier/ucrr8a.pfb><C:/Users/ASUS/AppData/Local/Programs/MiKTeX 2.9/
 fonts/type1/urw/times/utmb8a.pfb><C:/Users/ASUS/AppData/Local/Programs/MiKTeX 2
 .9/fonts/type1/urw/times/utmr8a.pfb>
-Output written on MFES.pdf (16 pages, 207755 bytes).
+Output written on MFES.pdf (15 pages, 193429 bytes).
 PDF statistics:
- 1203 PDF objects out of 1440 (max. 8388607)
- 869 named destinations out of 1000 (max. 500000)
- 161 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 1083 PDF objects out of 1200 (max. 8388607)
+ 789 named destinations out of 1000 (max. 500000)
+ 121 words of extra memory for PDF output out of 10000 (max. 10000000)
 

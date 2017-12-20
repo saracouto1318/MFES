@@ -4,95 +4,81 @@ class Surgery is subclass of Task
 types
 
 instance variables
-  public mainDoctor: [Surgeon];
-  public secondaryDoctors:set of (Surgeon);
-  public other:set of (OtherMedicalAssociated);
+  public secondaryDoctors:set of (MedicalAssociated);
+  public other:set of (MedicalAssociated);
   
-  inv mainDoctor <> nil;
   inv card secondaryDoctors >= 0;
-(*@
-\label{Surgery:12}
-@*)
   inv card other >= 0;
 operations
 
- public Surgery: Surgeon ==> Surgery
+ public Surgery: MedicalAssociated ==> Surgery
+  Surgery(s) == (medicalAssoc := s ; other := {}; secondaryDoctors := {}; return self)
 (*@
-\label{addSecondaryDoctor:16}
+\label{Surgery:15}
 @*)
-  Surgery(s) == (mainDoctor := s; other := {}; secondaryDoctors := {}; return self)
- post mainDoctor = s and other = {} and secondaryDoctors = {};
+ post medicalAssoc = s and other = {} and secondaryDoctors = {};
  
-(*@
-\label{removeSecondaryDoctor:19}
-@*)
- pure public addSecondaryDoctor : Surgeon ==> set of (Surgeon)
+ pure public addSecondaryDoctor : MedicalAssociated ==> set of (MedicalAssociated)
   addSecondaryDoctor(s) == (return secondaryDoctors union {s})
- pre s not in set secondaryDoctors
 (*@
-\label{addNurse:22}
+\label{addSecondaryDoctor:19}
 @*)
+ pre s not in set secondaryDoctors
  post s in set secondaryDoctors;
   
- pure public removeSecondaryDoctor : Surgeon ==> set of (Surgeon)
-(*@
-\label{removeNurse:25}
-@*)
+ pure public removeSecondaryDoctor : MedicalAssociated ==> set of (MedicalAssociated)
   removeSecondaryDoctor(s) == (return secondaryDoctors \ {s})
+(*@
+\label{removeSecondaryDoctor:24}
+@*)
  pre s in set secondaryDoctors
  post s not in set secondaryDoctors;
-(*@
-\label{setMainDoctor:28}
-@*)
   
-(*@
-\label{addOther:29}
-@*)
- pure public addOther : OtherMedicalAssociated ==> set of (OtherMedicalAssociated)
+ pure public addOther : MedicalAssociated ==> set of (MedicalAssociated)
   addOther(s) == (return other union {s})
 (*@
-\label{getMainDoctor:31}
+\label{addOther:29}
 @*)
  pre s not in set other
  post s in set other;
   
-(*@
-\label{getSecondaryDoctor:34}
-@*)
-(*@
-\label{getSecondaryDoctors:34}
-@*)
+ pure public removeOther : MedicalAssociated ==> set of (MedicalAssociated)
+  removeOther(s) == (return other \ {s})
 (*@
 \label{removeOther:34}
 @*)
- pure public removeOther : OtherMedicalAssociated ==> set of (OtherMedicalAssociated)
-  removeOther(s) == (return other \ {s})
  pre s in set other
-(*@
-\label{getNurses:37}
-@*)
  post s not in set other;
   
- public setMainDoctor : Surgeon ==> ()
-  setMainDoctor(s) == (mainDoctor := s);
+ public setMainDoctor : MedicalAssociated ==> ()
+  setMainDoctor(s) == (medicalAssoc := s);
+(*@
+\label{setMainDoctor:39}
+@*)
   
- public getMainDoctor : () ==> Surgeon
-  getMainDoctor() == (return mainDoctor);
+ public getMainDoctor : () ==> MedicalAssociated
+  getMainDoctor() == (return medicalAssoc);
+(*@
+\label{getMainDoctor:42}
+@*)
   
- public getSecondaryDoctors : () ==> set of (Surgeon)
+ public getSecondaryDoctors : () ==> set of (MedicalAssociated)
   getSecondaryDoctors() == (return secondaryDoctors);
+(*@
+\label{getSecondaryDoctors:45}
+@*)
   
+ public getOthers : () ==> set of (MedicalAssociated)
+  getOthers() == (return other);
 (*@
 \label{getOthers:48}
 @*)
- public getOthers : () ==> set of (OtherMedicalAssociated)
-  getOthers() == (return other);
   
+ pure public getType : () ==> seq of (char) 
+  getType() == (return "Surgery");
 (*@
 \label{getType:51}
 @*)
- pure public getType : () ==> seq of (char) 
-  getType() == (return "Surgery");
 
 end Surgery
 \end{vdmpp}

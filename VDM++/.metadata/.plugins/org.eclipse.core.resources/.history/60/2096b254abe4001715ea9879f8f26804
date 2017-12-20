@@ -1,7 +1,0 @@
-class Training
-instance variables
-  medicalAssociated:set of (MedicalAssociated);
-  purpose:Purpose;
-  schedule:Schedule;
-
-end Training
