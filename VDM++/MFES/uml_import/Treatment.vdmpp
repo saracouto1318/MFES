@@ -1,19 +1,17 @@
 class Treatment is subclass of Task
-types
-	public String = seq of (char);
 instance variables
   public med: [MedicalAssociated];
-  public name: String;
+  public name: Types`String;
   
   inv med.getType() = <Nurse> or med.getType() = <Technician>;
 operations
 
-	public Treatment: String ==> Treatment
-		Treatment(n) == (name := n; med := nil; return self)
+	public Treatment: Types`String * Schedule * Patient * Hospital ==> Treatment
+		Treatment(n, s, p, h) == (name := n; med := nil; Task(s, p, h, <Other>))
 	pre n <> []
 	post name = n;
 	
-	pure public getName: () ==> String
+	pure public getName: () ==> Types`String
 		getName() == (return name);
 		
 	public setMed: MedicalAssociated ==> ()
@@ -21,8 +19,5 @@ operations
 	
 	pure public getMed : () ==> MedicalAssociated
 		getMed() == (return med);
-	
-	pure public getType : () ==> seq of (char) 
-		getType() == (return "Hospital Treatment");
 
 end Treatment

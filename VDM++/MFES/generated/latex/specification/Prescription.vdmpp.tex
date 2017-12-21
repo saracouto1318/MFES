@@ -1,54 +1,52 @@
 \begin{vdmpp}[breaklines=true]
 class Prescription
 
-types
-
 instance variables
-  public medicaments:set of (Medicament);
-  public code:seq of (char);
+  private medicaments:set of (Medicament);
+  private code:Types`String;
   
 operations
+ public Prescription: Types`String ==> Prescription
+  Prescription(c) == (code := c; medicaments := {}; return self)
 (*@
 \label{Prescription:10}
 @*)
- public Prescription: seq of (char) ==> Prescription
-  Prescription(c) == (code := c; medicaments := {}; return self)
  pre c <> []
  post code = c and medicaments = {};
  
+ pure public getCode : () ==> Types`String
+  getCode() == (return code);
 (*@
 \label{getCode:15}
 @*)
- pure public getCode : () ==> seq of (char)
-  getCode() == (return code);
   
+ pure public addMedicament: Medicament ==> set of (Medicament)
+  addMedicament(m) == (return ({m} union medicaments))
 (*@
 \label{addMedicament:18}
 @*)
- pure public addMedicament: Medicament ==> set of (Medicament)
-  addMedicament(m) == (return ({m} union medicaments))
  pre m not in set medicaments
  post m in set medicaments;
   
+ pure public removeMedicament: Medicament ==> set of (Medicament)
+  removeMedicament(m) == (return (medicaments \ {m}))
 (*@
 \label{removeMedicament:23}
 @*)
- pure public removeMedicament: Medicament ==> set of (Medicament)
-  removeMedicament(m) == (return (medicaments \ {m}))
  pre m in set medicaments
  post m not in set medicaments;
   
+ pure public getMedicaments: () ==> set of (Medicament)
+  getMedicaments() == (return medicaments);
 (*@
 \label{getMedicaments:28}
 @*)
- pure public getMedicaments: () ==> set of (Medicament)
-  getMedicaments() == (return medicaments);
   
+ pure public compare: Types`String ==> bool
+  compare(c) == (return c = code);
 (*@
 \label{compare:31}
 @*)
- pure public compare: seq of (char) ==> bool
-  compare(c) == (return c = code);
 
 end Prescription
 \end{vdmpp}

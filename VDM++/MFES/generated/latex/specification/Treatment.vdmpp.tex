@@ -1,75 +1,37 @@
 \begin{vdmpp}[breaklines=true]
 class Treatment is subclass of Task
-types
- public String = seq of (char);
 instance variables
   public med: [MedicalAssociated];
-  public name: String;
+  public name: Types`String;
   
   inv med.getType() = <Nurse> or med.getType() = <Technician>;
 operations
 
+ public Treatment: Types`String * Schedule * Patient * Hospital ==> Treatment
+  Treatment(n, s, p, h) == (name := n; med := nil; Task(s, p, h, <Other>))
 (*@
-\label{HospitalTreatment:11}
+\label{Treatment:11}
 @*)
-(*@
-\label{HospitalTreatment:11}
-@*)
- public Treatment: String ==> Treatment
-  Treatment(n) == (name := n; med := nil; return self)
  pre n <> []
  post name = n;
  
-(*@
-\label{getName:16}
-@*)
-(*@
-\label{getName:16}
-@*)
- pure public getName: () ==> String
+ pure public getName: () ==> Types`String
   getName() == (return name);
+(*@
+\label{getName:16}
+@*)
   
-(*@
-\label{setTechnician:19}
-@*)
-(*@
-\label{setTechnician:19}
-@*)
+ public setMed: MedicalAssociated ==> ()
+  setMed(t) == (med := t; return);
 (*@
 \label{setMed:19}
 @*)
- public setMed: MedicalAssociated ==> ()
-  setMed(t) == (med := t; return);
  
-(*@
-\label{getTechnician:22}
-@*)
-(*@
-\label{getTechnician:22}
-@*)
+ pure public getMed : () ==> MedicalAssociated
+  getMed() == (return med);
 (*@
 \label{getMed:22}
 @*)
-(*@
-\label{Treatment:22}
-@*)
- pure public getMed : () ==> MedicalAssociated
-  getMed() == (return med);
- 
-(*@
-\label{getTechnicianName:25}
-@*)
-(*@
-\label{getTechnicianName:25}
-@*)
- pure public getType : () ==> seq of (char) 
-  getType() == (return "Hospital Treatment");
 
-(*@
-\label{getType:28}
-@*)
-(*@
-\label{getType:28}
-@*)
 end Treatment
 \end{vdmpp}

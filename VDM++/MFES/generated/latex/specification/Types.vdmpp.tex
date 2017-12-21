@@ -1,0 +1,16 @@
+\begin{vdmpp}[breaklines=true]
+class Types
+types
+ public String = seq of (char);
+ public Priority = <High> | <Medium> | <Low>;
+ public Type = <Doctor> | <Surgeon> | <Nurse> | <Technician>;
+ public TaskType = <Appointment> | <Urgencies> | <Surgery> | <Other>;
+ public Purpose = <Training> | <AddSkills>;
+ public Date ::  year: nat1
+         month: nat1
+         day: nat1
+         hour: nat
+         min: nat
+ inv d == d.month <= 12 and d.day <= 31 and d.hour >= 0 and d.hour < 24 and d.min >= 0 and d.min < 60;
+end Types
+\end{vdmpp}

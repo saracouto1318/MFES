@@ -1,12 +1,11 @@
 class Hospital
-types
-	public String = seq of(char);
 instance variables
-  public medicalAssociated: set of (MedicalAssociated);
-  public name: String;
-  public address: String;
-  public tasks: set of(Task);
-  public safetyNet: [SafetyNetHospital];
+  private medicalAssociated: set of (MedicalAssociated);
+  private name: Types`String;
+  private address: Types`String;
+  private tasks: set of(Task);
+  private trainings: set of(Training);
+  private safetyNet: [SafetyNetHospital];
  
  inv name <> [] and address <> [];
  inv safetyNet <> nil; 
@@ -14,15 +13,15 @@ instance variables
  inv card tasks >= 0;
 operations
 
-	public Hospital: String * String * SafetyNetHospital ==> Hospital
-		Hospital(n, a, s) == (name := n; address := a; safetyNet := s; medicalAssociated := {}; tasks := {}; return self)
+	public Hospital: Types`String * Types`String * SafetyNetHospital ==> Hospital
+		Hospital(n, a, s) == (name := n; address := a; safetyNet := s; medicalAssociated := {}; tasks := {}; trainings := {}; return self)
 	pre n <> [] and a <> [] and safetyNet <> nil
-	post name = n and address = a and safetyNet = s and medicalAssociated = {} and tasks = {};
+	post name = n and address = a and safetyNet = s and medicalAssociated = {} and tasks = {} and trainings = {};
 	
-	pure public getName: () ==> String
+	pure public getName: () ==> Types`String
 		getName() == (return name);
 	
-	pure public getAddress: () ==> String
+	pure public getAddress: () ==> Types`String
 		getAddress() == (return address);
 		
 	pure public getSafetyNet: () ==> SafetyNetHospital
@@ -51,40 +50,56 @@ operations
 	pre d in set tasks
 	post d not in set tasks;
 	
-	pure public getTasksByType: () ==> seq of(set of (Task))
-		getTasksByType() == (
-														dcl tasksTotal: seq of(set of (Task)), tasks2: set of (Task), tasks3: set of(Task), tasks4: set of (Task), tasks5: set of(Task);
-														for all t in set tasks do(
-															if(t.getType() = "Appointment")
-																then tasks2 := tasks2 union {t}
-															else if(t.getType() = "Urgencies")
-																then tasks3 := tasks3 union {t}
-															else if(t.getType() = "Surgery")
-																then tasks4 := tasks4 union {t}
-															else
-																tasks5 := tasks5 union {t}
-															);
+	public addTraining: Training ==> set of (Training)
+		addTraining(d) == (return ({d} union trainings))
+	pre d not in set trainings and forall t in set trainings & not (overlapTraining(d, t))
+	post d in set trainings;
+		
+	pure public removeTraining: Training ==> set of (Training)
+		removeTraining(d) == (return (trainings \ {d}))
+	pre d in set trainings
+	post d not in set trainings;
+	
+	pure public getTasksByType: Types`TaskType ==> set of (Task)
+		getTasksByType(s) == (
+														dcl tasksTotal: set of (Task);
+														for all t in set tasks do
+															if(t.getType() = s)
+																then tasksTotal := tasksTotal union {t};
 																
-														tasksTotal := tasksTotal ^ [tasks2] ^ [tasks3] ^ [tasks4] ^ [tasks5];
 														return tasksTotal);
+														
+	pure public getTrainingsByType: Types`Purpose ==> set of (Training)
+		getTrainingsByType(s) == (
+														dcl train: set of (Training);
+														for all t in set trainings do
+															if(t.getPurpose() = s)
+																then train := train union {t};
+																
+														return train);
 
-	pure public getMedicalAssociatedByType: () ==> seq of(set of (MedicalAssociated))
-		getMedicalAssociatedByType() == (
-											dcl med: seq of(set of(MedicalAssociated)), doctors: set of (MedicalAssociated), surgeons: set of (MedicalAssociated), other: set of (MedicalAssociated);
-											for all d in set medicalAssociated do(
-												if(d.getType() = <Doctor>)
-													then doctors := doctors union {d}
-												else if(d.getType() = <Surgeon>)
-													then surgeons := surgeons union {d}
-												else
-													other := other union {d}
-												);
+	pure public getMedicalAssociatedByType: Types`Type ==> set of (MedicalAssociated)
+		getMedicalAssociatedByType(type) == (
+											dcl med: set of(MedicalAssociated);
+											for all d in set medicalAssociated do
+												if(d.getType() = type)
+													then med := med union {d};
 												
-												med := med ^ [doctors] ^ [surgeons] ^ [other];
 											return med);
 											
 	pure public overlap: Task * Task ==> bool
 		overlap(t1, t2) == (
+													if(t1.getSchedule().compareDate(t1.getSchedule().getScheduleStart(), t2.getSchedule().getScheduleStart()) 
+														or (t1.getSchedule().compareDateLess(t1.getSchedule().getScheduleStart(), t2.getSchedule().getScheduleStart()) 
+														and not t1.getSchedule().compareDateLess(t1.getSchedule().getScheduleEnd(), t2.getSchedule().getScheduleStart()))
+														or (not t1.getSchedule().compareDateLess(t1.getSchedule().getScheduleStart(), t2.getSchedule().getScheduleStart()) 
+														and t1.getSchedule().compareDateLess(t1.getSchedule().getScheduleStart(), t2.getSchedule().getScheduleEnd())))
+														then return true
+													else
+														return false);
+														
+	pure public overlapTraining: Training * Training ==> bool
+		overlapTraining(t1, t2) == (
 													if(t1.getSchedule().compareDate(t1.getSchedule().getScheduleStart(), t2.getSchedule().getScheduleStart()) 
 														or (t1.getSchedule().compareDateLess(t1.getSchedule().getScheduleStart(), t2.getSchedule().getScheduleStart()) 
 														and not t1.getSchedule().compareDateLess(t1.getSchedule().getScheduleEnd(), t2.getSchedule().getScheduleStart()))

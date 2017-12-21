@@ -1,77 +1,79 @@
 \begin{vdmpp}[breaklines=true]
 class Task
 instance variables
-  public schedule:[Schedule];
-  public patient:[Patient];
-  public hospital:[Hospital];
-  public medicalAssoc:[MedicalAssociated];
+  protected schedule:[Schedule];
+  protected patient:[Patient];
+  protected hospital:[Hospital];
+  protected medicalAssoc:[MedicalAssociated];
+  protected type : Types`TaskType;
   
   inv schedule <> nil;
   inv patient <> nil;
   inv hospital <> nil;
+  inv type <> nil;
   inv medicalAssoc.getCC() <> patient.getCC();
 (*@
-\label{Task:12}
+\label{Task:14}
 @*)
   
 operations
- public Task: Schedule * Patient * Hospital ==> Task
-  Task(s, p, h) == (schedule := s; patient := p; hospital := h; medicalAssoc := nil; return self)
+ public Task: Schedule * Patient * Hospital * Types`TaskType ==> Task
+  Task(s, p, h, t) == (schedule := s; patient := p; hospital := h; type := t; medicalAssoc := nil; return self)
 (*@
-\label{getSchedule:16}
+\label{getSchedule:18}
 @*)
  post schedule = s and patient = p and hospital = h and medicalAssoc = nil;
  
  pure public getSchedule: () ==> Schedule
 (*@
-\label{getPatient:19}
+\label{getPatient:21}
 @*)
   getSchedule() == (return schedule);
   
  pure public getPatient: () ==> Patient
 (*@
-\label{getHospital:22}
+\label{getHospital:24}
 @*)
   getPatient() == (return patient);
   
  pure public getHospital: () ==> Hospital
 (*@
-\label{setSchedule:25}
+\label{getMedAssoc:27}
 @*)
   getHospital() == (return hospital);
   
+ pure public getType: () ==> Types`TaskType
+(*@
+\label{setSchedule:30}
+@*)
+  getType() == (return type);
+  
  pure public getMedAssoc : () ==> MedicalAssociated
 (*@
-\label{setPatient:28}
-@*)
-(*@
-\label{getMedAssoc:28}
+\label{setPatient:33}
 @*)
   getMedAssoc() == (return medicalAssoc);
   
  public setSchedule : Schedule ==> ()
 (*@
-\label{setHospital:31}
+\label{setHospital:36}
 @*)
   setSchedule(s) == (schedule := s);
   
  public setPatient : Patient ==> ()
 (*@
-\label{getType:34}
+\label{setMedAssoc:39}
 @*)
   setPatient(s) == (patient := s);
   
  public setHospital : Hospital ==> ()
+(*@
+\label{getType:42}
+@*)
   setHospital(s) == (hospital := s);
  
  public setMedAssoc : MedicalAssociated ==> ()
-(*@
-\label{setMedAssoc:40}
-@*)
   setMedAssoc(s) == (medicalAssoc := s);
-  
- pure public getType : () ==> seq of (char) 
-  getType() == (return "");
 
 end Task
 \end{vdmpp}

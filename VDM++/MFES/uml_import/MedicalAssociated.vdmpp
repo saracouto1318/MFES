@@ -1,25 +1,22 @@
 class MedicalAssociated is subclass of Person
 
-types
-	public String = seq of (char);
-	public Type = <Doctor> | <Surgeon> | <Nurse> | <Technician>;
 instance variables
-  public medicalNumber: String;
-  public specialties:set of (Specialty);
-  public patients : set of(Patient);
-	public type : Type;
+  private medicalNumber: Types`String;
+  private specialties:set of (Specialty);
+  private patients : set of(Patient);
+	private type : Types`Type;
 	
 	inv card patients >= 0;
   inv card specialties < 5;
 	inv medicalNumber <> [];
 	inv type <> nil;
 operations
-	public MedicalAssociated: String * Type ==> MedicalAssociated
+	public MedicalAssociated: Types`String * Types`Type ==> MedicalAssociated
 		MedicalAssociated(s, t) == (medicalNumber := s; type := t; specialties := {}; patients := {}; return self)
 	pre s <> [] and t <> nil
 	post medicalNumber = s and type = t and specialties = {} and patients = {};
 	
-	pure public getMedicalNumber: () ==> String
+	pure public getMedicalNumber: () ==> Types`String
 		getMedicalNumber() == (return medicalNumber);
 	
 	pure public getSpecialties: () ==> set of (Specialty)
@@ -28,7 +25,7 @@ operations
 	pure public getPatients: () ==> set of (Patient)
 		getPatients() == (return patients);
 		
-	pure public getType : () ==> Type
+	pure public getType : () ==> Types`Type
 		getType() == (return type);
 		
 	pure public removeSpecialty: Specialty ==> set of(Specialty)

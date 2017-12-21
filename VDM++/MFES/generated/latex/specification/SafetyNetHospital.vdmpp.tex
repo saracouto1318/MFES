@@ -1,68 +1,67 @@
 \begin{vdmpp}[breaklines=true]
 class SafetyNetHospital
-types
-
 instance variables
- public hospitals: set of (Hospital);
+ private hospitals: set of (Hospital);
  
  inv card hospitals >= 0;
 operations
 
+ public SafetyNetHospital : () ==> SafetyNetHospital
+  SafetyNetHospital() == (hospitals := {}; return self)
 (*@
 \label{SafetyNetHospital:10}
 @*)
- public SafetyNetHospital : () ==> SafetyNetHospital
-  SafetyNetHospital() == (hospitals := {}; return self)
  post hospitals = {};
-(*@
-\label{addHospital:13}
-@*)
   
  pure public addHospital : Hospital ==> set of (Hospital)
   addHospital(h) == (return hospitals union {h})
+(*@
+\label{addHospital:14}
+@*)
  pre h not in set hospitals
  post h in set hospitals;
-(*@
-\label{removeHospital:18}
-@*)
  
  pure public removeHospital : Hospital ==> set of (Hospital)
   removeHospital(h) == (return hospitals \ {h})
+(*@
+\label{removeHospital:19}
+@*)
  pre h in set hospitals
  post h not in set hospitals;
-(*@
-\label{numHospitals:23}
-@*)
  
  pure public numHospitals : () ==> nat
   numHospitals() == (return card hospitals);
 (*@
-\label{getHospitalsMoreAppointments:26}
+\label{numHospitals:24}
 @*)
-  
+ 
+ -- Mudar -- 
  pure public getHospitalsMoreAppointments : () ==> Hospital
   getHospitalsMoreAppointments() == (
+(*@
+\label{getHospitalsMoreAppointments:28}
+@*)
                     dcl max: nat, hosp: Hospital;
                     max := 0;
                     for all h in set hospitals do
-                     if(card (hd h.getTasksByType()) > max)
-                      then (max := card (hd h.getTasksByType()); hosp := h);
+                     if(card (h.getTasksByType(<Appointment>)) > max)
+                      then (max := card (h.getTasksByType(<Appointment>)); hosp := h);
                     return hosp);
-(*@
-\label{getDoctorsMoreHospitals:35}
-@*)
  
  pure public getDoctorsMoreHospitals : () ==> set of(MedicalAssociated)
   getDoctorsMoreHospitals() == (
+(*@
+\label{getDoctorsMoreHospitals:37}
+@*)
                   dcl doctors: set of(MedicalAssociated);
                   for all h in set hospitals do (
                    dcl med: set of (MedicalAssociated), list: set of(Hospital);
-                   med := hd h.getMedicalAssociatedByType();
+                   med := h.getMedicalAssociatedByType(<Doctor>);
                    
                    list := hospitals \ {h};
                    for all m in set med do(
                     for all l in set list do
-                     if(m.getType() = <Doctor> and m in set hd l.getMedicalAssociatedByType() and m not in set doctors)
+                     if(m.getType() = <Doctor> and m in set l.getMedicalAssociatedByType(<Doctor>) and m not in set doctors)
                       then doctors := doctors union {m};
                    );
                   );

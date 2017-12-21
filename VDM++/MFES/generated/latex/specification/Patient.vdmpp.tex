@@ -1,25 +1,22 @@
 \begin{vdmpp}[breaklines=true]
 class Patient is subclass of Person
-
-types
- public String = seq of (char);
 instance variables
-  public healthNumber: String;
+  private healthNumber: Types`String;
   inv healthNumber <> [];
 operations
+ public Patient: Types`String ==> Patient
+  Patient(n) == ( healthNumber := n; return self)
+ pre n <> []
 (*@
 \label{Patient:9}
 @*)
- public Patient: String ==> Patient
-  Patient(n) == ( healthNumber := n; return self)
- pre n <> []
  post healthNumber = n;
  
+ pure public getHealthNumber : () ==> Types`String
+  getHealthNumber() == (return healthNumber);
+
 (*@
 \label{getHealthNumber:14}
 @*)
- pure public getHealthNumber : () ==> String
-  getHealthNumber() == (return healthNumber);
-
 end Patient
 \end{vdmpp}

@@ -1,17 +1,14 @@
 class Surgery is subclass of Task
-
-types
-
 instance variables
-  public secondaryDoctors:set of (MedicalAssociated);
-  public other:set of (MedicalAssociated);
+  private secondaryDoctors:set of (MedicalAssociated);
+  private other:set of (MedicalAssociated);
   
   inv card secondaryDoctors >= 0;
   inv card other >= 0;
+  
 operations
-
-	public Surgery: MedicalAssociated ==> Surgery
-		Surgery(s) == (medicalAssoc := s ; other := {}; secondaryDoctors := {}; return self)
+	public Surgery: MedicalAssociated * Schedule * Patient * Hospital ==> Surgery
+		Surgery(s, sch, p, h) == (medicalAssoc := s ; other := {}; secondaryDoctors := {}; Task(sch, p, h, <Surgery>))
 	post medicalAssoc = s and other = {} and secondaryDoctors = {};
 	
 	pure public addSecondaryDoctor : MedicalAssociated ==> set of (MedicalAssociated)
@@ -40,14 +37,13 @@ operations
 	
 	public getMainDoctor : () ==> MedicalAssociated
 		getMainDoctor() == (return medicalAssoc);
-		
-	public getSurgeryPersons : () ==> seq of (set of (MedicalAssociated))
-		getSurgeryPersons() == (
-															dcl med : seq of (set of (MedicalAssociated));
-															med := med ^ [secondaryDoctors] ^ [other];
-															return med);
-		
-	pure public getType : () ==> seq of (char) 
-		getType() == (return "Surgery");
 
+	public getSurgeryPersons : Types`Type ==> set of (MedicalAssociated)
+		getSurgeryPersons(t) == (
+															dcl med : set of (MedicalAssociated);
+															if(t = <Surgeon>)
+																then med := secondaryDoctors
+															else
+																med := other;
+															return med);
 end Surgery

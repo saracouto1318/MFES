@@ -1,18 +1,20 @@
 class Task
 instance variables
-  public schedule:[Schedule];
-  public patient:[Patient];
-  public hospital:[Hospital];
-  public medicalAssoc:[MedicalAssociated];
+  protected schedule:[Schedule];
+  protected patient:[Patient];
+  protected hospital:[Hospital];
+  protected medicalAssoc:[MedicalAssociated];
+  protected type : Types`TaskType;
   
   inv schedule <> nil;
   inv patient <> nil;
   inv hospital <> nil;
+  inv type <> nil;
   inv medicalAssoc.getCC() <> patient.getCC();
   
 operations
-	public Task: Schedule * Patient * Hospital ==> Task
-		Task(s, p, h) == (schedule := s; patient := p; hospital := h; medicalAssoc := nil; return self)
+	public Task: Schedule * Patient * Hospital * Types`TaskType ==> Task
+		Task(s, p, h, t) == (schedule := s; patient := p; hospital := h; type := t; medicalAssoc := nil; return self)
 	post schedule = s and patient = p and hospital = h and medicalAssoc = nil;
 	
 	pure public getSchedule: () ==> Schedule
@@ -23,6 +25,9 @@ operations
 		
 	pure public getHospital: () ==> Hospital
 		getHospital() == (return hospital);
+		
+	pure public getType: () ==> Types`TaskType
+		getType() == (return type);
 		
 	pure public getMedAssoc : () ==> MedicalAssociated
 		getMedAssoc() == (return medicalAssoc);
@@ -38,8 +43,5 @@ operations
 	
 	public setMedAssoc : MedicalAssociated ==> ()
 		setMedAssoc(s) == (medicalAssoc := s);
-		
-	pure public getType : () ==> seq of (char) 
-		getType() == (return "");
 
 end Task

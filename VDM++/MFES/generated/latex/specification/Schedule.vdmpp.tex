@@ -2,73 +2,61 @@
 class Schedule
 
 types
- public Date ::  year: nat1
-         month: nat1
-         day: nat1
-         hour: nat
-         min: nat
- inv d == d.month <= 12 and d.day <= 31 and d.hour >= 0 and d.hour < 24 and d.min >= 0 and d.min < 60;
-(*@
-\label{Schedule:10}
-@*)
 instance variables
-  public startHour: Date;
-  public endHour: Date;
-(*@
-\label{setEndHour:13}
-@*)
+  private startHour: Types`Date;
+  private endHour: Types`Date;
   
   inv compareDateLess(startHour, endHour) = true;
 operations
 
-(*@
-\label{setStartHour:17}
-@*)
- public Schedule: Date ==> Schedule
+ public Schedule: Types`Date ==> Schedule
   Schedule(d) == (startHour := d; return self)
  post startHour = d;
  
-(*@
-\label{setSchedule:21}
-@*)
- public Schedule: Date * Date ==> Schedule
+ public Schedule: Types`Date * Types`Date ==> Schedule
   Schedule(d, d2) == (startHour := d; endHour := d2; return self)
  post startHour = d and endHour = d2;
- 
 (*@
-\label{getScheduleStart:25}
+\label{Schedule:18}
 @*)
- public setEndHour : Date ==> Date
+ 
+ public setEndHour : Types`Date ==> Types`Date
   setEndHour(d) == (endHour := d; return endHour)
  pre compareDateLess(startHour, d);
-(*@
-\label{getScheduleEnd:28}
-@*)
   
- public setStartHour : Date ==> Date
+ public setStartHour : Types`Date ==> Types`Date
   setStartHour(d) == (startHour := d; return startHour)
  pre compareDateLess(d, endHour);
+(*@
+\label{setEndHour:26}
+@*)
  
- public setSchedule : Date * Date ==> Schedule
+ public setSchedule : Types`Date * Types`Date ==> Schedule
   setSchedule(d1, d2) == (startHour := d1; endHour := d2; return self)
  pre compareDateLess(d1, d2);
+(*@
+\label{setStartHour:30}
+@*)
   
- pure public getScheduleStart : () ==> Date
+ pure public getScheduleStart : () ==> Types`Date
   getScheduleStart() == (return startHour);
-(*@
-\label{compareDateLess:39}
-@*)
   
- pure public getScheduleEnd : () ==> Date
+(*@
+\label{setSchedule:34}
+@*)
+ pure public getScheduleEnd : () ==> Types`Date
   getScheduleEnd() == (return endHour);
-(*@
-\label{compareDate:42}
-@*)
   
- pure public compareDateLess : Date * Date ==> bool
+ pure public compareDateLess : Types`Date * Types`Date ==> bool
+(*@
+\label{getScheduleStart:38}
+@*)
   compareDateLess(d1, d2) == (return (d1.year < d2.year and d1.month < d2.month and d1.day < d2.day and d1.hour < d2.hour and d1.min < d2.min));
   
- pure public compareDate : Date * Date ==> bool
+ pure public compareDate : Types`Date * Types`Date ==> bool
+(*@
+\label{getScheduleEnd:41}
+@*)
   compareDate(d1, d2) == (return (d1.year = d2.year and d1.month = d2.month and d1.day = d2.day and d1.hour = d2.hour and d1.min = d2.min));
 
 end Schedule

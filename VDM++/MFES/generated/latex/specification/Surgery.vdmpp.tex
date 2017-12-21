@@ -1,27 +1,25 @@
 \begin{vdmpp}[breaklines=true]
 class Surgery is subclass of Task
 
-types
-
 instance variables
-  public secondaryDoctors:set of (MedicalAssociated);
-  public other:set of (MedicalAssociated);
+  private secondaryDoctors:set of (MedicalAssociated);
+  private other:set of (MedicalAssociated);
   
   inv card secondaryDoctors >= 0;
   inv card other >= 0;
 operations
 
- public Surgery: MedicalAssociated ==> Surgery
-  Surgery(s) == (medicalAssoc := s ; other := {}; secondaryDoctors := {}; return self)
+ public Surgery: MedicalAssociated * Schedule * Patient * Hospital ==> Surgery
+  Surgery(s, sch, p, h) == (medicalAssoc := s ; other := {}; secondaryDoctors := {}; Task(sch, p, h, <Surgery>))
 (*@
-\label{Surgery:15}
+\label{Surgery:13}
 @*)
  post medicalAssoc = s and other = {} and secondaryDoctors = {};
  
  pure public addSecondaryDoctor : MedicalAssociated ==> set of (MedicalAssociated)
   addSecondaryDoctor(s) == (return secondaryDoctors union {s})
 (*@
-\label{addSecondaryDoctor:19}
+\label{addSecondaryDoctor:17}
 @*)
  pre s <> medicalAssoc and s.getType() = <Surgeon> and  s not in set secondaryDoctors
  post s in set secondaryDoctors;
@@ -29,7 +27,7 @@ operations
  pure public removeSecondaryDoctor : MedicalAssociated ==> set of (MedicalAssociated)
   removeSecondaryDoctor(s) == (return secondaryDoctors \ {s})
 (*@
-\label{removeSecondaryDoctor:24}
+\label{removeSecondaryDoctor:22}
 @*)
  pre s.getType() = <Surgeon> and s in set secondaryDoctors
  post s not in set secondaryDoctors;
@@ -37,7 +35,7 @@ operations
  pure public addOther : MedicalAssociated ==> set of (MedicalAssociated)
   addOther(s) == (return other union {s})
 (*@
-\label{addOther:29}
+\label{addOther:27}
 @*)
  pre s.getType() = <Nurse> and s not in set other
  post s in set other;
@@ -45,7 +43,7 @@ operations
  pure public removeOther : MedicalAssociated ==> set of (MedicalAssociated)
   removeOther(s) == (return other \ {s})
 (*@
-\label{removeOther:34}
+\label{removeOther:32}
 @*)
  pre s.getType() = <Nurse> and s in set other
  post s not in set other;
@@ -53,36 +51,25 @@ operations
  public setMainDoctor : MedicalAssociated ==> ()
   setMainDoctor(s) == (medicalAssoc := s)
 (*@
-\label{setMainDoctor:39}
+\label{setMainDoctor:37}
 @*)
  pre s.getType() = <Surgeon> and s not in set secondaryDoctors;
  
-(*@
-\label{getSurgeryPersons:41}
-@*)
  public getMainDoctor : () ==> MedicalAssociated
-(*@
-\label{getMainDoctor:42}
-@*)
   getMainDoctor() == (return medicalAssoc);
-  
- public getSurgeryPersons : () ==> seq of (set of (MedicalAssociated))
 (*@
-\label{getSecondaryDoctors:45}
+\label{getMainDoctor:41}
 @*)
+ 
+ -- Mudar -- 
+ public getSurgeryPersons : () ==> seq of (set of (MedicalAssociated))
   getSurgeryPersons() == (
+(*@
+\label{getSurgeryPersons:45}
+@*)
                dcl med : seq of (set of (MedicalAssociated));
                med := med ^ [secondaryDoctors] ^ [other];
-(*@
-\label{getOthers:48}
-@*)
                return med);
-  
- pure public getType : () ==> seq of (char) 
-(*@
-\label{getType:51}
-@*)
-  getType() == (return "Surgery");
 
 end Surgery
 \end{vdmpp}

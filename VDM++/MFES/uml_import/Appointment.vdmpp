@@ -1,29 +1,23 @@
 class Appointment is subclass of Task
 
-types
-	public Type = <Normal> | <Urgencies>;
-	public Priority = <High> | <Medium> | <Low>;
 instance variables
-  public prescriptions:set of (Prescription);
-  public type : Type;
-  public priority : Priority;
+  private prescriptions:set of (Prescription);
+  private priority : Types`Priority;
   
-  inv type <> nil and priority <> nil;
+  inv priority <> nil;
   inv card prescriptions >= 0;
   inv medicalAssoc.getType() = <Doctor>;
 operations
-	public Appointment: MedicalAssociated * Type==> Appointment
-		Appointment(d, t) == (medicalAssoc := d; type := t; priority := <Medium>; prescriptions := {}; return self)
-	post medicalAssoc = d and type = t and prescriptions = {} and priority = <Medium>;
+	public Appointment: MedicalAssociated * Schedule * Patient * Hospital==> Appointment
+		Appointment(d, s, p, h) == (medicalAssoc := d; priority := <Medium>; prescriptions := {}; Task(s, p, h, <Appointment>))
+	post medicalAssoc = d and prescriptions = {} and priority = <Medium>;
 	
-	public Appointment: MedicalAssociated * Type * Priority ==> Appointment
-		Appointment(d, t, p) == (medicalAssoc := d; type := t; priority := p; prescriptions := {}; return self)
-	post medicalAssoc = d and type = t and prescriptions = {} and priority = p;
-	
-	pure public getTypeAppointment : () ==> Type
-		getTypeAppointment() == (return type);
-		
-	pure public getPriority : () ==> Priority
+	public Appointment: MedicalAssociated * Types`Priority * Schedule * Patient * Hospital ==> Appointment
+		Appointment(d, p, s, pat, h) == (medicalAssoc := d; priority := p; prescriptions := {}; Task(s, pat, h, <Urgencies>))
+	pre p <> nil
+	post medicalAssoc = d and prescriptions = {} and priority = p;
+
+	pure public getPriority : () ==> Types`Priority
 		getPriority() == (return priority);
 	
   pure public getPrescriptions : () ==> set of (Prescription)
@@ -40,7 +34,7 @@ operations
   														)
   pre code <> [];
   
-  public setPriority : Priority ==> ()
+  public setPriority : Types`Priority ==> ()
   	setPriority(p) == (priority := p)
   pre type = <Urgencies>;
   
@@ -53,12 +47,5 @@ operations
   	removePrescription(p) == (return prescriptions \ {p})
   pre p in set prescriptions
   post p not in set prescriptions;
-		
-	pure public getType : () ==> seq of (char) 
-		getType() == (
-										if type = <Normal> 
-											then return "Appointment"
-										else
-											return "Urgencies");
   	
 end Appointment

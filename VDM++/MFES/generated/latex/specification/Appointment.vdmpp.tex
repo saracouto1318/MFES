@@ -1,96 +1,74 @@
 \begin{vdmpp}[breaklines=true]
 class Appointment is subclass of Task
 
-types
- public Type = <Normal> | <Urgencies>;
- public Priority = <High> | <Medium> | <Low>;
 instance variables
-  public prescriptions:set of (Prescription);
-  public type : Type;
-  public priority : Priority;
-(*@
-\label{Appointment:10}
-@*)
+  private prescriptions:set of (Prescription);
+  private priority : Types`Priority;
   
-  inv type <> nil and priority <> nil;
+  inv priority <> nil;
   inv card prescriptions >= 0;
   inv medicalAssoc.getType() = <Doctor>;
-(*@
-\label{getDoctorAppointment:14}
-@*)
 operations
- public Appointment: MedicalAssociated * Type==> Appointment
-  Appointment(d, t) == (medicalAssoc := d; type := t; priority := <Medium>; prescriptions := {}; return self)
-(*@
-\label{getPrescriptions:17}
-@*)
- post medicalAssoc = d and type = t and prescriptions = {} and priority = <Medium>;
+ public Appointment: MedicalAssociated * Schedule * Patient * Hospital==> Appointment
+  Appointment(d, s, p, h) == (medicalAssoc := d; priority := <Medium>; prescriptions := {}; Task(s, p, h, <Appointment>))
+ post medicalAssoc = d and prescriptions = {} and priority = <Medium>;
  
- public Appointment: MedicalAssociated * Type * Priority ==> Appointment
 (*@
-\label{getPrescription:20}
+\label{Appointment:15}
 @*)
-  Appointment(d, t, p) == (medicalAssoc := d; type := t; priority := p; prescriptions := {}; return self)
- post medicalAssoc = d and type = t and prescriptions = {} and priority = p;
-(*@
-\label{getTypeAppointment:22}
-@*)
- 
- pure public getTypeAppointment : () ==> Type
-  getTypeAppointment() == (return type);
-(*@
-\label{getPriority:25}
-@*)
-  
- pure public getPriority : () ==> Priority
+ public Appointment: MedicalAssociated * Types`Priority * Schedule * Patient * Hospital ==> Appointment
+  Appointment(d, p, s, pat, h) == (medicalAssoc := d; priority := p; prescriptions := {}; Task(s, pat, h, <Urgencies>))
+ pre p <> nil
+ post medicalAssoc = d and prescriptions = {} and priority = p;
+
+ pure public getPriority : () ==> Types`Priority
   getPriority() == (return priority);
  
+(*@
+\label{getTypeAppointment:23}
+@*)
   pure public getPrescriptions : () ==> set of (Prescription)
    getPrescriptions() == (return prescriptions);
-(*@
-\label{addPrescription:31}
-@*)
    
+(*@
+\label{getPriority:26}
+@*)
   pure public getPrescription : seq of (char) ==> Prescription
    getPrescription(code) == (
                 dcl prescription: Prescription;
-                 for all p in set prescriptions do
 (*@
-\label{removePrescription:36}
+\label{getPrescriptions:29}
 @*)
+                 for all p in set prescriptions do
                   if(p.compare(code))
                    then prescription := p;
+(*@
+\label{getPrescription:32}
+@*)
                  
                  return prescription;
                 )
-(*@
-\label{getType:41}
-@*)
   pre code <> [];
-(*@
-\label{setPriority:42}
-@*)
   
-  public setPriority : Priority ==> ()
+  public setPriority : Types`Priority ==> ()
    setPriority(p) == (priority := p)
   pre type = <Urgencies>;
   
   pure public addPrescription : Prescription ==> set of (Prescription)
    addPrescription(p) == (return prescriptions union {p})
+(*@
+\label{setPriority:43}
+@*)
   pre p not in set prescriptions
   post p in set prescriptions;
                  
  pure public removePrescription : Prescription ==> set of (Prescription)
+(*@
+\label{addPrescription:47}
+@*)
    removePrescription(p) == (return prescriptions \ {p})
   pre p in set prescriptions
   post p not in set prescriptions;
-  
- pure public getType : () ==> seq of (char) 
-  getType() == (
-          if type = <Normal> 
-           then return "Appointment"
-          else
-           return "Urgencies");
    
 end Appointment
 \end{vdmpp}
