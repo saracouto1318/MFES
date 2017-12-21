@@ -8,11 +8,11 @@ instance variables
   inv card prescriptions >= 0;
   inv medicalAssoc.getType() = <Doctor>;
 operations
-	public Appointment: MedicalAssociated * Schedule * Patient * Hospital==> Appointment
+	public Appointment: HealthProfessional * Schedule * Patient * Hospital==> Appointment
 		Appointment(d, s, p, h) == (medicalAssoc := d; priority := <Medium>; prescriptions := {}; Task(s, p, h, <Appointment>))
 	post medicalAssoc = d and prescriptions = {} and priority = <Medium>;
 	
-	public Appointment: MedicalAssociated * Types`Priority * Schedule * Patient * Hospital ==> Appointment
+	public Appointment: HealthProfessional * Types`Priority * Schedule * Patient * Hospital ==> Appointment
 		Appointment(d, p, s, pat, h) == (medicalAssoc := d; priority := p; prescriptions := {}; Task(s, pat, h, <Urgencies>))
 	pre p <> nil
 	post medicalAssoc = d and prescriptions = {} and priority = p;
@@ -22,17 +22,6 @@ operations
 	
   pure public getPrescriptions : () ==> set of (Prescription)
   	getPrescriptions() == (return prescriptions);
-  	
-  pure public getPrescription : seq of (char) ==> Prescription
-  	getPrescription(code) == (
-  														dcl prescription: Prescription;
-  															for all p in set prescriptions do
-  																if(p.compare(code))
-  																	then prescription := p;
-  															
-  															return prescription;
-  														)
-  pre code <> [];
   
   public setPriority : Types`Priority ==> ()
   	setPriority(p) == (priority := p)

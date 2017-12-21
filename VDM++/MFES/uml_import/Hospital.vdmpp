@@ -1,6 +1,6 @@
 class Hospital
 instance variables
-  private medicalAssociated: set of (MedicalAssociated);
+  private medicalAssociated: set of (HealthProfessional);
   private name: Types`String;
   private address: Types`String;
   private tasks: set of(Task);
@@ -23,27 +23,35 @@ operations
 	
 	pure public getAddress: () ==> Types`String
 		getAddress() == (return address);
-		
-	pure public getSafetyNet: () ==> SafetyNetHospital
-		getSafetyNet() == (return safetyNet);
 	
-	pure public addMedAssociated: MedicalAssociated ==> set of (MedicalAssociated)
+	pure public addMedAssociated: HealthProfessional ==> set of (HealthProfessional)
 		addMedAssociated(d) == (return ({d} union medicalAssociated))
 	pre d not in set medicalAssociated
 	post d in set medicalAssociated;
 		
-	pure public removeMedAssociated: MedicalAssociated ==> set of (MedicalAssociated)
-		removeMedAssociated(d) == (return (medicalAssociated \ {d}))
+	pure public removeMedAssociated: HealthProfessional ==> set of (HealthProfessional)
+		removeMedAssociated(d) == (
+																for all t in set tasks do
+																	if(d = t.getMedAssoc())
+																		then removeTask(t);
+																for all t in set trainings do
+																	if(d = t.getMedAssoc())
+																		then removeTraining(t);
+																return (medicalAssociated \ {d}))
 	pre d in set medicalAssociated
 	post d not in set medicalAssociated;
 	
 	public addTask: Task ==> set of (Task)
-		addTask(d) == (return ({d} union tasks))
+		addTask(d) == (
+										dcl patients : set of(Patient);
+										if(d.getPatient() not in set d.getMedAssoc().getPatients())
+											then patients := d.getMedAssoc().addPatient(d.getPatient());
+										return ({d} union tasks))
 	pre d not in set tasks and forall t in set tasks & 
-		not (overlap(d, t) and not (d.getMedAssoc().getCC() <> t.getMedAssoc().getCC() and 
+		not (overlap(d.getSchedule(), t.getSchedule()) and not (d.getMedAssoc().getCC() <> t.getMedAssoc().getCC() and 
 				d.getPatient().getCC() <> t.getPatient().getCC() and d.getMedAssoc().getCC() <> t.getPatient().getCC()
 				and d.getPatient().getCC() <> t.getMedAssoc().getCC()))
-	post d in set tasks;
+	post d in set tasks and d.getPatient() in set d.getMedAssoc().getPatients();
 		
 	pure public removeTask: Task ==> set of (Task)
 		removeTask(d) == (return (tasks \ {d}))
@@ -52,7 +60,7 @@ operations
 	
 	public addTraining: Training ==> set of (Training)
 		addTraining(d) == (return ({d} union trainings))
-	pre d not in set trainings and forall t in set trainings & not (overlapTraining(d, t))
+	pre d not in set trainings and forall t in set trainings & not (overlap(d.getSchedule(), t.getSchedule()))
 	post d in set trainings;
 		
 	pure public removeTraining: Training ==> set of (Training)
@@ -78,33 +86,22 @@ operations
 																
 														return train);
 
-	pure public getMedicalAssociatedByType: Types`Type ==> set of (MedicalAssociated)
+	pure public getMedicalAssociatedByType: Types`Type ==> set of (HealthProfessional)
 		getMedicalAssociatedByType(type) == (
-											dcl med: set of(MedicalAssociated);
+											dcl med: set of(HealthProfessional);
 											for all d in set medicalAssociated do
 												if(d.getType() = type)
 													then med := med union {d};
 												
 											return med);
 											
-	pure public overlap: Task * Task ==> bool
+	pure public overlap: Schedule * Schedule ==> bool
 		overlap(t1, t2) == (
-													if(t1.getSchedule().compareDate(t1.getSchedule().getScheduleStart(), t2.getSchedule().getScheduleStart()) 
-														or (t1.getSchedule().compareDateLess(t1.getSchedule().getScheduleStart(), t2.getSchedule().getScheduleStart()) 
-														and not t1.getSchedule().compareDateLess(t1.getSchedule().getScheduleEnd(), t2.getSchedule().getScheduleStart()))
-														or (not t1.getSchedule().compareDateLess(t1.getSchedule().getScheduleStart(), t2.getSchedule().getScheduleStart()) 
-														and t1.getSchedule().compareDateLess(t1.getSchedule().getScheduleStart(), t2.getSchedule().getScheduleEnd())))
-														then return true
-													else
-														return false);
-														
-	pure public overlapTraining: Training * Training ==> bool
-		overlapTraining(t1, t2) == (
-													if(t1.getSchedule().compareDate(t1.getSchedule().getScheduleStart(), t2.getSchedule().getScheduleStart()) 
-														or (t1.getSchedule().compareDateLess(t1.getSchedule().getScheduleStart(), t2.getSchedule().getScheduleStart()) 
-														and not t1.getSchedule().compareDateLess(t1.getSchedule().getScheduleEnd(), t2.getSchedule().getScheduleStart()))
-														or (not t1.getSchedule().compareDateLess(t1.getSchedule().getScheduleStart(), t2.getSchedule().getScheduleStart()) 
-														and t1.getSchedule().compareDateLess(t1.getSchedule().getScheduleStart(), t2.getSchedule().getScheduleEnd())))
+													if(t1.compareDate(t1.getScheduleStart(), t2.getScheduleStart()) 
+														or (t1.compareDateLess(t1.getScheduleStart(), t2.getScheduleStart()) 
+														and not t1.compareDateLess(t1.getScheduleEnd(), t2.getScheduleStart()))
+														or (not t1.compareDateLess(t1.getScheduleStart(), t2.getScheduleStart()) 
+														and t1.compareDateLess(t1.getScheduleStart(), t2.getScheduleEnd())))
 														then return true
 													else
 														return false);

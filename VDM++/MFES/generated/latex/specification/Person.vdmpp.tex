@@ -10,25 +10,25 @@ instance variables
  
   inv address <> [] and firstName <> [] and lastName <> [] and cc <> [] and len cc = 9 and phoneNumber <> [] and len phoneNumber = 9;
 operations
+(*@
+\label{Person:12}
+@*)
  public Person: Types`String * Types`String * Types`String * Types`String * Types`String ==> Person
   Person(a, fn, ln, c, pn) == ( address := a; firstName := fn; lastName := ln; cc := c; phoneNumber := pn; return self)
-(*@
-\label{Person:14}
-@*)
  pre a <> [] and fn <> [] and ln <> [] and c <> [] and pn <> []
  post address = a and firstName = fn and lastName = ln and cc = c and phoneNumber = pn;
   
+(*@
+\label{getCC:17}
+@*)
  pure public getCC : () ==> Types`String
   getCC() == (return cc);
-(*@
-\label{getCC:19}
-@*)
   
+(*@
+\label{getInfo:20}
+@*)
  pure public getInfo: () ==> Types`String
   getInfo() == (return "Name: " ^ firstName ^ " " ^ lastName ^ "\nAddress: " ^ address ^ "\nPhone Number: " ^ phoneNumber ^ "\nCC: " ^ cc);
-(*@
-\label{getInfo:22}
-@*)
 
 end Person
 \end{vdmpp}

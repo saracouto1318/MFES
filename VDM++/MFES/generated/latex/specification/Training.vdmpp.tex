@@ -2,61 +2,51 @@
 class Training
  
 instance variables
- public medicalAssociated:set of (MedicalAssociated);
- public purpose:[Types`Purpose];
- public schedule:[Schedule];
+ private medicalAssociated:[HealthProfessional];
+ private purpose:[Types`Purpose];
+ private schedule:[Schedule];
 
- inv card medicalAssociated > 1 and card medicalAssociated < 10;
+ inv medicalAssociated <> nil;
  inv purpose <> nil;
  inv schedule <> nil;
 
 operations
- public Training: Types`Purpose * Schedule ==> Training
-   Training(p, s) == (purpose := p; schedule := s; medicalAssociated := {}; return self)
- post purpose = p and schedule = s and medicalAssociated = {};
 (*@
-\label{Training:16}
+\label{Training:13}
 @*)
+ public Training: Types`Purpose * Schedule * HealthProfessional ==> Training
+   Training(p, s, h) == (purpose := p; schedule := s; medicalAssociated := h; return self)
+ post purpose = p and schedule = s and medicalAssociated = h;
 
+(*@
+\label{getSchedule:17}
+@*)
  pure public getSchedule : () ==> Schedule
    getSchedule() == (return schedule);
  
 (*@
-\label{getSchedule:20}
+\label{getPurpose:20}
 @*)
   pure public getPurpose : () ==> Types`Purpose
   getPurpose() == (return purpose); 
-  
+ 
 (*@
-\label{getPurpose:23}
+\label{addMedicalAssociated:23}
 @*)
-  pure public addMedicalAssociated: MedicalAssociated ==> set of (MedicalAssociated)
-   addMedicalAssociated(m) == (return medicalAssociated union {m})
-  pre m not in set medicalAssociated
 (*@
-\label{addMedicalAssociated:26}
+\label{getMedAssoc:23}
 @*)
- post m in set medicalAssociated;
-   
-  pure public removeMedicalAssociated: MedicalAssociated ==> set of (MedicalAssociated)
-   removeMedicalAssociated(m) == (return medicalAssociated \ {m})
-  pre m in set medicalAssociated
-(*@
-\label{removeMedicalAssociated:31}
-@*)
-  post m not in set medicalAssociated;
+ pure public getMedAssoc : () ==> HealthProfessional
+  getMedAssoc() == (return medicalAssociated); 
 
  public setSchedule : Schedule ==> ()
    setSchedule(s) == (schedule := s);
- 
 (*@
-\label{setSchedule:36}
+\label{removeMedicalAssociated:28}
 @*)
+ 
  public setPurpose : Types`Purpose ==> ()
    setPurpose(p) == (purpose := p);
  
-(*@
-\label{setPurpose:39}
-@*)
  end Training
 \end{vdmpp}

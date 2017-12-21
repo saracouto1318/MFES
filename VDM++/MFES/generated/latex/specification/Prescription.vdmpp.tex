@@ -6,47 +6,44 @@ instance variables
   private code:Types`String;
   
 operations
+(*@
+\label{Prescription:8}
+@*)
  public Prescription: Types`String ==> Prescription
   Prescription(c) == (code := c; medicaments := {}; return self)
-(*@
-\label{Prescription:10}
-@*)
  pre c <> []
  post code = c and medicaments = {};
  
+(*@
+\label{getCode:13}
+@*)
  pure public getCode : () ==> Types`String
   getCode() == (return code);
-(*@
-\label{getCode:15}
-@*)
   
+(*@
+\label{addMedicament:16}
+@*)
  pure public addMedicament: Medicament ==> set of (Medicament)
   addMedicament(m) == (return ({m} union medicaments))
-(*@
-\label{addMedicament:18}
-@*)
  pre m not in set medicaments
  post m in set medicaments;
   
+(*@
+\label{removeMedicament:21}
+@*)
  pure public removeMedicament: Medicament ==> set of (Medicament)
   removeMedicament(m) == (return (medicaments \ {m}))
-(*@
-\label{removeMedicament:23}
-@*)
  pre m in set medicaments
  post m not in set medicaments;
   
+(*@
+\label{getMedicaments:26}
+@*)
  pure public getMedicaments: () ==> set of (Medicament)
   getMedicaments() == (return medicaments);
-(*@
-\label{getMedicaments:28}
-@*)
-  
- pure public compare: Types`String ==> bool
-  compare(c) == (return c = code);
-(*@
-\label{compare:31}
-@*)
 
+(*@
+\label{compare:29}
+@*)
 end Prescription
 \end{vdmpp}

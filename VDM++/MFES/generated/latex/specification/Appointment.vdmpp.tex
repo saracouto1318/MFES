@@ -9,64 +9,47 @@ instance variables
   inv card prescriptions >= 0;
   inv medicalAssoc.getType() = <Doctor>;
 operations
- public Appointment: MedicalAssociated * Schedule * Patient * Hospital==> Appointment
+(*@
+\label{Appointment:11}
+@*)
+ public Appointment: HealthProfessional * Schedule * Patient * Hospital==> Appointment
   Appointment(d, s, p, h) == (medicalAssoc := d; priority := <Medium>; prescriptions := {}; Task(s, p, h, <Appointment>))
  post medicalAssoc = d and prescriptions = {} and priority = <Medium>;
  
-(*@
-\label{Appointment:15}
-@*)
- public Appointment: MedicalAssociated * Types`Priority * Schedule * Patient * Hospital ==> Appointment
+ public Appointment: HealthProfessional * Types`Priority * Schedule * Patient * Hospital ==> Appointment
   Appointment(d, p, s, pat, h) == (medicalAssoc := d; priority := p; prescriptions := {}; Task(s, pat, h, <Urgencies>))
  pre p <> nil
  post medicalAssoc = d and prescriptions = {} and priority = p;
 
+(*@
+\label{getPriority:20}
+@*)
  pure public getPriority : () ==> Types`Priority
   getPriority() == (return priority);
  
 (*@
-\label{getTypeAppointment:23}
+\label{getPrescriptions:23}
 @*)
   pure public getPrescriptions : () ==> set of (Prescription)
    getPrescriptions() == (return prescriptions);
-   
-(*@
-\label{getPriority:26}
-@*)
-  pure public getPrescription : seq of (char) ==> Prescription
-   getPrescription(code) == (
-                dcl prescription: Prescription;
-(*@
-\label{getPrescriptions:29}
-@*)
-                 for all p in set prescriptions do
-                  if(p.compare(code))
-                   then prescription := p;
-(*@
-\label{getPrescription:32}
-@*)
-                 
-                 return prescription;
-                )
-  pre code <> [];
   
+(*@
+\label{getPrescription:26}
+@*)
   public setPriority : Types`Priority ==> ()
    setPriority(p) == (priority := p)
   pre type = <Urgencies>;
   
   pure public addPrescription : Prescription ==> set of (Prescription)
    addPrescription(p) == (return prescriptions union {p})
-(*@
-\label{setPriority:43}
-@*)
   pre p not in set prescriptions
   post p in set prescriptions;
                  
  pure public removePrescription : Prescription ==> set of (Prescription)
-(*@
-\label{addPrescription:47}
-@*)
    removePrescription(p) == (return prescriptions \ {p})
+(*@
+\label{setPriority:37}
+@*)
   pre p in set prescriptions
   post p not in set prescriptions;
    

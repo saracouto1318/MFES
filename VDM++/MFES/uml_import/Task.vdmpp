@@ -3,7 +3,7 @@ instance variables
   protected schedule:[Schedule];
   protected patient:[Patient];
   protected hospital:[Hospital];
-  protected medicalAssoc:[MedicalAssociated];
+  protected medicalAssoc:[HealthProfessional];
   protected type : Types`TaskType;
   
   inv schedule <> nil;
@@ -29,19 +29,10 @@ operations
 	pure public getType: () ==> Types`TaskType
 		getType() == (return type);
 		
-	pure public getMedAssoc : () ==> MedicalAssociated
+	pure public getMedAssoc : () ==> HealthProfessional
 		getMedAssoc() == (return medicalAssoc);
 		
 	public setSchedule : Schedule ==> ()
 		setSchedule(s) == (schedule := s);
-		
-	public setPatient : Patient ==> ()
-		setPatient(s) == (patient := s);
-		
-	public setHospital : Hospital ==> ()
-		setHospital(s) == (hospital := s);
-	
-	public setMedAssoc : MedicalAssociated ==> ()
-		setMedAssoc(s) == (medicalAssoc := s);
 
 end Task

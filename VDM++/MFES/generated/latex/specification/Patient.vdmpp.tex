@@ -4,19 +4,19 @@ instance variables
   private healthNumber: Types`String;
   inv healthNumber <> [];
 operations
- public Patient: Types`String ==> Patient
-  Patient(n) == ( healthNumber := n; return self)
- pre n <> []
 (*@
-\label{Patient:9}
+\label{Patient:6}
 @*)
+ public Patient: Types`String * Types`String * Types`String * Types`String * Types`String * Types`String ==> Patient
+  Patient(a, fn, ln, c, pn, n) == ( healthNumber := n; Person(a, fn, ln, c, pn))
+ pre n <> []
  post healthNumber = n;
  
+(*@
+\label{getHealthNumber:11}
+@*)
  pure public getHealthNumber : () ==> Types`String
   getHealthNumber() == (return healthNumber);
 
-(*@
-\label{getHealthNumber:14}
-@*)
 end Patient
 \end{vdmpp}

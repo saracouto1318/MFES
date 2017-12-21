@@ -1,37 +1,37 @@
 \begin{vdmpp}[breaklines=true]
 class Treatment is subclass of Task
 instance variables
-  public med: [MedicalAssociated];
+  public med: [HealthProfessional];
   public name: Types`String;
   
   inv med.getType() = <Nurse> or med.getType() = <Technician>;
 operations
 
+(*@
+\label{Treatment:9}
+@*)
  public Treatment: Types`String * Schedule * Patient * Hospital ==> Treatment
   Treatment(n, s, p, h) == (name := n; med := nil; Task(s, p, h, <Other>))
-(*@
-\label{Treatment:11}
-@*)
  pre n <> []
  post name = n;
  
+(*@
+\label{getName:14}
+@*)
  pure public getName: () ==> Types`String
   getName() == (return name);
-(*@
-\label{getName:16}
-@*)
   
- public setMed: MedicalAssociated ==> ()
+(*@
+\label{setMed:17}
+@*)
+ public setMed: HealthProfessional ==> ()
   setMed(t) == (med := t; return);
-(*@
-\label{setMed:19}
-@*)
  
- pure public getMed : () ==> MedicalAssociated
-  getMed() == (return med);
 (*@
-\label{getMed:22}
+\label{getMed:20}
 @*)
+ pure public getMed : () ==> HealthProfessional
+  getMed() == (return med);
 
 end Treatment
 \end{vdmpp}

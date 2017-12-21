@@ -1,5 +1,5 @@
 \begin{vdmpp}[breaklines=true]
-class MedicalAssociated is subclass of Person
+class HealthProfessional is subclass of Person
 
 instance variables
   private medicalNumber: Types`String;
@@ -12,69 +12,99 @@ instance variables
  inv medicalNumber <> [];
  inv type <> nil;
 operations
- public MedicalAssociated: Types`String * Types`Type ==> MedicalAssociated
-  MedicalAssociated(s, t) == (medicalNumber := s; type := t; specialties := {}; patients := {}; return self)
- pre s <> [] and t <> nil
 (*@
-\label{MedicalAssociated:17}
+\label{MedicalAssociated:14}
 @*)
+(*@
+\label{HealthProfessional:14}
+@*)
+(*@
+\label{MedicalAssociated:14}
+@*)
+ public HealthProfessional: Types`String * Types`String * Types`String * Types`String * Types`String * Types`String * Types`Type ==> HealthProfessional
+  HealthProfessional(a, fn, ln, c, pn, s, t) == (medicalNumber := s; type := t; specialties := {}; patients := {}; Person(a, fn, ln, c, pn))
+ pre s <> [] and t <> nil
  post medicalNumber = s and type = t and specialties = {} and patients = {};
  
+(*@
+\label{getMedicalNumber:19}
+@*)
+(*@
+\label{getMedicalNumber:19}
+@*)
  pure public getMedicalNumber: () ==> Types`String
   getMedicalNumber() == (return medicalNumber);
  
 (*@
-\label{getMedicalNumber:22}
+\label{getSpecialties:22}
+@*)
+(*@
+\label{getSpecialties:22}
 @*)
  pure public getSpecialties: () ==> set of (Specialty)
   getSpecialties() == (return specialties);
  
 (*@
-\label{getSpecialties:25}
+\label{getPatients:25}
+@*)
+(*@
+\label{getPatients:25}
 @*)
  pure public getPatients: () ==> set of (Patient)
   getPatients() == (return patients);
   
 (*@
-\label{getPatients:28}
+\label{getType:28}
+@*)
+(*@
+\label{getType:28}
 @*)
  pure public getType : () ==> Types`Type
   getType() == (return type);
   
 (*@
-\label{getType:31}
+\label{removeSpecialty:31}
+@*)
+(*@
+\label{removeSpecialty:31}
 @*)
  pure public removeSpecialty: Specialty ==> set of(Specialty)
   removeSpecialty(s) == (return specialties \ {s})
  pre s in set specialties
-(*@
-\label{removeSpecialty:34}
-@*)
  post s not in set specialties;
   
+(*@
+\label{addSpecialty:36}
+@*)
+(*@
+\label{addSpecialty:36}
+@*)
  pure public addSpecialty: Specialty ==> set of(Specialty)
   addSpecialty(s) == (return specialties union {s})
  pre s not in set specialties
-(*@
-\label{addSpecialty:39}
-@*)
  post s in set specialties;
  
+(*@
+\label{addPatient:41}
+@*)
+(*@
+\label{addPatient:41}
+@*)
  public addPatient : Patient ==> set of(Patient)
   addPatient(p) == (return patients union {p})
  pre p not in set patients
-(*@
-\label{addPatient:44}
-@*)
  post p in set patients;
  
+(*@
+\label{removePatient:46}
+@*)
+(*@
+\label{removePatient:46}
+@*)
  public removePatient : Patient ==> set of(Patient)
   removePatient(p) == (return patients \ {p})
  pre p in set patients
-(*@
-\label{removePatient:49}
-@*)
  post p not in set patients;
 
-end MedicalAssociated
+end HealthProfessional
 \end{vdmpp}

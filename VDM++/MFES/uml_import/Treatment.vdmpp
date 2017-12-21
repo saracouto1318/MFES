@@ -1,6 +1,6 @@
 class Treatment is subclass of Task
 instance variables
-  public med: [MedicalAssociated];
+  public med: [HealthProfessional];
   public name: Types`String;
   
   inv med.getType() = <Nurse> or med.getType() = <Technician>;
@@ -14,10 +14,10 @@ operations
 	pure public getName: () ==> Types`String
 		getName() == (return name);
 		
-	public setMed: MedicalAssociated ==> ()
+	public setMed: HealthProfessional ==> ()
 		setMed(t) == (med := t; return);
 	
-	pure public getMed : () ==> MedicalAssociated
+	pure public getMed : () ==> HealthProfessional
 		getMed() == (return med);
 
 end Treatment

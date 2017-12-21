@@ -1,46 +1,46 @@
 class Surgery is subclass of Task
 instance variables
-  private secondaryDoctors:set of (MedicalAssociated);
-  private other:set of (MedicalAssociated);
+  private secondaryDoctors:set of (HealthProfessional);
+  private other:set of (HealthProfessional);
   
   inv card secondaryDoctors >= 0;
   inv card other >= 0;
   
 operations
-	public Surgery: MedicalAssociated * Schedule * Patient * Hospital ==> Surgery
+	public Surgery: HealthProfessional * Schedule * Patient * Hospital ==> Surgery
 		Surgery(s, sch, p, h) == (medicalAssoc := s ; other := {}; secondaryDoctors := {}; Task(sch, p, h, <Surgery>))
 	post medicalAssoc = s and other = {} and secondaryDoctors = {};
 	
-	pure public addSecondaryDoctor : MedicalAssociated ==> set of (MedicalAssociated)
+	pure public addSecondaryDoctor : HealthProfessional ==> set of (HealthProfessional)
 		addSecondaryDoctor(s) == (return secondaryDoctors union {s})
 	pre s <> medicalAssoc and s.getType() = <Surgeon> and  s not in set secondaryDoctors
 	post s in set secondaryDoctors;
 		
-	pure public removeSecondaryDoctor : MedicalAssociated ==> set of (MedicalAssociated)
+	pure public removeSecondaryDoctor : HealthProfessional ==> set of (HealthProfessional)
 		removeSecondaryDoctor(s) == (return secondaryDoctors \ {s})
 	pre s.getType() = <Surgeon> and s in set secondaryDoctors
 	post s not in set secondaryDoctors;
 		
-	pure public addOther : MedicalAssociated ==> set of (MedicalAssociated)
+	pure public addOther : HealthProfessional ==> set of (HealthProfessional)
 		addOther(s) == (return other union {s})
 	pre s.getType() = <Nurse> and s not in set other
 	post s in set other;
 		
-	pure public removeOther : MedicalAssociated ==> set of (MedicalAssociated)
+	pure public removeOther : HealthProfessional ==> set of (HealthProfessional)
 		removeOther(s) == (return other \ {s})
 	pre s.getType() = <Nurse> and s in set other
 	post s not in set other;
 		
-	public setMainDoctor : MedicalAssociated ==> ()
+	public setMainDoctor : HealthProfessional ==> ()
 		setMainDoctor(s) == (medicalAssoc := s)
 	pre s.getType() = <Surgeon> and s not in set secondaryDoctors;
 	
-	public getMainDoctor : () ==> MedicalAssociated
+	public getMainDoctor : () ==> HealthProfessional
 		getMainDoctor() == (return medicalAssoc);
 
-	public getSurgeryPersons : Types`Type ==> set of (MedicalAssociated)
+	public getSurgeryPersons : Types`Type ==> set of (HealthProfessional)
 		getSurgeryPersons(t) == (
-															dcl med : set of (MedicalAssociated);
+															dcl med : set of (HealthProfessional);
 															if(t = <Surgeon>)
 																then med := secondaryDoctors
 															else

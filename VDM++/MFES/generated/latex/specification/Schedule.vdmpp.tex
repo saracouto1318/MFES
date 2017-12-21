@@ -7,57 +7,42 @@ instance variables
   private endHour: Types`Date;
   
   inv compareDateLess(startHour, endHour) = true;
-operations
-
- public Schedule: Types`Date ==> Schedule
-  Schedule(d) == (startHour := d; return self)
- post startHour = d;
- 
+operations 
  public Schedule: Types`Date * Types`Date ==> Schedule
+(*@
+\label{Schedule:11}
+@*)
   Schedule(d, d2) == (startHour := d; endHour := d2; return self)
+ pre compareDateLess(d, d2)
  post startHour = d and endHour = d2;
-(*@
-\label{Schedule:18}
-@*)
- 
- public setEndHour : Types`Date ==> Types`Date
-  setEndHour(d) == (endHour := d; return endHour)
- pre compareDateLess(startHour, d);
-  
- public setStartHour : Types`Date ==> Types`Date
-  setStartHour(d) == (startHour := d; return startHour)
- pre compareDateLess(d, endHour);
-(*@
-\label{setEndHour:26}
-@*)
  
  public setSchedule : Types`Date * Types`Date ==> Schedule
   setSchedule(d1, d2) == (startHour := d1; endHour := d2; return self)
  pre compareDateLess(d1, d2);
-(*@
-\label{setStartHour:30}
-@*)
   
+(*@
+\label{setEndHour:19}
+@*)
  pure public getScheduleStart : () ==> Types`Date
   getScheduleStart() == (return startHour);
   
-(*@
-\label{setSchedule:34}
-@*)
  pure public getScheduleEnd : () ==> Types`Date
+(*@
+\label{setStartHour:23}
+@*)
   getScheduleEnd() == (return endHour);
   
  pure public compareDateLess : Types`Date * Types`Date ==> bool
-(*@
-\label{getScheduleStart:38}
-@*)
   compareDateLess(d1, d2) == (return (d1.year < d2.year and d1.month < d2.month and d1.day < d2.day and d1.hour < d2.hour and d1.min < d2.min));
+(*@
+\label{setSchedule:27}
+@*)
   
  pure public compareDate : Types`Date * Types`Date ==> bool
-(*@
-\label{getScheduleEnd:41}
-@*)
   compareDate(d1, d2) == (return (d1.year = d2.year and d1.month = d2.month and d1.day = d2.day and d1.hour = d2.hour and d1.min = d2.min));
 
+(*@
+\label{getScheduleStart:31}
+@*)
 end Schedule
 \end{vdmpp}

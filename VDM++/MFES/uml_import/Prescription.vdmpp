@@ -25,8 +25,5 @@ operations
 		
 	pure public getMedicaments: () ==> set of (Medicament)
 		getMedicaments() == (return medicaments);
-		
-	pure public compare: Types`String ==> bool
-		compare(c) == (return c = code);
 
 end Prescription

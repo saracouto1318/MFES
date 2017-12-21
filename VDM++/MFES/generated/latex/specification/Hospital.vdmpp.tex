@@ -1,7 +1,7 @@
 \begin{vdmpp}[breaklines=true]
 class Hospital
 instance variables
-  private medicalAssociated: set of (MedicalAssociated);
+  private medicalAssociated: set of (HealthProfessional);
   private name: Types`String;
   private address: Types`String;
   private tasks: set of(Task);
@@ -14,87 +14,98 @@ instance variables
  inv card tasks >= 0;
 operations
 
- public Hospital: Types`String * Types`String * SafetyNetHospital ==> Hospital
 (*@
-\label{Hospital:17}
+\label{Hospital:16}
 @*)
+ public Hospital: Types`String * Types`String * SafetyNetHospital ==> Hospital
   Hospital(n, a, s) == (name := n; address := a; safetyNet := s; medicalAssociated := {}; tasks := {}; trainings := {}; return self)
  pre n <> [] and a <> [] and safetyNet <> nil
  post name = n and address = a and safetyNet = s and medicalAssociated = {} and tasks = {} and trainings = {};
  
- pure public getName: () ==> Types`String
 (*@
-\label{getName:22}
+\label{getName:21}
 @*)
+ pure public getName: () ==> Types`String
   getName() == (return name);
  
+(*@
+\label{getAddress:24}
+@*)
  pure public getAddress: () ==> Types`String
-(*@
-\label{getAddress:25}
-@*)
   getAddress() == (return address);
-  
- pure public getSafetyNet: () ==> SafetyNetHospital
-(*@
-\label{getSafetyNet:28}
-@*)
-  getSafetyNet() == (return safetyNet);
  
- pure public addMedAssociated: MedicalAssociated ==> set of (MedicalAssociated)
 (*@
-\label{addMedAssociated:31}
+\label{getSafetyNet:27}
 @*)
+ pure public addMedAssociated: HealthProfessional ==> set of (HealthProfessional)
   addMedAssociated(d) == (return ({d} union medicalAssociated))
  pre d not in set medicalAssociated
+(*@
+\label{addMedAssociated:30}
+@*)
  post d in set medicalAssociated;
   
- pure public removeMedAssociated: MedicalAssociated ==> set of (MedicalAssociated)
+ pure public removeMedAssociated: HealthProfessional ==> set of (HealthProfessional)
+  removeMedAssociated(d) == (
+                for all t in set tasks do
 (*@
-\label{removeMedAssociated:36}
+\label{removeMedAssociated:35}
 @*)
-  removeMedAssociated(d) == (return (medicalAssociated \ {d}))
+                 if(d = t.getMedAssoc())
+                  then removeTask(t);
+                for all t in set trainings do
+                 if(d = t.getMedAssoc())
+                  then removeTraining(t);
+(*@
+\label{addTask:40}
+@*)
+                return (medicalAssociated \ {d}))
  pre d in set medicalAssociated
  post d not in set medicalAssociated;
  
  public addTask: Task ==> set of (Task)
+  addTask(d) == (
+          dcl patients : set of(Patient);
+          if(d.getPatient() not in set d.getMedAssoc().getPatients())
 (*@
-\label{addTask:41}
+\label{removeTask:48}
 @*)
-  addTask(d) == (return ({d} union tasks))
+           then patients := d.getMedAssoc().addPatient(d.getPatient());
+          return ({d} union tasks))
  pre d not in set tasks and forall t in set tasks & 
-  not (overlap(d, t) and not (d.getMedAssoc().getCC() <> t.getMedAssoc().getCC() and 
+  not (overlap(d.getSchedule(), t.getSchedule()) and not (d.getMedAssoc().getCC() <> t.getMedAssoc().getCC() and 
     d.getPatient().getCC() <> t.getPatient().getCC() and d.getMedAssoc().getCC() <> t.getPatient().getCC()
-    and d.getPatient().getCC() <> t.getMedAssoc().getCC()))
- post d in set tasks;
-  
- pure public removeTask: Task ==> set of (Task)
-(*@
-\label{removeTask:49}
-@*)
-  removeTask(d) == (return (tasks \ {d}))
- pre d in set tasks
- post d not in set tasks;
- 
 (*@
 \label{addTraining:53}
 @*)
- public addTraining: Training ==> set of (Training)
-(*@
-\label{getTasksByType:54}
-@*)
-  addTraining(d) == (return ({d} union trainings))
- pre d not in set trainings and forall t in set trainings & not (overlapTraining(d, t))
- post d in set trainings;
+    and d.getPatient().getCC() <> t.getMedAssoc().getCC()))
+ post d in set tasks and d.getPatient() in set d.getMedAssoc().getPatients();
   
+ pure public removeTask: Task ==> set of (Task)
+  removeTask(d) == (return (tasks \ {d}))
 (*@
 \label{removeTraining:58}
 @*)
+ pre d in set tasks
+ post d not in set tasks;
+ 
+ public addTraining: Training ==> set of (Training)
+  addTraining(d) == (return ({d} union trainings))
+(*@
+\label{getTasksByType:63}
+@*)
+ pre d not in set trainings and forall t in set trainings & not (overlap(d.getSchedule(), t.getSchedule()))
+ post d in set trainings;
+  
  pure public removeTraining: Training ==> set of (Training)
   removeTraining(d) == (return (trainings \ {d}))
  pre d in set trainings
  post d not in set trainings;
  
  pure public getTasksByType: Types`TaskType ==> set of (Task)
+(*@
+\label{getTrainingsByType:72}
+@*)
   getTasksByType(s) == (
               dcl tasksTotal: set of (Task);
               for all t in set tasks do
@@ -103,13 +114,10 @@ operations
                 
               return tasksTotal);
               
-(*@
-\label{getTrainingsByType:72}
-@*)
-(*@
-\label{getMedicalAssociatedByType:72}
-@*)
  pure public getTrainingsByType: Types`Purpose ==> set of (Training)
+(*@
+\label{getMedicalAssociatedByType:81}
+@*)
   getTrainingsByType(s) == (
               dcl train: set of (Training);
               for all t in set trainings do
@@ -118,39 +126,28 @@ operations
                 
               return train);
 
- pure public getMedicalAssociatedByType: Types`Type ==> set of (MedicalAssociated)
+ pure public getMedicalAssociatedByType: Types`Type ==> set of (HealthProfessional)
+(*@
+\label{overlap2:90}
+@*)
   getMedicalAssociatedByType(type) == (
-           dcl med: set of(MedicalAssociated);
+           dcl med: set of(HealthProfessional);
            for all d in set medicalAssociated do
             if(d.getType() = type)
              then med := med union {d};
-(*@
-\label{overlap:87}
-@*)
             
            return med);
            
- pure public overlap: Task * Task ==> bool
+ pure public overlap: Schedule * Schedule ==> bool
   overlap(t1, t2) == (
-             if(t1.getSchedule().compareDate(t1.getSchedule().getScheduleStart(), t2.getSchedule().getScheduleStart()) 
-              or (t1.getSchedule().compareDateLess(t1.getSchedule().getScheduleStart(), t2.getSchedule().getScheduleStart()) 
-              and not t1.getSchedule().compareDateLess(t1.getSchedule().getScheduleEnd(), t2.getSchedule().getScheduleStart()))
-              or (not t1.getSchedule().compareDateLess(t1.getSchedule().getScheduleStart(), t2.getSchedule().getScheduleStart()) 
-              and t1.getSchedule().compareDateLess(t1.getSchedule().getScheduleStart(), t2.getSchedule().getScheduleEnd())))
-              then return true
-             else
-              return false);
-              
+             if(t1.compareDate(t1.getScheduleStart(), t2.getScheduleStart()) 
 (*@
 \label{overlapTraining:101}
 @*)
- pure public overlapTraining: Training * Training ==> bool
-  overlapTraining(t1, t2) == (
-             if(t1.getSchedule().compareDate(t1.getSchedule().getScheduleStart(), t2.getSchedule().getScheduleStart()) 
-              or (t1.getSchedule().compareDateLess(t1.getSchedule().getScheduleStart(), t2.getSchedule().getScheduleStart()) 
-              and not t1.getSchedule().compareDateLess(t1.getSchedule().getScheduleEnd(), t2.getSchedule().getScheduleStart()))
-              or (not t1.getSchedule().compareDateLess(t1.getSchedule().getScheduleStart(), t2.getSchedule().getScheduleStart()) 
-              and t1.getSchedule().compareDateLess(t1.getSchedule().getScheduleStart(), t2.getSchedule().getScheduleEnd())))
+              or (t1.compareDateLess(t1.getScheduleStart(), t2.getScheduleStart()) 
+              and not t1.compareDateLess(t1.getScheduleEnd(), t2.getScheduleStart()))
+              or (not t1.compareDateLess(t1.getScheduleStart(), t2.getScheduleStart()) 
+              and t1.compareDateLess(t1.getScheduleStart(), t2.getScheduleEnd())))
               then return true
              else
               return false);

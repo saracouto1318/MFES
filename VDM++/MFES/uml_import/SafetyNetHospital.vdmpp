@@ -19,35 +19,81 @@ operations
 	pre h in set hospitals
 	post h not in set hospitals;
 	
-	pure public numHospitals : () ==> nat
-		numHospitals() == (return card hospitals);
+	pure public getHospitals : () ==> set of (Hospital)
+		getHospitals() == (return hospitals);
 	
 	-- Mudar --	
-	pure public getHospitalsMoreAppointments : () ==> Hospital
-		getHospitalsMoreAppointments() == (
+	pure public getHospitalsMoreAppointments : Types`TaskType ==> Hospital
+		getHospitalsMoreAppointments(t) == (
 																				dcl max: nat, hosp: Hospital;
 																				max := 0;
 																				for all h in set hospitals do
-																					if(card (h.getTasksByType(<Appointment>)) > max)
-																						then (max := card (h.getTasksByType(<Appointment>)); hosp := h);
+																					if(card (h.getTasksByType(t)) > max)
+																						then (max := card (h.getTasksByType(t)); hosp := h);
 																				return hosp);
 	
-	pure public getDoctorsMoreHospitals : () ==> set of(MedicalAssociated)
-		getDoctorsMoreHospitals() == (
-																		dcl doctors: set of(MedicalAssociated);
+	pure public getMedMoreHospitals : Types`Type ==> set of(HealthProfessional)
+		getMedMoreHospitals(t) == (
+																		dcl doctors: set of(HealthProfessional);
 																		for all h in set hospitals do (
-																			dcl med: set of (MedicalAssociated), list: set of(Hospital);
-																			med := h.getMedicalAssociatedByType(<Doctor>);
+																			dcl med: set of (HealthProfessional), list: set of(Hospital);
+																			med := h.getMedicalAssociatedByType(t);
 																			
 																			list := hospitals \ {h};
 																			for all m in set med do(
 																				for all l in set list do
-																					if(m.getType() = <Doctor> and m in set l.getMedicalAssociatedByType(<Doctor>) and m not in set doctors)
+																					if(m.getType() = t and m in set l.getMedicalAssociatedByType(t) and m not in set doctors)
 																						then doctors := doctors union {m};
 																			);
 																		);
 																		
 																		return doctors;
-																	); 													
+																	);
+																	 													
+	pure public getMedAssociatedByPatient: Patient * Types`Type ==> map Hospital to set of(HealthProfessional)
+		getMedAssociatedByPatient(p, t) == (
+																					dcl maps: map Hospital to set of(HealthProfessional), med : set of (HealthProfessional);
+																					for all h in set hospitals do (
+																						for all m in set h.getMedicalAssociatedByType(t) do
+																							if(p in set m.getPatients())
+																								then med := med union {m};
+																							
+																						maps := maps munion {h |-> med};
+																						med := {};);
+																						return maps);
+	
+	pure public getMedByHospital: Types`Type ==> map Hospital to set of(HealthProfessional)
+		getMedByHospital(t) == (
+																					dcl maps: map Hospital to set of(HealthProfessional);
+																					for all h in set hospitals do
+																						maps := maps munion {h |-> h.getMedicalAssociatedByType(t)};
+																					return maps);
+																					
+	pure public getTasksByHospital: Types`TaskType ==> map Hospital to set of(Task)
+		getTasksByHospital(t) == (
+																					dcl maps: map Hospital to set of(Task);
+																					for all h in set hospitals do
+																						maps := maps munion {h |-> h.getTasksByType(t)};
+																					return maps);
+																					
+	pure public getTrainingsByHospital: Types`Purpose ==> map Hospital to set of(Training)
+		getTrainingsByHospital(t) == (
+																					dcl maps: map Hospital to set of(Training);
+																					for all h in set hospitals do
+																						maps := maps munion {h |-> h.getTrainingsByType(t)};
+																					return maps);
+																					
+	pure public getTasksPatient: Patient * Types`TaskType ==> map Hospital to set of(Task)
+		getTasksPatient(p, t) == (
+																					dcl maps: map Hospital to set of(Task), med : set of (Task);
+																					for all h in set hospitals do (
+																						for all m in set h.getTasksByType(t) do
+																							if(p = m.getPatient())
+																								then med := med union {m};
+																							
+																						maps := maps munion {h |-> med};
+																						med := {};);
+																						return maps);
+																					
 		
 end SafetyNetHospital
