@@ -9,11 +9,11 @@ instance variables
   inv patient <> nil;
   inv hospital <> nil;
   inv type <> nil;
+  inv medicalAssoc.getCC() <> patient.getCC();
 operations
 	public Task: HealthProfessional * Schedule * Patient * Hospital * Types`TaskType ==> Task
 		Task(med, s, p, h, t) == (schedule := s; patient := p; hospital := h; type := t; medicalAssoc := med; 
 													h.addTask(self); return self)
-	pre med.getCC() <> p.getCC()
 	post schedule = s and patient = p and hospital = h and medicalAssoc = med;
 	
 	pure public getSchedule: () ==> Schedule

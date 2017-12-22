@@ -1,0 +1,185 @@
+\begin{vdmpp}[breaklines=true]
+class Hospital
+instance variables
+  private medicalAssociated: set of (HealthProfessional);
+  private name: Types`String;
+  private address: Types`String;
+  private tasks: set of(Task);
+  private trainings: set of(Training);
+  private safetyNet: [SafetyNetHospital];
+ 
+ inv safetyNet <> nil; 
+ inv card medicalAssociated >= 0;
+ inv card tasks >= 0;
+operations
+
+(*@
+\label{Hospital:15}
+@*)
+ public Hospital: Types`String * Types`String * SafetyNetHospital ==> Hospital
+  Hospital(n, a, s) == (name := n; address := a; safetyNet := s; medicalAssociated := {}; tasks := {}; trainings := {}; return self)
+ pre safetyNet <> nil
+ post name = n and address = a and safetyNet = s and medicalAssociated = {} and tasks = {} and trainings = {};
+ 
+(*@
+\label{getName:20}
+@*)
+ pure public getName: () ==> Types`String
+  getName() == (return name);
+ 
+(*@
+\label{getAddress:23}
+@*)
+ pure public getAddress: () ==> Types`String
+  getAddress() == ((*@\vdmnotcovered{return}@*) (*@\vdmnotcovered{address}@*));
+ 
+(*@
+\label{addMedAssociated:26}
+@*)
+ public addMedAssociated: HealthProfessional ==> ()
+  addMedAssociated(d) == (medicalAssociated := {d} (*@\vdmnotcovered{union}@*) (*@\vdmnotcovered{medicalAssociated}@*))
+ pre d not in set (*@\vdmnotcovered{medicalAssociated}@*)
+ post d in set (*@\vdmnotcovered{medicalAssociated}@*);
+  
+(*@
+\label{removeMedAssociated:31}
+@*)
+ public removeMedAssociated: HealthProfessional ==> ()
+  removeMedAssociated(d) == (*@\vdmnotcovered{(}@*)
+                (*@\vdmnotcovered{for}@*) all t in set (*@\vdmnotcovered{tasks}@*) do
+                 if(d = t.(*@\vdmnotcovered{getMedAssoc}@*)())
+                  then removeTask((*@\vdmnotcovered{t}@*));
+                (*@\vdmnotcovered{for}@*) all t in set (*@\vdmnotcovered{trainings}@*) do
+                 (*@\vdmnotcovered{if}@*)(d = t.(*@\vdmnotcovered{getMedAssoc}@*)())
+                  then (*@\vdmnotcovered{removeTraining}@*)((*@\vdmnotcovered{t}@*));
+                medicalAssociated := (*@\vdmnotcovered{medicalAssociated}@*) (*@\vdmnotcovered{\textbackslash }@*) (*@\vdmnotcovered{\{}@*)(*@\vdmnotcovered{d}@*)})
+ pre d in set (*@\vdmnotcovered{medicalAssociated}@*)
+ post d not in set (*@\vdmnotcovered{medicalAssociated}@*);
+ 
+(*@
+\label{addTask:43}
+@*)
+ public addTask: Task ==> ()
+  addTask(d) == (
+          if(d.getPatient() not in set d.getMedAssoc().getPatients())
+           then d.getMedAssoc().addPatient(d.getPatient());
+          tasks := {d} union tasks)
+ pre d not in set tasks and forall t in set tasks & 
+  not (overlap(d.getSchedule(), t.getSchedule()) and not (d.getMedAssoc().getCC() <> t.getMedAssoc().getCC() and 
+    d.getPatient().getCC() <> t.getPatient().getCC() and d.getMedAssoc().(*@\vdmnotcovered{getCC}@*)() <> (*@\vdmnotcovered{t}@*).(*@\vdmnotcovered{getPatient}@*)().(*@\vdmnotcovered{getCC}@*)()
+    and (*@\vdmnotcovered{d}@*).getPatient().getCC() (*@\vdmnotcovered{<>}@*) (*@\vdmnotcovered{t}@*).(*@\vdmnotcovered{getMedAssoc}@*)().(*@\vdmnotcovered{getCC}@*)()))
+ post d in set tasks and d.getPatient() in set d.getMedAssoc().getPatients();
+  
+(*@
+\label{removeTask:54}
+@*)
+ public removeTask: Task ==> ()
+  removeTask(d) == (tasks := tasks (*@\vdmnotcovered{\textbackslash }@*) {(*@\vdmnotcovered{d}@*)})
+ pre (*@\vdmnotcovered{d}@*) (*@\vdmnotcovered{in}@*) set (*@\vdmnotcovered{tasks}@*)
+ post d (*@\vdmnotcovered{not}@*) in set (*@\vdmnotcovered{tasks}@*);
+ 
+(*@
+\label{addTraining:59}
+@*)
+ public addTraining: Training ==> ()
+  addTraining(d) == (trainings := {d} (*@\vdmnotcovered{union}@*) (*@\vdmnotcovered{trainings}@*))
+ pre (*@\vdmnotcovered{d}@*) (*@\vdmnotcovered{not}@*) in set trainings and forall t in set trainings & not (overlap(d.(*@\vdmnotcovered{getSchedule}@*)(), t.(*@\vdmnotcovered{getSchedule}@*)()))
+ post (*@\vdmnotcovered{d}@*) (*@\vdmnotcovered{in}@*) set (*@\vdmnotcovered{trainings}@*);
+  
+(*@
+\label{removeTraining:64}
+@*)
+ public removeTraining: Training ==> ()
+  removeTraining(d) == (trainings := trainings \ (*@\vdmnotcovered{\{}@*)(*@\vdmnotcovered{d}@*)})
+ pre d in set (*@\vdmnotcovered{trainings}@*)
+ post d not in set (*@\vdmnotcovered{trainings}@*);
+ 
+(*@
+\label{getTasksByType:69}
+@*)
+ pure public getTasksByType: Types`TaskType ==> set of (Task)
+  getTasksByType(s) == (*@\vdmnotcovered{(}@*)
+              dcl tasksTotal: set of (Task);
+              for all t in set (*@\vdmnotcovered{tasks}@*) do
+               if(t.getType() = (*@\vdmnotcovered{s}@*))
+                then tasksTotal := tasksTotal (*@\vdmnotcovered{union}@*) {(*@\vdmnotcovered{t}@*)};
+                
+              return (*@\vdmnotcovered{tasksTotal}@*));
+              
+(*@
+\label{getTrainingsByType:78}
+@*)
+ pure public getTrainingsByType: Types`Purpose ==> set of (Training)
+  getTrainingsByType(s) == (*@\vdmnotcovered{(}@*)
+              dcl train: set of (Training);
+              for all t in set (*@\vdmnotcovered{trainings}@*) do
+               if(t.(*@\vdmnotcovered{getPurpose}@*)() = (*@\vdmnotcovered{s}@*))
+                then train := train (*@\vdmnotcovered{union}@*) (*@\vdmnotcovered{\{}@*)(*@\vdmnotcovered{t}@*)};
+                
+              (*@\vdmnotcovered{return}@*) (*@\vdmnotcovered{train}@*));
+
+(*@
+\label{getMedicalAssociatedByType:87}
+@*)
+ pure public getMedicalAssociatedByType: Types`Type ==> set of (HealthProfessional)
+  getMedicalAssociatedByType(type) == (*@\vdmnotcovered{(}@*)
+           dcl med: set of(HealthProfessional);
+           for all d in set (*@\vdmnotcovered{medicalAssociated}@*) do
+            if(d.getType() = (*@\vdmnotcovered{type}@*))
+             then med := med union {(*@\vdmnotcovered{d}@*)};
+            
+           return (*@\vdmnotcovered{med}@*));
+           
+(*@
+\label{overlap:96}
+@*)
+ pure public overlap: Schedule * Schedule ==> bool
+  overlap(t1, t2) == (
+             if(t1.compareDate(t1.getScheduleStart(), t2.getScheduleStart()) 
+              or (t1.compareDateLess(t1.getScheduleStart(), t2.(*@\vdmnotcovered{getScheduleStart}@*)()) 
+              and not t1.compareDateLess((*@\vdmnotcovered{t1}@*).getScheduleEnd(), t2.(*@\vdmnotcovered{getScheduleStart}@*)()))
+              or (not t1.compareDateLess(t1.getScheduleStart(), t2.(*@\vdmnotcovered{getScheduleStart}@*)()) 
+              and t1.compareDateLess(t1.getScheduleStart(), t2.(*@\vdmnotcovered{getScheduleEnd}@*)())))
+              then return true
+             else
+              (*@\vdmnotcovered{return}@*) (*@\vdmnotcovered{false}@*));
+              
+end Hospital
+\end{vdmpp}
+\bigskip
+\begin{longtable}{|l|r|r|r|}
+\hline
+Function or operation & Line & Coverage & Calls \\
+\hline
+\hline
+\hyperref[Hospital:15]{Hospital} & 15&100.0\% & 14 \\
+\hline
+\hyperref[addMedAssociated:26]{addMedAssociated} & 26&0.0\% & 0 \\
+\hline
+\hyperref[addTask:43]{addTask} & 43&78.8\% & 1 \\
+\hline
+\hyperref[addTraining:59]{addTraining} & 59&0.0\% & 0 \\
+\hline
+\hyperref[getAddress:23]{getAddress} & 23&0.0\% & 0 \\
+\hline
+\hyperref[getMedicalAssociatedByType:87]{getMedicalAssociatedByType} & 87&0.0\% & 0 \\
+\hline
+\hyperref[getName:20]{getName} & 20&100.0\% & 2 \\
+\hline
+\hyperref[getTasksByType:69]{getTasksByType} & 69&0.0\% & 0 \\
+\hline
+\hyperref[getTrainingsByType:78]{getTrainingsByType} & 78&0.0\% & 0 \\
+\hline
+\hyperref[overlap:96]{overlap} & 96&26.1\% & 0 \\
+\hline
+\hyperref[removeMedAssociated:31]{removeMedAssociated} & 31&0.0\% & 0 \\
+\hline
+\hyperref[removeTask:54]{removeTask} & 54&0.0\% & 0 \\
+\hline
+\hyperref[removeTraining:64]{removeTraining} & 64&0.0\% & 0 \\
+\hline
+\hline
+Hospital.vdmpp & & 40.2\% & 17 \\
+\hline
+\end{longtable}
+

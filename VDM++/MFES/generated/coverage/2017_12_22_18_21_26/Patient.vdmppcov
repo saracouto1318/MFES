@@ -1,0 +1,12 @@
+class Patient is subclass of Person
+instance variables
+  private healthNumber: Types`String;
+operations
+	public Patient: Types`String * Types`String * Types`String * Types`String * Types`String * Types`String ==> Patient
+		Patient(a, fn, ln, c, pn, n) == ( healthNumber := n; Person(a, fn, ln, c, pn))
+	post healthNumber = n;
+	
+	pure public getHealthNumber : () ==> Types`String
+		getHealthNumber() == (return healthNumber);
+
+end Patient

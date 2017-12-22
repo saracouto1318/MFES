@@ -1,0 +1,83 @@
+\begin{vdmpp}[breaklines=true]
+class Appointment is subclass of Task
+
+instance variables
+  private prescriptions:set of (Prescription);
+  private priority : Types`Priority;
+  
+  inv priority <> nil;
+  inv card prescriptions >= 0;
+  inv medicalAssoc.getType() = <Doctor>;
+operations
+(*@
+\label{Appointment:11}
+@*)
+ public Appointment: HealthProfessional * Schedule * Patient * Hospital==> Appointment
+  Appointment(d, s, p, h) == (medicalAssoc := d; priority := <Medium>; prescriptions := {}; Task(d, s, p, h, <Appointment>))
+ post medicalAssoc = d and prescriptions = {} and priority = <Medium>;
+ 
+ public Appointment: HealthProfessional * Types`Priority * Schedule * Patient * Hospital ==> Appointment
+  Appointment(d, p, s, pat, h) == (medicalAssoc := d; priority := p; prescriptions := {}; Task(d, s, pat, h, <Urgencies>))
+ pre p <> nil
+ post medicalAssoc = d and prescriptions = {} and priority = p;
+
+(*@
+\label{getPriority:20}
+@*)
+ pure public getPriority : () ==> Types`Priority
+  getPriority() == (return priority);
+ 
+(*@
+\label{getPrescriptions:23}
+@*)
+  pure public getPrescriptions : () ==> set of (Prescription)
+   getPrescriptions() == (return prescriptions);
+  
+(*@
+\label{setPriority:26}
+@*)
+  public setPriority : Types`Priority ==> ()
+   setPriority(p) == (priority := (*@\vdmnotcovered{p}@*))
+  pre type (*@\vdmnotcovered{=}@*) (*@\vdmnotcovered{<Urgencies>}@*);
+  
+(*@
+\label{addPrescription:30}
+@*)
+  public addPrescription : Prescription ==> ()
+   addPrescription(p) == (prescriptions := prescriptions union {p})
+  pre p not in set prescriptions
+  post p in set prescriptions;
+                 
+(*@
+\label{removePrescription:35}
+@*)
+ public removePrescription : Prescription ==> ()
+   removePrescription(p) == (prescriptions := prescriptions \ {p})
+  pre p in set prescriptions
+  post p not in set prescriptions;
+   
+end Appointment
+\end{vdmpp}
+\bigskip
+\begin{longtable}{|l|r|r|r|}
+\hline
+Function or operation & Line & Coverage & Calls \\
+\hline
+\hline
+\hyperref[Appointment:11]{Appointment} & 11&100.0\% & 4 \\
+\hline
+\hyperref[addPrescription:30]{addPrescription} & 30&100.0\% & 2 \\
+\hline
+\hyperref[getPrescriptions:23]{getPrescriptions} & 23&100.0\% & 6 \\
+\hline
+\hyperref[getPriority:20]{getPriority} & 20&100.0\% & 2 \\
+\hline
+\hyperref[removePrescription:35]{removePrescription} & 35&100.0\% & 2 \\
+\hline
+\hyperref[setPriority:26]{setPriority} & 26&0.0\% & 0 \\
+\hline
+\hline
+Appointment.vdmpp & & 93.8\% & 16 \\
+\hline
+\end{longtable}
+

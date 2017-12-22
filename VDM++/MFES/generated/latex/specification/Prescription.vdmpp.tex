@@ -1,0 +1,66 @@
+\begin{vdmpp}[breaklines=true]
+class Prescription
+
+instance variables
+  private medicaments:set of (Medicament);
+  private code:Types`String;
+  
+operations
+(*@
+\label{Prescription:8}
+@*)
+ public Prescription: Types`String ==> Prescription
+  Prescription(c) == (code := c; medicaments := {}; return self)
+ post code = c and medicaments = {};
+ 
+(*@
+\label{getCode:12}
+@*)
+ pure public getCode : () ==> Types`String
+  getCode() == (return code);
+  
+(*@
+\label{addMedicament:15}
+@*)
+ public addMedicament: Medicament ==> ()
+  addMedicament(m) == (medicaments := {m} union medicaments)
+ pre m not in set medicaments
+ post m in set medicaments;
+  
+(*@
+\label{removeMedicament:20}
+@*)
+ public removeMedicament: Medicament ==> ()
+  removeMedicament(m) == (medicaments := medicaments \ {m})
+ pre m in set medicaments
+ post m not in set medicaments;
+  
+(*@
+\label{getMedicaments:25}
+@*)
+ pure public getMedicaments: () ==> set of (Medicament)
+  getMedicaments() == (return medicaments);
+
+end Prescription
+\end{vdmpp}
+\bigskip
+\begin{longtable}{|l|r|r|r|}
+\hline
+Function or operation & Line & Coverage & Calls \\
+\hline
+\hline
+\hyperref[Prescription:8]{Prescription} & 8&100.0\% & 4 \\
+\hline
+\hyperref[addMedicament:15]{addMedicament} & 15&100.0\% & 1 \\
+\hline
+\hyperref[getCode:12]{getCode} & 12&100.0\% & 1 \\
+\hline
+\hyperref[getMedicaments:25]{getMedicaments} & 25&100.0\% & 5 \\
+\hline
+\hyperref[removeMedicament:20]{removeMedicament} & 20&100.0\% & 1 \\
+\hline
+\hline
+Prescription.vdmpp & & 100.0\% & 12 \\
+\hline
+\end{longtable}
+

@@ -1,0 +1,36 @@
+\begin{vdmpp}[breaklines=true]
+class Specialty
+
+instance variables
+  private name: Types`String;
+operations
+(*@
+\label{Specialty:6}
+@*)
+ public Specialty : Types`String ==> Specialty
+  Specialty(n) == (name := n; (*@\vdmnotcovered{return}@*) (*@\vdmnotcovered{self}@*))
+ post name (*@\vdmnotcovered{=}@*) (*@\vdmnotcovered{n}@*);
+  
+(*@
+\label{getName:10}
+@*)
+ pure public getName : () ==> Types`String
+  getName() == (*@\vdmnotcovered{(}@*)return (*@\vdmnotcovered{name}@*));
+
+end Specialty
+\end{vdmpp}
+\bigskip
+\begin{longtable}{|l|r|r|r|}
+\hline
+Function or operation & Line & Coverage & Calls \\
+\hline
+\hline
+\hyperref[Specialty:6]{Specialty} & 6&0.0\% & 0 \\
+\hline
+\hyperref[getName:10]{getName} & 10&0.0\% & 0 \\
+\hline
+\hline
+Specialty.vdmpp & & 0.0\% & 0 \\
+\hline
+\end{longtable}
+

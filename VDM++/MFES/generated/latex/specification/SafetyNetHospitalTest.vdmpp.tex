@@ -1,0 +1,163 @@
+\begin{vdmpp}[breaklines=true]
+class SafetyNetHospitalTest
+types
+instance variables
+ private safetyNet: SafetyNetHospital := (*@\vdmnotcovered{new}@*) (*@\vdmnotcovered{SafetyNetHospital}@*)();
+ 
+ private time1: Types`Time := (*@\vdmnotcovered{mk\_Types`Time}@*)((*@\vdmnotcovered{12}@*), (*@\vdmnotcovered{10}@*));
+ private date1: Types`Date := mk_Types`Date((*@\vdmnotcovered{2017}@*), (*@\vdmnotcovered{12}@*), (*@\vdmnotcovered{25}@*), (*@\vdmnotcovered{time1}@*));
+ private time2: Types`Time := (*@\vdmnotcovered{mk\_Types`Time}@*)((*@\vdmnotcovered{12}@*), (*@\vdmnotcovered{30}@*));
+ private date2: Types`Date := (*@\vdmnotcovered{mk\_Types`Date}@*)((*@\vdmnotcovered{2017}@*), (*@\vdmnotcovered{12}@*), (*@\vdmnotcovered{25}@*), (*@\vdmnotcovered{time2}@*));
+ private schedule: Schedule := new (*@\vdmnotcovered{Schedule}@*)(date1, (*@\vdmnotcovered{date2}@*));
+ 
+ private patient: Patient := new Patient("Rua 1 Maio", "Rui", "Andrade", "123456789", "223456111", (*@\vdmnotcovered{"0987654321"}@*));
+  private hospital: Hospital := new Hospital("Hospital das Camélias", "Rua de Cima", (*@\vdmnotcovered{safetyNet}@*));
+  private doctor: HealthProfessional := new HealthProfessional("Rua de Cima", (*@\vdmnotcovered{"Ana"}@*), "Marques", (*@\vdmnotcovered{"123432156"}@*), "921349076", "111111222", (*@\vdmnotcovered{<Doctor>}@*));
+  private doctor2: HealthProfessional := new HealthProfessional("Rua de Cima", "Anabela", "Marques", "123432157", "921349077", "111111223", (*@\vdmnotcovered{<Doctor>}@*));
+  private surgeon: HealthProfessional := new HealthProfessional("Rua 2", "Diogo", "Viana", "234512389", "921349134", (*@\vdmnotcovered{"111111232"}@*), (*@\vdmnotcovered{<Surgeon>}@*));
+  private secSurgeon: HealthProfessional := new HealthProfessional("Rua 2", "Diana", "Viana", "234512390", (*@\vdmnotcovered{"921349135"}@*), (*@\vdmnotcovered{"111111235"}@*), (*@\vdmnotcovered{<Surgeon>}@*));
+ private nurse: HealthProfessional := (*@\vdmnotcovered{new}@*) HealthProfessional("Rua de Baixo", "Lisete", "Antunes", (*@\vdmnotcovered{"123444654"}@*), (*@\vdmnotcovered{"921378643"}@*), (*@\vdmnotcovered{"111222333"}@*), (*@\vdmnotcovered{<Nurse>}@*));
+ private technician: HealthProfessional := new HealthProfessional("Rua de Baixo", (*@\vdmnotcovered{"Luís"}@*), (*@\vdmnotcovered{"Antunes"}@*), (*@\vdmnotcovered{"123444655"}@*), "921377654", (*@\vdmnotcovered{"111222345"}@*), (*@\vdmnotcovered{<Technician>}@*));
+
+ private appointment: Appointment := new (*@\vdmnotcovered{Appointment}@*)(doctor, schedule, patient, (*@\vdmnotcovered{hospital}@*));
+ private urgencies: Appointment := new Appointment(doctor2, <High>, schedule, patient, (*@\vdmnotcovered{hospital}@*));
+ private surgery: Surgery := new Surgery(surgeon, schedule, patient, (*@\vdmnotcovered{hospital}@*));
+ private treatment: Treatment := new (*@\vdmnotcovered{Treatment}@*)(technician, "Fisioterapia", schedule, patient, (*@\vdmnotcovered{hospital}@*));
+ 
+ private purpose: Types`Purpose := (*@\vdmnotcovered{<Training>}@*);
+ private training : Training := new Training(purpose, schedule, (*@\vdmnotcovered{doctor}@*));
+operations
+(*@
+\label{assertTrue:29}
+@*)
+ private assertTrue: bool ==> ()
+  assertTrue(cond) == (*@\vdmnotcovered{return}@*)
+ pre (*@\vdmnotcovered{cond}@*);
+ 
+(*@
+\label{testAddRemoveHospitals:33}
+@*)
+ public testAddRemoveHospitals: () ==> ()
+  testAddRemoveHospitals() == (*@\vdmnotcovered{(}@*)
+      dcl h1: Hospital, h2: Hospital, h3: Hospital;
+      h1 := (*@\vdmnotcovered{new}@*) (*@\vdmnotcovered{Hospital}@*)((*@\vdmnotcovered{"Hospital dos Lusíadas"}@*), (*@\vdmnotcovered{"Rua de Cima"}@*), (*@\vdmnotcovered{safetyNet}@*));
+      h2 := new (*@\vdmnotcovered{Hospital}@*)((*@\vdmnotcovered{"Hospital Novo"}@*), (*@\vdmnotcovered{"Rua 1 de Maio"}@*), (*@\vdmnotcovered{safetyNet}@*));
+      h3 := new Hospital("Hospital da Trofa", (*@\vdmnotcovered{"Rua da Trofa"}@*), (*@\vdmnotcovered{safetyNet}@*));
+      
+      (*@\vdmnotcovered{assertTrue}@*)((*@\vdmnotcovered{h1}@*).(*@\vdmnotcovered{getName}@*)() = (*@\vdmnotcovered{"Hospital dos Lusíadas"}@*));
+      (*@\vdmnotcovered{assertTrue}@*)((*@\vdmnotcovered{h2}@*).(*@\vdmnotcovered{getName}@*)() = (*@\vdmnotcovered{"Hospital Novo"}@*));
+      (*@\vdmnotcovered{assertTrue}@*)((*@\vdmnotcovered{h3}@*).(*@\vdmnotcovered{getName}@*)() = (*@\vdmnotcovered{"Hospital da Trofa"}@*));
+      
+      assertTrue((*@\vdmnotcovered{h1}@*).(*@\vdmnotcovered{getAddress}@*)() (*@\vdmnotcovered{=}@*) (*@\vdmnotcovered{"Rua de Cima"}@*));
+      (*@\vdmnotcovered{assertTrue}@*)((*@\vdmnotcovered{h2}@*).(*@\vdmnotcovered{getAddress}@*)() (*@\vdmnotcovered{=}@*) (*@\vdmnotcovered{"Rua 1 de Maio"}@*));
+      assertTrue((*@\vdmnotcovered{h3}@*).(*@\vdmnotcovered{getAddress}@*)() (*@\vdmnotcovered{=}@*) (*@\vdmnotcovered{"Rua da Trofa"}@*));
+      
+      assertTrue((*@\vdmnotcovered{card}@*) (*@\vdmnotcovered{safetyNet}@*).(*@\vdmnotcovered{getHospitals}@*)() (*@\vdmnotcovered{=}@*) (*@\vdmnotcovered{0}@*));
+      safetyNet.addHospital((*@\vdmnotcovered{h1}@*));
+      assertTrue(card safetyNet.getHospitals() = (*@\vdmnotcovered{1}@*));
+      safetyNet.addHospital((*@\vdmnotcovered{h2}@*));
+      (*@\vdmnotcovered{assertTrue}@*)((*@\vdmnotcovered{card}@*) safetyNet.(*@\vdmnotcovered{getHospitals}@*)() = (*@\vdmnotcovered{2}@*));
+      (*@\vdmnotcovered{safetyNet}@*).addHospital((*@\vdmnotcovered{h3}@*));
+      (*@\vdmnotcovered{assertTrue}@*)((*@\vdmnotcovered{card}@*) safetyNet.(*@\vdmnotcovered{getHospitals}@*)() = (*@\vdmnotcovered{3}@*));
+      (*@\vdmnotcovered{safetyNet}@*).removeHospital((*@\vdmnotcovered{h1}@*));
+      assertTrue(card safetyNet.(*@\vdmnotcovered{getHospitals}@*)() = (*@\vdmnotcovered{2}@*));
+      (*@\vdmnotcovered{safetyNet}@*).removeHospital((*@\vdmnotcovered{h2}@*));
+      assertTrue((*@\vdmnotcovered{card}@*) safetyNet.(*@\vdmnotcovered{getHospitals}@*)() = (*@\vdmnotcovered{1}@*));
+  );
+      
+(*@
+\label{testGetHospitals:61}
+@*)
+ public testGetHospitals: () ==> ()
+  testGetHospitals() == (*@\vdmnotcovered{(}@*)
+      dcl h1: Hospital, h2: Hospital;
+      (*@\vdmnotcovered{h1}@*) := (*@\vdmnotcovered{new}@*) (*@\vdmnotcovered{Hospital}@*)((*@\vdmnotcovered{"Hospital dos Lusíadas"}@*), (*@\vdmnotcovered{"Rua de Cima"}@*), (*@\vdmnotcovered{safetyNet}@*));
+      (*@\vdmnotcovered{h2}@*) := new Hospital((*@\vdmnotcovered{"Hospital Novo"}@*), (*@\vdmnotcovered{"Rua 1 de Maio"}@*), (*@\vdmnotcovered{safetyNet}@*));
+      (*@\vdmnotcovered{safetyNet}@*).addHospital((*@\vdmnotcovered{h1}@*));
+      (*@\vdmnotcovered{safetyNet}@*).addHospital((*@\vdmnotcovered{h2}@*));
+     
+      (*@\vdmnotcovered{assertTrue}@*)(card safetyNet.getHospitals() = (*@\vdmnotcovered{3}@*));
+      );
+      
+(*@
+\label{testAddRemoveTaskHospital:72}
+@*)
+ public testAddRemoveTaskHospital : () ==> ()
+  testAddRemoveTaskHospital() == (*@\vdmnotcovered{(}@*)
+      assertTrue(card (*@\vdmnotcovered{hospital}@*).(*@\vdmnotcovered{getTasksByType}@*)(<Appointment>) (*@\vdmnotcovered{=}@*) (*@\vdmnotcovered{1}@*));
+      assertTrue(card hospital.(*@\vdmnotcovered{getTasksByType}@*)((*@\vdmnotcovered{<Urgencies>}@*)) (*@\vdmnotcovered{=}@*) (*@\vdmnotcovered{1}@*));
+      (*@\vdmnotcovered{assertTrue}@*)((*@\vdmnotcovered{card}@*) hospital.getTasksByType((*@\vdmnotcovered{<Surgery>}@*)) (*@\vdmnotcovered{=}@*) (*@\vdmnotcovered{1}@*));
+      (*@\vdmnotcovered{assertTrue}@*)((*@\vdmnotcovered{card}@*) (*@\vdmnotcovered{hospital}@*).getTasksByType(<Other>) (*@\vdmnotcovered{=}@*) (*@\vdmnotcovered{1}@*));
+      
+      (*@\vdmnotcovered{hospital}@*).removeTask((*@\vdmnotcovered{appointment}@*));
+      assertTrue((*@\vdmnotcovered{card}@*) (*@\vdmnotcovered{hospital}@*).(*@\vdmnotcovered{getTasksByType}@*)(<Appointment>) = (*@\vdmnotcovered{0}@*));
+      
+      hospital.addTask((*@\vdmnotcovered{appointment}@*));
+      assertTrue((*@\vdmnotcovered{card}@*) (*@\vdmnotcovered{hospital}@*).getTasksByType(<Appointment>) (*@\vdmnotcovered{=}@*) (*@\vdmnotcovered{1}@*));   
+  );
+  
+(*@
+\label{testAddRemoveMedHospital:86}
+@*)
+  public testAddRemoveMedHospital : () ==> ()
+  testAddRemoveMedHospital() == (*@\vdmnotcovered{(}@*)
+      (*@\vdmnotcovered{assertTrue}@*)(card (*@\vdmnotcovered{hospital}@*).(*@\vdmnotcovered{getMedicalAssociatedByType}@*)(<Doctor>) (*@\vdmnotcovered{=}@*) (*@\vdmnotcovered{0}@*));
+      (*@\vdmnotcovered{assertTrue}@*)(card hospital.getMedicalAssociatedByType(<Surgeon>) (*@\vdmnotcovered{=}@*) (*@\vdmnotcovered{0}@*));
+      (*@\vdmnotcovered{assertTrue}@*)(card hospital.getMedicalAssociatedByType(<Nurse>) (*@\vdmnotcovered{=}@*) (*@\vdmnotcovered{0}@*));
+      (*@\vdmnotcovered{assertTrue}@*)(card hospital.(*@\vdmnotcovered{getMedicalAssociatedByType}@*)(<Technician>) = (*@\vdmnotcovered{0}@*));
+      
+      hospital.addMedAssociated((*@\vdmnotcovered{doctor}@*));
+      (*@\vdmnotcovered{assertTrue}@*)(card (*@\vdmnotcovered{hospital}@*).(*@\vdmnotcovered{getMedicalAssociatedByType}@*)(<Doctor>) (*@\vdmnotcovered{=}@*) (*@\vdmnotcovered{1}@*));
+      
+      hospital.removeMedAssociated((*@\vdmnotcovered{doctor}@*));
+      assertTrue(card (*@\vdmnotcovered{hospital}@*).getMedicalAssociatedByType(<Doctor>) (*@\vdmnotcovered{=}@*) (*@\vdmnotcovered{0}@*)); 
+      
+      hospital.addMedAssociated((*@\vdmnotcovered{doctor}@*));
+      (*@\vdmnotcovered{hospital}@*).addMedAssociated((*@\vdmnotcovered{surgeon}@*));
+      (*@\vdmnotcovered{hospital}@*).addMedAssociated((*@\vdmnotcovered{nurse}@*));
+      (*@\vdmnotcovered{hospital}@*).addMedAssociated((*@\vdmnotcovered{technician}@*));  
+  );
+  
+  --public testAddRemoveTrainingHospital : () ==> ()
+  --testAddRemoveTrainingHospital() == (
+  
+    -- add remove e get
+  --);
+  
+(*@
+\label{main:111}
+@*)
+  public static main: () ==> ()
+   main() == (*@\vdmnotcovered{(}@*)
+    dcl safetyTest: SafetyNetHospitalTest := (*@\vdmnotcovered{new}@*) (*@\vdmnotcovered{SafetyNetHospitalTest}@*)();
+    (*@\vdmnotcovered{safetyTest}@*).testAddRemoveHospitals();
+    (*@\vdmnotcovered{safetyTest}@*).testGetHospitals();
+    (*@\vdmnotcovered{safetyTest}@*).testAddRemoveTaskHospital();
+    (*@\vdmnotcovered{safetyTest}@*).testAddRemoveMedHospital();
+   );
+      
+end SafetyNetHospitalTest
+\end{vdmpp}
+\bigskip
+\begin{longtable}{|l|r|r|r|}
+\hline
+Function or operation & Line & Coverage & Calls \\
+\hline
+\hline
+\hyperref[assertTrue:29]{assertTrue} & 29&0.0\% & 0 \\
+\hline
+\hyperref[main:111]{main} & 111&0.0\% & 0 \\
+\hline
+\hyperref[testAddRemoveHospitals:33]{testAddRemoveHospitals} & 33&0.0\% & 0 \\
+\hline
+\hyperref[testAddRemoveMedHospital:86]{testAddRemoveMedHospital} & 86&0.0\% & 0 \\
+\hline
+\hyperref[testAddRemoveTaskHospital:72]{testAddRemoveTaskHospital} & 72&0.0\% & 0 \\
+\hline
+\hyperref[testGetHospitals:61]{testGetHospitals} & 61&0.0\% & 0 \\
+\hline
+\hline
+SafetyNetHospitalTest.vdmpp & & 0.0\% & 0 \\
+\hline
+\end{longtable}
+
