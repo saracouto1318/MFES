@@ -9,13 +9,13 @@ operations
 		SafetyNetHospital() == (hospitals := {}; return self)
 	post hospitals = {};
 		
-	pure public addHospital : Hospital ==> set of (Hospital)
-		addHospital(h) == (return hospitals union {h})
+	public addHospital : Hospital ==> ()
+		addHospital(h) == (hospitals := hospitals union {h})
 	pre h not in set hospitals
 	post h in set hospitals;
 	
-	pure public removeHospital : Hospital ==> set of (Hospital)
-		removeHospital(h) == (return hospitals \ {h})
+	public removeHospital : Hospital ==> ()
+		removeHospital(h) == (hospitals := hospitals \ {h})
 	pre h in set hospitals
 	post h not in set hospitals;
 	

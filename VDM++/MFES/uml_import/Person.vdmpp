@@ -6,12 +6,9 @@ instance variables
   protected lastName: Types`String;
   protected cc : Types`String;
   protected phoneNumber: Types`String;
- 
- 	inv address <> [] and firstName <> [] and lastName <> [] and cc <> [] and len cc = 9 and phoneNumber <> [] and len phoneNumber = 9;
 operations
 	public Person: Types`String * Types`String * Types`String * Types`String * Types`String ==> Person
 		Person(a, fn, ln, c, pn) == ( address := a; firstName := fn; lastName := ln; cc := c; phoneNumber := pn; return self)
-	pre a <> [] and fn <> [] and ln <> [] and c <> [] and pn <> []
 	post address = a and firstName = fn and lastName = ln and cc = c and phoneNumber = pn;
 		
 	pure public getCC : () ==> Types`String

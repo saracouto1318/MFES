@@ -8,12 +8,11 @@ instance variables
 	
 	inv card patients >= 0;
   inv card specialties < 5;
-	inv medicalNumber <> [];
 	inv type <> nil;
 operations
 	public HealthProfessional: Types`String * Types`String * Types`String * Types`String * Types`String * Types`String * Types`Type ==> HealthProfessional
 		HealthProfessional(a, fn, ln, c, pn, s, t) == (medicalNumber := s; type := t; specialties := {}; patients := {}; Person(a, fn, ln, c, pn))
-	pre s <> [] and t <> nil
+	pre t <> nil
 	post medicalNumber = s and type = t and specialties = {} and patients = {};
 	
 	pure public getMedicalNumber: () ==> Types`String
@@ -28,23 +27,23 @@ operations
 	pure public getType : () ==> Types`Type
 		getType() == (return type);
 		
-	pure public removeSpecialty: Specialty ==> set of(Specialty)
-		removeSpecialty(s) == (return specialties \ {s})
+	public removeSpecialty: Specialty ==> ()
+		removeSpecialty(s) == (specialties := specialties \ {s})
 	pre s in set specialties
 	post s not in set specialties;
 		
-	pure public addSpecialty: Specialty ==> set of(Specialty)
-		addSpecialty(s) == (return specialties union {s})
+	public addSpecialty: Specialty ==> ()
+		addSpecialty(s) == (specialties := specialties union {s})
 	pre s not in set specialties
 	post s in set specialties;
 	
-	public addPatient : Patient ==> set of(Patient)
-		addPatient(p) == (return patients union {p})
+	public addPatient : Patient ==> ()
+		addPatient(p) == (patients :=  patients union {p})
 	pre p not in set patients
 	post p in set patients;
 	
-	public removePatient : Patient ==> set of(Patient)
-		removePatient(p) == (return patients \ {p})
+	public removePatient : Patient ==> ()
+		removePatient(p) == (patients := patients \ {p})
 	pre p in set patients
 	post p not in set patients;
 

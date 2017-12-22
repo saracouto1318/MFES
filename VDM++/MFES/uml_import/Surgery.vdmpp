@@ -5,29 +5,28 @@ instance variables
   
   inv card secondaryDoctors >= 0;
   inv card other >= 0;
-  
 operations
 	public Surgery: HealthProfessional * Schedule * Patient * Hospital ==> Surgery
-		Surgery(s, sch, p, h) == (medicalAssoc := s ; other := {}; secondaryDoctors := {}; Task(sch, p, h, <Surgery>))
+		Surgery(s, sch, p, h) == (medicalAssoc := s ; other := {}; secondaryDoctors := {}; Task(s, sch, p, h, <Surgery>))
 	post medicalAssoc = s and other = {} and secondaryDoctors = {};
 	
-	pure public addSecondaryDoctor : HealthProfessional ==> set of (HealthProfessional)
-		addSecondaryDoctor(s) == (return secondaryDoctors union {s})
+	public addSecondaryDoctor : HealthProfessional ==> ()
+		addSecondaryDoctor(s) == (secondaryDoctors := secondaryDoctors union {s})
 	pre s <> medicalAssoc and s.getType() = <Surgeon> and  s not in set secondaryDoctors
 	post s in set secondaryDoctors;
 		
-	pure public removeSecondaryDoctor : HealthProfessional ==> set of (HealthProfessional)
-		removeSecondaryDoctor(s) == (return secondaryDoctors \ {s})
+	public removeSecondaryDoctor : HealthProfessional ==> ()
+		removeSecondaryDoctor(s) == (secondaryDoctors := secondaryDoctors \ {s})
 	pre s.getType() = <Surgeon> and s in set secondaryDoctors
 	post s not in set secondaryDoctors;
 		
-	pure public addOther : HealthProfessional ==> set of (HealthProfessional)
-		addOther(s) == (return other union {s})
+	public addOther : HealthProfessional ==> ()
+		addOther(s) == (other := other union {s})
 	pre s.getType() = <Nurse> and s not in set other
 	post s in set other;
 		
-	pure public removeOther : HealthProfessional ==> set of (HealthProfessional)
-		removeOther(s) == (return other \ {s})
+	public removeOther : HealthProfessional ==> ()
+		removeOther(s) == (other := other \ {s})
 	pre s.getType() = <Nurse> and s in set other
 	post s not in set other;
 		

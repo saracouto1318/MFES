@@ -6,16 +6,12 @@ instance variables
   inv med.getType() = <Nurse> or med.getType() = <Technician>;
 operations
 
-	public Treatment: Types`String * Schedule * Patient * Hospital ==> Treatment
-		Treatment(n, s, p, h) == (name := n; med := nil; Task(s, p, h, <Other>))
-	pre n <> []
-	post name = n;
+	public Treatment: HealthProfessional * Types`String * Schedule * Patient * Hospital ==> Treatment
+		Treatment(m, n, s, p, h) == (name := n; med := m; Task(m, s, p, h, <Other>))
+	post name = n and med = m;
 	
 	pure public getName: () ==> Types`String
 		getName() == (return name);
-		
-	public setMed: HealthProfessional ==> ()
-		setMed(t) == (med := t; return);
 	
 	pure public getMed : () ==> HealthProfessional
 		getMed() == (return med);

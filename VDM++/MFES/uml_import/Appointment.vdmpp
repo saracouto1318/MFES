@@ -9,11 +9,11 @@ instance variables
   inv medicalAssoc.getType() = <Doctor>;
 operations
 	public Appointment: HealthProfessional * Schedule * Patient * Hospital==> Appointment
-		Appointment(d, s, p, h) == (medicalAssoc := d; priority := <Medium>; prescriptions := {}; Task(s, p, h, <Appointment>))
+		Appointment(d, s, p, h) == (medicalAssoc := d; priority := <Medium>; prescriptions := {}; Task(d, s, p, h, <Appointment>))
 	post medicalAssoc = d and prescriptions = {} and priority = <Medium>;
 	
 	public Appointment: HealthProfessional * Types`Priority * Schedule * Patient * Hospital ==> Appointment
-		Appointment(d, p, s, pat, h) == (medicalAssoc := d; priority := p; prescriptions := {}; Task(s, pat, h, <Urgencies>))
+		Appointment(d, p, s, pat, h) == (medicalAssoc := d; priority := p; prescriptions := {}; Task(d, s, pat, h, <Urgencies>))
 	pre p <> nil
 	post medicalAssoc = d and prescriptions = {} and priority = p;
 
@@ -27,13 +27,13 @@ operations
   	setPriority(p) == (priority := p)
   pre type = <Urgencies>;
   
-  pure public addPrescription : Prescription ==> set of (Prescription)
-  	addPrescription(p) == (return prescriptions union {p})
+  public addPrescription : Prescription ==> ()
+  	addPrescription(p) == (prescriptions := prescriptions union {p})
   pre p not in set prescriptions
   post p in set prescriptions;
   															
-	pure public removePrescription : Prescription ==> set of (Prescription)
-  	removePrescription(p) == (return prescriptions \ {p})
+	public removePrescription : Prescription ==> ()
+  	removePrescription(p) == (prescriptions := prescriptions \ {p})
   pre p in set prescriptions
   post p not in set prescriptions;
   	

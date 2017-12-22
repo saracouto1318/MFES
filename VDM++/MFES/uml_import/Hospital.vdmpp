@@ -7,7 +7,6 @@ instance variables
   private trainings: set of(Training);
   private safetyNet: [SafetyNetHospital];
  
- inv name <> [] and address <> [];
  inv safetyNet <> nil; 
  inv card medicalAssociated >= 0;
  inv card tasks >= 0;
@@ -15,7 +14,7 @@ operations
 
 	public Hospital: Types`String * Types`String * SafetyNetHospital ==> Hospital
 		Hospital(n, a, s) == (name := n; address := a; safetyNet := s; medicalAssociated := {}; tasks := {}; trainings := {}; return self)
-	pre n <> [] and a <> [] and safetyNet <> nil
+	pre safetyNet <> nil
 	post name = n and address = a and safetyNet = s and medicalAssociated = {} and tasks = {} and trainings = {};
 	
 	pure public getName: () ==> Types`String
@@ -24,12 +23,12 @@ operations
 	pure public getAddress: () ==> Types`String
 		getAddress() == (return address);
 	
-	pure public addMedAssociated: HealthProfessional ==> set of (HealthProfessional)
-		addMedAssociated(d) == (return ({d} union medicalAssociated))
+	public addMedAssociated: HealthProfessional ==> ()
+		addMedAssociated(d) == (medicalAssociated := {d} union medicalAssociated)
 	pre d not in set medicalAssociated
 	post d in set medicalAssociated;
 		
-	pure public removeMedAssociated: HealthProfessional ==> set of (HealthProfessional)
+	public removeMedAssociated: HealthProfessional ==> ()
 		removeMedAssociated(d) == (
 																for all t in set tasks do
 																	if(d = t.getMedAssoc())
@@ -37,34 +36,33 @@ operations
 																for all t in set trainings do
 																	if(d = t.getMedAssoc())
 																		then removeTraining(t);
-																return (medicalAssociated \ {d}))
+																medicalAssociated := medicalAssociated \ {d})
 	pre d in set medicalAssociated
 	post d not in set medicalAssociated;
 	
-	public addTask: Task ==> set of (Task)
+	public addTask: Task ==> ()
 		addTask(d) == (
-										dcl patients : set of(Patient);
 										if(d.getPatient() not in set d.getMedAssoc().getPatients())
-											then patients := d.getMedAssoc().addPatient(d.getPatient());
-										return ({d} union tasks))
+											then d.getMedAssoc().addPatient(d.getPatient());
+										tasks := {d} union tasks)
 	pre d not in set tasks and forall t in set tasks & 
 		not (overlap(d.getSchedule(), t.getSchedule()) and not (d.getMedAssoc().getCC() <> t.getMedAssoc().getCC() and 
 				d.getPatient().getCC() <> t.getPatient().getCC() and d.getMedAssoc().getCC() <> t.getPatient().getCC()
 				and d.getPatient().getCC() <> t.getMedAssoc().getCC()))
 	post d in set tasks and d.getPatient() in set d.getMedAssoc().getPatients();
 		
-	pure public removeTask: Task ==> set of (Task)
-		removeTask(d) == (return (tasks \ {d}))
+	public removeTask: Task ==> ()
+		removeTask(d) == (tasks := tasks \ {d})
 	pre d in set tasks
 	post d not in set tasks;
 	
-	public addTraining: Training ==> set of (Training)
-		addTraining(d) == (return ({d} union trainings))
+	public addTraining: Training ==> ()
+		addTraining(d) == (trainings := {d} union trainings)
 	pre d not in set trainings and forall t in set trainings & not (overlap(d.getSchedule(), t.getSchedule()))
 	post d in set trainings;
 		
-	pure public removeTraining: Training ==> set of (Training)
-		removeTraining(d) == (return (trainings \ {d}))
+	public removeTraining: Training ==> ()
+		removeTraining(d) == (trainings := trainings \ {d})
 	pre d in set trainings
 	post d not in set trainings;
 	
