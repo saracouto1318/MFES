@@ -1,0 +1,85 @@
+\begin{vdmpp}[breaklines=true]
+class Task
+instance variables
+  protected schedule:[Schedule];
+  protected patient:[Patient];
+  protected hospital:[Hospital];
+  protected medicalAssoc:[HealthProfessional];
+  protected type : Types`TaskType;
+  
+  inv patient <> nil;
+  inv hospital <> nil;
+  inv type <> nil;
+operations
+(*@
+\label{Task:13}
+@*)
+ public Task: HealthProfessional * Schedule * Patient * Hospital * Types`TaskType ==> Task
+  Task(med, s, p, h, t) == (schedule := s; patient := p; hospital := h; type := t; medicalAssoc := med; 
+             h.addTask(self); return self)
+ pre med.getCC() <> p.getCC()
+ post schedule = s and patient = p and hospital = h and medicalAssoc = med;
+ 
+(*@
+\label{getSchedule:19}
+@*)
+ pure public getSchedule: () ==> Schedule
+  getSchedule() == (return schedule);
+  
+(*@
+\label{getPatient:22}
+@*)
+ pure public getPatient: () ==> Patient
+  getPatient() == (return patient);
+  
+(*@
+\label{getHospital:25}
+@*)
+ pure public getHospital: () ==> Hospital
+  getHospital() == (return hospital);
+  
+(*@
+\label{getType:28}
+@*)
+ pure public getType: () ==> Types`TaskType
+  getType() == (return type);
+  
+(*@
+\label{getMedAssoc:31}
+@*)
+ pure public getMedAssoc : () ==> HealthProfessional
+  getMedAssoc() == (return medicalAssoc);
+  
+(*@
+\label{setSchedule:34}
+@*)
+ public setSchedule : Schedule ==> ()
+  setSchedule(s) == (schedule := s);
+
+end Task
+\end{vdmpp}
+\bigskip
+\begin{longtable}{|l|r|r|r|}
+\hline
+Function or operation & Line & Coverage & Calls \\
+\hline
+\hline
+\hyperref[Task:13]{Task} & 13&100.0\% & 161 \\
+\hline
+\hyperref[getHospital:25]{getHospital} & 25&100.0\% & 9 \\
+\hline
+\hyperref[getMedAssoc:31]{getMedAssoc} & 31&100.0\% & 1091 \\
+\hline
+\hyperref[getPatient:22]{getPatient} & 22&100.0\% & 530 \\
+\hline
+\hyperref[getSchedule:19]{getSchedule} & 19&100.0\% & 969 \\
+\hline
+\hyperref[getType:28]{getType} & 28&100.0\% & 483 \\
+\hline
+\hyperref[setSchedule:34]{setSchedule} & 34&100.0\% & 9 \\
+\hline
+\hline
+Task.vdmpp & & 100.0\% & 3252 \\
+\hline
+\end{longtable}
+

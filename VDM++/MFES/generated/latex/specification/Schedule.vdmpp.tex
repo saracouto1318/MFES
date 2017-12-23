@@ -1,0 +1,74 @@
+\begin{vdmpp}[breaklines=true]
+class Schedule
+
+types
+instance variables
+  private startHour: Types`Date;
+  private endHour: Types`Date;
+  
+  inv compareDateLess(startHour, endHour) = true and startHour.year = endHour.year and startHour.month = endHour.month and startHour.day = endHour.day;
+operations 
+(*@
+\label{Schedule:10}
+@*)
+ public Schedule: Types`Date * Types`Date ==> Schedule
+  Schedule(d, d2) == (startHour := d; endHour := d2; return self)
+ pre compareDateLess(d, d2)
+ post startHour = d and endHour = d2;
+ 
+(*@
+\label{setSchedule:15}
+@*)
+ public setSchedule : Types`Date * Types`Date ==> ()
+  setSchedule(d1, d2) == (startHour := d1; endHour := d2;)
+ pre compareDateLess(d1, d2);
+  
+(*@
+\label{getScheduleStart:19}
+@*)
+ pure public getScheduleStart : () ==> Types`Date
+  getScheduleStart() == (return startHour);
+  
+(*@
+\label{getScheduleEnd:22}
+@*)
+ pure public getScheduleEnd : () ==> Types`Date
+  getScheduleEnd() == (return endHour);
+  
+(*@
+\label{compareDateLess:25}
+@*)
+ pure public compareDateLess : Types`Date * Types`Date ==> bool
+  compareDateLess(d1, d2) == (return (d1.year <= d2.year and d1.month <= d2.month and d1.day <= d2.day and d1.time.hour <= d2.time.hour and d1.time.min < d2.time.min));
+  
+(*@
+\label{compareDate:28}
+@*)
+ pure public compareDate : Types`Date * Types`Date ==> bool
+  compareDate(d1, d2) == (return (d1.year = d2.year and d1.month = d2.month and d1.day = d2.day and d1.time.hour = d2.time.hour and d1.time.min = d2.time.min));
+
+end Schedule
+\end{vdmpp}
+\bigskip
+\begin{longtable}{|l|r|r|r|}
+\hline
+Function or operation & Line & Coverage & Calls \\
+\hline
+\hline
+\hyperref[Schedule:10]{Schedule} & 10&100.0\% & 128 \\
+\hline
+\hyperref[compareDate:28]{compareDate} & 28&100.0\% & 343 \\
+\hline
+\hyperref[compareDateLess:25]{compareDateLess} & 25&100.0\% & 450 \\
+\hline
+\hyperref[getScheduleEnd:22]{getScheduleEnd} & 22&100.0\% & 314 \\
+\hline
+\hyperref[getScheduleStart:19]{getScheduleStart} & 19&100.0\% & 1156 \\
+\hline
+\hyperref[setSchedule:15]{setSchedule} & 15&100.0\% & 9 \\
+\hline
+\hline
+Schedule.vdmpp & & 100.0\% & 2400 \\
+\hline
+\end{longtable}
+

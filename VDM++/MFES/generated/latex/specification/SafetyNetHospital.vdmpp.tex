@@ -1,0 +1,128 @@
+\begin{vdmpp}[breaklines=true]
+class SafetyNetHospital
+instance variables
+ private hospitals: set of (Hospital);
+ 
+ inv card hospitals >= 0;
+operations
+
+(*@
+\label{SafetyNetHospital:8}
+@*)
+ public SafetyNetHospital : () ==> SafetyNetHospital
+  SafetyNetHospital() == (hospitals := {}; return self)
+ post hospitals = {};
+  
+(*@
+\label{addHospital:12}
+@*)
+ public addHospital : Hospital ==> ()
+  addHospital(h) == (hospitals := hospitals union {h})
+ pre h not in set hospitals
+ post h in set hospitals;
+ 
+(*@
+\label{removeHospital:17}
+@*)
+ public removeHospital : Hospital ==> ()
+  removeHospital(h) == (hospitals := hospitals \ {h})
+ pre h in set hospitals
+ post h not in set hospitals;
+ 
+(*@
+\label{getHospitals:22}
+@*)
+ pure public getHospitals : () ==> set of (Hospital)
+  getHospitals() == (return hospitals);
+ 
+ -- Mudar -- 
+(*@
+\label{getHospitalsMoreAppointments:26}
+@*)
+ pure public getHospitalsMoreAppointments : Types`TaskType ==> Hospital
+  getHospitalsMoreAppointments(t) == (
+                    dcl max: int, hosp: Hospital;
+                    max := -1;
+                    for all h in set hospitals do
+                     if((card h.getTasksByType(t)) > max)
+                      then (max := (card h.getTasksByType(t)); hosp := h);
+                    return hosp);
+ 
+(*@
+\label{getMedMoreHospitals:35}
+@*)
+ pure public getMedMoreHospitals : Types`Type ==> set of(HealthProfessional)
+  getMedMoreHospitals(t) == (
+                  dcl doctors: set of(HealthProfessional);
+                  doctors := {};
+                  for all h in set hospitals do (
+                   dcl med: set of (HealthProfessional), list: set of(Hospital);
+                   med := h.getMedicalAssociatedByType(t);
+                   
+                   list := hospitals \ {h};
+                   for all m in set med do(
+                    for all l in set list do
+                     if(m.getType() = t and m in set l.getMedicalAssociatedByType(t) and m not in set doctors)
+                      then doctors := doctors union {m};
+                   );
+                  );
+                  
+                  return doctors;
+                 );
+                               
+(*@
+\label{getMedAssociatedByPatient:54}
+@*)
+ pure public getMedAssociatedByPatient: Patient * Types`Type ==> map Hospital to set of(HealthProfessional)
+  getMedAssociatedByPatient(p, t) == (
+                     dcl maps: map Hospital to set of(HealthProfessional), med : set of (HealthProfessional);
+                     maps := { |-> };
+                     med := {};
+                     for all h in set hospitals do (
+                      for all m in set h.getMedicalAssociatedByType(t) do
+                       if(p in set m.getPatients())
+                        then med := med union {m};
+                       
+                      maps := maps munion {h |-> med};
+                      med := {};);
+                      return maps);
+ 
+(*@
+\label{getMedByHospital:68}
+@*)
+ pure public getMedByHospital: Types`Type ==> map Hospital to set of(HealthProfessional)
+  getMedByHospital(t) == (
+                     dcl maps: map Hospital to set of(HealthProfessional);
+                     maps := { |-> };
+                     for all h in set hospitals do
+                      maps := maps munion {h |-> h.getMedicalAssociatedByType(t)};
+                     return maps);
+end SafetyNetHospital
+\end{vdmpp}
+\bigskip
+\begin{longtable}{|l|r|r|r|}
+\hline
+Function or operation & Line & Coverage & Calls \\
+\hline
+\hline
+\hyperref[SafetyNetHospital:8]{SafetyNetHospital} & 8&100.0\% & 37 \\
+\hline
+\hyperref[addHospital:12]{addHospital} & 12&100.0\% & 64 \\
+\hline
+\hyperref[getHospitals:22]{getHospitals} & 22&100.0\% & 35 \\
+\hline
+\hyperref[getHospitalsMoreAppointments:26]{getHospitalsMoreAppointments} & 26&100.0\% & 32 \\
+\hline
+\hyperref[getMedAssociatedByPatient:54]{getMedAssociatedByPatient} & 54&100.0\% & 16 \\
+\hline
+\hyperref[getMedByHospital:68]{getMedByHospital} & 68&100.0\% & 16 \\
+\hline
+\hyperref[getMedMoreHospitals:35]{getMedMoreHospitals} & 35&100.0\% & 32 \\
+\hline
+\hyperref[removeHospital:17]{removeHospital} & 17&100.0\% & 36 \\
+\hline
+\hline
+SafetyNetHospital.vdmpp & & 100.0\% & 268 \\
+\hline
+\end{longtable}
+

@@ -1,0 +1,209 @@
+\begin{vdmpp}[breaklines=true]
+class TaskTest
+
+instance variables
+ private safetyNet: SafetyNetHospital := new SafetyNetHospital();
+ private time1: Types`Time := mk_Types`Time(12, 10);
+ private date1: Types`Date := mk_Types`Date(2017, 12, 25, time1);
+ private time2: Types`Time := mk_Types`Time(12, 30);
+ private date2: Types`Date := mk_Types`Date(2017, 12, 25, time2);
+ private schedule: Schedule := new Schedule(date1, date2);
+ 
+ private time3: Types`Time := mk_Types`Time(12, 15);
+ private date3: Types`Date := mk_Types`Date(2017, 12, 25, time3);
+ private time4: Types`Time := mk_Types`Time(12, 35);
+ private date4: Types`Date := mk_Types`Date(2017, 12, 25, time4);
+ private schedule2: Schedule := new Schedule(date3, date4);
+ 
+  private patient: Patient := new Patient("Rua 1 Maio", "Rui", "Andrade", "123456789", "223456111", "0987654321");
+  private hospital: Hospital := new Hospital("Hospital dos Lusíadas", "Rua de Cima", safetyNet);
+  private doctor: HealthProfessional := new HealthProfessional("Rua de Cima", "Ana", "Marques", "123432156", "921349076", "111111222", <Doctor>);
+  private doctor2: HealthProfessional := new HealthProfessional("Rua de Cima", "Anabela", "Marques", "123432157", "921349077", "111111223", <Doctor>);
+  private surgeon: HealthProfessional := new HealthProfessional("Rua 2", "Diogo", "Viana", "234512389", "921349134", "111111232", <Surgeon>);
+  private secSurgeon: HealthProfessional := new HealthProfessional("Rua 2", "Diana", "Viana", "234512390", "921349135", "111111235", <Surgeon>);
+ private nurse: HealthProfessional := new HealthProfessional("Rua de Baixo", "Lisete", "Antunes", "123444654", "921378643", "111222333", <Nurse>);
+ private technician: HealthProfessional := new HealthProfessional("Rua de Baixo", "Luís", "Antunes", "123444655", "921377654", "111222345", <Technician>);
+
+ private appointment: Appointment := new Appointment(doctor, schedule, patient, hospital);
+ private urgencies: Appointment := new Appointment(doctor2, <High>, schedule, patient, hospital);
+ private surgery: Surgery := new Surgery(surgeon, schedule, patient, hospital);
+ private treatment: Treatment := new Treatment(technician, "Fisioterapia", schedule, patient, hospital);
+ 
+ private medicament: Medicament := new Medicament("Brufen");
+ private prescription: Prescription := new Prescription("123");
+operations
+(*@
+\label{assertTrue:34}
+@*)
+ private assertTrue: bool ==> ()
+  assertTrue(cond) == return
+ pre cond;
+ 
+(*@
+\label{testGetsSetsTask:38}
+@*)
+ public testGetsSetsTask : () ==> ()
+  testGetsSetsTask() == (
+   assertTrue(appointment.getPatient().getCC() = "123456789");
+   assertTrue(appointment.getHospital().getName() = "Hospital dos Lusíadas");
+   
+   assertTrue(appointment.getType() = <Appointment>);
+   assertTrue(urgencies.getType() = <Urgencies>);
+   assertTrue(surgery.getType() = <Surgery>);
+   assertTrue(treatment.getType() = <Other>);
+  
+   assertTrue(appointment.getMedAssoc().getCC() = "123432156");
+   assertTrue(urgencies.getMedAssoc().getCC() = "123432157");
+   assertTrue(surgery.getMedAssoc().getCC() = "234512389");
+   
+   assertTrue(appointment.getSchedule().getScheduleStart().year = 2017);
+   assertTrue(appointment.getSchedule().getScheduleStart().month = 12);
+   assertTrue(appointment.getSchedule().getScheduleStart().day = 25);
+   assertTrue(appointment.getSchedule().getScheduleStart().time.hour = 12);
+   assertTrue(appointment.getSchedule().getScheduleStart().time.min = 10);
+   
+   assertTrue(appointment.getSchedule().getScheduleEnd().year = 2017);
+   assertTrue(appointment.getSchedule().getScheduleEnd().month = 12);
+   assertTrue(appointment.getSchedule().getScheduleEnd().day = 25);
+   assertTrue(appointment.getSchedule().getScheduleEnd().time.hour = 12);
+   assertTrue(appointment.getSchedule().getScheduleEnd().time.min = 30);
+   
+   assertTrue(appointment.getSchedule().compareDate(appointment.getSchedule().getScheduleStart(), appointment.getSchedule().getScheduleEnd()) = false);
+   assertTrue(appointment.getSchedule().compareDateLess(appointment.getSchedule().getScheduleStart(), appointment.getSchedule().getScheduleEnd()) = true);
+   
+   appointment.getSchedule().setSchedule(date3, date4);
+   assertTrue(appointment.getSchedule().getScheduleStart().year = 2017);
+   assertTrue(appointment.getSchedule().getScheduleStart().month = 12);
+   assertTrue(appointment.getSchedule().getScheduleStart().day = 25);
+   assertTrue(appointment.getSchedule().getScheduleStart().time.hour = 12);
+   assertTrue(appointment.getSchedule().getScheduleStart().time.min = 15);
+   
+   assertTrue(appointment.getSchedule().getScheduleEnd().year = 2017);
+   assertTrue(appointment.getSchedule().getScheduleEnd().month = 12);
+   assertTrue(appointment.getSchedule().getScheduleEnd().day = 25);
+   assertTrue(appointment.getSchedule().getScheduleEnd().time.hour = 12);
+   assertTrue(appointment.getSchedule().getScheduleEnd().time.min = 35);
+   
+   appointment.setSchedule(schedule2);
+   
+   assertTrue(appointment.getSchedule().getScheduleStart().year = 2017);
+   assertTrue(appointment.getSchedule().getScheduleStart().month = 12);
+   assertTrue(appointment.getSchedule().getScheduleStart().day = 25);
+   assertTrue(appointment.getSchedule().getScheduleStart().time.hour = 12);
+   assertTrue(appointment.getSchedule().getScheduleStart().time.min = 15);
+   
+   assertTrue(appointment.getSchedule().getScheduleEnd().year = 2017);
+   assertTrue(appointment.getSchedule().getScheduleEnd().month = 12);
+   assertTrue(appointment.getSchedule().getScheduleEnd().day = 25);
+   assertTrue(appointment.getSchedule().getScheduleEnd().time.hour = 12);
+   assertTrue(appointment.getSchedule().getScheduleEnd().time.min = 35);
+  );
+  
+(*@
+\label{testAppointment:95}
+@*)
+ public testAppointment : () ==> ()
+  testAppointment() == (
+   assertTrue(appointment.getPriority() = <Medium>);
+   assertTrue(urgencies.getPriority() = <High>);
+   
+   urgencies.setPriority(<Low>);
+   assertTrue(urgencies.getPriority() = <Low>);
+   
+   assertTrue(card appointment.getPrescriptions() = 0);
+   assertTrue(card urgencies.getPrescriptions() = 0);
+   
+   assertTrue(medicament.getName() = "Brufen");
+   assertTrue(prescription.getCode() = "123");
+   assertTrue(card prescription.getMedicaments() = 0);
+   
+   prescription.addMedicament(medicament);
+   assertTrue(card prescription.getMedicaments() = 1);
+   assertTrue(prescription.getMedicaments() = {medicament});
+   
+   prescription.removeMedicament(medicament);
+   assertTrue(card prescription.getMedicaments() = 0);
+   assertTrue(prescription.getMedicaments() = {});
+   
+   appointment.addPrescription(prescription);
+   urgencies.addPrescription(prescription);
+   assertTrue(card appointment.getPrescriptions() = 1);
+   assertTrue(card urgencies.getPrescriptions() = 1);
+   
+   appointment.removePrescription(prescription);
+   urgencies.removePrescription(prescription);
+   assertTrue(card appointment.getPrescriptions() = 0);
+   assertTrue(card urgencies.getPrescriptions() = 0);
+  );
+  
+(*@
+\label{testSurgery:129}
+@*)
+ public testSurgery: () ==> ()
+  testSurgery() == (
+   assertTrue(card surgery.getSurgeryPersons(<Surgeon>) = 0);
+   
+   surgery.addSecondaryDoctor(secSurgeon);
+   assertTrue(card surgery.getSurgeryPersons(<Surgeon>) = 1);
+  
+   surgery.removeSecondaryDoctor(secSurgeon);
+   assertTrue(card surgery.getSurgeryPersons(<Surgeon>) = 0);
+   
+   assertTrue(card surgery.getSurgeryPersons(<Nurse>) = 0);
+   surgery.addOther(nurse);
+   assertTrue(card surgery.getSurgeryPersons(<Nurse>) = 1);
+   
+   surgery.removeOther(nurse);
+   assertTrue(card surgery.getSurgeryPersons(<Nurse>) = 0);
+   
+   assertTrue(surgery.getMainDoctor().getCC() = "234512389");
+   surgery.setMainDoctor(secSurgeon);
+   assertTrue(surgery.getMainDoctor().getCC() = "234512390");
+ );
+ 
+(*@
+\label{testTreatment:151}
+@*)
+ public testTreatment: () ==> ()
+  testTreatment() == (
+   assertTrue(treatment.getName() = "Fisioterapia");
+   assertTrue(treatment.getMed().getCC() = "123444655");
+  );
+  
+(*@
+\label{main:157}
+@*)
+  public static main: () ==> ()
+   main() == (
+    dcl taskTest: TaskTest := new TaskTest();
+    taskTest.testGetsSetsTask();
+    taskTest.testAppointment();
+    taskTest.testSurgery();
+    taskTest.testTreatment();
+   );
+
+end TaskTest
+\end{vdmpp}
+\bigskip
+\begin{longtable}{|l|r|r|r|}
+\hline
+Function or operation & Line & Coverage & Calls \\
+\hline
+\hline
+\hyperref[assertTrue:34]{assertTrue} & 34&100.0\% & 603 \\
+\hline
+\hyperref[main:157]{main} & 157&100.0\% & 9 \\
+\hline
+\hyperref[testAppointment:95]{testAppointment} & 95&100.0\% & 9 \\
+\hline
+\hyperref[testGetsSetsTask:38]{testGetsSetsTask} & 38&100.0\% & 27 \\
+\hline
+\hyperref[testSurgery:129]{testSurgery} & 129&100.0\% & 9 \\
+\hline
+\hyperref[testTreatment:151]{testTreatment} & 151&100.0\% & 45 \\
+\hline
+\hline
+TaskTest.vdmpp & & 100.0\% & 702 \\
+\hline
+\end{longtable}
+

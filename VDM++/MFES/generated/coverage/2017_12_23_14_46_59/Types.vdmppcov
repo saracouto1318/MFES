@@ -1,0 +1,16 @@
+class Types
+types
+	public String = seq1 of (char);
+	public Priority = <High> | <Medium> | <Low>;
+	public Type = <Doctor> | <Surgeon> | <Nurse> | <Technician>;
+	public TaskType = <Appointment> | <Urgencies> | <Surgery> | <Other>;
+	public Purpose = <Training> | <AddSkills>;
+	public Time :: hour : nat
+									min: nat
+	inv t == t.hour >= 0 and t.hour < 24 and t.min >= 0 and t.min < 60;
+	public Date :: 	year: nat1
+									month: nat1
+									day: nat1
+									time: Time
+	inv d == d.month <= 12 and d.day <= 31;
+end Types

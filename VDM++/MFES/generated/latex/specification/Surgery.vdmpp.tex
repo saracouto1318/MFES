@@ -1,0 +1,101 @@
+\begin{vdmpp}[breaklines=true]
+class Surgery is subclass of Task
+instance variables
+  private secondaryDoctors:set of (HealthProfessional);
+  private other:set of (HealthProfessional);
+  
+  inv card secondaryDoctors >= 0;
+  inv card other >= 0;
+operations
+(*@
+\label{Surgery:9}
+@*)
+ public Surgery: HealthProfessional * Schedule * Patient * Hospital ==> Surgery
+  Surgery(s, sch, p, h) == (medicalAssoc := s ; other := {}; secondaryDoctors := {}; Task(s, sch, p, h, <Surgery>))
+ post medicalAssoc = s and other = {} and secondaryDoctors = {};
+ 
+(*@
+\label{addSecondaryDoctor:13}
+@*)
+ public addSecondaryDoctor : HealthProfessional ==> ()
+  addSecondaryDoctor(s) == (secondaryDoctors := secondaryDoctors union {s})
+ pre s <> medicalAssoc and s.getType() = <Surgeon> and  s not in set secondaryDoctors
+ post s in set secondaryDoctors;
+  
+(*@
+\label{removeSecondaryDoctor:18}
+@*)
+ public removeSecondaryDoctor : HealthProfessional ==> ()
+  removeSecondaryDoctor(s) == (secondaryDoctors := secondaryDoctors \ {s})
+ pre s.getType() = <Surgeon> and s in set secondaryDoctors
+ post s not in set secondaryDoctors;
+  
+(*@
+\label{addOther:23}
+@*)
+ public addOther : HealthProfessional ==> ()
+  addOther(s) == (other := other union {s})
+ pre s.getType() = <Nurse> and s not in set other
+ post s in set other;
+  
+(*@
+\label{removeOther:28}
+@*)
+ public removeOther : HealthProfessional ==> ()
+  removeOther(s) == (other := other \ {s})
+ pre s.getType() = <Nurse> and s in set other
+ post s not in set other;
+  
+(*@
+\label{setMainDoctor:33}
+@*)
+ public setMainDoctor : HealthProfessional ==> ()
+  setMainDoctor(s) == (medicalAssoc := s)
+ pre s.getType() = <Surgeon> and s not in set secondaryDoctors;
+ 
+(*@
+\label{getMainDoctor:37}
+@*)
+ public getMainDoctor : () ==> HealthProfessional
+  getMainDoctor() == (return medicalAssoc);
+
+(*@
+\label{getSurgeryPersons:40}
+@*)
+ public getSurgeryPersons : Types`Type ==> set of (HealthProfessional)
+  getSurgeryPersons(t) == (
+               dcl med : set of (HealthProfessional);
+               if(t = <Surgeon>)
+                then med := secondaryDoctors
+               else
+                med := other;
+               return med);
+end Surgery
+\end{vdmpp}
+\bigskip
+\begin{longtable}{|l|r|r|r|}
+\hline
+Function or operation & Line & Coverage & Calls \\
+\hline
+\hline
+\hyperref[Surgery:9]{Surgery} & 9&100.0\% & 36 \\
+\hline
+\hyperref[addOther:23]{addOther} & 23&100.0\% & 9 \\
+\hline
+\hyperref[addSecondaryDoctor:13]{addSecondaryDoctor} & 13&100.0\% & 9 \\
+\hline
+\hyperref[getMainDoctor:37]{getMainDoctor} & 37&100.0\% & 18 \\
+\hline
+\hyperref[getSurgeryPersons:40]{getSurgeryPersons} & 40&100.0\% & 54 \\
+\hline
+\hyperref[removeOther:28]{removeOther} & 28&100.0\% & 9 \\
+\hline
+\hyperref[removeSecondaryDoctor:18]{removeSecondaryDoctor} & 18&100.0\% & 9 \\
+\hline
+\hyperref[setMainDoctor:33]{setMainDoctor} & 33&100.0\% & 9 \\
+\hline
+\hline
+Surgery.vdmpp & & 100.0\% & 153 \\
+\hline
+\end{longtable}
+
