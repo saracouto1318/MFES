@@ -47,9 +47,8 @@ operations
 											then d.getMedAssoc().addPatient(d.getPatient());
 										tasks := {d} union tasks)
 	pre d not in set tasks and forall t in set tasks & 
-		not (overlap(d.getSchedule(), t.getSchedule()) and d.getMedAssoc().getCC() = t.getMedAssoc().getCC()
-		and d.getPatient().getCC() = t.getPatient().getCC() and d.getMedAssoc().getCC() = t.getPatient().getCC() and 
-		d.getPatient().getCC() = t.getMedAssoc().getCC())
+		not (overlap(d.getSchedule(), t.getSchedule()) and d.getMedAssoc().getCC() = t.getMedAssoc().getCC() 
+		and d.getPatient().getCC() = t.getPatient().getCC() and d.getMedAssoc().getCC() = t.getPatient().getCC() and d.getPatient().getCC() = t.getMedAssoc().getCC())
 	post d in set tasks and d.getPatient() in set d.getMedAssoc().getPatients();
 		
 	public removeTask: Task ==> ()

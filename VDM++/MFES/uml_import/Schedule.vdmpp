@@ -23,9 +23,9 @@ operations
 		getScheduleEnd() == (return endHour);
 		
 	pure public compareDateLess : Types`Date * Types`Date ==> bool
-		compareDateLess(d1, d2) == (return (d1.time.hour <= d2.time.hour and d1.time.min < d2.time.min));
+		compareDateLess(d1, d2) == (return (d1.year <= d2.year and d1.month <= d2.month and d1.day <= d2.day and d1.time.hour <= d2.time.hour and d1.time.min < d2.time.min));
 		
 	pure public compareDate : Types`Date * Types`Date ==> bool
-		compareDate(d1, d2) == (return (d1.time.hour = d2.time.hour and d1.time.min = d2.time.min));
+		compareDate(d1, d2) == (return (d1.year = d2.year and d1.month = d2.month and d1.day = d2.day and d1.time.hour = d2.time.hour and d1.time.min = d2.time.min));
 
 end Schedule

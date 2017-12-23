@@ -9,6 +9,18 @@ instance variables
 	private date2: Types`Date := mk_Types`Date(2017, 12, 25, time2);
 	private schedule: Schedule := new Schedule(date1, date2);
 	
+	private time3: Types`Time := mk_Types`Time(12, 15);
+	private date3: Types`Date := mk_Types`Date(2017, 12, 25, time3);
+	private time4: Types`Time := mk_Types`Time(12, 35);
+	private date4: Types`Date := mk_Types`Date(2017, 12, 25, time4);
+	private schedule2: Schedule := new Schedule(date3, date4);
+	
+	private time5: Types`Time := mk_Types`Time(12, 40);
+	private date5: Types`Date := mk_Types`Date(2017, 12, 25, time5);
+	private time6: Types`Time := mk_Types`Time(12, 50);
+	private date6: Types`Date := mk_Types`Date(2017, 12, 25, time6);
+	private schedule3: Schedule := new Schedule(date5, date6);
+	
 	private patient: Patient := new Patient("Rua 1 Maio", "Rui", "Andrade", "123456789", "223456111", "0987654321");
   private hospital: Hospital := new Hospital("Hospital das Camélias", "Rua de Cima", safetyNet);
   private doctor: HealthProfessional := new HealthProfessional("Rua de Cima", "Ana", "Marques", "123432156", "921349076", "111111222", <Doctor>);
@@ -75,6 +87,7 @@ operations
 						
 						hospital.addMedAssociated(doctor);
 						assertTrue(card hospital.getMedicalAssociatedByType(<Doctor>) = 1);
+						hospital.addTraining(training);
 						
 						hospital.removeMedAssociated(doctor);
 						assertTrue(card hospital.getMedicalAssociatedByType(<Doctor>) = 0);	
@@ -96,6 +109,12 @@ operations
 				hospital.removeTraining(training);
 				assertTrue(card hospital.getTrainingsByType(<Training>) = 0);
 		);
+		
+		public testOverlap : () ==> ()
+			testOverlap() == (
+				assertTrue(hospital.overlap(schedule, schedule2));
+				assertTrue(hospital.overlap(schedule, schedule3) = false);
+			);
 		
 		public testGetHospitalsMoreAppointments : () ==> ()
 			testGetHospitalsMoreAppointments() == (	
@@ -146,6 +165,7 @@ operations
  			safetyNetTest.testAddRemoveTaskHospital();
  			safetyNetTest.testAddRemoveTrainingHospital();
  			safetyNetTest.testAddRemoveMedHospital();
+ 			safetyNetTest.testOverlap();
  			safetyNetTest.testGetHospitalsMoreAppointments();
  			safetyNetTest.testGetMedMoreHospitals();
  			safetyNetTest.testGetMedAssociatedByPatient();
