@@ -1,0 +1,31 @@
+class RunTests
+
+operations
+	public static main: () ==> ()
+ 		main() == (
+ 			dcl taskTest: TaskTest := new TaskTest(), personTest: PersonTest := new PersonTest(), 
+ 				trainingTest: TrainingTest := new TrainingTest(), safetyNetTest: SafetyNetHospitalTest := new SafetyNetHospitalTest();
+ 			
+ 			personTest.testGetInformation();
+ 			personTest.testAddRemovePatient();
+ 			personTest.testAddRemoveSpecialty();
+ 			
+ 			taskTest.testGetsSetsTask();
+ 			taskTest.testAppointment();
+ 			taskTest.testSurgery();
+ 			taskTest.testTreatment();
+ 			
+ 			trainingTest.testGetsSets();
+ 			
+ 			safetyNetTest.testAddRemoveHospitals();
+ 			safetyNetTest.testAddRemoveTaskHospital();
+ 			safetyNetTest.testAddRemoveMedHospital();
+ 			safetyNetTest.testGetHospitalsMoreAppointments();
+ 			safetyNetTest.testGetMedMoreHospitals();
+ 			safetyNetTest.testGetMedAssociatedByPatient();
+ 			safetyNetTest.testGetMedByHospital();
+ 			safetyNetTest.testGetTasksByHospital();
+ 			safetyNetTest.testGetTrainingsByHospital();
+ 			safetyNetTest.testGetTasksPatient();
+ 		);
+end RunTests

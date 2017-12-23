@@ -107,6 +107,9 @@ operations
    assertTrue(appointment.getPriority() = <Medium>);
    assertTrue(urgencies.getPriority() = <High>);
    
+   urgencies.setPriority(<Low>);
+   assertTrue(urgencies.getPriority() = <Low>);
+   
    assertTrue(card appointment.getPrescriptions() = 0);
    assertTrue(card urgencies.getPrescriptions() = 0);
    
@@ -130,12 +133,12 @@ operations
    appointment.removePrescription(prescription);
    urgencies.removePrescription(prescription);
    assertTrue(card appointment.getPrescriptions() = 0);
-   assertTrue(card urgencies.getPrescriptions() = 0);
-  );
-  
 (*@
 \label{testSurgery:126}
 @*)
+   assertTrue(card urgencies.getPrescriptions() = 0);
+  );
+  
  public testSurgery: () ==> ()
   testSurgery() == (
    assertTrue(card surgery.getSurgeryPersons(<Surgeon>) = 0);
@@ -155,21 +158,21 @@ operations
    
    assertTrue(surgery.getMainDoctor().getCC() = "234512389");
    surgery.setMainDoctor(secSurgeon);
-   assertTrue(surgery.getMainDoctor().getCC() = "234512390");
- );
- 
 (*@
 \label{testTreatment:148}
 @*)
+   assertTrue(surgery.getMainDoctor().getCC() = "234512390");
+ );
+ 
  public testTreatment: () ==> ()
   testTreatment() == (
    assertTrue(treatment.getName() = "Fisioterapia");
-   assertTrue(treatment.getMed().getCC() = "123444655");
-  );
-  
 (*@
 \label{main:154}
 @*)
+   assertTrue(treatment.getMed().getCC() = "123444655");
+  );
+  
   public static main: () ==> ()
    main() == (
     dcl taskTest: TaskTest := new TaskTest();
@@ -187,20 +190,20 @@ end TaskTest
 Function or operation & Line & Coverage & Calls \\
 \hline
 \hline
-\hyperref[assertTrue:34]{assertTrue} & 34&100.0\% & 107 \\
+\hyperref[assertTrue:34]{assertTrue} & 34&100.0\% & 1522 \\
 \hline
-\hyperref[main:154]{main} & 154&100.0\% & 1 \\
+\hyperref[main:154]{main} & 154&100.0\% & 4 \\
 \hline
-\hyperref[testAppointment:95]{testAppointment} & 95&100.0\% & 3 \\
+\hyperref[testAppointment:95]{testAppointment} & 95&100.0\% & 4 \\
 \hline
-\hyperref[testGetsSetsTask:38]{testGetsSetsTask} & 38&100.0\% & 6 \\
+\hyperref[testGetsSetsTask:38]{testGetsSetsTask} & 38&100.0\% & 69 \\
 \hline
-\hyperref[testSurgery:126]{testSurgery} & 126&100.0\% & 3 \\
+\hyperref[testSurgery:126]{testSurgery} & 126&100.0\% & 4 \\
 \hline
-\hyperref[testTreatment:148]{testTreatment} & 148&100.0\% & 3 \\
+\hyperref[testTreatment:148]{testTreatment} & 148&100.0\% & 20 \\
 \hline
 \hline
-TaskTest.vdmpp & & 100.0\% & 123 \\
+TaskTest.vdmpp & & 100.0\% & 1623 \\
 \hline
 \end{longtable}
 

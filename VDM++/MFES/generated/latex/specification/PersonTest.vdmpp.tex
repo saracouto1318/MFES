@@ -19,8 +19,8 @@ operations
 @*)
  public testGetInformation: () ==> ()
   testGetInformation() == (
-   (*@\vdmnotcovered{assertTrue}@*)(patient.getHealthNumber() = (*@\vdmnotcovered{"0987654321"}@*));
-   assertTrue((*@\vdmnotcovered{patient}@*).(*@\vdmnotcovered{getCC}@*)() = (*@\vdmnotcovered{"123456789"}@*));
+   assertTrue(patient.getHealthNumber() = "0987654321");
+   assertTrue(patient.getCC() = "123456789");
    assertTrue(patient.getInfo() = "Name: " ^ "Rui" ^ " " ^ "Andrade" ^ "\nAddress: " ^ "Rua 1 Maio" ^ "\nPhone Number: " ^ "223456111" ^ "\nCC: " ^ "123456789");
    
    assertTrue(doctor.getMedicalNumber() = "111111222");
@@ -60,33 +60,33 @@ operations
    assertTrue(card surgeon.getPatients() = 0);
    
    surgeon.addPatient(patient);
-   assertTrue(card surgeon.getPatients() (*@\vdmnotcovered{=}@*) (*@\vdmnotcovered{1}@*));
+   assertTrue(card surgeon.getPatients() = 1);
   );
   
 (*@
 \label{testAddRemoveSpecialty:56}
 @*)
  public testAddRemoveSpecialty : () ==> ()
-  testAddRemoveSpecialty() == (*@\vdmnotcovered{(}@*)
-   dcl specialty1: Specialty := new Specialty("General"), specialty2: Specialty := new (*@\vdmnotcovered{Specialty}@*)((*@\vdmnotcovered{"Cardio"}@*));
+  testAddRemoveSpecialty() == (
+   dcl specialty1: Specialty := new Specialty("General"), specialty2: Specialty := new Specialty("Cardio");
    
-   assertTrue(card doctor.getSpecialties() = (*@\vdmnotcovered{0}@*));
+   assertTrue(card doctor.getSpecialties() = 0);
    
-   doctor.addSpecialty((*@\vdmnotcovered{specialty1}@*));
-   assertTrue(specialty1.getName() = (*@\vdmnotcovered{"General"}@*));
+   doctor.addSpecialty(specialty1);
+   assertTrue(specialty1.getName() = "General");
    
-   assertTrue(card (*@\vdmnotcovered{doctor}@*).(*@\vdmnotcovered{getSpecialties}@*)() (*@\vdmnotcovered{=}@*) (*@\vdmnotcovered{1}@*));
-   assertTrue(doctor.getSpecialties() (*@\vdmnotcovered{=}@*) {(*@\vdmnotcovered{specialty1}@*)});
+   assertTrue(card doctor.getSpecialties() = 1);
+   assertTrue(doctor.getSpecialties() = {specialty1});
    
-   doctor.addSpecialty((*@\vdmnotcovered{specialty2}@*));
-   (*@\vdmnotcovered{assertTrue}@*)(specialty2.(*@\vdmnotcovered{getName}@*)() (*@\vdmnotcovered{=}@*) (*@\vdmnotcovered{"Cardio"}@*));
+   doctor.addSpecialty(specialty2);
+   assertTrue(specialty2.getName() = "Cardio");
    
-   assertTrue(card doctor.(*@\vdmnotcovered{getSpecialties}@*)() (*@\vdmnotcovered{=}@*) (*@\vdmnotcovered{2}@*));
-   assertTrue(doctor.getSpecialties() (*@\vdmnotcovered{=}@*) {specialty1, (*@\vdmnotcovered{specialty2}@*)});
+   assertTrue(card doctor.getSpecialties() = 2);
+   assertTrue(doctor.getSpecialties() = {specialty1, specialty2});
    
-   doctor.removeSpecialty((*@\vdmnotcovered{specialty1}@*));
-   assertTrue(card doctor.(*@\vdmnotcovered{getSpecialties}@*)() = (*@\vdmnotcovered{1}@*));
-   (*@\vdmnotcovered{assertTrue}@*)(doctor.getSpecialties() (*@\vdmnotcovered{=}@*) {(*@\vdmnotcovered{specialty2}@*)});
+   doctor.removeSpecialty(specialty1);
+   assertTrue(card doctor.getSpecialties() = 1);
+   assertTrue(doctor.getSpecialties() = {specialty2});
   );
   
 (*@
@@ -94,10 +94,10 @@ operations
 @*)
  public static main: () ==> ()
    main() == (
-    dcl personTest: PersonTest := (*@\vdmnotcovered{new}@*) (*@\vdmnotcovered{PersonTest}@*)();
-    (*@\vdmnotcovered{personTest}@*).testGetInformation();
-    (*@\vdmnotcovered{personTest}@*).testAddRemovePatient();
-    (*@\vdmnotcovered{personTest}@*).testAddRemoveSpecialty();
+    dcl personTest: PersonTest := new PersonTest();
+    personTest.testGetInformation();
+    personTest.testAddRemovePatient();
+    personTest.testAddRemoveSpecialty();
    );
   
 end PersonTest
@@ -108,18 +108,18 @@ end PersonTest
 Function or operation & Line & Coverage & Calls \\
 \hline
 \hline
-\hyperref[assertTrue:9]{assertTrue} & 9&100.0\% & 21 \\
+\hyperref[assertTrue:9]{assertTrue} & 9&100.0\% & 759 \\
 \hline
-\hyperref[main:79]{main} & 79&16.6\% & 0 \\
+\hyperref[main:79]{main} & 79&100.0\% & 5 \\
 \hline
-\hyperref[testAddRemovePatient:40]{testAddRemovePatient} & 40&89.1\% & 1 \\
+\hyperref[testAddRemovePatient:40]{testAddRemovePatient} & 40&100.0\% & 23 \\
 \hline
-\hyperref[testAddRemoveSpecialty:56]{testAddRemoveSpecialty} & 56&0.0\% & 0 \\
+\hyperref[testAddRemoveSpecialty:56]{testAddRemoveSpecialty} & 56&100.0\% & 23 \\
 \hline
-\hyperref[testGetInformation:13]{testGetInformation} & 13&94.6\% & 1 \\
+\hyperref[testGetInformation:13]{testGetInformation} & 13&100.0\% & 23 \\
 \hline
 \hline
-PersonTest.vdmpp & & 75.0\% & 23 \\
+PersonTest.vdmpp & & 100.0\% & 833 \\
 \hline
 \end{longtable}
 

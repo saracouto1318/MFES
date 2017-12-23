@@ -1,0 +1,105 @@
+class Hospital
+instance variables
+  private medicalAssociated: set of (HealthProfessional);
+  private name: Types`String;
+  private address: Types`String;
+  private tasks: set of(Task);
+  private trainings: set of(Training);
+  private safetyNet: [SafetyNetHospital];
+ 
+ inv safetyNet <> nil; 
+ inv card medicalAssociated >= 0;
+ inv card tasks >= 0;
+operations
+
+	public Hospital: Types`String * Types`String * SafetyNetHospital ==> Hospital
+		Hospital(n, a, s) == (name := n; address := a; safetyNet := s; medicalAssociated := {}; tasks := {}; trainings := {}; return self)
+	pre safetyNet <> nil
+	post name = n and address = a and safetyNet = s and medicalAssociated = {} and tasks = {} and trainings = {};
+	
+	pure public getName: () ==> Types`String
+		getName() == (return name);
+	
+	pure public getAddress: () ==> Types`String
+		getAddress() == (return address);
+	
+	public addMedAssociated: HealthProfessional ==> ()
+		addMedAssociated(d) == (medicalAssociated := {d} union medicalAssociated)
+	pre d not in set medicalAssociated
+	post d in set medicalAssociated;
+		
+	public removeMedAssociated: HealthProfessional ==> ()
+		removeMedAssociated(d) == (
+																for all t in set tasks do
+																	if(d = t.getMedAssoc())
+																		then removeTask(t);
+																for all t in set trainings do
+																	if(d = t.getMedAssoc())
+																		then removeTraining(t);
+																medicalAssociated := medicalAssociated \ {d})
+	pre d in set medicalAssociated
+	post d not in set medicalAssociated;
+	
+	public addTask: Task ==> ()
+		addTask(d) == (
+										if(d.getPatient() not in set d.getMedAssoc().getPatients())
+											then d.getMedAssoc().addPatient(d.getPatient());
+										tasks := {d} union tasks)
+	pre d not in set tasks and forall t in set tasks & 
+		not (overlap(d.getSchedule(), t.getSchedule()) and d.getMedAssoc().getCC() = t.getMedAssoc().getCC()
+		and d.getPatient().getCC() = t.getPatient().getCC() and d.getMedAssoc().getCC() = t.getPatient().getCC() and 
+		d.getPatient().getCC() = t.getMedAssoc().getCC())
+	post d in set tasks and d.getPatient() in set d.getMedAssoc().getPatients();
+		
+	public removeTask: Task ==> ()
+		removeTask(d) == (tasks := tasks \ {d})
+	pre d in set tasks
+	post d not in set tasks;
+	
+	public addTraining: Training ==> ()
+		addTraining(d) == (trainings := {d} union trainings)
+	pre d not in set trainings and forall t in set trainings & not (overlap(d.getSchedule(), t.getSchedule()))
+	post d in set trainings;
+		
+	public removeTraining: Training ==> ()
+		removeTraining(d) == (trainings := trainings \ {d})
+	pre d in set trainings
+	post d not in set trainings;
+	
+	pure public getTasksByType: Types`TaskType ==> set of (Task)
+		getTasksByType(s) == (
+														dcl tasksTotal: set of (Task);
+														for all t in set tasks do
+															if(t.getType() = s)
+																then tasksTotal := tasksTotal union {t};
+																
+														return tasksTotal);
+														
+	pure public getTrainingsByType: Types`Purpose ==> set of (Training)
+		getTrainingsByType(s) == (
+														dcl train: set of (Training);
+														for all t in set trainings do
+															if(t.getPurpose() = s)
+																then train := train union {t};
+																
+														return train);
+
+	pure public getMedicalAssociatedByType: Types`Type ==> set of (HealthProfessional)
+		getMedicalAssociatedByType(type) == (
+											dcl med: set of(HealthProfessional);
+											for all d in set medicalAssociated do
+												if(d.getType() = type)
+													then med := med union {d};
+												
+											return med);
+											
+	pure public overlap: Schedule * Schedule ==> bool
+		overlap(t1, t2) == (
+													if(t1.compareDate(t1.getScheduleStart(), t2.getScheduleStart()) 
+														or (not t1.compareDateLess(t1.getScheduleStart(), t2.getScheduleStart()) 
+														or not t1.compareDateLess(t1.getScheduleEnd(), t2.getScheduleStart())))
+														then return true
+													else
+														return false);
+														
+end Hospital

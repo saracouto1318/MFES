@@ -29,7 +29,7 @@ operations
 \label{getSpecialties:21}
 @*)
  pure public getSpecialties: () ==> set of (Specialty)
-  getSpecialties() == (return (*@\vdmnotcovered{specialties}@*));
+  getSpecialties() == (return specialties);
  
 (*@
 \label{getPatients:24}
@@ -47,17 +47,17 @@ operations
 \label{removeSpecialty:30}
 @*)
  public removeSpecialty: Specialty ==> ()
-  removeSpecialty(s) == (specialties := (*@\vdmnotcovered{specialties}@*) (*@\vdmnotcovered{\textbackslash }@*) {(*@\vdmnotcovered{s}@*)})
- pre s in set (*@\vdmnotcovered{specialties}@*)
- post s not in set (*@\vdmnotcovered{specialties}@*);
+  removeSpecialty(s) == (specialties := specialties \ {s})
+ pre s in set specialties
+ post s not in set specialties;
   
 (*@
 \label{addSpecialty:35}
 @*)
  public addSpecialty: Specialty ==> ()
-  addSpecialty(s) == (specialties := specialties union {(*@\vdmnotcovered{s}@*)})
- pre s not in set (*@\vdmnotcovered{specialties}@*)
- post (*@\vdmnotcovered{s}@*) (*@\vdmnotcovered{in}@*) set (*@\vdmnotcovered{specialties}@*);
+  addSpecialty(s) == (specialties := specialties union {s})
+ pre s not in set specialties
+ post s in set specialties;
  
 (*@
 \label{addPatient:40}
@@ -83,26 +83,26 @@ end HealthProfessional
 Function or operation & Line & Coverage & Calls \\
 \hline
 \hline
-\hyperref[HealthProfessional:13]{HealthProfessional} & 13&100.0\% & 98 \\
+\hyperref[HealthProfessional:13]{HealthProfessional} & 13&100.0\% & 523 \\
 \hline
-\hyperref[addPatient:40]{addPatient} & 40&100.0\% & 3 \\
+\hyperref[addPatient:40]{addPatient} & 40&100.0\% & 277 \\
 \hline
-\hyperref[addSpecialty:35]{addSpecialty} & 35&0.0\% & 0 \\
+\hyperref[addSpecialty:35]{addSpecialty} & 35&100.0\% & 46 \\
 \hline
-\hyperref[getMedicalNumber:18]{getMedicalNumber} & 18&100.0\% & 4 \\
+\hyperref[getMedicalNumber:18]{getMedicalNumber} & 18&100.0\% & 92 \\
 \hline
-\hyperref[getPatients:24]{getPatients} & 24&100.0\% & 7 \\
+\hyperref[getPatients:24]{getPatients} & 24&100.0\% & 635 \\
 \hline
-\hyperref[getSpecialties:21]{getSpecialties} & 21&0.0\% & 0 \\
+\hyperref[getSpecialties:21]{getSpecialties} & 21&100.0\% & 161 \\
 \hline
-\hyperref[getType:27]{getType} & 27&100.0\% & 30 \\
+\hyperref[getType:27]{getType} & 27&100.0\% & 926 \\
 \hline
-\hyperref[removePatient:45]{removePatient} & 45&100.0\% & 1 \\
+\hyperref[removePatient:45]{removePatient} & 45&100.0\% & 23 \\
 \hline
-\hyperref[removeSpecialty:30]{removeSpecialty} & 30&0.0\% & 0 \\
+\hyperref[removeSpecialty:30]{removeSpecialty} & 30&100.0\% & 23 \\
 \hline
 \hline
-HealthProfessional.vdmpp & & 74.0\% & 143 \\
+HealthProfessional.vdmpp & & 100.0\% & 2706 \\
 \hline
 \end{longtable}
 
