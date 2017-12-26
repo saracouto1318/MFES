@@ -1,0 +1,20 @@
+class Person
+
+instance variables
+  protected address: Utils`String;
+  protected firstName: Utils`String;
+  protected lastName: Utils`String;
+  protected cc : Utils`String;
+  protected phoneNumber: Utils`String;
+operations
+	public Person: Utils`String * Utils`String * Utils`String * Utils`String * Utils`String ==> Person
+		Person(a, fn, ln, c, pn) == ( address := a; firstName := fn; lastName := ln; cc := c; phoneNumber := pn; return self)
+	post address = a and firstName = fn and lastName = ln and cc = c and phoneNumber = pn;
+		
+	pure public getCC : () ==> Utils`String
+		getCC() == (return cc);
+		
+	pure public getInfo: () ==> Utils`String
+		getInfo() == (return "Name: " ^ firstName ^ " " ^ lastName ^ "\nAddress: " ^ address ^ "\nPhone Number: " ^ phoneNumber ^ "\nCC: " ^ cc);
+
+end Person

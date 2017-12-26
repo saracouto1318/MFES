@@ -1,24 +1,23 @@
 class SafetyNetHospitalTest
-types
 instance variables
 	private safetyNet: SafetyNetHospital := new SafetyNetHospital();
 	
-	private time1: Types`Time := mk_Types`Time(12, 10);
-	private date1: Types`Date := mk_Types`Date(2017, 12, 25, time1);
-	private time2: Types`Time := mk_Types`Time(12, 30);
-	private date2: Types`Date := mk_Types`Date(2017, 12, 25, time2);
+	private time1: Utils`Time := mk_Utils`Time(12, 10);
+	private date1: Utils`Date := mk_Utils`Date(2017, 12, 25, time1);
+	private time2: Utils`Time := mk_Utils`Time(12, 30);
+	private date2: Utils`Date := mk_Utils`Date(2017, 12, 25, time2);
 	private schedule: Schedule := new Schedule(date1, date2);
 	
-	private time3: Types`Time := mk_Types`Time(12, 15);
-	private date3: Types`Date := mk_Types`Date(2017, 12, 25, time3);
-	private time4: Types`Time := mk_Types`Time(12, 35);
-	private date4: Types`Date := mk_Types`Date(2017, 12, 25, time4);
+	private time3: Utils`Time := mk_Utils`Time(12, 15);
+	private date3: Utils`Date := mk_Utils`Date(2017, 12, 25, time3);
+	private time4: Utils`Time := mk_Utils`Time(12, 35);
+	private date4: Utils`Date := mk_Utils`Date(2017, 12, 25, time4);
 	private schedule2: Schedule := new Schedule(date3, date4);
 	
-	private time5: Types`Time := mk_Types`Time(12, 40);
-	private date5: Types`Date := mk_Types`Date(2017, 12, 25, time5);
-	private time6: Types`Time := mk_Types`Time(12, 50);
-	private date6: Types`Date := mk_Types`Date(2017, 12, 25, time6);
+	private time5: Utils`Time := mk_Utils`Time(12, 40);
+	private date5: Utils`Date := mk_Utils`Date(2017, 12, 25, time5);
+	private time6: Utils`Time := mk_Utils`Time(12, 50);
+	private date6: Utils`Date := mk_Utils`Date(2017, 12, 25, time6);
 	private schedule3: Schedule := new Schedule(date5, date6);
 	
 	private patient: Patient := new Patient("Rua 1 Maio", "Rui", "Andrade", "123456789", "223456111", "0987654321");
@@ -42,7 +41,7 @@ instance variables
 	private surgery: Surgery := new Surgery(surgeon, schedule, patient3, hospital);
 	private treatment: Treatment := new Treatment(technician, "Fisioterapia", schedule, patient4, hospital);
 	
-	private purpose: Types`Purpose := <Training>;
+	private purpose: Utils`Purpose := <Training>;
 	private training : Training := new Training(purpose, schedule, doctor);
 	private training2 : Training := new Training(purpose, schedule2, doctor2);
 operations
@@ -56,7 +55,10 @@ operations
 						h1 := new Hospital("Hospital dos Lusíadas", "Rua de Cima", safetyNet);
 						h2 := new Hospital("Hospital Novo", "Rua 1 de Maio", safetyNet);
 						h3 := new Hospital("Hospital da Trofa", "Rua da Trofa", safetyNet);
-						
+						IO`print("\n Number of hospitals: ");
+						IO`print(card safetyNet.getHospitals());
+			
+						IO`print("\n\n Getting hospitals information \n");
 						assertTrue(h1.getName() = "Hospital dos Lusíadas");
 						assertTrue(h2.getName() = "Hospital Novo");
 						assertTrue(h3.getName() = "Hospital da Trofa");
@@ -65,40 +67,81 @@ operations
 						assertTrue(h2.getAddress() = "Rua 1 de Maio");
 						assertTrue(h3.getAddress() = "Rua da Trofa");
 						
+						IO`print("\n Removing hospitals \n");
 						assertTrue(card safetyNet.getHospitals() = 4);
 						safetyNet.removeHospital(h1);
+						
+						IO`print("\n Removing hospitals \n");
 						assertTrue(card safetyNet.getHospitals() = 3);
 						safetyNet.removeHospital(h2);
 						assertTrue(card safetyNet.getHospitals() = 2);
+						
+						IO`print("\n Number of hospitals: ");
+						IO`print(card safetyNet.getHospitals());
 		);
 						
 	public testAddRemoveTaskHospital : () ==> ()
 		testAddRemoveTaskHospital() == (
+						IO`print("\n\n Total number of appointments: ");
+						IO`print(card hospital.getTasksByType(<Appointment>));
+						IO`print("\n Total number of urgencies: ");
+						IO`print(card hospital.getTasksByType(<Urgencies>));
+						IO`print("\n Total number of surgeries: ");
+						IO`print(card hospital.getTasksByType(<Surgery>));
+						IO`print("\n Total number of other treatments: ");
+						IO`print(card hospital.getTasksByType(<Other>));
+						
 						assertTrue(card hospital.getTasksByType(<Appointment>) = 3);
 						assertTrue(card hospital.getTasksByType(<Urgencies>) = 1);
 						assertTrue(card hospital.getTasksByType(<Surgery>) = 1);
 						assertTrue(card hospital.getTasksByType(<Other>) = 1);
 						
+						IO`print("\n Removing an appointment \n");
 						hospital.removeTask(appointment);
 						assertTrue(card hospital.getTasksByType(<Appointment>) = 2);
 						
+						IO`print("\n Total number of appointments: ");
+						IO`print(card hospital.getTasksByType(<Appointment>));
+						
+						IO`print("\n Adding an appointment \n");
 						hospital.addTask(appointment);
-						assertTrue(card hospital.getTasksByType(<Appointment>) = 3);			
+						assertTrue(card hospital.getTasksByType(<Appointment>) = 3);	
+						
+						IO`print("\n Total number of appointments: ");
+						IO`print(card hospital.getTasksByType(<Appointment>));		
 		);
 		
 		public testAddRemoveMedHospital : () ==> ()
 		testAddRemoveMedHospital() == (
+						IO`print("\n Total number of doctors: ");
+						IO`print(card hospital.getMedicalAssociatedByType(<Doctor>));
+						IO`print("\n Total number of surgeons: ");
+						IO`print(card hospital.getMedicalAssociatedByType(<Surgeon>));
+						IO`print("\n Total number of nurses: ");
+						IO`print(card hospital.getMedicalAssociatedByType(<Nurse>));
+						IO`print("\n Total number of technicians: ");
+						IO`print(card hospital.getMedicalAssociatedByType(<Technician>));
+						
 						assertTrue(card hospital.getMedicalAssociatedByType(<Doctor>) = 0);
 						assertTrue(card hospital.getMedicalAssociatedByType(<Surgeon>) = 0);
 						assertTrue(card hospital.getMedicalAssociatedByType(<Nurse>) = 0);
 						assertTrue(card hospital.getMedicalAssociatedByType(<Technician>) = 0);
 						
+						IO`print("\n Adding a doctor \n");
 						hospital.addMedAssociated(doctor);
+						
+						IO`print("\n Total number of doctors: ");
+						IO`print(card hospital.getMedicalAssociatedByType(<Doctor>));
+						
 						assertTrue(card hospital.getMedicalAssociatedByType(<Doctor>) = 1);
 						hospital.addTraining(training);
 						
+						IO`print("\n Removing a doctor \n");
 						hospital.removeMedAssociated(doctor);
 						assertTrue(card hospital.getMedicalAssociatedByType(<Doctor>) = 0);	
+						
+						IO`print("\n Total number of doctors: ");
+						IO`print(card hospital.getMedicalAssociatedByType(<Doctor>));
 						
 						hospital.addMedAssociated(doctor);
 						hospital.addMedAssociated(surgeon);
@@ -108,24 +151,37 @@ operations
 		
 		public testAddRemoveTrainingHospital : () ==> ()
 			testAddRemoveTrainingHospital() == (
+				IO`print("\n\n Total number of trainings: ");
+				IO`print(card hospital.getTrainingsByType(<Training>) + card hospital.getTrainingsByType(<AddSkills>));
+
 				assertTrue(card hospital.getTrainingsByType(<Training>) = 0);
 				assertTrue(card hospital.getTrainingsByType(<AddSkills>) = 0);
 				
+				IO`print("\n Adding a training \n");
 				hospital.addTraining(training);
 				assertTrue(card hospital.getTrainingsByType(<Training>) = 1);
 				
+				IO`print("\n Total number of trainings: ");
+				IO`print(card hospital.getTrainingsByType(<Training>) + card hospital.getTrainingsByType(<AddSkills>));
+				
+				IO`print("\n Removing a training \n");
 				hospital.removeTraining(training);
 				assertTrue(card hospital.getTrainingsByType(<Training>) = 0);
+				
+				IO`print("\n\n Total number of trainings: ");
+				IO`print(card hospital.getTrainingsByType(<Training>) + card hospital.getTrainingsByType(<AddSkills>));
 		);
 		
 		public testOverlap : () ==> ()
 			testOverlap() == (
+				IO`print("\n\n Checking overlap \n");
 				assertTrue(hospital.overlap(schedule, schedule2));
 				assertTrue(hospital.overlap(schedule, schedule3) = false);
 			);
 		
 		public testGetHospitalsMoreAppointments : () ==> ()
 			testGetHospitalsMoreAppointments() == (	
+				IO`print("\n Checking Safety Net Hospitals with more appointments, etc \n");
 				assertTrue(safetyNet.getHospitalsMoreAppointments(<Appointment>).getName() = "Hospital das Camélias");
 				assertTrue(safetyNet.getHospitalsMoreAppointments(<Urgencies>).getName() = "Hospital das Camélias");
 				assertTrue(safetyNet.getHospitalsMoreAppointments(<Surgery>).getName() = "Hospital das Camélias");
@@ -137,7 +193,10 @@ operations
 				for all t in set safetyNet.getHospitals() do
 					if(t.getName() <> "Hospital das Camélias")
 						then t.addMedAssociated(doctor);
-						
+				
+				IO`print("\n Checking Safety Net Doctors that works in more than 1 hospital \n");
+				IO`print("\n Number of Doctors: ");	
+				IO`print(card safetyNet.getMedMoreHospitals(<Doctor>));	
 				assertTrue(card safetyNet.getMedMoreHospitals(<Doctor>) = 1);
 				assertTrue(safetyNet.getMedMoreHospitals(<Doctor>) = {doctor}); 	
 			);
@@ -145,7 +204,7 @@ operations
 		public testGetMedAssociatedByPatient : () ==> ()
 			testGetMedAssociatedByPatient() == (
 				dcl mapTest : map Hospital to set of (HealthProfessional);
-				
+				IO`print("\n\n Getting Doctors associated by patient by hospital \n");
 				mapTest := safetyNet.getMedAssociatedByPatient(patient, <Doctor>);
 				
 				assertTrue(card mapTest(hospital) = 1);
@@ -155,6 +214,7 @@ operations
 		public testGetMedByHospital : () ==> ()
 			testGetMedByHospital() == (
 				dcl mapTest : map Hospital to set of (HealthProfessional);
+				IO`print("\n\n Getting Doctors associated by hospital \n");
 				mapTest := safetyNet.getMedByHospital(<Doctor>);
 				
 				assertTrue(card mapTest(hospital) = 1);
@@ -169,6 +229,7 @@ operations
 		public static main: () ==> ()
  		main() == (
  			dcl safetyNetTest: SafetyNetHospitalTest := new SafetyNetHospitalTest();
+ 			IO`print("\n *****Running SafetyNetHospitalTest***** \n");
  			safetyNetTest.testAddRemoveHospitals();
  			safetyNetTest.testAddRemoveTaskHospital();
  			safetyNetTest.testAddRemoveTrainingHospital();

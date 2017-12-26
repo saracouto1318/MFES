@@ -1,0 +1,35 @@
+class Schedule
+
+instance variables
+  private startHour: Utils`Date;
+  private endHour: Utils`Date;
+  
+  inv compare(startHour, endHour);
+operations	
+	public Schedule: Utils`Date * Utils`Date ==> Schedule
+		Schedule(d, d2) == (startHour := d; endHour := d2; return self)
+	pre compare(d, d2)
+	post startHour = d and endHour = d2;
+	
+	public setSchedule : Utils`Date * Utils`Date ==> ()
+		setSchedule(d1, d2) == (startHour := d1; endHour := d2;)
+	pre compare(d1, d2)
+	post startHour = d1 and endHour = d2;
+		
+	pure public getScheduleStart : () ==> Utils`Date
+		getScheduleStart() == (return startHour);
+		
+	pure public getScheduleEnd : () ==> Utils`Date
+		getScheduleEnd() == (return endHour);
+	
+	pure public compare : Utils`Date * Utils`Date ==> bool
+		compare(d1, d2) == (
+										if(d1.year = d2.year and d1.month = d2.month and d1.day = d2.day)
+											then if(d1.time.hour < d2.time.hour)
+												then return true
+											else if(d1.time.hour = d2.time.hour)
+												then return (d1.time.min < d2.time.min)
+											else return false
+										else 
+											return false;);
+end Schedule

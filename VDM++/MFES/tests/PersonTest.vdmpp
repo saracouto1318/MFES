@@ -12,25 +12,30 @@ operations
 	
 	public testGetInformation: () ==> ()
 		testGetInformation() == (
+			IO`print("\n Getting patient informations \n");
 			assertTrue(patient.getHealthNumber() = "0987654321");
 			assertTrue(patient.getCC() = "123456789");
 			assertTrue(patient.getInfo() = "Name: " ^ "Rui" ^ " " ^ "Andrade" ^ "\nAddress: " ^ "Rua 1 Maio" ^ "\nPhone Number: " ^ "223456111" ^ "\nCC: " ^ "123456789");
 			
+			IO`print("\n Getting doctor informations \n");
 			assertTrue(doctor.getMedicalNumber() = "111111222");
 			assertTrue(doctor.getCC() = "123432156");
 			assertTrue(doctor.getInfo() = "Name: " ^ "Ana" ^ " " ^ "Marques" ^ "\nAddress: " ^ "Rua de Cima" ^ "\nPhone Number: " ^ "921349076" ^ "\nCC: " ^ "123432156");
 			assertTrue(doctor.getType() = <Doctor>);
 			
+			IO`print("\n Getting surgeon informations \n");
 			assertTrue(surgeon.getMedicalNumber() = "111111232");
 			assertTrue(surgeon.getCC() = "234512389");
 			assertTrue(surgeon.getInfo() = "Name: " ^ "Diogo" ^ " " ^ "Viana" ^ "\nAddress: " ^ "Rua 2" ^ "\nPhone Number: " ^ "921349134" ^ "\nCC: " ^ "234512389");
 			assertTrue(surgeon.getType() = <Surgeon>);
 			
+			IO`print("\n Getting nurse informations \n");
 			assertTrue(nurse.getMedicalNumber() = "111222333");
 			assertTrue(nurse.getCC() = "123444654");
 			assertTrue(nurse.getInfo() = "Name: " ^ "Lisete" ^ " " ^ "Antunes" ^ "\nAddress: " ^ "Rua de Baixo" ^ "\nPhone Number: " ^ "921378643" ^ "\nCC: " ^ "123444654");
 			assertTrue(nurse.getType() = <Nurse>);
 			
+			IO`print("\n Getting technician informations \n");
 			assertTrue(technician.getMedicalNumber() = "123432578");
 			assertTrue(technician.getCC() = "123432151");
 			assertTrue(technician.getInfo() = "Name: " ^ "Inês" ^ " " ^ "Pinto" ^ "\nAddress: " ^ "Rua Antero Marques" ^ "\nPhone Number: " ^ "921348765" ^ "\nCC: " ^ "123432151");
@@ -39,17 +44,30 @@ operations
 		
 	public testAddRemovePatient : () ==> ()
 		testAddRemovePatient() == (
+			IO`print("\n Number of patients: ");
+			IO`print(card doctor.getPatients());
 			assertTrue(card doctor.getPatients() = 0);
 			
+			IO`print("\n Adding a patient \n");
 			doctor.addPatient(patient);
+			
+			IO`print("\n Number of patients: ");
+			IO`print(card doctor.getPatients());
 			assertTrue(card doctor.getPatients() = 1);
 			
+			IO`print("\nRemoving a patient \n");
 			doctor.removePatient(patient);
+			
+			IO`print("\n Number of patients: ");
+			IO`print(card doctor.getPatients());
 			assertTrue(card doctor.getPatients() = 0);
 			
+			IO`print("\n Adding a patient \n");
 			assertTrue(card surgeon.getPatients() = 0);
 			
 			surgeon.addPatient(patient);
+			IO`print("\n Number of patients: ");
+			IO`print(card surgeon.getPatients());
 			assertTrue(card surgeon.getPatients() = 1);
 		);
 		
@@ -57,21 +75,36 @@ operations
 		testAddRemoveSpecialty() == (
 			dcl specialty1: Specialty := new Specialty("General"), specialty2: Specialty := new Specialty("Cardio");
 			
+			IO`print("\n Number of specialties: ");
+			IO`print(card doctor.getSpecialties());
 			assertTrue(card doctor.getSpecialties() = 0);
 			
+			IO`print("\n Adding a specialty \n");
 			doctor.addSpecialty(specialty1);
-			assertTrue(specialty1.getName() = "General");
 			
+			IO`print("\n Number of specialties: ");
+			IO`print(card doctor.getSpecialties());
+			
+			assertTrue(specialty1.getName() = "General");
 			assertTrue(card doctor.getSpecialties() = 1);
 			assertTrue(doctor.getSpecialties() = {specialty1});
 			
+			IO`print("\n Adding a specialty \n");
 			doctor.addSpecialty(specialty2);
-			assertTrue(specialty2.getName() = "Cardio");
 			
+			IO`print("\n Number of specialties: ");
+			IO`print(card doctor.getSpecialties());
+			
+			assertTrue(specialty2.getName() = "Cardio");
 			assertTrue(card doctor.getSpecialties() = 2);
 			assertTrue(doctor.getSpecialties() = {specialty1, specialty2});
 			
+			IO`print("\n Removing a specialty \n");
 			doctor.removeSpecialty(specialty1);
+			
+			IO`print("\n Number of specialties: ");
+			IO`print(card doctor.getSpecialties());
+			
 			assertTrue(card doctor.getSpecialties() = 1);
 			assertTrue(doctor.getSpecialties() = {specialty2});
 		);
@@ -79,6 +112,7 @@ operations
 	public static main: () ==> ()
  		main() == (
  			dcl personTest: PersonTest := new PersonTest();
+ 			IO`print("\n *****Running PersonTest***** \n");
  			personTest.testGetInformation();
  			personTest.testAddRemovePatient();
  			personTest.testAddRemoveSpecialty();

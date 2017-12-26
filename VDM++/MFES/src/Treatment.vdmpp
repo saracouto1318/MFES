@@ -1,0 +1,19 @@
+class Treatment is subclass of Task
+instance variables
+  public med: [HealthProfessional];
+  public name: Utils`String;
+  
+  inv med.getType() = <Nurse> or med.getType() = <Technician>;
+operations
+
+	public Treatment: HealthProfessional * Utils`String * Schedule * Patient * Hospital ==> Treatment
+		Treatment(m, n, s, p, h) == (name := n; med := m; Task(m, s, p, h, <Other>))
+	post name = n and med = m;
+	
+	pure public getName: () ==> Utils`String
+		getName() == (return name);
+	
+	pure public getMed : () ==> HealthProfessional
+		getMed() == (return med);
+
+end Treatment
