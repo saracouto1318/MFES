@@ -21,10 +21,16 @@ instance variables
 	private schedule3: Schedule := new Schedule(date5, date6);
 	
 	private time7: Types`Time := mk_Types`Time(12, 10);
-	private date7: Types`Date := mk_Types`Date(2017, 11, 25, time7);
+	private date7: Types`Date := mk_Types`Date(2017, 11, 22, time7);
 	private time8: Types`Time := mk_Types`Time(12, 30);
-	private date8: Types`Date := mk_Types`Date(2017, 11, 25, time8);
+	private date8: Types`Date := mk_Types`Date(2017, 11, 22, time8);
 	private schedule4: Schedule := new Schedule(date7, date8);
+	
+	private time9: Types`Time := mk_Types`Time(12, 35);
+	private date9: Types`Date := mk_Types`Date(2017, 11, 22, time9);
+	private time10: Types`Time := mk_Types`Time(12, 45);
+	private date10: Types`Date := mk_Types`Date(2017, 11, 22, time10);
+	private schedule5: Schedule := new Schedule(date9, date10);
 	
 	private patient: Patient := new Patient("Rua 1 Maio", "Rui", "Andrade", "123456789", "223456111", "0987654321");
 	private patient2: Patient := new Patient("Rua 1 Maio", "Diogo", "Andrade", "123321123", "911112345", "908765123");
@@ -186,6 +192,39 @@ operations
 				assertTrue(hospital.overlap(schedule, schedule2));
 				assertTrue(hospital.overlap(schedule, schedule3) = false);
 			);
+			
+		public testOverlapTask : () ==> ()
+			testOverlapTask() == (
+				dcl newTask : Appointment, task : Appointment, newTraining1 : Training;
+				newTask := new Appointment(doctor, schedule4, patient, hospital);
+				newTraining1 := new Training(<Training>, schedule5, doctor2);
+				hospital.addTraining(newTraining1);
+				task := new Appointment(doctor, schedule5, patient2, hospital);
+				
+				IO`print("\n\n Checking overlap task \n");
+				assertTrue(hospital.overlapTask(newTask));
+				assertTrue(hospital.overlapTask(task));
+				
+				hospital.removeTraining(newTraining1);
+				assertTrue(card hospital.getTrainingsByType(<Training>) = 0);
+			);
+			
+		public testOverlapTraining : () ==> ()
+			testOverlapTraining() == (
+				dcl newTraining1 : Training, newTraining2 : Training, newTraining3 : Training, surgeryNew : Surgery;
+				newTraining1 := new Training(<Training>, schedule5, doctor2);
+				newTraining2 := new Training(<Training>, schedule5, nurse);
+				newTraining3 := new Training(<Training>, schedule5, secSurgeon);
+				surgeryNew := new Surgery(surgeon, schedule5, patient, hospital);
+				surgeryNew.addSecondaryDoctor(secSurgeon);
+				hospital.addTraining(newTraining1);
+				hospital.addTraining(newTraining2);
+				
+				IO`print("\n\n Checking overlap training \n");
+				assertTrue(hospital.overlapTraining(newTraining1));
+				assertTrue(hospital.overlapTraining(newTraining2));
+				assertTrue(hospital.overlapTraining(newTraining3));
+			);
 		
 		public testGetHospitalsMoreAppointments : () ==> ()
 			testGetHospitalsMoreAppointments() == (	
@@ -243,6 +282,8 @@ operations
  			safetyNetTest.testAddRemoveTrainingHospital();
  			safetyNetTest.testAddRemoveMedHospital();
  			safetyNetTest.testOverlap();
+ 			safetyNetTest.testOverlapTask();
+ 			safetyNetTest.testOverlapTraining();
  			safetyNetTest.testGetHospitalsMoreAppointments();
  			safetyNetTest.testGetMedMoreHospitals();
  			safetyNetTest.testGetMedAssociatedByPatient();

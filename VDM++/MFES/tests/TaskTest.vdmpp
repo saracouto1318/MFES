@@ -23,6 +23,18 @@ instance variables
 	private date6: Types`Date := mk_Types`Date(2017, 12, 25, time6);
 	private schedule3: Schedule := new Schedule(date5, date6);
 	
+	private time7: Types`Time := mk_Types`Time(12, 10);
+	private date7: Types`Date := mk_Types`Date(2018, 11, 22, time7);
+	private time8: Types`Time := mk_Types`Time(12, 30);
+	private date8: Types`Date := mk_Types`Date(2018, 11, 22, time8);
+	private schedule4: Schedule := new Schedule(date7, date8);
+	
+	private time9: Types`Time := mk_Types`Time(12, 35);
+	private date9: Types`Date := mk_Types`Date(2017, 11, 22, time9);
+	private time10: Types`Time := mk_Types`Time(12, 45);
+	private date10: Types`Date := mk_Types`Date(2017, 11, 22, time10);
+	private schedule5: Schedule := new Schedule(date9, date10);
+	
 	private patient: Patient := new Patient("Rua 1 Maio", "Rui", "Andrade", "123456789", "223456111", "0987654321");
 	private patient2: Patient := new Patient("Rua 1 Maio", "Diogo", "Andrade", "123321123", "911112345", "908765123");
 	private patient3: Patient := new Patient("Rua 1 Maio", "Vitor", "Andrade", "135790864", "912345334", "123432130");
@@ -185,6 +197,16 @@ operations
 	public testTreatment: () ==> ()
 		testTreatment() == (
 			IO`print("\n Checking treatment informations \n");
+			assertTrue(appointment.getSchedule().lessThan(appointment.getSchedule().getScheduleStart(), appointment.getSchedule().getScheduleEnd()));
+			assertTrue(appointment.getSchedule().greaterThan(appointment.getSchedule().getScheduleEnd(), appointment.getSchedule().getScheduleStart()));
+			
+			assertTrue(appointment.getSchedule().lessThan(appointment.getSchedule().getScheduleStart(), schedule4.getScheduleStart()));
+			assertTrue(appointment.getSchedule().greaterThan(schedule4.getScheduleStart(), schedule5.getScheduleStart()));
+		);
+	
+	public testScheduleFunctions : () ==> ()
+		testScheduleFunctions() == (
+			IO`print("\n Checking schedule functions \n");
 			assertTrue(treatment.getName() = "Fisioterapia");
 			assertTrue(treatment.getMed().getCC() = "123444655");
 		);
@@ -197,6 +219,7 @@ operations
  			taskTest.testAppointment();
  			taskTest.testSurgery();
  			taskTest.testTreatment();
+ 			taskTest.testScheduleFunctions();
  		);
 
 end TaskTest
