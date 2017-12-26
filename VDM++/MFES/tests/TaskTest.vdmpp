@@ -5,6 +5,7 @@ instance variables
 	
 	private time1: Types`Time := mk_Types`Time(12, 10);
 	private date: Types`Date := mk_Types`Date(2017, 11, 25, time1);
+	private d: Types`Date := mk_Types`Date(2017, 2, 25, time1);
 	private date1: Types`Date := mk_Types`Date(2017, 12, 25, time1);
 	private time2: Types`Time := mk_Types`Time(12, 30);
 	private date2: Types`Date := mk_Types`Date(2017, 12, 25, time2);
