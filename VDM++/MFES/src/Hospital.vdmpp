@@ -100,11 +100,11 @@ operations
 	pure public overlapTask: Task ==> bool
 		overlapTask(t1) == (
 															for all t in set tasks do
-																if(overlap(t1.getSchedule(), t.getSchedule()) and (t1.getMedAssoc().getCC() = t.getMedAssoc().getCC() or t1.getPatient().getCC() = t.getPatient().getCC()
+																if(overlap(t.getSchedule(), t1.getSchedule()) and (t1.getMedAssoc().getCC() = t.getMedAssoc().getCC() or t1.getPatient().getCC() = t.getPatient().getCC()
 																				or t1.getMedAssoc().getCC() = t.getPatient().getCC() or t1.getPatient().getCC() = t.getMedAssoc().getCC()))
 																	then return true;
 															for all t in set trainings do
-																if(overlap(t1.getSchedule(), t.getSchedule()) and (t1.getMedAssoc().getCC() = t.getMedAssoc().getCC() or t1.getPatient().getCC() = t.getMedAssoc().getCC()))
+																if(overlap(t.getSchedule(), t1.getSchedule()) and (t1.getMedAssoc().getCC() = t.getMedAssoc().getCC() or t1.getPatient().getCC() = t.getMedAssoc().getCC()))
 																	then return true;
 															return false;
 		);
@@ -112,12 +112,12 @@ operations
 		pure public overlapTraining: Training ==> bool
 		overlapTraining(t1) == (
 															for all t in set trainings do
-																if(overlap(t1.getSchedule(), t.getSchedule()) and t1.getMedAssoc().getCC() = t.getMedAssoc().getCC())
+																if(overlap(t.getSchedule(), t1.getSchedule()) and t1.getMedAssoc().getCC() = t.getMedAssoc().getCC())
 																	then return true;
 															for all t in set tasks do
-																if(overlap(t1.getSchedule(), t.getSchedule()) and (t1.getMedAssoc().getCC() = t.getMedAssoc().getCC() or t1.getMedAssoc().getCC() = t.getPatient().getCC()))
+																if(overlap(t.getSchedule(), t1.getSchedule()) and (t1.getMedAssoc().getCC() = t.getMedAssoc().getCC() or t1.getMedAssoc().getCC() = t.getPatient().getCC()))
 																	then return true;
 															return false;
 		);
-														
+		
 end Hospital
