@@ -2,7 +2,7 @@ class Training
 	
 instance variables
  private medicalAssociated:[HealthProfessional];
- private purpose:[Utils`Purpose];
+ private purpose:[Types`Purpose];
  private schedule:[Schedule];
 
  inv medicalAssociated <> nil;
@@ -10,14 +10,14 @@ instance variables
  inv schedule <> nil;
 
 operations
-	public Training: Utils`Purpose * Schedule * HealthProfessional ==> Training
+	public Training: Types`Purpose * Schedule * HealthProfessional ==> Training
  		Training(p, s, h) == (purpose := p; schedule := s; medicalAssociated := h; return self)
 	post purpose = p and schedule = s and medicalAssociated = h;
 
 	pure public getSchedule : () ==> Schedule
  		getSchedule() == (return schedule);
 	
- 	pure public getPurpose : () ==> Utils`Purpose
+ 	pure public getPurpose : () ==> Types`Purpose
 		getPurpose() == (return purpose);	
 	
 	pure public getMedAssoc : () ==> HealthProfessional
@@ -26,7 +26,7 @@ operations
 	public setSchedule : Schedule ==> ()
  		setSchedule(s) == (schedule := s);
 	
-	public setPurpose : Utils`Purpose ==> ()
+	public setPurpose : Types`Purpose ==> ()
  		setPurpose(p) == (purpose := p);
  
  end Training

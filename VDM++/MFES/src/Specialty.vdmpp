@@ -1,13 +1,13 @@
 class Specialty
 
 instance variables
-  private name: Utils`String;
+  private name: Types`String;
 operations
-	public Specialty : Utils`String ==> Specialty
+	public Specialty : Types`String ==> Specialty
 		Specialty(n) == (name := n; return self)
 	post name = n;
 		
-	pure public getName : () ==> Utils`String
+	pure public getName : () ==> Types`String
 		getName() == (return name);
 
 end Specialty

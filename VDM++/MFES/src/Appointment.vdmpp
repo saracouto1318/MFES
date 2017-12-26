@@ -2,7 +2,7 @@ class Appointment is subclass of Task
 
 instance variables
   private prescriptions:set of (Prescription);
-  private priority : Utils`Priority;
+  private priority : Types`Priority;
   
   inv priority <> nil;
   inv card prescriptions >= 0;
@@ -12,18 +12,18 @@ operations
 		Appointment(d, s, p, h) == (medicalAssoc := d; priority := <Medium>; prescriptions := {}; Task(d, s, p, h, <Appointment>))
 	post medicalAssoc = d and prescriptions = {} and priority = <Medium>;
 	
-	public Appointment: HealthProfessional * Utils`Priority * Schedule * Patient * Hospital ==> Appointment
+	public Appointment: HealthProfessional * Types`Priority * Schedule * Patient * Hospital ==> Appointment
 		Appointment(d, p, s, pat, h) == (medicalAssoc := d; priority := p; prescriptions := {}; Task(d, s, pat, h, <Urgencies>))
 	pre p <> nil
 	post medicalAssoc = d and prescriptions = {} and priority = p;
 
-	pure public getPriority : () ==> Utils`Priority
+	pure public getPriority : () ==> Types`Priority
 		getPriority() == (return priority);
 	
   pure public getPrescriptions : () ==> set of (Prescription)
   	getPrescriptions() == (return prescriptions);
   
-  public setPriority : Utils`Priority ==> ()
+  public setPriority : Types`Priority ==> ()
   	setPriority(p) == (priority := p)
   pre type = <Urgencies>;
   

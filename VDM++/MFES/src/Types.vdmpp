@@ -1,4 +1,4 @@
-class Utils
+class Types
 types
 	public String = seq1 of (char);
 	public Priority = <High> | <Medium> | <Low>;
@@ -24,4 +24,4 @@ operations
 														else
 															return 28;);
 																
-end Utils
+end Types

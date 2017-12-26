@@ -1,8 +1,8 @@
 class Hospital
 instance variables
   private medicalAssociated: set of (HealthProfessional);
-  private name: Utils`String;
-  private address: Utils`String;
+  private name: Types`String;
+  private address: Types`String;
   private tasks: set of(Task);
   private trainings: set of(Training);
   private safetyNet: [SafetyNetHospital];
@@ -12,16 +12,16 @@ instance variables
  inv card tasks >= 0;
 operations
 
-	public Hospital: Utils`String * Utils`String * SafetyNetHospital ==> Hospital
+	public Hospital: Types`String * Types`String * SafetyNetHospital ==> Hospital
 		Hospital(n, a, s) == (name := n; address := a; safetyNet := s; medicalAssociated := {}; tasks := {}; trainings := {}; 
 		safetyNet.addHospital(self); return self)
 	pre safetyNet <> nil
 	post name = n and address = a and safetyNet = s and medicalAssociated = {} and tasks = {} and trainings = {};
 	
-	pure public getName: () ==> Utils`String
+	pure public getName: () ==> Types`String
 		getName() == (return name);
 	
-	pure public getAddress: () ==> Utils`String
+	pure public getAddress: () ==> Types`String
 		getAddress() == (return address);
 	
 	public addMedAssociated: HealthProfessional ==> ()
@@ -64,7 +64,7 @@ operations
 	pre d in set trainings
 	post d not in set trainings;
 	
-	pure public getTasksByType: Utils`TaskType ==> set of (Task)
+	pure public getTasksByType: Types`TaskType ==> set of (Task)
 		getTasksByType(s) == (
 														dcl tasksTotal: set of (Task);
 														tasksTotal := {};
@@ -74,7 +74,7 @@ operations
 																
 														return tasksTotal);
 														
-	pure public getTrainingsByType: Utils`Purpose ==> set of (Training)
+	pure public getTrainingsByType: Types`Purpose ==> set of (Training)
 		getTrainingsByType(s) == (
 														dcl train: set of (Training);
 														train := {};
@@ -84,7 +84,7 @@ operations
 																
 														return train);
 
-	pure public getMedicalAssociatedByType: Utils`Type ==> set of (HealthProfessional)
+	pure public getMedicalAssociatedByType: Types`Type ==> set of (HealthProfessional)
 		getMedicalAssociatedByType(type) == (
 											dcl med: set of(HealthProfessional);
 											med := {};

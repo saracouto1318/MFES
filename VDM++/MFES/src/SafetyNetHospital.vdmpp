@@ -23,7 +23,7 @@ operations
 		getHospitals() == (return hospitals);
 	
 	-- Mudar --	
-	pure public getHospitalsMoreAppointments : Utils`TaskType ==> Hospital
+	pure public getHospitalsMoreAppointments : Types`TaskType ==> Hospital
 		getHospitalsMoreAppointments(t) == (
 																				dcl max: int, hosp: Hospital;
 																				max := -1;
@@ -32,7 +32,7 @@ operations
 																						then (max := (card h.getTasksByType(t)); hosp := h);
 																				return hosp);
 	
-	pure public getMedMoreHospitals : Utils`Type ==> set of(HealthProfessional)
+	pure public getMedMoreHospitals : Types`Type ==> set of(HealthProfessional)
 		getMedMoreHospitals(t) == (
 																		dcl doctors: set of(HealthProfessional);
 																		doctors := {};
@@ -51,7 +51,7 @@ operations
 																		return doctors;
 																	);
 																	 													
-	pure public getMedAssociatedByPatient: Patient * Utils`Type ==> map Hospital to set of(HealthProfessional)
+	pure public getMedAssociatedByPatient: Patient * Types`Type ==> map Hospital to set of(HealthProfessional)
 		getMedAssociatedByPatient(p, t) == (
 																					dcl maps: map Hospital to set of(HealthProfessional), med : set of (HealthProfessional);
 																					maps := { |-> };
@@ -65,7 +65,7 @@ operations
 																						med := {};);
 																						return maps);
 	
-	pure public getMedByHospital: Utils`Type ==> map Hospital to set of(HealthProfessional)
+	pure public getMedByHospital: Types`Type ==> map Hospital to set of(HealthProfessional)
 		getMedByHospital(t) == (
 																					dcl maps: map Hospital to set of(HealthProfessional);
 																					maps := { |-> };

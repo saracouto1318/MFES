@@ -37,7 +37,7 @@ operations
 	public getMainDoctor : () ==> HealthProfessional
 		getMainDoctor() == (return medicalAssoc);
 
-	public getSurgeryPersons : Utils`Type ==> set of (HealthProfessional)
+	public getSurgeryPersons : Types`Type ==> set of (HealthProfessional)
 		getSurgeryPersons(t) == (
 															dcl med : set of (HealthProfessional);
 															if(t = <Surgeon>)
