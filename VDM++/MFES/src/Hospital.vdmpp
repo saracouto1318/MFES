@@ -106,6 +106,9 @@ operations
 															for all t in set trainings do
 																if(overlap(t.getSchedule(), t1.getSchedule()) and (t1.getMedAssoc().getCC() = t.getMedAssoc().getCC() or t1.getPatient().getCC() = t.getMedAssoc().getCC()))
 																	then return true;
+															for all t in set getTasksByType(<Surgery>) do
+																if(overlap(t.getSchedule(), t1.getSchedule()) and t1.getMedAssoc() in set t.getSurgeryPersons(<Surgeon>) or t1.getMedAssoc() in set t.getSurgeryPersons(<Nurse>))
+																	then return true;
 															return false;
 		);
 		
@@ -117,7 +120,9 @@ operations
 															for all t in set tasks do
 																if(overlap(t.getSchedule(), t1.getSchedule()) and (t1.getMedAssoc().getCC() = t.getMedAssoc().getCC() or t1.getMedAssoc().getCC() = t.getPatient().getCC()))
 																	then return true;
+															for all t in set getTasksByType(<Surgery>) do
+																if(overlap(t.getSchedule(), t1.getSchedule()) and t1.getMedAssoc() in set t.getSurgeryPersons(<Surgeon>) or t1.getMedAssoc() in set t.getSurgeryPersons(<Nurse>))
+																	then return true;
 															return false;
 		);
-		
 end Hospital

@@ -2,7 +2,9 @@ class TaskTest
 
 instance variables
 	private safetyNet: SafetyNetHospital := new SafetyNetHospital();
+	
 	private time1: Types`Time := mk_Types`Time(12, 10);
+	private date: Types`Date := mk_Types`Date(2017, 11, 25, time1);
 	private date1: Types`Date := mk_Types`Date(2017, 12, 25, time1);
 	private time2: Types`Time := mk_Types`Time(12, 30);
 	private date2: Types`Date := mk_Types`Date(2017, 12, 25, time2);
@@ -58,6 +60,7 @@ operations
 		
 			IO`print("\n Getting tasks informations \n");
 			assertTrue(appointment.getMedAssoc().getCC() = "123432156");
+			assertTrue(card appointment.getSurgeryPersons(<Nurse>) = 0);
 			assertTrue(urgencies.getMedAssoc().getCC() = "123432157");
 			assertTrue(surgery.getMedAssoc().getCC() = "234512389");
 			
@@ -114,7 +117,7 @@ operations
 			assertTrue(urgencies.getPriority() = <Low>);
 			
 			IO`print("\n Checking appointment prescriptions \n");
-			IO`print("\n Number of prescriptions: \n");
+			IO`print("\n Number of prescriptions: ");
 			IO`print(card appointment.getPrescriptions() + card urgencies.getPrescriptions());
 			assertTrue(card appointment.getPrescriptions() = 0);
 			assertTrue(card urgencies.getPrescriptions() = 0);
@@ -125,21 +128,21 @@ operations
 			assertTrue(card prescription.getMedicaments() = 0);
 			
 			IO`print("\n Adding medicament \n");
-			IO`print("\n Number of medicaments: \n");
+			IO`print("\n Number of medicaments: ");
 			IO`print(card prescription.getMedicaments());
 			prescription.addMedicament(medicament);
 			assertTrue(card prescription.getMedicaments() = 1);
 			assertTrue(prescription.getMedicaments() = {medicament});
 			
 			IO`print("\n\n Removing medicament \n");
-			IO`print("\n Number of medicaments: \n");
+			IO`print("\n Number of medicaments: ");
 			IO`print(card prescription.getMedicaments());
 			prescription.removeMedicament(medicament);
 			assertTrue(card prescription.getMedicaments() = 0);
 			assertTrue(prescription.getMedicaments() = {});
 			
 			IO`print("\n Adding a prescription \n");
-			IO`print("\n Number of prescriptions: \n");
+			IO`print("\n Number of prescriptions: ");
 			IO`print(card appointment.getPrescriptions() + card urgencies.getPrescriptions());
 			appointment.addPrescription(prescription);
 			urgencies.addPrescription(prescription);
@@ -147,7 +150,7 @@ operations
 			assertTrue(card urgencies.getPrescriptions() = 1);
 			
 			IO`print("\n\n Removing a prescription \n");
-			IO`print("\n Number of prescriptions: \n");
+			IO`print("\n Number of prescriptions: ");
 			IO`print(card appointment.getPrescriptions() + card urgencies.getPrescriptions());
 			appointment.removePrescription(prescription);
 			urgencies.removePrescription(prescription);
