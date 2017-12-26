@@ -27,9 +27,9 @@ instance variables
 	private schedule4: Schedule := new Schedule(date7, date8);
 	
 	private time9: Types`Time := mk_Types`Time(12, 35);
-	private date9: Types`Date := mk_Types`Date(2017, 11, 22, time9);
+	private date9: Types`Date := mk_Types`Date(2017, 11, 23, time9);
 	private time10: Types`Time := mk_Types`Time(12, 45);
-	private date10: Types`Date := mk_Types`Date(2017, 11, 22, time10);
+	private date10: Types`Date := mk_Types`Date(2017, 11, 23, time10);
 	private schedule5: Schedule := new Schedule(date9, date10);
 	
 	private patient: Patient := new Patient("Rua 1 Maio", "Rui", "Andrade", "123456789", "223456111", "0987654321");
@@ -195,18 +195,32 @@ operations
 			
 		public testOverlapTask : () ==> ()
 			testOverlapTask() == (
-				dcl newTask : Appointment, task : Appointment, newTraining1 : Training;
+				dcl newTask : Appointment, task : Appointment, newTraining1 : Training, surgeryNew2 : Surgery, surgeryNew3 : Surgery;
 				newTask := new Appointment(doctor, schedule4, patient, hospital);
 				newTraining1 := new Training(<Training>, schedule5, doctor2);
+			
+				task := new Appointment(doctor2, schedule5, patient2, hospital);
+				hospital.removeTask(task);
 				hospital.addTraining(newTraining1);
-				task := new Appointment(doctor, schedule5, patient2, hospital);
 				
-				IO`print("\n\n Checking overlap task \n");
+				IO`print("\n\n Checking overlap task \n");				
 				assertTrue(hospital.overlapTask(newTask));
 				assertTrue(hospital.overlapTask(task));
 				
 				hospital.removeTraining(newTraining1);
 				assertTrue(card hospital.getTrainingsByType(<Training>) = 0);
+				
+				surgeryNew2 := new Surgery(surgeon, schedule5, patient, hospital);
+				surgeryNew2.addSecondaryDoctor(secSurgeon);
+				hospital.removeTask(surgeryNew2);
+				
+				surgeryNew3 := new Surgery(secSurgeon, schedule5, patient, hospital);
+				surgeryNew3.addSecondaryDoctor(surgeon);
+				
+				hospital.removeTask(surgeryNew3);
+				hospital.addTask(surgeryNew2);
+				assertTrue(hospital.overlapTask(surgeryNew3));
+				hospital.removeTask(surgeryNew2);
 			);
 			
 		public testOverlapTraining : () ==> ()
