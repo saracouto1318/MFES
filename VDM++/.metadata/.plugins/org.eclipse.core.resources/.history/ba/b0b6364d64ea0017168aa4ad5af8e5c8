@@ -1,0 +1,48 @@
+class Schedule
+
+instance variables
+  private startHour: Types`Date;
+  private endHour: Types`Date;
+  
+  inv compare(startHour, endHour);
+operations	
+	public Schedule: Types`Date * Types`Date ==> Schedule
+		Schedule(d, d2) == (startHour := d; endHour := d2; return self)
+	pre compare(d, d2)
+	post startHour = d and endHour = d2;
+	
+	public setSchedule : Types`Date * Types`Date ==> ()
+		setSchedule(d1, d2) == (startHour := d1; endHour := d2;)
+	pre compare(d1, d2)
+	post startHour = d1 and endHour = d2;
+		
+	pure public getScheduleStart : () ==> Types`Date
+		getScheduleStart() == (return startHour);
+		
+	pure public getScheduleEnd : () ==> Types`Date
+		getScheduleEnd() == (return endHour);
+	
+	pure public compare : Types`Date * Types`Date ==> bool
+		compare(d1, d2) == (
+										if(d1.year = d2.year and d1.month = d2.month and d1.day = d2.day)
+											then 
+											if(d1.time.hour < d2.time.hour)
+												then return true
+											else if(d1.time.hour = d2.time.hour)
+												then return (d1.time.min <= d2.time.min)
+											else return false
+										else 
+											return false;);
+											
+	pure public compare : Type`Date * Type`Date ==> bool
+		compare(d1, d2) == (
+										if(d1.year = d2.year and d1.month = d2.month and d1.day = d2.day)
+											then 
+											if(d1.time.hour < d2.time.hour)
+												then return true
+											else if(d1.time.hour = d2.time.hour)
+												then return (d1.time.min <= d2.time.min)
+											else return false
+										else 
+											return false;);
+end Schedule

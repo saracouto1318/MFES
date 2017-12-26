@@ -1,0 +1,9 @@
+!SESSION 2017-12-26 17:22:32.057 -----------------------------------------------
+eclipse.buildId=unknown
+java.version=1.8.0_151
+java.vendor=Oracle Corporation
+BootLoader constants: OS=win32, ARCH=x86_64, WS=win32, NL=pt_PT
+Command-line arguments:  -os win32 -ws win32 -arch x86_64 -data C:\Users\vasco\Documents\MFES\VDM++
+
+!ENTRY org.overture.ide.debug 4 0 2017-12-26 18:15:47.952
+!MESSAGE Cannot launch a project (MFES) with type errors, please check the problems view
