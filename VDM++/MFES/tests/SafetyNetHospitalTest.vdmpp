@@ -20,6 +20,12 @@ instance variables
 	private date6: Types`Date := mk_Types`Date(2017, 12, 25, time6);
 	private schedule3: Schedule := new Schedule(date5, date6);
 	
+	private time7: Types`Time := mk_Types`Time(12, 10);
+	private date7: Types`Date := mk_Types`Date(2017, 11, 25, time7);
+	private time8: Types`Time := mk_Types`Time(12, 30);
+	private date8: Types`Date := mk_Types`Date(2017, 11, 25, time8);
+	private schedule4: Schedule := new Schedule(date7, date8);
+	
 	private patient: Patient := new Patient("Rua 1 Maio", "Rui", "Andrade", "123456789", "223456111", "0987654321");
 	private patient2: Patient := new Patient("Rua 1 Maio", "Diogo", "Andrade", "123321123", "911112345", "908765123");
 	private patient3: Patient := new Patient("Rua 1 Maio", "Vitor", "Andrade", "135790864", "912345334", "123432130");
@@ -113,6 +119,8 @@ operations
 		
 		public testAddRemoveMedHospital : () ==> ()
 		testAddRemoveMedHospital() == (
+						dcl newTraining : Training;
+						newTraining := new Training(<Training>, schedule4, doctor);
 						IO`print("\n Total number of doctors: ");
 						IO`print(card hospital.getMedicalAssociatedByType(<Doctor>));
 						IO`print("\n Total number of surgeons: ");
@@ -134,7 +142,7 @@ operations
 						IO`print(card hospital.getMedicalAssociatedByType(<Doctor>));
 						
 						assertTrue(card hospital.getMedicalAssociatedByType(<Doctor>) = 1);
-						hospital.addTraining(training);
+						hospital.addTraining(newTraining);
 						
 						IO`print("\n Removing a doctor \n");
 						hospital.removeMedAssociated(doctor);
