@@ -1,2 +1,6 @@
 .metadata/ 
-generated 
+coverage
+RemoteSystemsTempFiles
+.classpath
+.project
+*.class 
