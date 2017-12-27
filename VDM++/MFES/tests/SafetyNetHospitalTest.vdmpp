@@ -195,7 +195,7 @@ operations
 			
 		public testOverlapTask : () ==> ()
 			testOverlapTask() == (
-				dcl newTask : Appointment, task : Appointment, newTraining1 : Training, surgeryNew2 : Surgery, surgeryNew3 : Surgery;
+				dcl newTask : Appointment, task : Appointment, newTraining1 : Training;
 				newTask := new Appointment(doctor, schedule4, patient, hospital);
 				newTraining1 := new Training(<Training>, schedule5, doctor2);
 			
@@ -205,22 +205,11 @@ operations
 				
 				IO`print("\n\n Checking overlap task \n");				
 				assertTrue(hospital.overlapTask(newTask));
+				hospital.removeTask(newTask);
 				assertTrue(hospital.overlapTask(task));
 				
 				hospital.removeTraining(newTraining1);
 				assertTrue(card hospital.getTrainingsByType(<Training>) = 0);
-				
-				surgeryNew2 := new Surgery(surgeon, schedule5, patient, hospital);
-				surgeryNew2.addSecondaryDoctor(secSurgeon);
-				hospital.removeTask(surgeryNew2);
-				
-				surgeryNew3 := new Surgery(secSurgeon, schedule5, patient, hospital);
-				surgeryNew3.addSecondaryDoctor(surgeon);
-				
-				hospital.removeTask(surgeryNew3);
-				hospital.addTask(surgeryNew2);
-				assertTrue(hospital.overlapTask(surgeryNew3));
-				hospital.removeTask(surgeryNew2);
 			);
 			
 		public testOverlapTraining : () ==> ()

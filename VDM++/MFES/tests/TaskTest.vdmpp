@@ -194,21 +194,24 @@ operations
 			assertTrue(surgery.getMainDoctor().getCC() = "234512390");
 	);
 	
-	public testTreatment: () ==> ()
+	public testTreatment : () ==> ()
 		testTreatment() == (
 			IO`print("\n Checking treatment informations \n");
+			IO`print("\n Checking schedule functions \n");
+			assertTrue(treatment.getName() = "Fisioterapia");
+			assertTrue(treatment.getMed().getCC() = "123444655");
+		);
+		
+		public testScheduleFunctions: () ==> ()
+		testScheduleFunctions() == (
+			IO`print("\n Checking schedule functions \n");
 			assertTrue(appointment.getSchedule().lessThan(appointment.getSchedule().getScheduleStart(), appointment.getSchedule().getScheduleEnd()));
 			assertTrue(appointment.getSchedule().greaterThan(appointment.getSchedule().getScheduleEnd(), appointment.getSchedule().getScheduleStart()));
 			
 			assertTrue(appointment.getSchedule().lessThan(appointment.getSchedule().getScheduleStart(), schedule4.getScheduleStart()));
+			assertTrue(schedule4.lessThan(schedule4.getScheduleStart(), schedule5.getScheduleStart()));
 			assertTrue(appointment.getSchedule().greaterThan(schedule4.getScheduleStart(), schedule5.getScheduleStart()));
-		);
-	
-	public testScheduleFunctions : () ==> ()
-		testScheduleFunctions() == (
-			IO`print("\n Checking schedule functions \n");
-			assertTrue(treatment.getName() = "Fisioterapia");
-			assertTrue(treatment.getMed().getCC() = "123444655");
+			assertTrue(appointment.getSchedule().greaterThan(appointment.getSchedule().getScheduleStart(), schedule4.getScheduleStart()));
 		);
 		
 		public static main: () ==> ()

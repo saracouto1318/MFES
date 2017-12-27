@@ -22,7 +22,6 @@ operations
 	pure public getHospitals : () ==> set of (Hospital)
 		getHospitals() == (return hospitals);
 	
-	-- Mudar --	
 	pure public getHospitalsMoreAppointments : Types`TaskType ==> Hospital
 		getHospitalsMoreAppointments(t) == (
 																				dcl max: int, hosp: Hospital;
