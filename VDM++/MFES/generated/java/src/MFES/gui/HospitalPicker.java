@@ -2,29 +2,21 @@ package MFES.gui;
 
 import java.util.Scanner;
 
-/*
-    Compile program - When inside src folder
-        javac -classpath .;..\lib\codegen-runtime.jar; MFES\gui\Main.java
-    Run program - When inside src folder
-        java -classpath .;..\lib\codegen-runtime.jar; MFES.gui.Main
-*/
-public class HospitalPicker implements Menu {
-    private Scanner reader;
-
-    public HospitalPicker() {
-        reader = new Scanner(System.in);
+public class HospitalPicker extends Menu {
+    public HospitalPicker(Scanner reader) {
+        super(reader);
     }
 
 	@Override
 	public void show() {
-		System.out.println("\n1. Create Hospital");
-		System.out.println("2. Pick Hospital");
-		System.out.print("Option: ");
+		System.out.println("\n1. Criar Hospital");
+		System.out.println("2. Escolher Hospital");
+		System.out.print("Opcao: ");
     }
     
 	@Override
 	public Menu action() {
-        String str = reader.next();
+        String str = reader.nextLine();
         return input(str);
 	}
 
@@ -34,21 +26,18 @@ public class HospitalPicker implements Menu {
         try {
             number = Integer.parseInt(input);
         } catch(NumberFormatException ignore) {
-            System.out.println("Invalid input");
+            System.out.println("Input invalido");
             show();
             return null;
         }
 
         if(number == 1)
-            return null;
+            return new CreateHospital(reader);
         else if(number == 2)
             return null;
         return null;
 	}
 
 	@Override
-	public void destroy() {
-        reader.close();
-    }
-
+	public void destroy() {}
 }

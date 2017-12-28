@@ -1,5 +1,8 @@
 package MFES.gui;
 
+import MFES.SafetyNetHospital;
+import java.util.Scanner;
+
 /*
     Compile program - When inside src folder
         javac -classpath .;..\lib\codegen-runtime.jar; MFES\gui\Main.java
@@ -7,8 +10,11 @@ package MFES.gui;
         java -classpath .;..\lib\codegen-runtime.jar; MFES.gui.Main
 */
 public class Main {
+    private Scanner reader;
     private Menu menu;
     private boolean close;
+
+    public static SafetyNetHospital snh = new SafetyNetHospital();
 
     public static void main(String[] args) {
         System.out.println("SAFETY NET HOSPITAL");
@@ -18,8 +24,11 @@ public class Main {
     }
 
     private Main() {
+        reader = new Scanner(System.in);
+        
         close = false;
-        menu = new HospitalPicker();
+        menu = new HospitalPicker(reader);
+
     }
 
     private void run() {
