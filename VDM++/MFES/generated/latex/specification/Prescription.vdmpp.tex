@@ -10,36 +10,36 @@ operations
 \label{Prescription:8}
 @*)
  public Prescription: Types`String ==> Prescription
-  Prescription(c) == (code := c; medicaments := {}; return self)
- post code = c and medicaments = {};
+  Prescription(c) == (code := c; medicaments := {}; return (*@\vdmnotcovered{self}@*))
+ post (*@\vdmnotcovered{code}@*) = c and medicaments = (*@\vdmnotcovered{\{}@*)};
  
 (*@
 \label{getCode:12}
 @*)
  pure public getCode : () ==> Types`String
-  getCode() == (return code);
+  getCode() == (return (*@\vdmnotcovered{code}@*));
   
 (*@
 \label{addMedicament:15}
 @*)
  public addMedicament: Medicament ==> ()
-  addMedicament(m) == (medicaments := {m} union medicaments)
- pre m not in set medicaments
- post m in set medicaments;
+  addMedicament(m) == (medicaments := {m} (*@\vdmnotcovered{union}@*) (*@\vdmnotcovered{medicaments}@*))
+ pre m not in set (*@\vdmnotcovered{medicaments}@*)
+ post m in set (*@\vdmnotcovered{medicaments}@*);
   
 (*@
 \label{removeMedicament:20}
 @*)
  public removeMedicament: Medicament ==> ()
-  removeMedicament(m) == (medicaments := medicaments \ {m})
- pre m in set medicaments
- post m not in set medicaments;
+  removeMedicament(m) == (medicaments := medicaments (*@\vdmnotcovered{\textbackslash }@*) {(*@\vdmnotcovered{m}@*)})
+ pre m (*@\vdmnotcovered{in}@*) set (*@\vdmnotcovered{medicaments}@*)
+ post (*@\vdmnotcovered{m}@*) (*@\vdmnotcovered{not}@*) in set (*@\vdmnotcovered{medicaments}@*);
   
 (*@
 \label{getMedicaments:25}
 @*)
  pure public getMedicaments: () ==> set of (Medicament)
-  getMedicaments() == (return medicaments);
+  getMedicaments() == (return (*@\vdmnotcovered{medicaments}@*));
 
 end Prescription
 \end{vdmpp}
@@ -49,18 +49,18 @@ end Prescription
 Function or operation & Line & Coverage & Calls \\
 \hline
 \hline
-\hyperref[Prescription:8]{Prescription} & 8&100.0\% & 70 \\
+\hyperref[Prescription:8]{Prescription} & 8&0.0\% & 0 \\
 \hline
-\hyperref[addMedicament:15]{addMedicament} & 15&100.0\% & 29 \\
+\hyperref[addMedicament:15]{addMedicament} & 15&0.0\% & 0 \\
 \hline
-\hyperref[getCode:12]{getCode} & 12&100.0\% & 29 \\
+\hyperref[getCode:12]{getCode} & 12&0.0\% & 0 \\
 \hline
-\hyperref[getMedicaments:25]{getMedicaments} & 25&100.0\% & 203 \\
+\hyperref[getMedicaments:25]{getMedicaments} & 25&0.0\% & 0 \\
 \hline
-\hyperref[removeMedicament:20]{removeMedicament} & 20&100.0\% & 58 \\
+\hyperref[removeMedicament:20]{removeMedicament} & 20&0.0\% & 0 \\
 \hline
 \hline
-Prescription.vdmpp & & 100.0\% & 389 \\
+Prescription.vdmpp & & 0.0\% & 0 \\
 \hline
 \end{longtable}
 

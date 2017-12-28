@@ -8,14 +8,14 @@ operations
 \label{Specialty:6}
 @*)
  public Specialty : Types`String ==> Specialty
-  Specialty(n) == (name := n; return self)
- post name = n;
+  Specialty(n) == (*@\vdmnotcovered{(}@*)(*@\vdmnotcovered{name}@*) := (*@\vdmnotcovered{n}@*); (*@\vdmnotcovered{return}@*) (*@\vdmnotcovered{self}@*))
+ post (*@\vdmnotcovered{name}@*) (*@\vdmnotcovered{=}@*) (*@\vdmnotcovered{n}@*);
   
 (*@
 \label{getName:10}
 @*)
  pure public getName : () ==> Types`String
-  getName() == (return name);
+  getName() == (return (*@\vdmnotcovered{name}@*));
 
 end Specialty
 \end{vdmpp}
@@ -25,12 +25,12 @@ end Specialty
 Function or operation & Line & Coverage & Calls \\
 \hline
 \hline
-\hyperref[Specialty:6]{Specialty} & 6&100.0\% & 70 \\
+\hyperref[Specialty:6]{Specialty} & 6&0.0\% & 0 \\
 \hline
-\hyperref[getName:10]{getName} & 10&100.0\% & 70 \\
+\hyperref[getName:10]{getName} & 10&0.0\% & 0 \\
 \hline
 \hline
-Specialty.vdmpp & & 100.0\% & 140 \\
+Specialty.vdmpp & & 0.0\% & 0 \\
 \hline
 \end{longtable}
 

@@ -6,14 +6,14 @@ operations
 \label{main:4}
 @*)
  public static main: () ==> ()
-   main() == (
-    dcl taskTest: TaskTest := new TaskTest(), personTest: PersonTest := new PersonTest(), 
-     trainingTest: TrainingTest := new TrainingTest(), safetyNetTest: SafetyNetHospitalTest := new SafetyNetHospitalTest();
+   main() == (*@\vdmnotcovered{(}@*)
+    dcl taskTest: TaskTest := new TaskTest(), personTest: PersonTest := new (*@\vdmnotcovered{PersonTest}@*)(), 
+     trainingTest: TrainingTest := new TrainingTest(), safetyNetTest: SafetyNetHospitalTest := new (*@\vdmnotcovered{SafetyNetHospitalTest}@*)();
     
-    personTest.main();
-    taskTest.main();    
-    trainingTest.main();
-    safetyNetTest.main();
+    (*@\vdmnotcovered{personTest}@*).main();
+    (*@\vdmnotcovered{taskTest}@*).main();    
+    (*@\vdmnotcovered{trainingTest}@*).main();
+    (*@\vdmnotcovered{safetyNetTest}@*).main();
    );
 end RunTests
 \end{vdmpp}
@@ -23,10 +23,10 @@ end RunTests
 Function or operation & Line & Coverage & Calls \\
 \hline
 \hline
-\hyperref[main:4]{main} & 4&100.0\% & 35 \\
+\hyperref[main:4]{main} & 4&0.0\% & 0 \\
 \hline
 \hline
-RunTests.vdmpp & & 100.0\% & 35 \\
+RunTests.vdmpp & & 0.0\% & 0 \\
 \hline
 \end{longtable}
 

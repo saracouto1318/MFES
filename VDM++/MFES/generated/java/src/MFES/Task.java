@@ -9,7 +9,7 @@ public class Task {
   protected Patient patient;
   protected Hospital hospital;
   protected HealthProfessional medicalAssoc;
-  protected Object type;
+  protected Object taskType;
 
   public void cg_init_Task_1(
       final HealthProfessional med,
@@ -21,7 +21,7 @@ public class Task {
     schedule = s;
     patient = p;
     hospital = h;
-    type = t;
+    taskType = t;
     medicalAssoc = med;
     return;
   }
@@ -53,7 +53,7 @@ public class Task {
 
   public Object getType() {
 
-    return type;
+    return taskType;
   }
 
   public HealthProfessional getMedAssoc() {
@@ -84,8 +84,8 @@ public class Task {
         + Utils.toString(hospital)
         + ", medicalAssoc := "
         + Utils.toString(medicalAssoc)
-        + ", type := "
-        + Utils.toString(type)
+        + ", taskType := "
+        + Utils.toString(taskType)
         + "}";
   }
 }

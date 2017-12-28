@@ -4,14 +4,14 @@ instance variables
   protected patient:[Patient];
   protected hospital:[Hospital];
   protected medicalAssoc:[HealthProfessional];
-  protected type : Types`TaskType;
+  protected taskType : Types`TaskType;
   
   inv patient <> nil;
   inv hospital <> nil;
-  inv type <> nil;
+  inv taskType <> nil;
 operations
 	public Task: HealthProfessional * Schedule * Patient * Hospital * Types`TaskType ==> Task
-		Task(med, s, p, h, t) == (schedule := s; patient := p; hospital := h; type := t; medicalAssoc := med; return self)
+		Task(med, s, p, h, t) == (schedule := s; patient := p; hospital := h; taskType := t; medicalAssoc := med; return self)
 	pre med.getCC() <> p.getCC()
 	post schedule = s and patient = p and hospital = h and medicalAssoc = med;
 	
@@ -25,7 +25,7 @@ operations
 		getHospital() == (return hospital);
 		
 	pure public getType: () ==> Types`TaskType
-		getType() == (return type);
+		getType() == (return taskType);
 		
 	pure public getMedAssoc : () ==> HealthProfessional
 		getMedAssoc() == (return medicalAssoc);

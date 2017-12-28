@@ -6,47 +6,47 @@ instance variables
  private purpose:[Types`Purpose];
  private schedule:[Schedule];
 
- inv medicalAssociated <> nil;
- inv purpose <> nil;
- inv schedule <> nil;
+ inv (*@\vdmnotcovered{medicalAssociated}@*) (*@\vdmnotcovered{<>}@*) (*@\vdmnotcovered{nil}@*);
+ inv purpose (*@\vdmnotcovered{<>}@*) (*@\vdmnotcovered{nil}@*);
+ inv schedule (*@\vdmnotcovered{<>}@*) (*@\vdmnotcovered{nil}@*);
 
 operations
 (*@
 \label{Training:13}
 @*)
  public Training: Types`Purpose * Schedule * HealthProfessional ==> Training
-   Training(p, s, h) == (purpose := p; schedule := s; medicalAssociated := h; return self)
- post purpose = p and schedule = s and medicalAssociated = h;
+   Training(p, s, h) == (purpose := (*@\vdmnotcovered{p}@*); (*@\vdmnotcovered{schedule}@*) := s; (*@\vdmnotcovered{medicalAssociated}@*) := h; return (*@\vdmnotcovered{self}@*))
+ post purpose (*@\vdmnotcovered{=}@*) p (*@\vdmnotcovered{and}@*) schedule = (*@\vdmnotcovered{s}@*) (*@\vdmnotcovered{and}@*) (*@\vdmnotcovered{medicalAssociated}@*) (*@\vdmnotcovered{=}@*) (*@\vdmnotcovered{h}@*);
 
 (*@
 \label{getSchedule:17}
 @*)
  pure public getSchedule : () ==> Schedule
-   getSchedule() == (return schedule);
+   getSchedule() == (return (*@\vdmnotcovered{schedule}@*));
  
 (*@
 \label{getPurpose:20}
 @*)
   pure public getPurpose : () ==> Types`Purpose
-  getPurpose() == (return purpose); 
+  getPurpose() == (*@\vdmnotcovered{(}@*)(*@\vdmnotcovered{return}@*) (*@\vdmnotcovered{purpose}@*)); 
  
 (*@
 \label{getMedAssoc:23}
 @*)
  pure public getMedAssoc : () ==> HealthProfessional
-  getMedAssoc() == (return medicalAssociated); 
+  getMedAssoc() == ((*@\vdmnotcovered{return}@*) (*@\vdmnotcovered{medicalAssociated}@*)); 
 
 (*@
 \label{setSchedule:26}
 @*)
  public setSchedule : Schedule ==> ()
-   setSchedule(s) == (schedule := s);
+   setSchedule(s) == (schedule := (*@\vdmnotcovered{s}@*));
  
 (*@
 \label{setPurpose:29}
 @*)
  public setPurpose : Types`Purpose ==> ()
-   setPurpose(p) == (purpose := p);
+   setPurpose(p) == (purpose := (*@\vdmnotcovered{p}@*));
  
  end Training
 \end{vdmpp}
@@ -56,20 +56,20 @@ operations
 Function or operation & Line & Coverage & Calls \\
 \hline
 \hline
-\hyperref[Training:13]{Training} & 13&100.0\% & 153 \\
+\hyperref[Training:13]{Training} & 13&0.0\% & 0 \\
 \hline
-\hyperref[getMedAssoc:23]{getMedAssoc} & 23&100.0\% & 138 \\
+\hyperref[getMedAssoc:23]{getMedAssoc} & 23&0.0\% & 0 \\
 \hline
-\hyperref[getPurpose:20]{getPurpose} & 20&100.0\% & 72 \\
+\hyperref[getPurpose:20]{getPurpose} & 20&0.0\% & 0 \\
 \hline
-\hyperref[getSchedule:17]{getSchedule} & 17&100.0\% & 588 \\
+\hyperref[getSchedule:17]{getSchedule} & 17&0.0\% & 0 \\
 \hline
-\hyperref[setPurpose:29]{setPurpose} & 29&100.0\% & 27 \\
+\hyperref[setPurpose:29]{setPurpose} & 29&0.0\% & 0 \\
 \hline
-\hyperref[setSchedule:26]{setSchedule} & 26&100.0\% & 27 \\
+\hyperref[setSchedule:26]{setSchedule} & 26&0.0\% & 0 \\
 \hline
 \hline
-Training.vdmpp & & 100.0\% & 1005 \\
+Training.vdmpp & & 0.0\% & 0 \\
 \hline
 \end{longtable}
 

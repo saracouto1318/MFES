@@ -8,7 +8,7 @@ types
  public Purpose = <Training> | <AddSkills>;
  public Time :: hour : nat
          min: nat
- inv t == t.hour >= 0 and t.hour < 24 and t.min >= 0 and t.min < 60;
+ inv t == t.hour >= 0 and (*@\vdmnotcovered{t}@*).(*@\vdmnotcovered{hour}@*) < (*@\vdmnotcovered{24}@*) (*@\vdmnotcovered{and}@*) t.min (*@\vdmnotcovered{>=}@*) (*@\vdmnotcovered{0}@*) and (*@\vdmnotcovered{t}@*).min (*@\vdmnotcovered{<}@*) (*@\vdmnotcovered{60}@*);
  public Date ::  year: nat1
          month: nat1
          day: nat1
@@ -20,13 +20,13 @@ operations
 \label{daysOfMonth:18}
 @*)
  public static pure daysOfMonth : nat1 ==> nat1
-  daysOfMonth(month) == (
-              if(month = 1 or month = 3 or month = 5 or month = 7 or month = 8 or month = 10 or month = 12)
-               then return 31
-              else if(month = 4 or month = 6 or month = 9 or month = 11)
-               then return 30
+  daysOfMonth(month) == (*@\vdmnotcovered{(}@*)
+              if(month = 1 or month = 3 or month = 5 or month = 7 or month = 8 or month = 10 or month = (*@\vdmnotcovered{12}@*))
+               then (*@\vdmnotcovered{return}@*) (*@\vdmnotcovered{31}@*)
+              else if((*@\vdmnotcovered{month}@*) (*@\vdmnotcovered{=}@*) 4 or (*@\vdmnotcovered{month}@*) = 6 (*@\vdmnotcovered{or}@*) (*@\vdmnotcovered{month}@*) = (*@\vdmnotcovered{9}@*) (*@\vdmnotcovered{or}@*) month (*@\vdmnotcovered{=}@*) (*@\vdmnotcovered{11}@*))
+               then return (*@\vdmnotcovered{30}@*)
               else
-               return 28;);
+               (*@\vdmnotcovered{return}@*) (*@\vdmnotcovered{28}@*););
                 
 end Types
 \end{vdmpp}
@@ -36,10 +36,10 @@ end Types
 Function or operation & Line & Coverage & Calls \\
 \hline
 \hline
-\hyperref[daysOfMonth:18]{daysOfMonth} & 18&100.0\% & 1710 \\
+\hyperref[daysOfMonth:18]{daysOfMonth} & 18&0.0\% & 0 \\
 \hline
 \hline
-Types.vdmpp & & 100.0\% & 1710 \\
+Types.vdmpp & & 0.0\% & 0 \\
 \hline
 \end{longtable}
 

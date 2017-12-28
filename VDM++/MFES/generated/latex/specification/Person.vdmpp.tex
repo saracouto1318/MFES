@@ -12,20 +12,20 @@ operations
 \label{Person:10}
 @*)
  public Person: Types`String * Types`String * Types`String * Types`String * Types`String ==> Person
-  Person(a, fn, ln, c, pn) == ( address := a; firstName := fn; lastName := ln; cc := c; phoneNumber := pn; return self)
- post address = a and firstName = fn and lastName = ln and cc = c and phoneNumber = pn;
+  Person(a, fn, ln, c, pn) == ( address := (*@\vdmnotcovered{a}@*); (*@\vdmnotcovered{firstName}@*) := fn; (*@\vdmnotcovered{lastName}@*) := ln; cc := c; (*@\vdmnotcovered{phoneNumber}@*) := pn; (*@\vdmnotcovered{return}@*) (*@\vdmnotcovered{self}@*))
+ post (*@\vdmnotcovered{address}@*) (*@\vdmnotcovered{=}@*) a and firstName = (*@\vdmnotcovered{fn}@*) and lastName = ln and cc = c and phoneNumber = (*@\vdmnotcovered{pn}@*);
   
 (*@
 \label{getCC:14}
 @*)
  pure public getCC : () ==> Types`String
-  getCC() == (return cc);
+  getCC() == (return (*@\vdmnotcovered{cc}@*));
   
 (*@
 \label{getInfo:17}
 @*)
  pure public getInfo: () ==> Types`String
-  getInfo() == (return "Name: " ^ firstName ^ " " ^ lastName ^ "\nAddress: " ^ address ^ "\nPhone Number: " ^ phoneNumber ^ "\nCC: " ^ cc);
+  getInfo() == (return "Name: " ^ firstName ^ " " ^ lastName ^ "\nAddress: " ^ address ^ "\nPhone Number: " ^ phoneNumber ^ "\nCC: " (*@\vdmnotcovered{\^{}}@*) (*@\vdmnotcovered{cc}@*));
 
 end Person
 \end{vdmpp}
@@ -35,14 +35,14 @@ end Person
 Function or operation & Line & Coverage & Calls \\
 \hline
 \hline
-\hyperref[Person:10]{Person} & 10&100.0\% & 1732 \\
+\hyperref[Person:10]{Person} & 10&0.0\% & 0 \\
 \hline
-\hyperref[getCC:14]{getCC} & 14&100.0\% & 3247 \\
+\hyperref[getCC:14]{getCC} & 14&0.0\% & 0 \\
 \hline
-\hyperref[getInfo:17]{getInfo} & 17&100.0\% & 175 \\
+\hyperref[getInfo:17]{getInfo} & 17&0.0\% & 0 \\
 \hline
 \hline
-Person.vdmpp & & 100.0\% & 5154 \\
+Person.vdmpp & & 0.0\% & 0 \\
 \hline
 \end{longtable}
 

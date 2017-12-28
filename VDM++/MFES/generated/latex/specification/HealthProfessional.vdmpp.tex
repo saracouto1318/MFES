@@ -7,73 +7,73 @@ instance variables
   private patients : set of(Patient);
  private type : Types`Type;
  
- inv card patients >= 0;
-  inv card specialties < 5;
- inv type <> nil;
+ inv card patients (*@\vdmnotcovered{>=}@*) (*@\vdmnotcovered{0}@*);
+  inv card specialties < (*@\vdmnotcovered{5}@*);
+ inv type (*@\vdmnotcovered{<>}@*) (*@\vdmnotcovered{nil}@*);
 operations
 (*@
 \label{HealthProfessional:13}
 @*)
  public HealthProfessional: Types`String * Types`String * Types`String * Types`String * Types`String * Types`String * Types`Type ==> HealthProfessional
-  HealthProfessional(a, fn, ln, c, pn, s, t) == (medicalNumber := s; type := t; specialties := {}; patients := {}; Person(a, fn, ln, c, pn))
- pre t <> nil
- post medicalNumber = s and type = t and specialties = {} and patients = {};
+  HealthProfessional(a, fn, ln, c, pn, s, t) == (medicalNumber := s; type := t; specialties := (*@\vdmnotcovered{\{}@*)}; patients := {}; Person(a, fn, ln, c, (*@\vdmnotcovered{pn}@*)))
+ pre t <> (*@\vdmnotcovered{nil}@*)
+ post medicalNumber = s and type = t and specialties = {} and patients = (*@\vdmnotcovered{\{}@*)};
  
 (*@
 \label{getMedicalNumber:18}
 @*)
  pure public getMedicalNumber: () ==> Types`String
-  getMedicalNumber() == (return medicalNumber);
+  getMedicalNumber() == (return (*@\vdmnotcovered{medicalNumber}@*));
  
 (*@
 \label{getSpecialties:21}
 @*)
  pure public getSpecialties: () ==> set of (Specialty)
-  getSpecialties() == (return specialties);
+  getSpecialties() == (return (*@\vdmnotcovered{specialties}@*));
  
 (*@
 \label{getPatients:24}
 @*)
  pure public getPatients: () ==> set of (Patient)
-  getPatients() == (return patients);
+  getPatients() == ((*@\vdmnotcovered{return}@*) (*@\vdmnotcovered{patients}@*));
   
 (*@
 \label{getType:27}
 @*)
  pure public getType : () ==> Types`Type
-  getType() == (return type);
+  getType() == (*@\vdmnotcovered{(}@*)(*@\vdmnotcovered{return}@*) (*@\vdmnotcovered{type}@*));
   
 (*@
 \label{removeSpecialty:30}
 @*)
  public removeSpecialty: Specialty ==> ()
-  removeSpecialty(s) == (specialties := specialties \ {s})
- pre s in set specialties
- post s not in set specialties;
+  removeSpecialty(s) == (*@\vdmnotcovered{(}@*)(*@\vdmnotcovered{specialties}@*) := (*@\vdmnotcovered{specialties}@*) (*@\vdmnotcovered{\textbackslash }@*) {(*@\vdmnotcovered{s}@*)})
+ pre s (*@\vdmnotcovered{in}@*) set (*@\vdmnotcovered{specialties}@*)
+ post s not in set (*@\vdmnotcovered{specialties}@*);
   
 (*@
 \label{addSpecialty:35}
 @*)
  public addSpecialty: Specialty ==> ()
-  addSpecialty(s) == (specialties := specialties union {s})
- pre s not in set specialties
- post s in set specialties;
+  addSpecialty(s) == (specialties := (*@\vdmnotcovered{specialties}@*) (*@\vdmnotcovered{union}@*) {(*@\vdmnotcovered{s}@*)})
+ pre s (*@\vdmnotcovered{not}@*) in set (*@\vdmnotcovered{specialties}@*)
+ post s (*@\vdmnotcovered{in}@*) set (*@\vdmnotcovered{specialties}@*);
  
 (*@
 \label{addPatient:40}
 @*)
  public addPatient : Patient ==> ()
-  addPatient(p) == (patients :=  patients union {p})
- pre p not in set patients
- post p in set patients;
+  addPatient(p) == ((*@\vdmnotcovered{patients}@*) :=  (*@\vdmnotcovered{patients}@*) (*@\vdmnotcovered{union}@*) {(*@\vdmnotcovered{p}@*)})
+ pre p not in set (*@\vdmnotcovered{patients}@*)
+ post p (*@\vdmnotcovered{in}@*) set (*@\vdmnotcovered{patients}@*);
  
 (*@
 \label{removePatient:45}
 @*)
  public removePatient : Patient ==> ()
-  removePatient(p) == (patients := patients \ {p})
- pre p in set patients
- post p not in set patients;
+  removePatient(p) == (*@\vdmnotcovered{(}@*)(*@\vdmnotcovered{patients}@*) := patients (*@\vdmnotcovered{\textbackslash }@*) {(*@\vdmnotcovered{p}@*)})
+ pre p in set (*@\vdmnotcovered{patients}@*)
+ post p not in set (*@\vdmnotcovered{patients}@*);
 
 end HealthProfessional
 \end{vdmpp}
@@ -83,26 +83,26 @@ end HealthProfessional
 Function or operation & Line & Coverage & Calls \\
 \hline
 \hline
-\hyperref[HealthProfessional:13]{HealthProfessional} & 13&100.0\% & 1134 \\
+\hyperref[HealthProfessional:13]{HealthProfessional} & 13&0.0\% & 0 \\
 \hline
-\hyperref[addPatient:40]{addPatient} & 40&100.0\% & 231 \\
+\hyperref[addPatient:40]{addPatient} & 40&0.0\% & 0 \\
 \hline
-\hyperref[addSpecialty:35]{addSpecialty} & 35&100.0\% & 70 \\
+\hyperref[addSpecialty:35]{addSpecialty} & 35&0.0\% & 0 \\
 \hline
-\hyperref[getMedicalNumber:18]{getMedicalNumber} & 18&100.0\% & 140 \\
+\hyperref[getMedicalNumber:18]{getMedicalNumber} & 18&0.0\% & 0 \\
 \hline
-\hyperref[getPatients:24]{getPatients} & 24&100.0\% & 672 \\
+\hyperref[getPatients:24]{getPatients} & 24&0.0\% & 0 \\
 \hline
-\hyperref[getSpecialties:21]{getSpecialties} & 21&100.0\% & 385 \\
+\hyperref[getSpecialties:21]{getSpecialties} & 21&0.0\% & 0 \\
 \hline
-\hyperref[getType:27]{getType} & 27&100.0\% & 2660 \\
+\hyperref[getType:27]{getType} & 27&0.0\% & 0 \\
 \hline
-\hyperref[removePatient:45]{removePatient} & 45&100.0\% & 35 \\
+\hyperref[removePatient:45]{removePatient} & 45&0.0\% & 0 \\
 \hline
-\hyperref[removeSpecialty:30]{removeSpecialty} & 30&100.0\% & 35 \\
+\hyperref[removeSpecialty:30]{removeSpecialty} & 30&0.0\% & 0 \\
 \hline
 \hline
-HealthProfessional.vdmpp & & 100.0\% & 5362 \\
+HealthProfessional.vdmpp & & 0.0\% & 0 \\
 \hline
 \end{longtable}
 

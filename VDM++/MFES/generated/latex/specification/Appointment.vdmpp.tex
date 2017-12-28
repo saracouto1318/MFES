@@ -5,56 +5,56 @@ instance variables
   private prescriptions:set of (Prescription);
   private priority : Types`Priority;
   
-  inv priority <> nil;
-  inv card prescriptions >= 0;
-  inv medicalAssoc.getType() = <Doctor>;
+  inv (*@\vdmnotcovered{priority}@*) <> (*@\vdmnotcovered{nil}@*);
+  inv (*@\vdmnotcovered{card}@*) (*@\vdmnotcovered{prescriptions}@*) (*@\vdmnotcovered{>=}@*) (*@\vdmnotcovered{0}@*);
+  inv (*@\vdmnotcovered{medicalAssoc}@*).(*@\vdmnotcovered{getType}@*)() (*@\vdmnotcovered{=}@*) (*@\vdmnotcovered{<Doctor>}@*);
 operations
 (*@
 \label{Appointment:11}
 @*)
  public Appointment: HealthProfessional * Schedule * Patient * Hospital==> Appointment
-  Appointment(d, s, p, h) == (medicalAssoc := d; priority := <Medium>; prescriptions := {}; Task(d, s, p, h, <Appointment>))
- post medicalAssoc = d and prescriptions = {} and priority = <Medium>;
+  Appointment(d, s, p, h) == (*@\vdmnotcovered{(}@*)(*@\vdmnotcovered{medicalAssoc}@*) := (*@\vdmnotcovered{d}@*); (*@\vdmnotcovered{priority}@*) := (*@\vdmnotcovered{<Medium>}@*); (*@\vdmnotcovered{prescriptions}@*) := (*@\vdmnotcovered{\{}@*)}; (*@\vdmnotcovered{Task}@*)((*@\vdmnotcovered{d}@*), (*@\vdmnotcovered{s}@*), (*@\vdmnotcovered{p}@*), (*@\vdmnotcovered{h}@*), (*@\vdmnotcovered{<Appointment>}@*)))
+ post medicalAssoc = (*@\vdmnotcovered{d}@*) (*@\vdmnotcovered{and}@*) (*@\vdmnotcovered{prescriptions}@*) = (*@\vdmnotcovered{\{}@*)} (*@\vdmnotcovered{and}@*) (*@\vdmnotcovered{priority}@*) = (*@\vdmnotcovered{<Medium>}@*);
  
  public Appointment: HealthProfessional * Types`Priority * Schedule * Patient * Hospital ==> Appointment
-  Appointment(d, p, s, pat, h) == (medicalAssoc := d; priority := p; prescriptions := {}; Task(d, s, pat, h, <Urgencies>))
- pre p <> nil
- post medicalAssoc = d and prescriptions = {} and priority = p;
+  Appointment(d, p, s, pat, h) == (medicalAssoc := d; priority := (*@\vdmnotcovered{p}@*); (*@\vdmnotcovered{prescriptions}@*) := (*@\vdmnotcovered{\{}@*)}; (*@\vdmnotcovered{Task}@*)((*@\vdmnotcovered{d}@*), (*@\vdmnotcovered{s}@*), (*@\vdmnotcovered{pat}@*), (*@\vdmnotcovered{h}@*), (*@\vdmnotcovered{<Urgencies>}@*)))
+ pre p <> (*@\vdmnotcovered{nil}@*)
+ post (*@\vdmnotcovered{medicalAssoc}@*) = d and prescriptions (*@\vdmnotcovered{=}@*) {} (*@\vdmnotcovered{and}@*) (*@\vdmnotcovered{priority}@*) = (*@\vdmnotcovered{p}@*);
 
 (*@
 \label{getPriority:20}
 @*)
  pure public getPriority : () ==> Types`Priority
-  getPriority() == (return priority);
+  getPriority() == ((*@\vdmnotcovered{return}@*) (*@\vdmnotcovered{priority}@*));
  
 (*@
 \label{getPrescriptions:23}
 @*)
   pure public getPrescriptions : () ==> set of (Prescription)
-   getPrescriptions() == (return prescriptions);
+   getPrescriptions() == ((*@\vdmnotcovered{return}@*) (*@\vdmnotcovered{prescriptions}@*));
   
 (*@
 \label{setPriority:26}
 @*)
   public setPriority : Types`Priority ==> ()
-   setPriority(p) == (priority := p)
-  pre type = <Urgencies>;
+   setPriority(p) == (*@\vdmnotcovered{(}@*)(*@\vdmnotcovered{priority}@*) := (*@\vdmnotcovered{p}@*))
+  pre taskType = (*@\vdmnotcovered{<Urgencies>}@*);
   
 (*@
 \label{addPrescription:30}
 @*)
   public addPrescription : Prescription ==> ()
-   addPrescription(p) == (prescriptions := prescriptions union {p})
-  pre p not in set prescriptions
-  post p in set prescriptions;
+   addPrescription(p) == (prescriptions := prescriptions (*@\vdmnotcovered{union}@*) (*@\vdmnotcovered{\{}@*)(*@\vdmnotcovered{p}@*)})
+  pre p (*@\vdmnotcovered{not}@*) in set (*@\vdmnotcovered{prescriptions}@*)
+  post (*@\vdmnotcovered{p}@*) in set (*@\vdmnotcovered{prescriptions}@*);
                  
 (*@
 \label{removePrescription:35}
 @*)
  public removePrescription : Prescription ==> ()
-   removePrescription(p) == (prescriptions := prescriptions \ {p})
-  pre p in set prescriptions
-  post p not in set prescriptions;
+   removePrescription(p) == (prescriptions := prescriptions (*@\vdmnotcovered{\textbackslash }@*) (*@\vdmnotcovered{\{}@*)(*@\vdmnotcovered{p}@*)})
+  pre p (*@\vdmnotcovered{in}@*) set (*@\vdmnotcovered{prescriptions}@*)
+  post (*@\vdmnotcovered{p}@*) (*@\vdmnotcovered{not}@*) in set (*@\vdmnotcovered{prescriptions}@*);
    
 end Appointment
 \end{vdmpp}
@@ -64,20 +64,20 @@ end Appointment
 Function or operation & Line & Coverage & Calls \\
 \hline
 \hline
-\hyperref[Appointment:11]{Appointment} & 11&100.0\% & 132 \\
+\hyperref[Appointment:11]{Appointment} & 11&0.0\% & 0 \\
 \hline
-\hyperref[addPrescription:30]{addPrescription} & 30&100.0\% & 116 \\
+\hyperref[addPrescription:30]{addPrescription} & 30&0.0\% & 0 \\
 \hline
-\hyperref[getPrescriptions:23]{getPrescriptions} & 23&100.0\% & 348 \\
+\hyperref[getPrescriptions:23]{getPrescriptions} & 23&0.0\% & 0 \\
 \hline
-\hyperref[getPriority:20]{getPriority} & 20&100.0\% & 87 \\
+\hyperref[getPriority:20]{getPriority} & 20&0.0\% & 0 \\
 \hline
-\hyperref[removePrescription:35]{removePrescription} & 35&100.0\% & 116 \\
+\hyperref[removePrescription:35]{removePrescription} & 35&0.0\% & 0 \\
 \hline
-\hyperref[setPriority:26]{setPriority} & 26&100.0\% & 58 \\
+\hyperref[setPriority:26]{setPriority} & 26&0.0\% & 0 \\
 \hline
 \hline
-Appointment.vdmpp & & 100.0\% & 857 \\
+Appointment.vdmpp & & 0.0\% & 0 \\
 \hline
 \end{longtable}
 
