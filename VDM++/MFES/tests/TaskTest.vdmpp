@@ -251,7 +251,7 @@ operations
 		
 		public testScheduleFunctions: () ==> ()
 		testScheduleFunctions() == (
-			dcl sch : Schedule, sch1 : Schedule, dateNew: Types`Date, dateNew2 : Types`Date;
+			dcl sch : Schedule, sch1 : Schedule, sch2 : Schedule, dateNew: Types`Date, dateNew2 : Types`Date;
 			dateNew := mk_Types`Date(2017, 10, 25, time1);
 			dateNew2 := mk_Types`Date(2017, 10, 25, time2);
 			sch := new Schedule(dateNew, dateNew2);
@@ -259,6 +259,10 @@ operations
 			dateNew := mk_Types`Date(2017, 10, 26, time1);
 			dateNew2 := mk_Types`Date(2017, 10, 26, time2);
 			sch1 := new Schedule(dateNew, dateNew2);
+			
+			dateNew := mk_Types`Date(2017, 11, 26, time1);
+			dateNew2 := mk_Types`Date(2017, 11, 26, time2);
+			sch2 := new Schedule(dateNew, dateNew2);
 			
 			IO`print("\n Checking schedule functions \n");
 			assertTrue(appointment.getSchedule().lessThan(appointment.getSchedule().getScheduleStart(), appointment.getSchedule().getScheduleEnd()));
@@ -268,12 +272,15 @@ operations
 			assertTrue(not(schedule4.lessThan(schedule4.getScheduleStart(), schedule5.getScheduleStart())));
 			assertTrue(sch.lessThan(sch.getScheduleStart(), schedule.getScheduleStart()));
 			assertTrue(not(sch1.lessThan(sch1.getScheduleStart(), sch.getScheduleStart())));
+			assertTrue(not(schedule3.lessThan(schedule3.getScheduleStart(), sch2.getScheduleStart())));
+			assertTrue(sch.lessThan(sch.getScheduleStart(), sch1.getScheduleStart()));
 			
 			assertTrue(appointment.getSchedule().greaterThan(schedule4.getScheduleStart(), schedule5.getScheduleStart()));
 			assertTrue(not(appointment.getSchedule().greaterThan(appointment.getSchedule().getScheduleStart(), schedule4.getScheduleStart())));
 			assertTrue(not(sch.greaterThan(sch.getScheduleStart(), schedule.getScheduleStart())));
 			assertTrue(sch1.greaterThan(sch1.getScheduleStart(), sch.getScheduleStart()));
 			assertTrue(schedule.greaterThan(schedule.getScheduleStart(), sch.getScheduleStart()));
+			assertTrue(not(sch.greaterThan(sch.getScheduleStart(), sch1.getScheduleStart())));
 		);
 		
 		public static main: () ==> ()

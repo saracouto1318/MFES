@@ -78,11 +78,11 @@ operations
  public removeMedAssociated: HealthProfessional ==> ()
   removeMedAssociated(d) == (
    for all t in set tasks do
-    if(d (*@\vdmnotcovered{=}@*) (*@\vdmnotcovered{t}@*).(*@\vdmnotcovered{getMedAssoc}@*)())
-     then removeTask((*@\vdmnotcovered{t}@*));
+    if(d = t.getMedAssoc())
+     then removeTask(t);
    for all t in set trainings do
-    (*@\vdmnotcovered{if}@*)((*@\vdmnotcovered{d}@*) = t.(*@\vdmnotcovered{getMedAssoc}@*)())
-     then removeTraining((*@\vdmnotcovered{t}@*));
+    if(d = t.getMedAssoc())
+     then removeTraining(t);
    for all a in set agenda do
     if(a.getHealthProfessional().getCC() = d.getCC())
      then removeAgenda(a);
@@ -91,18 +91,7 @@ operations
  post d not in set medicalAssociated;
  
 (*@
-\label{addAgenda:68}
-@*)
- public addAgenda : HealthProfessional * Schedule ==> ()
-  addAgenda(h, sch) == (*@\vdmnotcovered{(}@*)
-   (*@\vdmnotcovered{for}@*) all a in set (*@\vdmnotcovered{agenda}@*) do
-    (*@\vdmnotcovered{if}@*)((*@\vdmnotcovered{a}@*).(*@\vdmnotcovered{getHealthProfessional}@*)() = (*@\vdmnotcovered{h}@*))
-     then a.addSchedule((*@\vdmnotcovered{sch}@*));)
- pre (*@\vdmnotcovered{sch}@*) not in set getAgenda((*@\vdmnotcovered{h}@*))
- post sch in set getAgenda((*@\vdmnotcovered{h}@*));
- 
-(*@
-\label{addTask:76}
+\label{addTask:68}
 @*)
  public addTask: Task ==> ()
   addTask(d) == (
@@ -116,7 +105,7 @@ operations
  post d in set tasks and d.getPatient() in set d.getMedAssoc().getPatients() and d.getSchedule() not in set getAgenda(d.getMedAssoc());
   
 (*@
-\label{removeTask:87}
+\label{removeTask:79}
 @*)
  public removeTask: Task ==> ()
   removeTask(d) == (
@@ -128,7 +117,7 @@ operations
  post d not in set tasks and d.getSchedule() in set getAgenda(d.getMedAssoc());
  
 (*@
-\label{addTraining:96}
+\label{addTraining:88}
 @*)
  public addTraining: Training ==> ()
   addTraining(d) == (
@@ -140,7 +129,7 @@ operations
  post d in set trainings and d.getSchedule() not in set getAgenda(d.getMedAssoc());
   
 (*@
-\label{removeTraining:105}
+\label{removeTraining:97}
 @*)
  public removeTraining: Training ==> ()
   removeTraining(d) == (
@@ -152,7 +141,7 @@ operations
  post d not in set trainings and d.getSchedule() in set getAgenda(d.getMedAssoc());
  
 (*@
-\label{getTasksByType:114}
+\label{getTasksByType:106}
 @*)
  pure public getTasksByType: Types`TaskType ==> set of (Task)
   getTasksByType(s) == (
@@ -165,7 +154,7 @@ operations
    return tasksTotal);
               
 (*@
-\label{getTrainingsByType:124}
+\label{getTrainingsByType:116}
 @*)
  pure public getTrainingsByType: Types`Purpose ==> set of (Training)
   getTrainingsByType(s) == (
@@ -178,7 +167,7 @@ operations
    return train);
 
 (*@
-\label{getMedicalAssociatedByType:134}
+\label{getMedicalAssociatedByType:126}
 @*)
  pure public getMedicalAssociatedByType: Types`Type ==> set of (HealthProfessional)
   getMedicalAssociatedByType(type) == (
@@ -197,40 +186,38 @@ end Hospital
 Function or operation & Line & Coverage & Calls \\
 \hline
 \hline
-\hyperref[Hospital:17]{Hospital} & 17&100.0\% & 186 \\
+\hyperref[Hospital:17]{Hospital} & 17&100.0\% & 213 \\
 \hline
-\hyperref[addAgenda:68]{addAgenda} & 68&0.0\% & 0 \\
+\hyperref[addMedAssociated:44]{addMedAssociated} & 44&100.0\% & 211 \\
 \hline
-\hyperref[addMedAssociated:44]{addMedAssociated} & 44&100.0\% & 171 \\
+\hyperref[addTask:68]{addTask} & 68&100.0\% & 32 \\
 \hline
-\hyperref[addTask:76]{addTask} & 76&100.0\% & 103 \\
+\hyperref[addTraining:88]{addTraining} & 88&100.0\% & 4 \\
 \hline
-\hyperref[addTraining:96]{addTraining} & 96&100.0\% & 3 \\
-\hline
-\hyperref[getAddress:26]{getAddress} & 26&100.0\% & 72 \\
+\hyperref[getAddress:26]{getAddress} & 26&100.0\% & 81 \\
 \hline
 \hyperref[getAgenda:32]{getAgenda} & 32&100.0\% & 5 \\
 \hline
-\hyperref[getAgendas:29]{getAgendas} & 29&100.0\% & 42 \\
+\hyperref[getAgendas:29]{getAgendas} & 29&100.0\% & 53 \\
 \hline
-\hyperref[getMedicalAssociatedByType:134]{getMedicalAssociatedByType} & 134&100.0\% & 223 \\
+\hyperref[getMedicalAssociatedByType:126]{getMedicalAssociatedByType} & 126&100.0\% & 66 \\
 \hline
-\hyperref[getName:23]{getName} & 23&100.0\% & 114 \\
+\hyperref[getName:23]{getName} & 23&100.0\% & 140 \\
 \hline
-\hyperref[getTasksByType:114]{getTasksByType} & 114&100.0\% & 124 \\
+\hyperref[getTasksByType:106]{getTasksByType} & 106&100.0\% & 48 \\
 \hline
-\hyperref[getTrainingsByType:124]{getTrainingsByType} & 124&100.0\% & 34 \\
+\hyperref[getTrainingsByType:116]{getTrainingsByType} & 116&100.0\% & 6 \\
 \hline
-\hyperref[removeAgenda:39]{removeAgenda} & 39&100.0\% & 12 \\
+\hyperref[removeAgenda:39]{removeAgenda} & 39&100.0\% & 15 \\
 \hline
-\hyperref[removeMedAssociated:53]{removeMedAssociated} & 53&65.8\% & 60 \\
+\hyperref[removeMedAssociated:53]{removeMedAssociated} & 53&100.0\% & 75 \\
 \hline
-\hyperref[removeTask:87]{removeTask} & 87&100.0\% & 4 \\
+\hyperref[removeTask:79]{removeTask} & 79&100.0\% & 4 \\
 \hline
-\hyperref[removeTraining:105]{removeTraining} & 105&100.0\% & 45 \\
+\hyperref[removeTraining:97]{removeTraining} & 97&100.0\% & 4 \\
 \hline
 \hline
-Hospital.vdmpp & & 91.9\% & 1198 \\
+Hospital.vdmpp & & 100.0\% & 957 \\
 \hline
 \end{longtable}
 

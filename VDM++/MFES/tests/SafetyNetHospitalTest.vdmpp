@@ -55,6 +55,7 @@ instance variables
 	
 	private purpose: Types`Purpose := <Training>;
 	private training : Training := new Training(purpose, schedule3, nurse);
+	private train : Training := new Training(purpose, schedule4, doctor);
 operations
 	private assertTrue: bool ==> ()
 		assertTrue(cond) == return
@@ -116,6 +117,7 @@ operations
 						
 						agenda1.addSchedule(schedule);
 						agenda1.addSchedule(schedule3);
+						agenda1.addSchedule(schedule4);
 						
 						agenda2.addSchedule(schedule);
 						agenda2.addSchedule(schedule3);
@@ -126,7 +128,7 @@ operations
 						
 						agenda5.addSchedule(schedule);
 						
-						assertTrue(card agenda1.getAgenda() = 2);
+						assertTrue(card agenda1.getAgenda() = 3);
 						assertTrue(card agenda2.getAgenda() = 2);
 						assertTrue(card agenda3.getAgenda() = 1);
 						assertTrue(card agenda4.getAgenda() = 1);
@@ -153,7 +155,7 @@ operations
 						
 						IO`print("\n Removing a doctor \n");
 						hospital.addTask(appointment);
-						hospital.addTraining(training);
+						hospital.addTraining(train);
 						hospital.removeMedAssociated(doctor);
 						assertTrue(card hospital.getMedicalAssociatedByType(<Doctor>) = 1);	
 						

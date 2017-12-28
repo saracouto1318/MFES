@@ -56,16 +56,17 @@ instance variables
  
  private purpose: Types`Purpose := <Training>;
  private training : Training := new Training(purpose, schedule3, nurse);
+ private train : Training := new Training(purpose, schedule4, doctor);
 operations
 (*@
-\label{assertTrue:59}
+\label{assertTrue:60}
 @*)
  private assertTrue: bool ==> ()
   assertTrue(cond) == return
  pre cond;
  
 (*@
-\label{testAddRemoveHospitals:63}
+\label{testAddRemoveHospitals:64}
 @*)
  public testAddRemoveHospitals: () ==> ()
   testAddRemoveHospitals() == (
@@ -99,7 +100,7 @@ operations
   );
   
 (*@
-\label{testAddRemoveMedHospital:94}
+\label{testAddRemoveMedHospital:95}
 @*)
   public testAddRemoveMedHospital : () ==> ()
   testAddRemoveMedHospital() == (
@@ -126,6 +127,7 @@ operations
       
       agenda1.addSchedule(schedule);
       agenda1.addSchedule(schedule3);
+      agenda1.addSchedule(schedule4);
       
       agenda2.addSchedule(schedule);
       agenda2.addSchedule(schedule3);
@@ -136,7 +138,7 @@ operations
       
       agenda5.addSchedule(schedule);
       
-      assertTrue(card agenda1.getAgenda() = 2);
+      assertTrue(card agenda1.getAgenda() = 3);
       assertTrue(card agenda2.getAgenda() = 2);
       assertTrue(card agenda3.getAgenda() = 1);
       assertTrue(card agenda4.getAgenda() = 1);
@@ -162,6 +164,8 @@ operations
       assertTrue(card hospital.getMedicalAssociatedByType(<Doctor>) = 2);
       
       IO`print("\n Removing a doctor \n");
+      hospital.addTask(appointment);
+      hospital.addTraining(train);
       hospital.removeMedAssociated(doctor);
       assertTrue(card hospital.getMedicalAssociatedByType(<Doctor>) = 1); 
       
@@ -181,7 +185,7 @@ operations
   );
   
 (*@
-\label{testAddRemoveTaskHospital:173}
+\label{testAddRemoveTaskHospital:177}
 @*)
     public testAddRemoveTaskHospital : () ==> ()
     testAddRemoveTaskHospital() == (      
@@ -222,7 +226,7 @@ operations
   );
   
 (*@
-\label{testAddRemoveTrainingHospital:211}
+\label{testAddRemoveTrainingHospital:215}
 @*)
   public testAddRemoveTrainingHospital : () ==> ()
    testAddRemoveTrainingHospital() == (
@@ -248,7 +252,7 @@ operations
   );
   
 (*@
-\label{testGetHospitalsMoreAppointments:234}
+\label{testGetHospitalsMoreAppointments:238}
 @*)
   public testGetHospitalsMoreAppointments : () ==> ()
    testGetHospitalsMoreAppointments() == ( 
@@ -260,7 +264,7 @@ operations
    );
    
 (*@
-\label{testGetMedMoreHospitals:243}
+\label{testGetMedMoreHospitals:247}
 @*)
   public testGetMedMoreHospitals : () ==> ()
    testGetMedMoreHospitals() == (
@@ -276,7 +280,7 @@ operations
    );
   
 (*@
-\label{testGetMedAssociatedByPatient:256}
+\label{testGetMedAssociatedByPatient:260}
 @*)
   public testGetMedAssociatedByPatient : () ==> ()
    testGetMedAssociatedByPatient() == (
@@ -289,7 +293,7 @@ operations
    );
    
 (*@
-\label{testGetMedByHospital:266}
+\label{testGetMedByHospital:270}
 @*)
   public testGetMedByHospital : () ==> ()
    testGetMedByHospital() == (
@@ -307,7 +311,7 @@ operations
    );
    
 (*@
-\label{main:281}
+\label{main:285}
 @*)
   public static main: () ==> ()
    main() == (
@@ -331,28 +335,28 @@ end SafetyNetHospitalTest
 Function or operation & Line & Coverage & Calls \\
 \hline
 \hline
-\hyperref[assertTrue:59]{assertTrue} & 59&100.0\% & 714 \\
+\hyperref[assertTrue:60]{assertTrue} & 60&100.0\% & 169 \\
 \hline
-\hyperref[main:281]{main} & 281&100.0\% & 4 \\
+\hyperref[main:285]{main} & 285&100.0\% & 2 \\
 \hline
-\hyperref[testAddRemoveHospitals:63]{testAddRemoveHospitals} & 63&100.0\% & 17 \\
+\hyperref[testAddRemoveHospitals:64]{testAddRemoveHospitals} & 64&100.0\% & 9 \\
 \hline
-\hyperref[testAddRemoveMedHospital:94]{testAddRemoveMedHospital} & 94&100.0\% & 3 \\
+\hyperref[testAddRemoveMedHospital:95]{testAddRemoveMedHospital} & 95&100.0\% & 6 \\
 \hline
-\hyperref[testAddRemoveTaskHospital:173]{testAddRemoveTaskHospital} & 173&100.0\% & 8 \\
+\hyperref[testAddRemoveTaskHospital:177]{testAddRemoveTaskHospital} & 177&100.0\% & 11 \\
 \hline
-\hyperref[testAddRemoveTrainingHospital:211]{testAddRemoveTrainingHospital} & 211&100.0\% & 3 \\
+\hyperref[testAddRemoveTrainingHospital:215]{testAddRemoveTrainingHospital} & 215&100.0\% & 2 \\
 \hline
-\hyperref[testGetHospitalsMoreAppointments:234]{testGetHospitalsMoreAppointments} & 234&100.0\% & 3 \\
+\hyperref[testGetHospitalsMoreAppointments:238]{testGetHospitalsMoreAppointments} & 238&100.0\% & 2 \\
 \hline
-\hyperref[testGetMedAssociatedByPatient:256]{testGetMedAssociatedByPatient} & 256&100.0\% & 6 \\
+\hyperref[testGetMedAssociatedByPatient:260]{testGetMedAssociatedByPatient} & 260&100.0\% & 4 \\
 \hline
-\hyperref[testGetMedByHospital:266]{testGetMedByHospital} & 266&100.0\% & 1 \\
+\hyperref[testGetMedByHospital:270]{testGetMedByHospital} & 270&100.0\% & 2 \\
 \hline
-\hyperref[testGetMedMoreHospitals:243]{testGetMedMoreHospitals} & 243&100.0\% & 18 \\
+\hyperref[testGetMedMoreHospitals:247]{testGetMedMoreHospitals} & 247&100.0\% & 2 \\
 \hline
 \hline
-SafetyNetHospitalTest.vdmpp & & 100.0\% & 777 \\
+SafetyNetHospitalTest.vdmpp & & 100.0\% & 209 \\
 \hline
 \end{longtable}
 

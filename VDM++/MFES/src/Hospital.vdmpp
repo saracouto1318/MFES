@@ -65,14 +65,6 @@ operations
 	pre d in set medicalAssociated
 	post d not in set medicalAssociated;
 	
-	public addAgenda : HealthProfessional * Schedule ==> ()
-		addAgenda(h, sch) == (
-			for all a in set agenda do
-				if(a.getHealthProfessional() = h)
-					then a.addSchedule(sch);)
-	pre sch not in set getAgenda(h)
-	post sch in set getAgenda(h);
-	
 	public addTask: Task ==> ()
 		addTask(d) == (
 			if(d.getPatient() not in set d.getMedAssoc().getPatients())
