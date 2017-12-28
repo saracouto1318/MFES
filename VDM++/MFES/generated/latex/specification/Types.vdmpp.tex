@@ -1,0 +1,45 @@
+\begin{vdmpp}[breaklines=true]
+class Types
+types
+ public String = seq1 of (char);
+ public Priority = <High> | <Medium> | <Low>;
+ public Type = <Doctor> | <Surgeon> | <Nurse> | <Technician>;
+ public TaskType = <Appointment> | <Urgencies> | <Surgery> | <Other>;
+ public Purpose = <Training> | <AddSkills>;
+ public Time :: hour : nat
+         min: nat
+ inv t == t.hour >= 0 and t.hour < 24 and t.min >= 0 and t.min < 60;
+ public Date ::  year: nat1
+         month: nat1
+         day: nat1
+         time: Time
+ inv d == d.month <= 12 and d.day <= daysOfMonth(d.month);
+ 
+operations
+(*@
+\label{daysOfMonth:18}
+@*)
+ public static pure daysOfMonth : nat1 ==> nat1
+  daysOfMonth(month) == (
+              if(month = 1 or month = 3 or month = 5 or month = 7 or month = 8 or month = 10 or month = 12)
+               then return 31
+              else if(month = 4 or month = 6 or month = 9 or month = 11)
+               then return 30
+              else
+               return 28;);
+                
+end Types
+\end{vdmpp}
+\bigskip
+\begin{longtable}{|l|r|r|r|}
+\hline
+Function or operation & Line & Coverage & Calls \\
+\hline
+\hline
+\hyperref[daysOfMonth:18]{daysOfMonth} & 18&100.0\% & 1476 \\
+\hline
+\hline
+Types.vdmpp & & 100.0\% & 1476 \\
+\hline
+\end{longtable}
+

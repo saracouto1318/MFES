@@ -1,0 +1,119 @@
+\begin{vdmpp}[breaklines=true]
+class Schedule
+
+instance variables
+  private startHour: Types`Date;
+  private endHour: Types`Date;
+  
+  inv lessThan(startHour, endHour);
+operations 
+(*@
+\label{Schedule:9}
+@*)
+ public Schedule: Types`Date * Types`Date ==> Schedule
+  Schedule(d, d2) == (startHour := d; endHour := d2; return self)
+ pre lessThan(d, d2)
+ post startHour = d and endHour = d2;
+ 
+(*@
+\label{setSchedule:14}
+@*)
+ public setSchedule : Types`Date * Types`Date ==> ()
+  setSchedule(d1, d2) == (startHour := d1; endHour := d2;)
+ pre lessThan(d1, d2)
+ post startHour = d1 and endHour = d2;
+  
+(*@
+\label{getScheduleStart:19}
+@*)
+ pure public getScheduleStart : () ==> Types`Date
+  getScheduleStart() == (return startHour);
+  
+(*@
+\label{getScheduleEnd:22}
+@*)
+ pure public getScheduleEnd : () ==> Types`Date
+  getScheduleEnd() == (return endHour);
+ 
+(*@
+\label{overlap:25}
+@*)
+ pure public overlap : Schedule * Schedule ==> bool
+  overlap(d1, d2) == (
+          if((lessThan(d1.startHour, d2.startHour) and greaterThan(d1.(*@\vdmnotcovered{endHour}@*), d2.(*@\vdmnotcovered{startHour}@*))) or
+          (not lessThan(d1.startHour, d2.startHour) and lessThan(d1.startHour, d2.endHour)))
+           then return true;
+          return false;);
+
+(*@
+\label{lessThan:32}
+@*)
+ pure static public lessThan : Types`Date * Types`Date ==> bool
+  lessThan(d1, d2) == (
+          if(d1.year < d2.year)
+           then return true
+          else if(d1.year > d2.year)
+           then return false;
+          if(d1.month < d2.month)
+           then return true
+          else if(d1.month > d2.month)
+           then return (*@\vdmnotcovered{false}@*);
+          if(d1.day < d2.day)
+           then return (*@\vdmnotcovered{true}@*)
+          else if(d1.day > d2.day)
+           then return false;
+          if(d1.time.hour < d2.time.hour)
+           then return true
+          else if(d1.time.hour > d2.time.hour)
+           then return false;
+          return (d1.time.min < d2.time.min););
+          
+(*@
+\label{greaterThan:52}
+@*)
+ pure static public greaterThan : Types`Date * Types`Date ==> bool
+  greaterThan(d1, d2) == (
+          if(d1.year < d2.year)
+           then return false
+          else if(d1.year > d2.year)
+           then return true;
+          if(d1.month < d2.month)
+           then return false
+          else if(d1.month > d2.month)
+           then return true;
+          if(d1.day < d2.day)
+           then (*@\vdmnotcovered{return}@*) (*@\vdmnotcovered{false}@*)
+          else if(d1.day > d2.day)
+           then return true;
+          if(d1.time.hour < d2.time.hour)
+           then return false
+          else if(d1.time.hour > d2.time.hour)
+           then return true;
+          return (d1.time.min > d2.time.min););
+end Schedule
+\end{vdmpp}
+\bigskip
+\begin{longtable}{|l|r|r|r|}
+\hline
+Function or operation & Line & Coverage & Calls \\
+\hline
+\hline
+\hyperref[Schedule:9]{Schedule} & 9&100.0\% & 726 \\
+\hline
+\hyperref[getScheduleEnd:22]{getScheduleEnd} & 22&100.0\% & 672 \\
+\hline
+\hyperref[getScheduleStart:19]{getScheduleStart} & 19&100.0\% & 1104 \\
+\hline
+\hyperref[greaterThan:52]{greaterThan} & 52&96.0\% & 0 \\
+\hline
+\hyperref[lessThan:32]{lessThan} & 32&92.0\% & 24 \\
+\hline
+\hyperref[overlap:25]{overlap} & 25&83.3\% & 52 \\
+\hline
+\hyperref[setSchedule:14]{setSchedule} & 14&100.0\% & 24 \\
+\hline
+\hline
+Schedule.vdmpp & & 93.5\% & 2602 \\
+\hline
+\end{longtable}
+

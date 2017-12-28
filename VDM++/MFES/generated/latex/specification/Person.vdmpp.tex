@@ -1,0 +1,48 @@
+\begin{vdmpp}[breaklines=true]
+class Person
+
+instance variables
+  protected address: Types`String;
+  protected firstName: Types`String;
+  protected lastName: Types`String;
+  protected cc : Types`String;
+  protected phoneNumber: Types`String;
+operations
+(*@
+\label{Person:10}
+@*)
+ public Person: Types`String * Types`String * Types`String * Types`String * Types`String ==> Person
+  Person(a, fn, ln, c, pn) == ( address := a; firstName := fn; lastName := ln; cc := c; phoneNumber := pn; return self)
+ post address = a and firstName = fn and lastName = ln and cc = c and phoneNumber = pn;
+  
+(*@
+\label{getCC:14}
+@*)
+ pure public getCC : () ==> Types`String
+  getCC() == (return cc);
+  
+(*@
+\label{getInfo:17}
+@*)
+ pure public getInfo: () ==> Types`String
+  getInfo() == (return "Name: " ^ firstName ^ " " ^ lastName ^ "\nAddress: " ^ address ^ "\nPhone Number: " ^ phoneNumber ^ "\nCC: " ^ cc);
+
+end Person
+\end{vdmpp}
+\bigskip
+\begin{longtable}{|l|r|r|r|}
+\hline
+Function or operation & Line & Coverage & Calls \\
+\hline
+\hline
+\hyperref[Person:10]{Person} & 10&100.0\% & 1494 \\
+\hline
+\hyperref[getCC:14]{getCC} & 14&100.0\% & 2538 \\
+\hline
+\hyperref[getInfo:17]{getInfo} & 17&100.0\% & 150 \\
+\hline
+\hline
+Person.vdmpp & & 100.0\% & 4182 \\
+\hline
+\end{longtable}
+

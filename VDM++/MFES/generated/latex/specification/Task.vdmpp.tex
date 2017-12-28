@@ -1,0 +1,92 @@
+\begin{vdmpp}[breaklines=true]
+class Task
+instance variables
+  protected schedule:[Schedule];
+  protected patient:[Patient];
+  protected hospital:[Hospital];
+  protected medicalAssoc:[HealthProfessional];
+  protected type : Types`TaskType;
+  
+  inv patient <> nil;
+  inv hospital <> nil;
+  inv type <> nil;
+operations
+(*@
+\label{Task:13}
+@*)
+ public Task: HealthProfessional * Schedule * Patient * Hospital * Types`TaskType ==> Task
+  Task(med, s, p, h, t) == (schedule := s; patient := p; hospital := h; type := t; medicalAssoc := med; return self)
+ pre med.getCC() <> p.getCC()
+ post schedule = s and patient = p and hospital = h and medicalAssoc = med;
+ 
+(*@
+\label{getSchedule:18}
+@*)
+ pure public getSchedule: () ==> Schedule
+  getSchedule() == (return schedule);
+  
+(*@
+\label{getPatient:21}
+@*)
+ pure public getPatient: () ==> Patient
+  getPatient() == (return patient);
+  
+(*@
+\label{getHospital:24}
+@*)
+ pure public getHospital: () ==> Hospital
+  getHospital() == (return hospital);
+  
+(*@
+\label{getType:27}
+@*)
+ pure public getType: () ==> Types`TaskType
+  getType() == (return type);
+  
+(*@
+\label{getMedAssoc:30}
+@*)
+ pure public getMedAssoc : () ==> HealthProfessional
+  getMedAssoc() == (return medicalAssoc);
+  
+(*@
+\label{setSchedule:33}
+@*)
+ public setSchedule : Schedule ==> ()
+  setSchedule(s) == (schedule := s);
+  
+(*@
+\label{getSurgeryPersons:36}
+@*)
+ pure public getSurgeryPersons : Types`Type ==> set of (HealthProfessional)
+  getSurgeryPersons(t) == ( return {}; );
+
+end Task
+\end{vdmpp}
+\bigskip
+\begin{longtable}{|l|r|r|r|}
+\hline
+Function or operation & Line & Coverage & Calls \\
+\hline
+\hline
+\hyperref[Task:13]{Task} & 13&100.0\% & 564 \\
+\hline
+\hyperref[getHospital:24]{getHospital} & 24&100.0\% & 24 \\
+\hline
+\hyperref[getMedAssoc:30]{getMedAssoc} & 30&100.0\% & 1281 \\
+\hline
+\hyperref[getPatient:21]{getPatient} & 21&100.0\% & 401 \\
+\hline
+\hyperref[getSchedule:18]{getSchedule} & 18&100.0\% & 1484 \\
+\hline
+\hyperref[getSurgeryPersons:36]{getSurgeryPersons} & 36&100.0\% & 24 \\
+\hline
+\hyperref[getType:27]{getType} & 27&100.0\% & 520 \\
+\hline
+\hyperref[setSchedule:33]{setSchedule} & 33&100.0\% & 24 \\
+\hline
+\hline
+Task.vdmpp & & 100.0\% & 4322 \\
+\hline
+\end{longtable}
+

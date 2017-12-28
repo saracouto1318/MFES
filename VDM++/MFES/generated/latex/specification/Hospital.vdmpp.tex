@@ -1,0 +1,236 @@
+\begin{vdmpp}[breaklines=true]
+class Hospital
+instance variables
+  private medicalAssociated: set of (HealthProfessional);
+  private agenda : set of (Agenda);
+  private name: Types`String;
+  private address: Types`String;
+  private tasks: set of(Task);
+  private trainings: set of(Training);
+  private safetyNet: [SafetyNetHospital];
+ 
+ inv safetyNet <> nil; 
+ inv card medicalAssociated >= 0;
+ inv card agenda >= 0;
+ inv card tasks >= 0;
+operations
+
+(*@
+\label{Hospital:17}
+@*)
+ public Hospital: Types`String * Types`String * SafetyNetHospital ==> Hospital
+  Hospital(n, a, s) == (name := n; address := a; safetyNet := s; medicalAssociated := {}; tasks := {}; trainings := {}; agenda := {};
+  safetyNet.addHospital(self); return self)
+ pre safetyNet <> nil
+ post name = n and address = a and safetyNet = s and medicalAssociated = {} and tasks = {} and trainings = {} and agenda = {};
+ 
+(*@
+\label{getName:23}
+@*)
+ pure public getName: () ==> Types`String
+  getName() == (return name);
+ 
+(*@
+\label{getAddress:26}
+@*)
+ pure public getAddress: () ==> Types`String
+  getAddress() == (return address);
+ 
+(*@
+\label{getAgendas:29}
+@*)
+ pure public getAgendas : () ==> set of(Agenda)
+  getAgendas() == (return agenda);
+  
+(*@
+\label{getAgenda:32}
+@*)
+ pure public getAgenda : HealthProfessional ==> set of(Schedule)
+  getAgenda(h) == (
+   for all a in set agenda do
+    if(a.getHealthProfessional() = h)
+     then return a.getAgenda();
+   return {});
+ 
+(*@
+\label{removeAgenda:39}
+@*)
+ public removeAgenda : Agenda ==> ()
+  removeAgenda(a) == (agenda := agenda \ {a})
+ pre a in set agenda
+ post a not in set agenda;
+ 
+(*@
+\label{addMedAssociated:44}
+@*)
+ public addMedAssociated: HealthProfessional ==> ()
+  addMedAssociated(d) == (
+   dcl agendaNew : Agenda;
+   agendaNew := new Agenda(d);
+   agenda := agenda union {agendaNew};
+   medicalAssociated := {d} union medicalAssociated)
+ pre d not in set medicalAssociated
+ post d in set medicalAssociated;
+  
+(*@
+\label{removeMedAssociated:53}
+@*)
+ public removeMedAssociated: HealthProfessional ==> ()
+  removeMedAssociated(d) == (
+   for all t in set tasks do
+    if(d (*@\vdmnotcovered{=}@*) (*@\vdmnotcovered{t}@*).(*@\vdmnotcovered{getMedAssoc}@*)())
+     then removeTask((*@\vdmnotcovered{t}@*));
+   for all t in set trainings do
+    (*@\vdmnotcovered{if}@*)((*@\vdmnotcovered{d}@*) = t.(*@\vdmnotcovered{getMedAssoc}@*)())
+     then removeTraining((*@\vdmnotcovered{t}@*));
+   for all a in set agenda do
+    if(a.getHealthProfessional().getCC() = d.getCC())
+     then removeAgenda(a);
+   medicalAssociated := medicalAssociated \ {d})
+ pre d in set medicalAssociated
+ post d not in set medicalAssociated;
+ 
+(*@
+\label{addAgenda:68}
+@*)
+ public addAgenda : HealthProfessional * Schedule ==> ()
+  addAgenda(h, sch) == (*@\vdmnotcovered{(}@*)
+   (*@\vdmnotcovered{for}@*) all a in set (*@\vdmnotcovered{agenda}@*) do
+    (*@\vdmnotcovered{if}@*)((*@\vdmnotcovered{a}@*).(*@\vdmnotcovered{getHealthProfessional}@*)() = (*@\vdmnotcovered{h}@*))
+     then a.addSchedule((*@\vdmnotcovered{sch}@*));)
+ pre (*@\vdmnotcovered{sch}@*) not in set getAgenda((*@\vdmnotcovered{h}@*))
+ post sch in set getAgenda((*@\vdmnotcovered{h}@*));
+ 
+(*@
+\label{addTask:76}
+@*)
+ public addTask: Task ==> ()
+  addTask(d) == (
+   if(d.getPatient() not in set d.getMedAssoc().getPatients())
+    then d.getMedAssoc().addPatient(d.getPatient());
+   tasks := {d} union tasks;
+   for all a in set agenda do
+    if(a.getHealthProfessional().getCC() = d.getMedAssoc().getCC())
+      then a.removeSchedule(d.getSchedule());)
+ pre d not in set tasks and d.getSchedule() in set getAgenda(d.getMedAssoc())
+ post d in set tasks and d.getPatient() in set d.getMedAssoc().getPatients() and d.getSchedule() not in set getAgenda(d.getMedAssoc());
+  
+(*@
+\label{removeTask:87}
+@*)
+ public removeTask: Task ==> ()
+  removeTask(d) == (
+   for all a in set agenda do
+    if(a.getHealthProfessional() = d.getMedAssoc())
+      then a.addSchedule(d.getSchedule());
+   tasks := tasks \ {d})
+ pre d in set tasks and d.getSchedule() not in set getAgenda(d.getMedAssoc())
+ post d not in set tasks and d.getSchedule() in set getAgenda(d.getMedAssoc());
+ 
+(*@
+\label{addTraining:96}
+@*)
+ public addTraining: Training ==> ()
+  addTraining(d) == (
+   for all a in set agenda do
+    if(a.getHealthProfessional() = d.getMedAssoc())
+      then a.removeSchedule(d.getSchedule());
+   trainings := {d} union trainings)
+ pre d not in set trainings and d.getSchedule() in set getAgenda(d.getMedAssoc())
+ post d in set trainings and d.getSchedule() not in set getAgenda(d.getMedAssoc());
+  
+(*@
+\label{removeTraining:105}
+@*)
+ public removeTraining: Training ==> ()
+  removeTraining(d) == (
+   for all a in set agenda do
+    if(a.getHealthProfessional() = d.getMedAssoc())
+      then a.addSchedule(d.getSchedule());
+   trainings := trainings \ {d})
+ pre d in set trainings and d.getSchedule() not in set getAgenda(d.getMedAssoc())
+ post d not in set trainings and d.getSchedule() in set getAgenda(d.getMedAssoc());
+ 
+(*@
+\label{getTasksByType:114}
+@*)
+ pure public getTasksByType: Types`TaskType ==> set of (Task)
+  getTasksByType(s) == (
+   dcl tasksTotal: set of (Task);
+   tasksTotal := {};
+   for all t in set tasks do
+    if(t.getType() = s)
+     then tasksTotal := tasksTotal union {t};
+     
+   return tasksTotal);
+              
+(*@
+\label{getTrainingsByType:124}
+@*)
+ pure public getTrainingsByType: Types`Purpose ==> set of (Training)
+  getTrainingsByType(s) == (
+   dcl train: set of (Training);
+   train := {};
+   for all t in set trainings do
+    if(t.getPurpose() = s)
+     then train := train union {t};
+     
+   return train);
+
+(*@
+\label{getMedicalAssociatedByType:134}
+@*)
+ pure public getMedicalAssociatedByType: Types`Type ==> set of (HealthProfessional)
+  getMedicalAssociatedByType(type) == (
+   dcl med: set of(HealthProfessional);
+   med := {};
+   for all d in set medicalAssociated do
+    if(d.getType() = type)
+     then med := med union {d};
+    
+   return med);
+end Hospital
+\end{vdmpp}
+\bigskip
+\begin{longtable}{|l|r|r|r|}
+\hline
+Function or operation & Line & Coverage & Calls \\
+\hline
+\hline
+\hyperref[Hospital:17]{Hospital} & 17&100.0\% & 186 \\
+\hline
+\hyperref[addAgenda:68]{addAgenda} & 68&0.0\% & 0 \\
+\hline
+\hyperref[addMedAssociated:44]{addMedAssociated} & 44&100.0\% & 171 \\
+\hline
+\hyperref[addTask:76]{addTask} & 76&100.0\% & 103 \\
+\hline
+\hyperref[addTraining:96]{addTraining} & 96&100.0\% & 3 \\
+\hline
+\hyperref[getAddress:26]{getAddress} & 26&100.0\% & 72 \\
+\hline
+\hyperref[getAgenda:32]{getAgenda} & 32&100.0\% & 5 \\
+\hline
+\hyperref[getAgendas:29]{getAgendas} & 29&100.0\% & 42 \\
+\hline
+\hyperref[getMedicalAssociatedByType:134]{getMedicalAssociatedByType} & 134&100.0\% & 223 \\
+\hline
+\hyperref[getName:23]{getName} & 23&100.0\% & 114 \\
+\hline
+\hyperref[getTasksByType:114]{getTasksByType} & 114&100.0\% & 124 \\
+\hline
+\hyperref[getTrainingsByType:124]{getTrainingsByType} & 124&100.0\% & 34 \\
+\hline
+\hyperref[removeAgenda:39]{removeAgenda} & 39&100.0\% & 12 \\
+\hline
+\hyperref[removeMedAssociated:53]{removeMedAssociated} & 53&65.8\% & 60 \\
+\hline
+\hyperref[removeTask:87]{removeTask} & 87&100.0\% & 4 \\
+\hline
+\hyperref[removeTraining:105]{removeTraining} & 105&100.0\% & 45 \\
+\hline
+\hline
+Hospital.vdmpp & & 91.9\% & 1198 \\
+\hline
+\end{longtable}
+

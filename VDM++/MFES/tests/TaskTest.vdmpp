@@ -47,7 +47,7 @@ instance variables
   private secSurgeon: HealthProfessional := new HealthProfessional("Rua 2", "Diana", "Viana", "234512390", "921349135", "111111235", <Surgeon>);
 	private nurse: HealthProfessional := new HealthProfessional("Rua de Baixo", "Lisete", "Antunes", "123444654", "921378643", "111222333", <Nurse>);
 	private technician: HealthProfessional := new HealthProfessional("Rua de Baixo", "Luís", "Antunes", "123444655", "921377654", "111222345", <Technician>);
-
+	
 	private appointment: Appointment := new Appointment(doctor, schedule, patient, hospital);
 	private urgencies: Appointment := new Appointment(doctor2, <High>, schedule, patient2, hospital);
 	private surgery: Surgery := new Surgery(surgeon, schedule3, patient3, hospital);
@@ -62,6 +62,53 @@ operations
 	
 	public testGetsSetsTask : () ==> ()
 		testGetsSetsTask() == (
+			dcl agenda1 : Agenda, agenda2 : Agenda, agenda3 : Agenda, agenda4: Agenda;
+			hospital.addMedAssociated(doctor);
+			hospital.addMedAssociated(doctor2);
+			hospital.addMedAssociated(surgeon);
+			hospital.addMedAssociated(technician);
+			
+			for all a in set hospital.getAgendas() do(
+				if(a.getHealthProfessional() = doctor)
+					then agenda1 := a
+				else if(a.getHealthProfessional() = doctor2)
+					then agenda2 := a
+				else if(a.getHealthProfessional() = surgeon)
+					then agenda3 := a
+				else
+					agenda4 := a;);
+			
+			agenda1.addSchedule(schedule);
+			
+			assertTrue(agenda1.getHealthProfessional().getCC() = doctor.getCC());
+			
+			assertTrue(card agenda1.getAgenda() = 1);
+			
+			agenda2.addSchedule(schedule);
+			
+			assertTrue(card agenda2.getAgenda() = 1);
+		
+			agenda3.addSchedule(schedule3);
+			
+			assertTrue(card agenda3.getAgenda() = 1);
+			
+			agenda4.addSchedule(schedule);
+			
+			assertTrue(card agenda4.getAgenda() = 1);
+			
+			agenda4.removeSchedule(schedule);
+			
+			assertTrue(card agenda4.getAgenda() = 0);
+			
+			agenda4.addSchedule(schedule);
+			
+			assertTrue(card agenda4.getAgenda() = 1);
+			
+			hospital.addTask(appointment);
+			hospital.addTask(urgencies);
+			hospital.addTask(surgery);
+			hospital.addTask(treatment);
+			
 			IO`print("\n Getting appointment informations \n");
 			assertTrue(appointment.getPatient().getCC() = "123456789");
 			assertTrue(appointment.getHospital().getName() = "Hospital dos Lusíadas");

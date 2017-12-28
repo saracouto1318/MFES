@@ -1,0 +1,77 @@
+\begin{vdmpp}[breaklines=true]
+class Agenda
+instance variables
+
+private healthProfessional : [HealthProfessional];
+private agenda : set of (Schedule);
+
+inv healthProfessional <> nil;
+inv card agenda >= 0;
+
+operations
+(*@
+\label{Agenda:11}
+@*)
+ public Agenda : HealthProfessional ==> Agenda
+  Agenda(h) == (healthProfessional := h; agenda := {}; return self)
+ pre healthProfessional <> nil
+ post healthProfessional = h and agenda = {};
+ 
+(*@
+\label{getHealthProfessional:16}
+@*)
+ pure public getHealthProfessional : () ==> HealthProfessional
+  getHealthProfessional() == (return healthProfessional);
+ 
+(*@
+\label{getAgenda:19}
+@*)
+ pure public getAgenda : () ==> set of (Schedule)
+  getAgenda() == (return agenda);
+ 
+(*@
+\label{addSchedule:22}
+@*)
+ public addSchedule : Schedule ==> ()
+  addSchedule(s) == (agenda := agenda union {s})
+ pre s not in set agenda and forall sch in set agenda & not overlap(s, sch)
+ post s in set agenda;
+ 
+(*@
+\label{removeSchedule:27}
+@*)
+ public removeSchedule : Schedule ==> ()
+  removeSchedule(s) == (agenda := agenda \ {s})
+ pre s in set agenda
+ post s not in set agenda;
+ 
+(*@
+\label{overlap:32}
+@*)
+ pure public overlap: Schedule * Schedule ==> bool
+  overlap(t1, t2) == (return t1.overlap(t1, t2));
+end Agenda
+\end{vdmpp}
+\bigskip
+\begin{longtable}{|l|r|r|r|}
+\hline
+Function or operation & Line & Coverage & Calls \\
+\hline
+\hline
+\hyperref[Agenda:11]{Agenda} & 11&100.0\% & 240 \\
+\hline
+\hyperref[addSchedule:22]{addSchedule} & 22&100.0\% & 285 \\
+\hline
+\hyperref[getAgenda:19]{getAgenda} & 19&100.0\% & 503 \\
+\hline
+\hyperref[getHealthProfessional:16]{getHealthProfessional} & 16&100.0\% & 2207 \\
+\hline
+\hyperref[overlap:32]{overlap} & 32&100.0\% & 52 \\
+\hline
+\hyperref[removeSchedule:27]{removeSchedule} & 27&100.0\% & 158 \\
+\hline
+\hline
+Agenda.vdmpp & & 100.0\% & 3445 \\
+\hline
+\end{longtable}
+

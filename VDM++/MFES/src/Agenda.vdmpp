@@ -1,0 +1,34 @@
+class Agenda
+instance variables
+
+private healthProfessional : [HealthProfessional];
+private agenda : set of (Schedule);
+
+inv healthProfessional <> nil;
+inv card agenda >= 0;
+
+operations
+	public Agenda : HealthProfessional ==> Agenda
+		Agenda(h) == (healthProfessional := h; agenda := {}; return self)
+	pre healthProfessional <> nil
+	post healthProfessional = h and agenda = {};
+	
+	pure public getHealthProfessional : () ==> HealthProfessional
+		getHealthProfessional() == (return healthProfessional);
+	
+	pure public getAgenda : () ==> set of (Schedule)
+		getAgenda() == (return agenda);
+	
+	public addSchedule : Schedule ==> ()
+		addSchedule(s) == (agenda := agenda union {s})
+	pre s not in set agenda and forall sch in set agenda & not overlap(s, sch)
+	post s in set agenda;
+	
+	public removeSchedule : Schedule ==> ()
+		removeSchedule(s) == (agenda := agenda \ {s})
+	pre s in set agenda
+	post s not in set agenda;
+	
+	pure public overlap: Schedule * Schedule ==> bool
+		overlap(t1, t2) == (return t1.overlap(t1, t2));
+end Agenda
