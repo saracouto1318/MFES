@@ -10,8 +10,11 @@ public class HealthProfessionalPage extends Menu {
 	@Override
 	public void show() {
         System.out.println("Profissional de Saude");
-        System.out.println("1. Sair");
-        System.out.println("Opcao");
+        System.out.println("1. Agenda");
+        System.out.println("2. Adicionar especialidade");
+        System.out.println("3. Adicionar agenda");
+        System.out.println("4. Sair");
+        System.out.print("Opcao");
 	}
 
 	@Override
@@ -34,7 +37,7 @@ public class HealthProfessionalPage extends Menu {
             return null;
         }
 
-        if(option == 1)
+        if(option == 4)
             return new HospitalPicker(reader);
 
         show();
