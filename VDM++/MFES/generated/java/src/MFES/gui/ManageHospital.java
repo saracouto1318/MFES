@@ -39,7 +39,8 @@ public class ManageHospital extends Menu {
 			System.out.println("1. Medico");
 			System.out.println("2. Enfermeiro");
 			System.out.println("3. Tecnico");
-			System.out.println("4. Atras");
+			System.out.println("4. Cirurgiao");
+			System.out.println("5. Atras");
 			break;
 		case APPOINTMENT:
 		case SURGERY:
@@ -113,13 +114,19 @@ public class ManageHospital extends Menu {
 			if(option < 1 && option > 4)
 				return null;
 
-			if(option == 1)
-				state = MenuState.MAIN;
-			else if(option == 2)
-				state = MenuState.MAIN;
-			else if(option == 3)
-				state = MenuState.MAIN;
-			else if(option == 4)
+			if(option == 1) {
+				return new CreatePerson(reader, CreatePerson.CreateType.MEDIC, hospital);
+			}
+			else if(option == 2) {
+				return new CreatePerson(reader, CreatePerson.CreateType.NURSE, hospital);
+			}
+			else if(option == 3) {
+				return new CreatePerson(reader, CreatePerson.CreateType.TECHNICIAN, hospital);
+			}
+			else if(option == 4) {
+				return new CreatePerson(reader, CreatePerson.CreateType.SURGEON, hospital);
+			}
+			else if(option == 5)
 				state = MenuState.MAIN;
 
 			break;
