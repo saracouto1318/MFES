@@ -4,7 +4,7 @@ instance variables
 	private doctor: HealthProfessional := new HealthProfessional("Rua de Cima", "Ana", "Marques", "123432156", "921349076", "111111222", <Doctor>);
 	private surgeon: HealthProfessional := new HealthProfessional("Rua 2", "Diogo", "Viana", "234512389", "921349134", "111111232", <Surgeon>);
 	private nurse: HealthProfessional := new HealthProfessional("Rua de Baixo", "Lisete", "Antunes", "123444654", "921378643", "111222333", <Nurse>);
-	private technician: HealthProfessional := new HealthProfessional("Rua Antero Marques", "Inês", "Pinto", "123432151", "921348765", "123432578", <Technician>);
+	private technician: HealthProfessional := new HealthProfessional("Rua Antero Marques", "InÃªs", "Pinto", "123432151", "921348765", "123432578", <Technician>);
 operations
 	private assertTrue: bool ==> ()
 		assertTrue(cond) == return
@@ -38,7 +38,7 @@ operations
 			IO`print("\n Getting technician informations \n");
 			assertTrue(technician.getMedicalNumber() = "123432578");
 			assertTrue(technician.getCC() = "123432151");
-			assertTrue(technician.getInfo() = "Name: " ^ "Inês" ^ " " ^ "Pinto" ^ "\nAddress: " ^ "Rua Antero Marques" ^ "\nPhone Number: " ^ "921348765" ^ "\nCC: " ^ "123432151");
+			assertTrue(technician.getInfo() = "Name: " ^ "InÃªs" ^ " " ^ "Pinto" ^ "\nAddress: " ^ "Rua Antero Marques" ^ "\nPhone Number: " ^ "921348765" ^ "\nCC: " ^ "123432151");
 			assertTrue(technician.getType() = <Technician>);
 		);
 		
@@ -55,7 +55,7 @@ operations
 			IO`print(card doctor.getPatients());
 			assertTrue(card doctor.getPatients() = 1);
 			
-			IO`print("\nRemoving a patient \n");
+			IO`print("\n Removing a patient \n");
 			doctor.removePatient(patient);
 			
 			IO`print("\n Number of patients: ");
