@@ -62,7 +62,6 @@ public class HospitalPicker extends Menu {
             int i = 0;
             while(iter.hasNext()) {
                 hArr[i++] = iter.next();
-                System.out.println("Add " + hArr[i - 1]);
             }
 
             ListSelectabels<Hospital> m = new ListSelectabels<>(reader, hArr, this);

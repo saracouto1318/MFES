@@ -8,10 +8,10 @@ import MFES.Patient;
 import MFES.Person;
 
 public class CreatePerson extends Menu {
-    private enum CreateState {CC, FIRSTNAME, LASTNAME, ADDRESS, PHONENUMBER, MEDICALNUMBER, HEALTHNUMBER};
+    private static enum CreateState {CC, FIRSTNAME, LASTNAME, ADDRESS, PHONENUMBER, MEDICALNUMBER, HEALTHNUMBER};
     private CreateState state;
 
-    public enum CreateType {MEDIC, NURSE, TECHNICIAN, SURGEON, PATIENT};
+    public static enum CreateType {MEDIC, NURSE, TECHNICIAN, SURGEON, PATIENT};
     private CreateType type;
 
     private Hospital hospital;
@@ -23,6 +23,8 @@ public class CreatePerson extends Menu {
     private String phoneNumber = null;
     private String medicalNumber = null;
     private String healthNumber = null;
+
+    private Person person = null;
 
     public CreatePerson(Scanner reader, CreateType type, Hospital hospital) {
         super(reader);
@@ -129,6 +131,7 @@ public class CreatePerson extends Menu {
 
     private Person createPerson() {
         HealthProfessional h = null;
+
         switch(type) {
         case MEDIC:
             h = new HealthProfessional(address, firstName, lastName, cc, phoneNumber, medicalNumber, "MEDIC");
@@ -143,9 +146,14 @@ public class CreatePerson extends Menu {
             h = new HealthProfessional(address, firstName, lastName, cc, phoneNumber, medicalNumber, "SURGEON");
             hospital.addMedAssociated(h);
         case PATIENT:
-            return new Patient(address, firstName, lastName, cc, phoneNumber, healthNumber);
+            person = new Patient(address, firstName, lastName, cc, phoneNumber, healthNumber);
         }
 
-        return h;
+        person = h;
+        return person;
+    }
+
+    public Person getPerson() {
+        return person;
     }
 }

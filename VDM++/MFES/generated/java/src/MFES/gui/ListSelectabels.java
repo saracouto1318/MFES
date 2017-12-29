@@ -17,7 +17,7 @@ public class ListSelectabels<T> extends Menu {
 
 	@Override
 	public void show() {
-        System.out.println("\n\nSeleciona");
+        System.out.println("\n\n");
         int i = 1;
         for(T t : selectabels)
             System.out.println(i++ + ". " + t.toString());
