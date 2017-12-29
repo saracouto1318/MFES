@@ -6,6 +6,7 @@ instance variables
 operations
 	public Patient: Types`String * Types`String * Types`String * Types`String * Types`String * Types`String ==> Patient
 		Patient(a, fn, ln, c, pn, n) == ( healthNumber := n; Person(a, fn, ln, c, pn))
+	pre len n > 5
 	post healthNumber = n;
 	
 	pure public getHealthNumber : () ==> Types`String

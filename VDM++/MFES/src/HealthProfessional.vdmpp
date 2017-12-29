@@ -13,7 +13,7 @@ instance variables
 operations
 	public HealthProfessional: Types`String * Types`String * Types`String * Types`String * Types`String * Types`String * Types`Type ==> HealthProfessional
 		HealthProfessional(a, fn, ln, c, pn, s, t) == (medicalNumber := s; type := t; specialties := {}; patients := {}; Person(a, fn, ln, c, pn))
-	pre t <> nil
+	pre t <> nil and len s > 5
 	post medicalNumber = s and type = t and specialties = {} and patients = {};
 	
 	pure public getMedicalNumber: () ==> Types`String
