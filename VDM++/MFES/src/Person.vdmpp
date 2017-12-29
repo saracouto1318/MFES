@@ -6,6 +6,7 @@ instance variables
   protected lastName: Types`String;
   protected cc : Types`String;
   protected phoneNumber: Types`String;
+  
 operations
 	public Person: Types`String * Types`String * Types`String * Types`String * Types`String ==> Person
 		Person(a, fn, ln, c, pn) == ( address := a; firstName := fn; lastName := ln; cc := c; phoneNumber := pn; return self)

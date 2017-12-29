@@ -3,99 +3,99 @@ class SafetyNetHospital
 instance variables
  private hospitals: set of (Hospital);
  
- inv (*@\vdmnotcovered{card}@*) (*@\vdmnotcovered{hospitals}@*) (*@\vdmnotcovered{>=}@*) (*@\vdmnotcovered{0}@*);
+ inv card hospitals >= 0;
 operations
 
 (*@
 \label{SafetyNetHospital:8}
 @*)
  public SafetyNetHospital : () ==> SafetyNetHospital
-  SafetyNetHospital() == (hospitals := {}; return (*@\vdmnotcovered{self}@*))
- post (*@\vdmnotcovered{hospitals}@*) = (*@\vdmnotcovered{\{}@*)};
+  SafetyNetHospital() == (hospitals := {}; return self)
+ post hospitals = {};
   
 (*@
 \label{addHospital:12}
 @*)
  public addHospital : Hospital ==> ()
-  addHospital(h) == (hospitals := (*@\vdmnotcovered{hospitals}@*) (*@\vdmnotcovered{union}@*) (*@\vdmnotcovered{\{}@*)(*@\vdmnotcovered{h}@*)})
- pre (*@\vdmnotcovered{h}@*) (*@\vdmnotcovered{not}@*) in set (*@\vdmnotcovered{hospitals}@*)
- post (*@\vdmnotcovered{h}@*) (*@\vdmnotcovered{in}@*) set (*@\vdmnotcovered{hospitals}@*);
+  addHospital(h) == (hospitals := hospitals union {h})
+ pre h not in set hospitals
+ post h in set hospitals;
  
 (*@
 \label{removeHospital:17}
 @*)
  public removeHospital : Hospital ==> ()
-  removeHospital(h) == (hospitals := hospitals (*@\vdmnotcovered{\textbackslash }@*) (*@\vdmnotcovered{\{}@*)(*@\vdmnotcovered{h}@*)})
- pre (*@\vdmnotcovered{h}@*) (*@\vdmnotcovered{in}@*) set (*@\vdmnotcovered{hospitals}@*)
- post h not in set (*@\vdmnotcovered{hospitals}@*);
+  removeHospital(h) == (hospitals := hospitals \ {h})
+ pre h in set hospitals
+ post h not in set hospitals;
  
 (*@
 \label{getHospitals:22}
 @*)
  pure public getHospitals : () ==> set of (Hospital)
-  getHospitals() == (*@\vdmnotcovered{(}@*)(*@\vdmnotcovered{return}@*) (*@\vdmnotcovered{hospitals}@*));
+  getHospitals() == (return hospitals);
  
 (*@
 \label{getHospitalsMoreAppointments:25}
 @*)
  pure public getHospitalsMoreAppointments : Types`TaskType ==> Hospital
-  getHospitalsMoreAppointments(t) == (*@\vdmnotcovered{(}@*)
+  getHospitalsMoreAppointments(t) == (
                     dcl max: int, hosp: Hospital;
-                    (*@\vdmnotcovered{max}@*) := (*@\vdmnotcovered{-}@*)(*@\vdmnotcovered{1}@*);
-                    (*@\vdmnotcovered{for}@*) all h in set (*@\vdmnotcovered{hospitals}@*) do
-                     if((card h.getTasksByType(t)) (*@\vdmnotcovered{>}@*) (*@\vdmnotcovered{max}@*))
-                      then (max := (card h.getTasksByType(t)); (*@\vdmnotcovered{hosp}@*) := (*@\vdmnotcovered{h}@*));
-                    return (*@\vdmnotcovered{hosp}@*));
+                    max := -1;
+                    for all h in set hospitals do
+                     if((card h.getTasksByType(t)) > max)
+                      then (max := (card h.getTasksByType(t)); hosp := h);
+                    return hosp);
  
 (*@
 \label{getMedMoreHospitals:34}
 @*)
  pure public getMedMoreHospitals : Types`Type ==> set of(HealthProfessional)
-  getMedMoreHospitals(t) == (*@\vdmnotcovered{(}@*)
+  getMedMoreHospitals(t) == (
                   dcl doctors: set of(HealthProfessional);
-                  doctors := (*@\vdmnotcovered{\{}@*)};
-                  (*@\vdmnotcovered{for}@*) all h in set hospitals do (*@\vdmnotcovered{(}@*)
+                  doctors := {};
+                  for all h in set hospitals do (
                    dcl med: set of (HealthProfessional), list: set of(Hospital);
-                   (*@\vdmnotcovered{med}@*) := h.(*@\vdmnotcovered{getMedicalAssociatedByType}@*)((*@\vdmnotcovered{t}@*));
+                   med := h.getMedicalAssociatedByType(t);
                    
-                   list := hospitals \ (*@\vdmnotcovered{\{}@*)(*@\vdmnotcovered{h}@*)};
-                   (*@\vdmnotcovered{for}@*) all m in set (*@\vdmnotcovered{med}@*) do(*@\vdmnotcovered{(}@*)
-                    (*@\vdmnotcovered{for}@*) all l in set (*@\vdmnotcovered{list}@*) do
-                     if(m.getType() = t and m in set l.getMedicalAssociatedByType(t) and m not in set (*@\vdmnotcovered{doctors}@*))
-                      then doctors := doctors (*@\vdmnotcovered{union}@*) (*@\vdmnotcovered{\{}@*)(*@\vdmnotcovered{m}@*)};
+                   list := hospitals \ {h};
+                   for all m in set med do(
+                    for all l in set list do
+                     if(m.getType() = t and m in set l.getMedicalAssociatedByType(t) and m not in set doctors)
+                      then doctors := doctors union {m};
                    );
                   );
                   
-                  return (*@\vdmnotcovered{doctors}@*);
+                  return doctors;
                  );
                                
 (*@
 \label{getMedAssociatedByPatient:53}
 @*)
  pure public getMedAssociatedByPatient: Patient * Types`Type ==> map Hospital to set of(HealthProfessional)
-  getMedAssociatedByPatient(p, t) == (*@\vdmnotcovered{(}@*)
+  getMedAssociatedByPatient(p, t) == (
                      dcl maps: map Hospital to set of(HealthProfessional), med : set of (HealthProfessional);
-                     (*@\vdmnotcovered{maps}@*) := (*@\vdmnotcovered{\{}@*) |-> };
-                     med := (*@\vdmnotcovered{\{}@*)};
-                     (*@\vdmnotcovered{for}@*) all h in set (*@\vdmnotcovered{hospitals}@*) do (*@\vdmnotcovered{(}@*)
-                      (*@\vdmnotcovered{for}@*) all m in set (*@\vdmnotcovered{h}@*).(*@\vdmnotcovered{getMedicalAssociatedByType}@*)((*@\vdmnotcovered{t}@*)) do
-                       if(p (*@\vdmnotcovered{in}@*) set m.(*@\vdmnotcovered{getPatients}@*)())
-                        then med := med (*@\vdmnotcovered{union}@*) (*@\vdmnotcovered{\{}@*)(*@\vdmnotcovered{m}@*)};
+                     maps := { |-> };
+                     med := {};
+                     for all h in set hospitals do (
+                      for all m in set h.getMedicalAssociatedByType(t) do
+                       if(p in set m.getPatients())
+                        then med := med union {m};
                        
-                      maps := maps munion {h |-> (*@\vdmnotcovered{med}@*)};
-                      med := (*@\vdmnotcovered{\{}@*)};);
-                      return (*@\vdmnotcovered{maps}@*));
+                      maps := maps munion {h |-> med};
+                      med := {};);
+                      return maps);
  
 (*@
 \label{getMedByHospital:67}
 @*)
  pure public getMedByHospital: Types`Type ==> map Hospital to set of(HealthProfessional)
-  getMedByHospital(t) == (*@\vdmnotcovered{(}@*)
+  getMedByHospital(t) == (
                      dcl maps: map Hospital to set of(HealthProfessional);
-                     maps := (*@\vdmnotcovered{\{}@*) |-> };
-                     (*@\vdmnotcovered{for}@*) all h in set (*@\vdmnotcovered{hospitals}@*) do
-                      maps := maps munion {h |-> h.(*@\vdmnotcovered{getMedicalAssociatedByType}@*)((*@\vdmnotcovered{t}@*))};
-                     return (*@\vdmnotcovered{maps}@*));
+                     maps := { |-> };
+                     for all h in set hospitals do
+                      maps := maps munion {h |-> h.getMedicalAssociatedByType(t)};
+                     return maps);
 end SafetyNetHospital
 \end{vdmpp}
 \bigskip
@@ -104,24 +104,24 @@ end SafetyNetHospital
 Function or operation & Line & Coverage & Calls \\
 \hline
 \hline
-\hyperref[SafetyNetHospital:8]{SafetyNetHospital} & 8&0.0\% & 0 \\
+\hyperref[SafetyNetHospital:8]{SafetyNetHospital} & 8&100.0\% & 19 \\
 \hline
-\hyperref[addHospital:12]{addHospital} & 12&0.0\% & 0 \\
+\hyperref[addHospital:12]{addHospital} & 12&100.0\% & 28 \\
 \hline
-\hyperref[getHospitals:22]{getHospitals} & 22&0.0\% & 0 \\
+\hyperref[getHospitals:22]{getHospitals} & 22&100.0\% & 24 \\
 \hline
-\hyperref[getHospitalsMoreAppointments:25]{getHospitalsMoreAppointments} & 25&0.0\% & 0 \\
+\hyperref[getHospitalsMoreAppointments:25]{getHospitalsMoreAppointments} & 25&100.0\% & 16 \\
 \hline
-\hyperref[getMedAssociatedByPatient:53]{getMedAssociatedByPatient} & 53&0.0\% & 0 \\
+\hyperref[getMedAssociatedByPatient:53]{getMedAssociatedByPatient} & 53&100.0\% & 4 \\
 \hline
-\hyperref[getMedByHospital:67]{getMedByHospital} & 67&0.0\% & 0 \\
+\hyperref[getMedByHospital:67]{getMedByHospital} & 67&100.0\% & 8 \\
 \hline
-\hyperref[getMedMoreHospitals:34]{getMedMoreHospitals} & 34&0.0\% & 0 \\
+\hyperref[getMedMoreHospitals:34]{getMedMoreHospitals} & 34&100.0\% & 24 \\
 \hline
-\hyperref[removeHospital:17]{removeHospital} & 17&0.0\% & 0 \\
+\hyperref[removeHospital:17]{removeHospital} & 17&100.0\% & 8 \\
 \hline
 \hline
-SafetyNetHospital.vdmpp & & 0.0\% & 0 \\
+SafetyNetHospital.vdmpp & & 100.0\% & 131 \\
 \hline
 \end{longtable}
 

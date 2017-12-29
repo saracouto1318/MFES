@@ -1,186 +1,186 @@
 \begin{vdmpp}[breaklines=true]
 class SafetyNetHospitalTest
 instance variables
- private safetyNet: SafetyNetHospital := (*@\vdmnotcovered{new}@*) (*@\vdmnotcovered{SafetyNetHospital}@*)();
+ private safetyNet: SafetyNetHospital := new SafetyNetHospital();
  
- private time1: Types`Time := (*@\vdmnotcovered{mk\_Types`Time}@*)((*@\vdmnotcovered{12}@*), (*@\vdmnotcovered{10}@*));
- private date1: Types`Date := mk_Types`Date((*@\vdmnotcovered{2017}@*), 12, 25, (*@\vdmnotcovered{time1}@*));
- private time2: Types`Time := (*@\vdmnotcovered{mk\_Types`Time}@*)(12, (*@\vdmnotcovered{30}@*));
- private date2: Types`Date := mk_Types`Date((*@\vdmnotcovered{2017}@*), 12, 25, (*@\vdmnotcovered{time2}@*));
- private schedule: Schedule := new Schedule(date1, (*@\vdmnotcovered{date2}@*));
+ private time1: Types`Time := mk_Types`Time(12, 10);
+ private date1: Types`Date := mk_Types`Date(2017, 12, 25, time1);
+ private time2: Types`Time := mk_Types`Time(12, 30);
+ private date2: Types`Date := mk_Types`Date(2017, 12, 25, time2);
+ private schedule: Schedule := new Schedule(date1, date2);
  
- private time3: Types`Time := (*@\vdmnotcovered{mk\_Types`Time}@*)(12, (*@\vdmnotcovered{15}@*));
- private date3: Types`Date := (*@\vdmnotcovered{mk\_Types`Date}@*)((*@\vdmnotcovered{2017}@*), (*@\vdmnotcovered{12}@*), 25, (*@\vdmnotcovered{time3}@*));
- private time4: Types`Time := (*@\vdmnotcovered{mk\_Types`Time}@*)(12, (*@\vdmnotcovered{35}@*));
- private date4: Types`Date := mk_Types`Date(2017, (*@\vdmnotcovered{12}@*), 25, (*@\vdmnotcovered{time4}@*));
- private schedule2: Schedule := (*@\vdmnotcovered{new}@*) (*@\vdmnotcovered{Schedule}@*)((*@\vdmnotcovered{date3}@*), (*@\vdmnotcovered{date4}@*));
+ private time3: Types`Time := mk_Types`Time(12, 15);
+ private date3: Types`Date := mk_Types`Date(2017, 12, 25, time3);
+ private time4: Types`Time := mk_Types`Time(12, 35);
+ private date4: Types`Date := mk_Types`Date(2017, 12, 25, time4);
+ private schedule2: Schedule := new Schedule(date3, date4);
  
- private time5: Types`Time := (*@\vdmnotcovered{mk\_Types`Time}@*)(12, (*@\vdmnotcovered{40}@*));
- private date5: Types`Date := (*@\vdmnotcovered{mk\_Types`Date}@*)((*@\vdmnotcovered{2017}@*), 12, 25, (*@\vdmnotcovered{time5}@*));
- private time6: Types`Time := (*@\vdmnotcovered{mk\_Types`Time}@*)(12, (*@\vdmnotcovered{50}@*));
- private date6: Types`Date := mk_Types`Date(2017, 12, 25, (*@\vdmnotcovered{time6}@*));
- private schedule3: Schedule := new (*@\vdmnotcovered{Schedule}@*)((*@\vdmnotcovered{date5}@*), (*@\vdmnotcovered{date6}@*));
+ private time5: Types`Time := mk_Types`Time(12, 40);
+ private date5: Types`Date := mk_Types`Date(2017, 12, 25, time5);
+ private time6: Types`Time := mk_Types`Time(12, 50);
+ private date6: Types`Date := mk_Types`Date(2017, 12, 25, time6);
+ private schedule3: Schedule := new Schedule(date5, date6);
  
- private time7: Types`Time := mk_Types`Time(12, (*@\vdmnotcovered{10}@*));
- private date7: Types`Date := (*@\vdmnotcovered{mk\_Types`Date}@*)((*@\vdmnotcovered{2017}@*), 11, 22, (*@\vdmnotcovered{time7}@*));
- private time8: Types`Time := (*@\vdmnotcovered{mk\_Types`Time}@*)(12, (*@\vdmnotcovered{30}@*));
- private date8: Types`Date := (*@\vdmnotcovered{mk\_Types`Date}@*)((*@\vdmnotcovered{2017}@*), 11, 22, (*@\vdmnotcovered{time8}@*));
- private schedule4: Schedule := new (*@\vdmnotcovered{Schedule}@*)((*@\vdmnotcovered{date7}@*), (*@\vdmnotcovered{date8}@*));
+ private time7: Types`Time := mk_Types`Time(12, 10);
+ private date7: Types`Date := mk_Types`Date(2017, 11, 22, time7);
+ private time8: Types`Time := mk_Types`Time(12, 30);
+ private date8: Types`Date := mk_Types`Date(2017, 11, 22, time8);
+ private schedule4: Schedule := new Schedule(date7, date8);
  
- private time9: Types`Time := (*@\vdmnotcovered{mk\_Types`Time}@*)(12, (*@\vdmnotcovered{35}@*));
- private date9: Types`Date := mk_Types`Date((*@\vdmnotcovered{2017}@*), 11, 23, (*@\vdmnotcovered{time9}@*));
- private time10: Types`Time := (*@\vdmnotcovered{mk\_Types`Time}@*)(12, (*@\vdmnotcovered{45}@*));
- private date10: Types`Date := mk_Types`Date((*@\vdmnotcovered{2017}@*), 11, 23, (*@\vdmnotcovered{time10}@*));
- private schedule5: Schedule := (*@\vdmnotcovered{new}@*) (*@\vdmnotcovered{Schedule}@*)(date9, (*@\vdmnotcovered{date10}@*));
+ private time9: Types`Time := mk_Types`Time(12, 35);
+ private date9: Types`Date := mk_Types`Date(2017, 11, 23, time9);
+ private time10: Types`Time := mk_Types`Time(12, 45);
+ private date10: Types`Date := mk_Types`Date(2017, 11, 23, time10);
+ private schedule5: Schedule := new Schedule(date9, date10);
  
- private patient: Patient := new Patient("Rua 1 Maio", "Rui", "Andrade", "123456789", "223456111", (*@\vdmnotcovered{"0987654321"}@*));
- private patient2: Patient := new Patient("Rua 1 Maio", "Diogo", "Andrade", (*@\vdmnotcovered{"123321123"}@*), (*@\vdmnotcovered{"911112345"}@*), (*@\vdmnotcovered{"908765123"}@*));
- private patient3: Patient := new Patient("Rua 1 Maio", (*@\vdmnotcovered{"Vitor"}@*), "Andrade", (*@\vdmnotcovered{"135790864"}@*), (*@\vdmnotcovered{"912345334"}@*), (*@\vdmnotcovered{"123432130"}@*));
- private patient4: Patient := new Patient("Rua 1 Maio", "Simone", "Andrade", "234123765", "931238654", (*@\vdmnotcovered{"0987654143"}@*));
+ private patient: Patient := new Patient("Rua 1 Maio", "Rui", "Andrade", "123456789", "223456111", "0987654321");
+ private patient2: Patient := new Patient("Rua 1 Maio", "Diogo", "Andrade", "123321123", "911112345", "908765123");
+ private patient3: Patient := new Patient("Rua 1 Maio", "Vitor", "Andrade", "135790864", "912345334", "123432130");
+ private patient4: Patient := new Patient("Rua 1 Maio", "Simone", "Andrade", "234123765", "931238654", "0987654143");
  
-  private hospital: Hospital := new Hospital("Hospital das Camélias", "Rua de Cima", (*@\vdmnotcovered{safetyNet}@*));
+  private hospital: Hospital := new Hospital("Hospital das Camélias", "Rua de Cima", safetyNet);
   
-  private doctor: HealthProfessional := new HealthProfessional("Rua de Cima", "Ana", (*@\vdmnotcovered{"Marques"}@*), (*@\vdmnotcovered{"123432156"}@*), "921349076", "111111222", (*@\vdmnotcovered{<Doctor>}@*));
-  private doctor2: HealthProfessional := new HealthProfessional("Rua de Cima", "Anabela", "Marques", "123432157", "921349077", "111111223", (*@\vdmnotcovered{<Doctor>}@*));
-  private surgeon: HealthProfessional := new HealthProfessional("Rua 2", "Diogo", "Viana", (*@\vdmnotcovered{"234512389"}@*), "921349134", "111111232", (*@\vdmnotcovered{<Surgeon>}@*));
-  private secSurgeon: HealthProfessional := new HealthProfessional("Rua 2", "Diana", "Viana", "234512390", (*@\vdmnotcovered{"921349135"}@*), (*@\vdmnotcovered{"111111235"}@*), (*@\vdmnotcovered{<Surgeon>}@*));
- private nurse: HealthProfessional := new HealthProfessional("Rua de Baixo", "Lisete", "Antunes", "123444654", (*@\vdmnotcovered{"921378643"}@*), (*@\vdmnotcovered{"111222333"}@*), (*@\vdmnotcovered{<Nurse>}@*));
- private technician: HealthProfessional := new HealthProfessional("Rua de Baixo", "Luís", "Antunes", (*@\vdmnotcovered{"123444655"}@*), "921377654", (*@\vdmnotcovered{"111222345"}@*), (*@\vdmnotcovered{<Technician>}@*));
+  private doctor: HealthProfessional := new HealthProfessional("Rua de Cima", "Ana", "Marques", "123432156", "921349076", "111111222", <Doctor>);
+  private doctor2: HealthProfessional := new HealthProfessional("Rua de Cima", "Anabela", "Marques", "123432157", "921349077", "111111223", <Doctor>);
+  private surgeon: HealthProfessional := new HealthProfessional("Rua 2", "Diogo", "Viana", "234512389", "921349134", "111111232", <Surgeon>);
+  private secSurgeon: HealthProfessional := new HealthProfessional("Rua 2", "Diana", "Viana", "234512390", "921349135", "111111235", <Surgeon>);
+ private nurse: HealthProfessional := new HealthProfessional("Rua de Baixo", "Lisete", "Antunes", "123444654", "921378643", "111222333", <Nurse>);
+ private technician: HealthProfessional := new HealthProfessional("Rua de Baixo", "Luís", "Antunes", "123444655", "921377654", "111222345", <Technician>);
 
- private appointment: Appointment := (*@\vdmnotcovered{new}@*) Appointment((*@\vdmnotcovered{doctor}@*), schedule, (*@\vdmnotcovered{patient}@*), (*@\vdmnotcovered{hospital}@*));
- private appointment2: Appointment := (*@\vdmnotcovered{new}@*) (*@\vdmnotcovered{Appointment}@*)(doctor, schedule3, (*@\vdmnotcovered{patient4}@*), (*@\vdmnotcovered{hospital}@*));
- private appointment3: Appointment := new (*@\vdmnotcovered{Appointment}@*)((*@\vdmnotcovered{doctor2}@*), schedule3, patient, (*@\vdmnotcovered{hospital}@*));
- private urgencies: Appointment := new Appointment((*@\vdmnotcovered{doctor2}@*), (*@\vdmnotcovered{<High>}@*), (*@\vdmnotcovered{schedule}@*), (*@\vdmnotcovered{patient2}@*), (*@\vdmnotcovered{hospital}@*));
- private surgery: Surgery := new (*@\vdmnotcovered{Surgery}@*)(surgeon, schedule, (*@\vdmnotcovered{patient3}@*), (*@\vdmnotcovered{hospital}@*));
- private treatment: Treatment := new Treatment(technician, "Fisioterapia", (*@\vdmnotcovered{schedule}@*), (*@\vdmnotcovered{patient4}@*), (*@\vdmnotcovered{hospital}@*));
+ private appointment: Appointment := new Appointment(doctor, schedule, patient, hospital);
+ private appointment2: Appointment := new Appointment(doctor, schedule3, patient4, hospital);
+ private appointment3: Appointment := new Appointment(doctor2, schedule3, patient, hospital);
+ private urgencies: Appointment := new Appointment(doctor2, <High>, schedule, patient2, hospital);
+ private surgery: Surgery := new Surgery(surgeon, schedule, patient3, hospital);
+ private treatment: Treatment := new Treatment(technician, "Fisioterapia", schedule, patient4, hospital);
  
- private purpose: Types`Purpose := (*@\vdmnotcovered{<Training>}@*);
- private training : Training := new Training(purpose, schedule3, (*@\vdmnotcovered{nurse}@*));
- private train : Training := (*@\vdmnotcovered{new}@*) (*@\vdmnotcovered{Training}@*)((*@\vdmnotcovered{purpose}@*), (*@\vdmnotcovered{schedule4}@*), (*@\vdmnotcovered{doctor}@*));
+ private purpose: Types`Purpose := <Training>;
+ private training : Training := new Training(purpose, schedule3, nurse);
+ private train : Training := new Training(purpose, schedule4, doctor);
 operations
 (*@
 \label{assertTrue:60}
 @*)
  private assertTrue: bool ==> ()
-  assertTrue(cond) == (*@\vdmnotcovered{return}@*)
- pre (*@\vdmnotcovered{cond}@*);
+  assertTrue(cond) == return
+ pre cond;
  
 (*@
 \label{testAddRemoveHospitals:64}
 @*)
  public testAddRemoveHospitals: () ==> ()
-  testAddRemoveHospitals() == (*@\vdmnotcovered{(}@*)
+  testAddRemoveHospitals() == (
       dcl h1: Hospital, h2: Hospital, h3: Hospital;
-      h1 := new Hospital((*@\vdmnotcovered{"Hospital dos Lusíadas"}@*), "Rua de Cima", (*@\vdmnotcovered{safetyNet}@*));
-      h2 := new Hospital("Hospital Novo", "Rua 1 de Maio", (*@\vdmnotcovered{safetyNet}@*));
-      (*@\vdmnotcovered{h3}@*) := new Hospital("Hospital da Trofa", (*@\vdmnotcovered{"Rua da Trofa"}@*), (*@\vdmnotcovered{safetyNet}@*));
-      (*@\vdmnotcovered{IO`print}@*)((*@\vdmnotcovered{"\textbackslash n Number of hospitals: "}@*));
-      (*@\vdmnotcovered{IO`print}@*)((*@\vdmnotcovered{card}@*) safetyNet.(*@\vdmnotcovered{getHospitals}@*)());
+      h1 := new Hospital("Hospital dos Lusíadas", "Rua de Cima", safetyNet);
+      h2 := new Hospital("Hospital Novo", "Rua 1 de Maio", safetyNet);
+      h3 := new Hospital("Hospital da Trofa", "Rua da Trofa", safetyNet);
+      IO`print("\n Number of hospitals: ");
+      IO`print(card safetyNet.getHospitals());
    
-      (*@\vdmnotcovered{IO`print}@*)((*@\vdmnotcovered{"\textbackslash n\textbackslash n Getting hospitals information \textbackslash n"}@*));
-      assertTrue(h1.getName() (*@\vdmnotcovered{=}@*) (*@\vdmnotcovered{"Hospital dos Lusíadas"}@*));
-      assertTrue((*@\vdmnotcovered{h2}@*).getName() = (*@\vdmnotcovered{"Hospital Novo"}@*));
-      (*@\vdmnotcovered{assertTrue}@*)(h3.(*@\vdmnotcovered{getName}@*)() = (*@\vdmnotcovered{"Hospital da Trofa"}@*));
+      IO`print("\n\n Getting hospitals information \n");
+      assertTrue(h1.getName() = "Hospital dos Lusíadas");
+      assertTrue(h2.getName() = "Hospital Novo");
+      assertTrue(h3.getName() = "Hospital da Trofa");
       
-      (*@\vdmnotcovered{assertTrue}@*)(h1.getAddress() = (*@\vdmnotcovered{"Rua de Cima"}@*));
-      assertTrue((*@\vdmnotcovered{h2}@*).getAddress() = (*@\vdmnotcovered{"Rua 1 de Maio"}@*));
-      assertTrue(h3.getAddress() (*@\vdmnotcovered{=}@*) (*@\vdmnotcovered{"Rua da Trofa"}@*));
+      assertTrue(h1.getAddress() = "Rua de Cima");
+      assertTrue(h2.getAddress() = "Rua 1 de Maio");
+      assertTrue(h3.getAddress() = "Rua da Trofa");
       
-      (*@\vdmnotcovered{IO`print}@*)((*@\vdmnotcovered{"\textbackslash n Removing hospitals \textbackslash n"}@*));
-      (*@\vdmnotcovered{assertTrue}@*)(card safetyNet.getHospitals() = (*@\vdmnotcovered{4}@*));
-      (*@\vdmnotcovered{safetyNet}@*).removeHospital((*@\vdmnotcovered{h1}@*));
+      IO`print("\n Removing hospitals \n");
+      assertTrue(card safetyNet.getHospitals() = 4);
+      safetyNet.removeHospital(h1);
       
-      (*@\vdmnotcovered{IO`print}@*)((*@\vdmnotcovered{"\textbackslash n Removing hospitals \textbackslash n"}@*));
-      (*@\vdmnotcovered{assertTrue}@*)(card safetyNet.(*@\vdmnotcovered{getHospitals}@*)() = (*@\vdmnotcovered{3}@*));
-      (*@\vdmnotcovered{safetyNet}@*).removeHospital((*@\vdmnotcovered{h2}@*));
-      (*@\vdmnotcovered{assertTrue}@*)(card safetyNet.getHospitals() = (*@\vdmnotcovered{2}@*));
+      IO`print("\n Removing hospitals \n");
+      assertTrue(card safetyNet.getHospitals() = 3);
+      safetyNet.removeHospital(h2);
+      assertTrue(card safetyNet.getHospitals() = 2);
       
-      (*@\vdmnotcovered{IO`print}@*)((*@\vdmnotcovered{"\textbackslash n Number of hospitals: "}@*));
-      IO`print(card safetyNet.(*@\vdmnotcovered{getHospitals}@*)());
+      IO`print("\n Number of hospitals: ");
+      IO`print(card safetyNet.getHospitals());
   );
   
 (*@
 \label{testAddRemoveMedHospital:95}
 @*)
   public testAddRemoveMedHospital : () ==> ()
-  testAddRemoveMedHospital() == (*@\vdmnotcovered{(}@*)
+  testAddRemoveMedHospital() == (
      dcl agenda1 : Agenda, agenda2 : Agenda, agenda3 : Agenda, agenda4: Agenda, agenda5: Agenda;
      
-     (*@\vdmnotcovered{IO`print}@*)((*@\vdmnotcovered{"\textbackslash n Adding health professionals \textbackslash n"}@*));
-     (*@\vdmnotcovered{hospital}@*).addMedAssociated((*@\vdmnotcovered{doctor}@*));
-     (*@\vdmnotcovered{hospital}@*).addMedAssociated((*@\vdmnotcovered{doctor2}@*));
-     (*@\vdmnotcovered{hospital}@*).addMedAssociated((*@\vdmnotcovered{surgeon}@*));
-     (*@\vdmnotcovered{hospital}@*).addMedAssociated((*@\vdmnotcovered{nurse}@*));
-     hospital.addMedAssociated((*@\vdmnotcovered{technician}@*)); 
+     IO`print("\n Adding health professionals \n");
+     hospital.addMedAssociated(doctor);
+     hospital.addMedAssociated(doctor2);
+     hospital.addMedAssociated(surgeon);
+     hospital.addMedAssociated(nurse);
+     hospital.addMedAssociated(technician); 
    
-    (*@\vdmnotcovered{for}@*) all a in set (*@\vdmnotcovered{hospital}@*).(*@\vdmnotcovered{getAgendas}@*)() do(*@\vdmnotcovered{(}@*)
-     if(a.(*@\vdmnotcovered{getHealthProfessional}@*)() = (*@\vdmnotcovered{doctor}@*))
-      then (*@\vdmnotcovered{agenda1}@*) := (*@\vdmnotcovered{a}@*)
-     else if(a.getHealthProfessional() = (*@\vdmnotcovered{doctor2}@*))
-      then (*@\vdmnotcovered{agenda2}@*) := (*@\vdmnotcovered{a}@*)
-     else if(a.getHealthProfessional() = (*@\vdmnotcovered{surgeon}@*))
-      then (*@\vdmnotcovered{agenda3}@*) := (*@\vdmnotcovered{a}@*)
-     else (*@\vdmnotcovered{if}@*)(a.(*@\vdmnotcovered{getHealthProfessional}@*)() = (*@\vdmnotcovered{nurse}@*))
-      then (*@\vdmnotcovered{agenda4}@*) := (*@\vdmnotcovered{a}@*)
+    for all a in set hospital.getAgendas() do(
+     if(a.getHealthProfessional() = doctor)
+      then agenda1 := a
+     else if(a.getHealthProfessional() = doctor2)
+      then agenda2 := a
+     else if(a.getHealthProfessional() = surgeon)
+      then agenda3 := a
+     else if(a.getHealthProfessional() = nurse)
+      then agenda4 := a
      else
-      agenda5 := (*@\vdmnotcovered{a}@*););
+      agenda5 := a;);
       
-      (*@\vdmnotcovered{agenda1}@*).addSchedule((*@\vdmnotcovered{schedule}@*));
-      (*@\vdmnotcovered{agenda1}@*).addSchedule((*@\vdmnotcovered{schedule3}@*));
-      agenda1.addSchedule((*@\vdmnotcovered{schedule4}@*));
+      agenda1.addSchedule(schedule);
+      agenda1.addSchedule(schedule3);
+      agenda1.addSchedule(schedule4);
       
-      agenda2.addSchedule((*@\vdmnotcovered{schedule}@*));
-      agenda2.addSchedule((*@\vdmnotcovered{schedule3}@*));
+      agenda2.addSchedule(schedule);
+      agenda2.addSchedule(schedule3);
       
-      (*@\vdmnotcovered{agenda3}@*).addSchedule((*@\vdmnotcovered{schedule}@*));
+      agenda3.addSchedule(schedule);
       
-      (*@\vdmnotcovered{agenda4}@*).addSchedule((*@\vdmnotcovered{schedule3}@*));
+      agenda4.addSchedule(schedule3);
       
-      (*@\vdmnotcovered{agenda5}@*).addSchedule((*@\vdmnotcovered{schedule}@*));
+      agenda5.addSchedule(schedule);
       
-      assertTrue(card agenda1.getAgenda() = (*@\vdmnotcovered{3}@*));
-      assertTrue(card (*@\vdmnotcovered{agenda2}@*).getAgenda() = (*@\vdmnotcovered{2}@*));
-      (*@\vdmnotcovered{assertTrue}@*)(card agenda3.(*@\vdmnotcovered{getAgenda}@*)() = (*@\vdmnotcovered{1}@*));
-      assertTrue(card agenda4.getAgenda() (*@\vdmnotcovered{=}@*) (*@\vdmnotcovered{1}@*));
-      assertTrue(card agenda5.(*@\vdmnotcovered{getAgenda}@*)() (*@\vdmnotcovered{=}@*) (*@\vdmnotcovered{1}@*));
+      assertTrue(card agenda1.getAgenda() = 3);
+      assertTrue(card agenda2.getAgenda() = 2);
+      assertTrue(card agenda3.getAgenda() = 1);
+      assertTrue(card agenda4.getAgenda() = 1);
+      assertTrue(card agenda5.getAgenda() = 1);
       
-      IO`print((*@\vdmnotcovered{"\textbackslash n Total number of doctors: "}@*));
-      (*@\vdmnotcovered{IO`print}@*)(card hospital.(*@\vdmnotcovered{getMedicalAssociatedByType}@*)((*@\vdmnotcovered{<Doctor>}@*)));
-      (*@\vdmnotcovered{IO`print}@*)((*@\vdmnotcovered{"\textbackslash n Total number of surgeons: "}@*));
-      (*@\vdmnotcovered{IO`print}@*)(card hospital.getMedicalAssociatedByType((*@\vdmnotcovered{<Surgeon>}@*)));
-      IO`print((*@\vdmnotcovered{"\textbackslash n Total number of nurses: "}@*));
-      IO`print(card hospital.getMedicalAssociatedByType((*@\vdmnotcovered{<Nurse>}@*)));
-      IO`print((*@\vdmnotcovered{"\textbackslash n Total number of technicians: "}@*));
-      IO`print(card hospital.getMedicalAssociatedByType((*@\vdmnotcovered{<Technician>}@*)));
+      IO`print("\n Total number of doctors: ");
+      IO`print(card hospital.getMedicalAssociatedByType(<Doctor>));
+      IO`print("\n Total number of surgeons: ");
+      IO`print(card hospital.getMedicalAssociatedByType(<Surgeon>));
+      IO`print("\n Total number of nurses: ");
+      IO`print(card hospital.getMedicalAssociatedByType(<Nurse>));
+      IO`print("\n Total number of technicians: ");
+      IO`print(card hospital.getMedicalAssociatedByType(<Technician>));
       
-      assertTrue(card hospital.(*@\vdmnotcovered{getMedicalAssociatedByType}@*)(<Doctor>) = (*@\vdmnotcovered{2}@*));
-      assertTrue(card hospital.getMedicalAssociatedByType(<Surgeon>) = (*@\vdmnotcovered{1}@*));
-      assertTrue(card hospital.getMedicalAssociatedByType((*@\vdmnotcovered{<Nurse>}@*)) (*@\vdmnotcovered{=}@*) (*@\vdmnotcovered{1}@*));
-      assertTrue(card hospital.getMedicalAssociatedByType(<Technician>) (*@\vdmnotcovered{=}@*) (*@\vdmnotcovered{1}@*));
+      assertTrue(card hospital.getMedicalAssociatedByType(<Doctor>) = 2);
+      assertTrue(card hospital.getMedicalAssociatedByType(<Surgeon>) = 1);
+      assertTrue(card hospital.getMedicalAssociatedByType(<Nurse>) = 1);
+      assertTrue(card hospital.getMedicalAssociatedByType(<Technician>) = 1);
       
-      (*@\vdmnotcovered{IO`print}@*)((*@\vdmnotcovered{"\textbackslash n Total number of doctors: "}@*));
-      (*@\vdmnotcovered{IO`print}@*)(card hospital.(*@\vdmnotcovered{getMedicalAssociatedByType}@*)((*@\vdmnotcovered{<Doctor>}@*)));
+      IO`print("\n Total number of doctors: ");
+      IO`print(card hospital.getMedicalAssociatedByType(<Doctor>));
       
-      (*@\vdmnotcovered{assertTrue}@*)(card hospital.getMedicalAssociatedByType(<Doctor>) = (*@\vdmnotcovered{2}@*));
+      assertTrue(card hospital.getMedicalAssociatedByType(<Doctor>) = 2);
       
-      IO`print((*@\vdmnotcovered{"\textbackslash n Removing a doctor \textbackslash n"}@*));
-      (*@\vdmnotcovered{hospital}@*).addTask((*@\vdmnotcovered{appointment}@*));
-      hospital.addTraining((*@\vdmnotcovered{train}@*));
-      hospital.removeMedAssociated((*@\vdmnotcovered{doctor}@*));
-      assertTrue(card hospital.getMedicalAssociatedByType(<Doctor>) (*@\vdmnotcovered{=}@*) (*@\vdmnotcovered{1}@*)); 
+      IO`print("\n Removing a doctor \n");
+      hospital.addTask(appointment);
+      hospital.addTraining(train);
+      hospital.removeMedAssociated(doctor);
+      assertTrue(card hospital.getMedicalAssociatedByType(<Doctor>) = 1); 
       
-      (*@\vdmnotcovered{IO`print}@*)((*@\vdmnotcovered{"\textbackslash n Total number of doctors: "}@*));
-      (*@\vdmnotcovered{IO`print}@*)(card hospital.(*@\vdmnotcovered{getMedicalAssociatedByType}@*)((*@\vdmnotcovered{<Doctor>}@*)));
+      IO`print("\n Total number of doctors: ");
+      IO`print(card hospital.getMedicalAssociatedByType(<Doctor>));
       
-      hospital.addMedAssociated((*@\vdmnotcovered{doctor}@*));
+      hospital.addMedAssociated(doctor);
       
-      for all a in set hospital.(*@\vdmnotcovered{getAgendas}@*)() do
-       if(a.getHealthProfessional().getCC() = doctor.(*@\vdmnotcovered{getCC}@*)())
-        then agenda1 := (*@\vdmnotcovered{a}@*);
+      for all a in set hospital.getAgendas() do
+       if(a.getHealthProfessional().getCC() = doctor.getCC())
+        then agenda1 := a;
       
-      agenda1.addSchedule((*@\vdmnotcovered{schedule}@*));
-      agenda1.addSchedule((*@\vdmnotcovered{schedule3}@*));
-      (*@\vdmnotcovered{assertTrue}@*)(card agenda1.getAgenda() = (*@\vdmnotcovered{2}@*));
+      agenda1.addSchedule(schedule);
+      agenda1.addSchedule(schedule3);
+      assertTrue(card agenda1.getAgenda() = 2);
        
   );
   
@@ -188,143 +188,143 @@ operations
 \label{testAddRemoveTaskHospital:177}
 @*)
     public testAddRemoveTaskHospital : () ==> ()
-    testAddRemoveTaskHospital() == (*@\vdmnotcovered{(}@*)      
-      (*@\vdmnotcovered{hospital}@*).addTask((*@\vdmnotcovered{appointment}@*));
-      hospital.addTask((*@\vdmnotcovered{appointment2}@*));
-      hospital.addTask((*@\vdmnotcovered{appointment3}@*));
-      (*@\vdmnotcovered{hospital}@*).addTask((*@\vdmnotcovered{urgencies}@*));
-      hospital.addTask((*@\vdmnotcovered{surgery}@*));
-      hospital.addTask((*@\vdmnotcovered{treatment}@*));
+    testAddRemoveTaskHospital() == (      
+      hospital.addTask(appointment);
+      hospital.addTask(appointment2);
+      hospital.addTask(appointment3);
+      hospital.addTask(urgencies);
+      hospital.addTask(surgery);
+      hospital.addTask(treatment);
       
-      (*@\vdmnotcovered{IO`print}@*)((*@\vdmnotcovered{"\textbackslash n\textbackslash n Total number of appointments: "}@*));
-      (*@\vdmnotcovered{IO`print}@*)((*@\vdmnotcovered{card}@*) (*@\vdmnotcovered{hospital}@*).(*@\vdmnotcovered{getTasksByType}@*)((*@\vdmnotcovered{<Appointment>}@*)));
-      (*@\vdmnotcovered{IO`print}@*)((*@\vdmnotcovered{"\textbackslash n Total number of urgencies: "}@*));
-      (*@\vdmnotcovered{IO`print}@*)(card hospital.getTasksByType((*@\vdmnotcovered{<Urgencies>}@*)));
-      IO`print((*@\vdmnotcovered{"\textbackslash n Total number of surgeries: "}@*));
-      IO`print((*@\vdmnotcovered{card}@*) (*@\vdmnotcovered{hospital}@*).(*@\vdmnotcovered{getTasksByType}@*)((*@\vdmnotcovered{<Surgery>}@*)));
-      IO`print((*@\vdmnotcovered{"\textbackslash n Total number of other treatments: "}@*));
-      (*@\vdmnotcovered{IO`print}@*)((*@\vdmnotcovered{card}@*) (*@\vdmnotcovered{hospital}@*).(*@\vdmnotcovered{getTasksByType}@*)((*@\vdmnotcovered{<Other>}@*)));
+      IO`print("\n\n Total number of appointments: ");
+      IO`print(card hospital.getTasksByType(<Appointment>));
+      IO`print("\n Total number of urgencies: ");
+      IO`print(card hospital.getTasksByType(<Urgencies>));
+      IO`print("\n Total number of surgeries: ");
+      IO`print(card hospital.getTasksByType(<Surgery>));
+      IO`print("\n Total number of other treatments: ");
+      IO`print(card hospital.getTasksByType(<Other>));
       
-      assertTrue((*@\vdmnotcovered{card}@*) (*@\vdmnotcovered{hospital}@*).(*@\vdmnotcovered{getTasksByType}@*)((*@\vdmnotcovered{<Appointment>}@*)) (*@\vdmnotcovered{=}@*) (*@\vdmnotcovered{3}@*));
-      assertTrue((*@\vdmnotcovered{card}@*) (*@\vdmnotcovered{hospital}@*).(*@\vdmnotcovered{getTasksByType}@*)((*@\vdmnotcovered{<Urgencies>}@*)) (*@\vdmnotcovered{=}@*) (*@\vdmnotcovered{1}@*));
-      assertTrue(card hospital.getTasksByType(<Surgery>) (*@\vdmnotcovered{=}@*) (*@\vdmnotcovered{1}@*));
-      assertTrue(card hospital.(*@\vdmnotcovered{getTasksByType}@*)((*@\vdmnotcovered{<Other>}@*)) (*@\vdmnotcovered{=}@*) (*@\vdmnotcovered{1}@*));
+      assertTrue(card hospital.getTasksByType(<Appointment>) = 3);
+      assertTrue(card hospital.getTasksByType(<Urgencies>) = 1);
+      assertTrue(card hospital.getTasksByType(<Surgery>) = 1);
+      assertTrue(card hospital.getTasksByType(<Other>) = 1);
       
-      IO`print((*@\vdmnotcovered{"\textbackslash n Removing an appointment \textbackslash n"}@*));
-      hospital.removeTask((*@\vdmnotcovered{appointment}@*));
-      assertTrue(card hospital.getTasksByType(<Appointment>) = (*@\vdmnotcovered{2}@*));
+      IO`print("\n Removing an appointment \n");
+      hospital.removeTask(appointment);
+      assertTrue(card hospital.getTasksByType(<Appointment>) = 2);
       
-      (*@\vdmnotcovered{IO`print}@*)((*@\vdmnotcovered{"\textbackslash n Total number of appointments: "}@*));
-      (*@\vdmnotcovered{IO`print}@*)((*@\vdmnotcovered{card}@*) (*@\vdmnotcovered{hospital}@*).(*@\vdmnotcovered{getTasksByType}@*)((*@\vdmnotcovered{<Appointment>}@*)));
+      IO`print("\n Total number of appointments: ");
+      IO`print(card hospital.getTasksByType(<Appointment>));
       
-      IO`print((*@\vdmnotcovered{"\textbackslash n Adding an appointment \textbackslash n"}@*));
-      hospital.addTask((*@\vdmnotcovered{appointment}@*));
-      (*@\vdmnotcovered{assertTrue}@*)((*@\vdmnotcovered{card}@*) (*@\vdmnotcovered{hospital}@*).getTasksByType(<Appointment>) (*@\vdmnotcovered{=}@*) (*@\vdmnotcovered{3}@*)); 
+      IO`print("\n Adding an appointment \n");
+      hospital.addTask(appointment);
+      assertTrue(card hospital.getTasksByType(<Appointment>) = 3); 
       
-      (*@\vdmnotcovered{IO`print}@*)((*@\vdmnotcovered{"\textbackslash n Total number of appointments: "}@*));
-      IO`print(card (*@\vdmnotcovered{hospital}@*).(*@\vdmnotcovered{getTasksByType}@*)((*@\vdmnotcovered{<Appointment>}@*)));  
+      IO`print("\n Total number of appointments: ");
+      IO`print(card hospital.getTasksByType(<Appointment>));  
   );
   
 (*@
 \label{testAddRemoveTrainingHospital:215}
 @*)
   public testAddRemoveTrainingHospital : () ==> ()
-   testAddRemoveTrainingHospital() == (*@\vdmnotcovered{(}@*)
-    (*@\vdmnotcovered{IO`print}@*)((*@\vdmnotcovered{"\textbackslash n\textbackslash n Total number of trainings: "}@*));
-    IO`print((*@\vdmnotcovered{card}@*) (*@\vdmnotcovered{hospital}@*).getTrainingsByType((*@\vdmnotcovered{<Training>}@*)) (*@\vdmnotcovered{+}@*) card hospital.getTrainingsByType((*@\vdmnotcovered{<AddSkills>}@*)));
+   testAddRemoveTrainingHospital() == (
+    IO`print("\n\n Total number of trainings: ");
+    IO`print(card hospital.getTrainingsByType(<Training>) + card hospital.getTrainingsByType(<AddSkills>));
 
-    (*@\vdmnotcovered{assertTrue}@*)(card hospital.getTrainingsByType((*@\vdmnotcovered{<Training>}@*)) (*@\vdmnotcovered{=}@*) (*@\vdmnotcovered{0}@*));
-    (*@\vdmnotcovered{assertTrue}@*)(card (*@\vdmnotcovered{hospital}@*).getTrainingsByType((*@\vdmnotcovered{<AddSkills>}@*)) (*@\vdmnotcovered{=}@*) (*@\vdmnotcovered{0}@*));
+    assertTrue(card hospital.getTrainingsByType(<Training>) = 0);
+    assertTrue(card hospital.getTrainingsByType(<AddSkills>) = 0);
     
-    (*@\vdmnotcovered{IO`print}@*)((*@\vdmnotcovered{"\textbackslash n Adding a training \textbackslash n"}@*));
-    hospital.addTraining((*@\vdmnotcovered{training}@*));
-    assertTrue((*@\vdmnotcovered{card}@*) (*@\vdmnotcovered{hospital}@*).getTrainingsByType(<Training>) = (*@\vdmnotcovered{1}@*));
+    IO`print("\n Adding a training \n");
+    hospital.addTraining(training);
+    assertTrue(card hospital.getTrainingsByType(<Training>) = 1);
     
-    IO`print((*@\vdmnotcovered{"\textbackslash n Total number of trainings: "}@*));
-    IO`print((*@\vdmnotcovered{card}@*) (*@\vdmnotcovered{hospital}@*).getTrainingsByType(<Training>) (*@\vdmnotcovered{+}@*) card hospital.getTrainingsByType((*@\vdmnotcovered{<AddSkills>}@*)));
+    IO`print("\n Total number of trainings: ");
+    IO`print(card hospital.getTrainingsByType(<Training>) + card hospital.getTrainingsByType(<AddSkills>));
     
-    (*@\vdmnotcovered{IO`print}@*)((*@\vdmnotcovered{"\textbackslash n Removing a training \textbackslash n"}@*));
-    hospital.removeTraining((*@\vdmnotcovered{training}@*));
-    (*@\vdmnotcovered{assertTrue}@*)(card hospital.(*@\vdmnotcovered{getTrainingsByType}@*)(<Training>) = (*@\vdmnotcovered{0}@*));
+    IO`print("\n Removing a training \n");
+    hospital.removeTraining(training);
+    assertTrue(card hospital.getTrainingsByType(<Training>) = 0);
     
-    (*@\vdmnotcovered{IO`print}@*)((*@\vdmnotcovered{"\textbackslash n\textbackslash n Total number of trainings: "}@*));
-    (*@\vdmnotcovered{IO`print}@*)(card (*@\vdmnotcovered{hospital}@*).(*@\vdmnotcovered{getTrainingsByType}@*)(<Training>) + card (*@\vdmnotcovered{hospital}@*).getTrainingsByType((*@\vdmnotcovered{<AddSkills>}@*)));
+    IO`print("\n\n Total number of trainings: ");
+    IO`print(card hospital.getTrainingsByType(<Training>) + card hospital.getTrainingsByType(<AddSkills>));
   );
   
 (*@
 \label{testGetHospitalsMoreAppointments:238}
 @*)
   public testGetHospitalsMoreAppointments : () ==> ()
-   testGetHospitalsMoreAppointments() == (*@\vdmnotcovered{(}@*) 
-    IO`print((*@\vdmnotcovered{"\textbackslash n Checking Safety Net Hospitals with more appointments, etc \textbackslash n"}@*));
-    assertTrue((*@\vdmnotcovered{safetyNet}@*).getHospitalsMoreAppointments((*@\vdmnotcovered{<Appointment>}@*)).getName() = (*@\vdmnotcovered{"Hospital das Camélias"}@*));
-    (*@\vdmnotcovered{assertTrue}@*)(safetyNet.(*@\vdmnotcovered{getHospitalsMoreAppointments}@*)(<Urgencies>).getName() (*@\vdmnotcovered{=}@*) (*@\vdmnotcovered{"Hospital das Camélias"}@*));
-    assertTrue(safetyNet.(*@\vdmnotcovered{getHospitalsMoreAppointments}@*)(<Surgery>).getName() (*@\vdmnotcovered{=}@*) (*@\vdmnotcovered{"Hospital das Camélias"}@*));
-    (*@\vdmnotcovered{assertTrue}@*)(safetyNet.getHospitalsMoreAppointments((*@\vdmnotcovered{<Other>}@*)).getName() = (*@\vdmnotcovered{"Hospital das Camélias"}@*));
+   testGetHospitalsMoreAppointments() == ( 
+    IO`print("\n Checking Safety Net Hospitals with more appointments, etc \n");
+    assertTrue(safetyNet.getHospitalsMoreAppointments(<Appointment>).getName() = "Hospital das Camélias");
+    assertTrue(safetyNet.getHospitalsMoreAppointments(<Urgencies>).getName() = "Hospital das Camélias");
+    assertTrue(safetyNet.getHospitalsMoreAppointments(<Surgery>).getName() = "Hospital das Camélias");
+    assertTrue(safetyNet.getHospitalsMoreAppointments(<Other>).getName() = "Hospital das Camélias");
    );
    
 (*@
 \label{testGetMedMoreHospitals:247}
 @*)
   public testGetMedMoreHospitals : () ==> ()
-   testGetMedMoreHospitals() == (*@\vdmnotcovered{(}@*)
-    for all t in set (*@\vdmnotcovered{safetyNet}@*).(*@\vdmnotcovered{getHospitals}@*)() do
-     if(t.(*@\vdmnotcovered{getName}@*)() (*@\vdmnotcovered{<>}@*) (*@\vdmnotcovered{"Hospital das Camélias"}@*))
-      then (*@\vdmnotcovered{t}@*).addMedAssociated((*@\vdmnotcovered{doctor}@*));
+   testGetMedMoreHospitals() == (
+    for all t in set safetyNet.getHospitals() do
+     if(t.getName() <> "Hospital das Camélias")
+      then t.addMedAssociated(doctor);
     
-    IO`print((*@\vdmnotcovered{"\textbackslash n Checking Safety Net Doctors that works in more than 1 hospital \textbackslash n"}@*));
-    IO`print((*@\vdmnotcovered{"\textbackslash n Number of Doctors: "}@*)); 
-    IO`print(card safetyNet.(*@\vdmnotcovered{getMedMoreHospitals}@*)((*@\vdmnotcovered{<Doctor>}@*))); 
-    assertTrue((*@\vdmnotcovered{card}@*) (*@\vdmnotcovered{safetyNet}@*).(*@\vdmnotcovered{getMedMoreHospitals}@*)((*@\vdmnotcovered{<Doctor>}@*)) = (*@\vdmnotcovered{1}@*));
-    (*@\vdmnotcovered{assertTrue}@*)(safetyNet.getMedMoreHospitals(<Doctor>) (*@\vdmnotcovered{=}@*) (*@\vdmnotcovered{\{}@*)(*@\vdmnotcovered{doctor}@*)});  
+    IO`print("\n Checking Safety Net Doctors that works in more than 1 hospital \n");
+    IO`print("\n Number of Doctors: "); 
+    IO`print(card safetyNet.getMedMoreHospitals(<Doctor>)); 
+    assertTrue(card safetyNet.getMedMoreHospitals(<Doctor>) = 1);
+    assertTrue(safetyNet.getMedMoreHospitals(<Doctor>) = {doctor});  
    );
   
 (*@
 \label{testGetMedAssociatedByPatient:260}
 @*)
   public testGetMedAssociatedByPatient : () ==> ()
-   testGetMedAssociatedByPatient() == (*@\vdmnotcovered{(}@*)
+   testGetMedAssociatedByPatient() == (
     dcl mapTest : map Hospital to set of (HealthProfessional);
-    IO`print((*@\vdmnotcovered{"\textbackslash n\textbackslash n Getting Doctors associated by patient by hospital \textbackslash n"}@*));
-    (*@\vdmnotcovered{mapTest}@*) := (*@\vdmnotcovered{safetyNet}@*).(*@\vdmnotcovered{getMedAssociatedByPatient}@*)((*@\vdmnotcovered{patient}@*), (*@\vdmnotcovered{<Doctor>}@*));
+    IO`print("\n\n Getting Doctors associated by patient by hospital \n");
+    mapTest := safetyNet.getMedAssociatedByPatient(patient, <Doctor>);
     
-    (*@\vdmnotcovered{assertTrue}@*)(card mapTest(hospital) = (*@\vdmnotcovered{2}@*));
-    assertTrue((*@\vdmnotcovered{mapTest}@*)((*@\vdmnotcovered{hospital}@*)) (*@\vdmnotcovered{=}@*) (*@\vdmnotcovered{\{}@*)(*@\vdmnotcovered{doctor}@*), (*@\vdmnotcovered{doctor2}@*)});
+    assertTrue(card mapTest(hospital) = 2);
+    assertTrue(mapTest(hospital) = {doctor, doctor2});
    );
    
 (*@
 \label{testGetMedByHospital:270}
 @*)
   public testGetMedByHospital : () ==> ()
-   testGetMedByHospital() == (*@\vdmnotcovered{(}@*)
+   testGetMedByHospital() == (
     dcl mapTest : map Hospital to set of (HealthProfessional);
-    (*@\vdmnotcovered{IO`print}@*)((*@\vdmnotcovered{"\textbackslash n\textbackslash n Getting Doctors associated by hospital \textbackslash n"}@*));
-    mapTest := safetyNet.(*@\vdmnotcovered{getMedByHospital}@*)((*@\vdmnotcovered{<Doctor>}@*));
+    IO`print("\n\n Getting Doctors associated by hospital \n");
+    mapTest := safetyNet.getMedByHospital(<Doctor>);
     
-    assertTrue(card mapTest((*@\vdmnotcovered{hospital}@*)) (*@\vdmnotcovered{=}@*) (*@\vdmnotcovered{2}@*));
-    (*@\vdmnotcovered{assertTrue}@*)((*@\vdmnotcovered{mapTest}@*)((*@\vdmnotcovered{hospital}@*)) = {doctor, (*@\vdmnotcovered{doctor2}@*)});
+    assertTrue(card mapTest(hospital) = 2);
+    assertTrue(mapTest(hospital) = {doctor, doctor2});
     
-    mapTest := safetyNet.(*@\vdmnotcovered{getMedByHospital}@*)((*@\vdmnotcovered{<Surgeon>}@*));
+    mapTest := safetyNet.getMedByHospital(<Surgeon>);
     
-    (*@\vdmnotcovered{assertTrue}@*)(card mapTest(hospital) = (*@\vdmnotcovered{1}@*));
-    (*@\vdmnotcovered{assertTrue}@*)(mapTest((*@\vdmnotcovered{hospital}@*)) (*@\vdmnotcovered{=}@*) (*@\vdmnotcovered{\{}@*)(*@\vdmnotcovered{surgeon}@*)});
+    assertTrue(card mapTest(hospital) = 1);
+    assertTrue(mapTest(hospital) = {surgeon});
    );
    
 (*@
 \label{main:285}
 @*)
   public static main: () ==> ()
-   main() == (*@\vdmnotcovered{(}@*)
-    dcl safetyNetTest: SafetyNetHospitalTest := new (*@\vdmnotcovered{SafetyNetHospitalTest}@*)();
-    IO`print((*@\vdmnotcovered{"\textbackslash n *****Running SafetyNetHospitalTest***** \textbackslash n"}@*));
-    (*@\vdmnotcovered{safetyNetTest}@*).testAddRemoveHospitals();
-    (*@\vdmnotcovered{safetyNetTest}@*).testAddRemoveMedHospital();
-    (*@\vdmnotcovered{safetyNetTest}@*).testAddRemoveTaskHospital();
-    (*@\vdmnotcovered{safetyNetTest}@*).testAddRemoveTrainingHospital();
-    (*@\vdmnotcovered{safetyNetTest}@*).testGetHospitalsMoreAppointments();
-    (*@\vdmnotcovered{safetyNetTest}@*).testGetMedMoreHospitals();
-    (*@\vdmnotcovered{safetyNetTest}@*).testGetMedAssociatedByPatient();
-    (*@\vdmnotcovered{safetyNetTest}@*).testGetMedByHospital();
+   main() == (
+    dcl safetyNetTest: SafetyNetHospitalTest := new SafetyNetHospitalTest();
+    IO`print("\n *****Running SafetyNetHospitalTest***** \n");
+    safetyNetTest.testAddRemoveHospitals();
+    safetyNetTest.testAddRemoveMedHospital();
+    safetyNetTest.testAddRemoveTaskHospital();
+    safetyNetTest.testAddRemoveTrainingHospital();
+    safetyNetTest.testGetHospitalsMoreAppointments();
+    safetyNetTest.testGetMedMoreHospitals();
+    safetyNetTest.testGetMedAssociatedByPatient();
+    safetyNetTest.testGetMedByHospital();
    );
       
 end SafetyNetHospitalTest
@@ -335,28 +335,28 @@ end SafetyNetHospitalTest
 Function or operation & Line & Coverage & Calls \\
 \hline
 \hline
-\hyperref[assertTrue:60]{assertTrue} & 60&0.0\% & 0 \\
+\hyperref[assertTrue:60]{assertTrue} & 60&100.0\% & 172 \\
 \hline
-\hyperref[main:285]{main} & 285&0.0\% & 0 \\
+\hyperref[main:285]{main} & 285&100.0\% & 4 \\
 \hline
-\hyperref[testAddRemoveHospitals:64]{testAddRemoveHospitals} & 64&0.0\% & 0 \\
+\hyperref[testAddRemoveHospitals:64]{testAddRemoveHospitals} & 64&100.0\% & 4 \\
 \hline
-\hyperref[testAddRemoveMedHospital:95]{testAddRemoveMedHospital} & 95&0.0\% & 0 \\
+\hyperref[testAddRemoveMedHospital:95]{testAddRemoveMedHospital} & 95&100.0\% & 4 \\
 \hline
-\hyperref[testAddRemoveTaskHospital:177]{testAddRemoveTaskHospital} & 177&0.0\% & 0 \\
+\hyperref[testAddRemoveTaskHospital:177]{testAddRemoveTaskHospital} & 177&100.0\% & 4 \\
 \hline
-\hyperref[testAddRemoveTrainingHospital:215]{testAddRemoveTrainingHospital} & 215&0.0\% & 0 \\
+\hyperref[testAddRemoveTrainingHospital:215]{testAddRemoveTrainingHospital} & 215&100.0\% & 4 \\
 \hline
-\hyperref[testGetHospitalsMoreAppointments:238]{testGetHospitalsMoreAppointments} & 238&0.0\% & 0 \\
+\hyperref[testGetHospitalsMoreAppointments:238]{testGetHospitalsMoreAppointments} & 238&100.0\% & 4 \\
 \hline
-\hyperref[testGetMedAssociatedByPatient:260]{testGetMedAssociatedByPatient} & 260&0.0\% & 0 \\
+\hyperref[testGetMedAssociatedByPatient:260]{testGetMedAssociatedByPatient} & 260&100.0\% & 8 \\
 \hline
-\hyperref[testGetMedByHospital:270]{testGetMedByHospital} & 270&0.0\% & 0 \\
+\hyperref[testGetMedByHospital:270]{testGetMedByHospital} & 270&100.0\% & 4 \\
 \hline
-\hyperref[testGetMedMoreHospitals:247]{testGetMedMoreHospitals} & 247&0.0\% & 0 \\
+\hyperref[testGetMedMoreHospitals:247]{testGetMedMoreHospitals} & 247&100.0\% & 4 \\
 \hline
 \hline
-SafetyNetHospitalTest.vdmpp & & 0.0\% & 0 \\
+SafetyNetHospitalTest.vdmpp & & 100.0\% & 212 \\
 \hline
 \end{longtable}
 

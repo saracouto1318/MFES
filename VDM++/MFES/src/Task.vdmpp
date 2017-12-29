@@ -1,13 +1,11 @@
 class Task
 instance variables
-  protected schedule:[Schedule];
-  protected patient:[Patient];
-  protected hospital:[Hospital];
-  protected medicalAssoc:[HealthProfessional];
+  protected schedule: Schedule;
+  protected patient: Patient;
+  protected hospital: Hospital;
+  protected medicalAssoc: HealthProfessional;
   protected taskType : Types`TaskType;
-  
-  inv patient <> nil;
-  inv hospital <> nil;
+
   inv taskType <> nil;
 operations
 	public Task: HealthProfessional * Schedule * Patient * Hospital * Types`TaskType ==> Task

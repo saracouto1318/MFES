@@ -2,51 +2,48 @@
 class Training
  
 instance variables
- private medicalAssociated:[HealthProfessional];
- private purpose:[Types`Purpose];
- private schedule:[Schedule];
+ private medicalAssociated: HealthProfessional;
+ private purpose: Types`Purpose;
+ private schedule: Schedule;
 
- inv (*@\vdmnotcovered{medicalAssociated}@*) (*@\vdmnotcovered{<>}@*) (*@\vdmnotcovered{nil}@*);
- inv purpose (*@\vdmnotcovered{<>}@*) (*@\vdmnotcovered{nil}@*);
- inv schedule (*@\vdmnotcovered{<>}@*) (*@\vdmnotcovered{nil}@*);
-
+ inv purpose <> nil;
 operations
 (*@
-\label{Training:13}
+\label{Training:10}
 @*)
  public Training: Types`Purpose * Schedule * HealthProfessional ==> Training
-   Training(p, s, h) == (purpose := (*@\vdmnotcovered{p}@*); (*@\vdmnotcovered{schedule}@*) := s; (*@\vdmnotcovered{medicalAssociated}@*) := h; return (*@\vdmnotcovered{self}@*))
- post purpose (*@\vdmnotcovered{=}@*) p (*@\vdmnotcovered{and}@*) schedule = (*@\vdmnotcovered{s}@*) (*@\vdmnotcovered{and}@*) (*@\vdmnotcovered{medicalAssociated}@*) (*@\vdmnotcovered{=}@*) (*@\vdmnotcovered{h}@*);
+   Training(p, s, h) == (purpose := p; schedule := s; medicalAssociated := h; return self)
+ post purpose = p and schedule = s and medicalAssociated = h;
 
 (*@
-\label{getSchedule:17}
+\label{getSchedule:14}
 @*)
  pure public getSchedule : () ==> Schedule
-   getSchedule() == (return (*@\vdmnotcovered{schedule}@*));
+   getSchedule() == (return schedule);
  
 (*@
-\label{getPurpose:20}
+\label{getPurpose:17}
 @*)
   pure public getPurpose : () ==> Types`Purpose
-  getPurpose() == (*@\vdmnotcovered{(}@*)(*@\vdmnotcovered{return}@*) (*@\vdmnotcovered{purpose}@*)); 
+  getPurpose() == (return purpose); 
  
 (*@
-\label{getMedAssoc:23}
+\label{getMedAssoc:20}
 @*)
  pure public getMedAssoc : () ==> HealthProfessional
-  getMedAssoc() == ((*@\vdmnotcovered{return}@*) (*@\vdmnotcovered{medicalAssociated}@*)); 
+  getMedAssoc() == (return medicalAssociated); 
 
 (*@
-\label{setSchedule:26}
+\label{setSchedule:23}
 @*)
  public setSchedule : Schedule ==> ()
-   setSchedule(s) == (schedule := (*@\vdmnotcovered{s}@*));
+   setSchedule(s) == (schedule := s);
  
 (*@
-\label{setPurpose:29}
+\label{setPurpose:26}
 @*)
  public setPurpose : Types`Purpose ==> ()
-   setPurpose(p) == (purpose := (*@\vdmnotcovered{p}@*));
+   setPurpose(p) == (purpose := p);
  
  end Training
 \end{vdmpp}
@@ -56,20 +53,20 @@ operations
 Function or operation & Line & Coverage & Calls \\
 \hline
 \hline
-\hyperref[Training:13]{Training} & 13&0.0\% & 0 \\
+\hyperref[Training:10]{Training} & 10&100.0\% & 24 \\
 \hline
-\hyperref[getMedAssoc:23]{getMedAssoc} & 23&0.0\% & 0 \\
+\hyperref[getMedAssoc:20]{getMedAssoc} & 20&100.0\% & 120 \\
 \hline
-\hyperref[getPurpose:20]{getPurpose} & 20&0.0\% & 0 \\
+\hyperref[getPurpose:17]{getPurpose} & 17&100.0\% & 20 \\
 \hline
-\hyperref[getSchedule:17]{getSchedule} & 17&0.0\% & 0 \\
+\hyperref[getSchedule:14]{getSchedule} & 14&100.0\% & 128 \\
 \hline
-\hyperref[setPurpose:29]{setPurpose} & 29&0.0\% & 0 \\
+\hyperref[setPurpose:26]{setPurpose} & 26&100.0\% & 4 \\
 \hline
-\hyperref[setSchedule:26]{setSchedule} & 26&0.0\% & 0 \\
+\hyperref[setSchedule:23]{setSchedule} & 23&100.0\% & 4 \\
 \hline
 \hline
-Training.vdmpp & & 0.0\% & 0 \\
+Training.vdmpp & & 100.0\% & 300 \\
 \hline
 \end{longtable}
 

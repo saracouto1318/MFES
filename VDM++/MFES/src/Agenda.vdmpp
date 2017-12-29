@@ -1,16 +1,14 @@
 class Agenda
 instance variables
 
-private healthProfessional : [HealthProfessional];
+private healthProfessional : HealthProfessional;
 private agenda : set of (Schedule);
 
-inv healthProfessional <> nil;
 inv card agenda >= 0;
 
 operations
 	public Agenda : HealthProfessional ==> Agenda
 		Agenda(h) == (healthProfessional := h; agenda := {}; return self)
-	pre healthProfessional <> nil
 	post healthProfessional = h and agenda = {};
 	
 	pure public getHealthProfessional : () ==> HealthProfessional

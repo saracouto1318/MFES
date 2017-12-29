@@ -7,177 +7,177 @@ instance variables
   private address: Types`String;
   private tasks: set of(Task);
   private trainings: set of(Training);
-  private safetyNet: [SafetyNetHospital];
+  private safetyNet: SafetyNetHospital;
  
- inv (*@\vdmnotcovered{safetyNet}@*) (*@\vdmnotcovered{<>}@*) (*@\vdmnotcovered{nil}@*); 
- inv (*@\vdmnotcovered{card}@*) medicalAssociated (*@\vdmnotcovered{>=}@*) (*@\vdmnotcovered{0}@*);
- inv card agenda (*@\vdmnotcovered{>=}@*) (*@\vdmnotcovered{0}@*);
- inv card tasks >= (*@\vdmnotcovered{0}@*);
+ inv card medicalAssociated >= 0;
+ inv card agenda >= 0;
+ inv card tasks >= 0;
 operations
 
 (*@
-\label{Hospital:17}
+\label{Hospital:16}
 @*)
  public Hospital: Types`String * Types`String * SafetyNetHospital ==> Hospital
-  Hospital(n, a, s) == (name := n; address := a; safetyNet := s; medicalAssociated := {}; tasks := {}; (*@\vdmnotcovered{trainings}@*) := {}; agenda := (*@\vdmnotcovered{\{}@*)};
-  safetyNet.addHospital(self); return (*@\vdmnotcovered{self}@*))
- pre safetyNet <> (*@\vdmnotcovered{nil}@*)
- post (*@\vdmnotcovered{name}@*) (*@\vdmnotcovered{=}@*) (*@\vdmnotcovered{n}@*) (*@\vdmnotcovered{and}@*) address = a and (*@\vdmnotcovered{safetyNet}@*) = s (*@\vdmnotcovered{and}@*) (*@\vdmnotcovered{medicalAssociated}@*) (*@\vdmnotcovered{=}@*) (*@\vdmnotcovered{\{}@*)} (*@\vdmnotcovered{and}@*) tasks = {} (*@\vdmnotcovered{and}@*) (*@\vdmnotcovered{trainings}@*) = {} and agenda (*@\vdmnotcovered{=}@*) (*@\vdmnotcovered{\{}@*)};
+  Hospital(n, a, s) == (name := n; address := a; safetyNet := s; medicalAssociated := {}; tasks := {}; trainings := {}; agenda := {};
+  safetyNet.addHospital(self); return self)
+ post name = n and address = a and safetyNet = s and medicalAssociated = {} and tasks = {} and trainings = {} and agenda = {};
  
 (*@
-\label{getName:23}
+\label{getName:21}
 @*)
  pure public getName: () ==> Types`String
-  getName() == (return (*@\vdmnotcovered{name}@*));
+  getName() == (return name);
  
 (*@
-\label{getAddress:26}
+\label{getAddress:24}
 @*)
  pure public getAddress: () ==> Types`String
-  getAddress() == ((*@\vdmnotcovered{return}@*) (*@\vdmnotcovered{address}@*));
+  getAddress() == (return address);
  
 (*@
-\label{getAgendas:29}
+\label{getAgendas:27}
 @*)
  pure public getAgendas : () ==> set of(Agenda)
-  getAgendas() == (*@\vdmnotcovered{(}@*)(*@\vdmnotcovered{return}@*) (*@\vdmnotcovered{agenda}@*));
+  getAgendas() == (return agenda);
   
 (*@
-\label{getAgenda:32}
+\label{getAgenda:30}
 @*)
  pure public getAgenda : HealthProfessional ==> set of(Schedule)
-  getAgenda(h) == (*@\vdmnotcovered{(}@*)
-   for all a in set (*@\vdmnotcovered{agenda}@*) do
-    (*@\vdmnotcovered{if}@*)((*@\vdmnotcovered{a}@*).(*@\vdmnotcovered{getHealthProfessional}@*)() = (*@\vdmnotcovered{h}@*))
-     then return (*@\vdmnotcovered{a}@*).(*@\vdmnotcovered{getAgenda}@*)();
-   (*@\vdmnotcovered{return}@*) (*@\vdmnotcovered{\{}@*)});
- 
+  getAgenda(h) == (
+   dcl agendaNew : set of(Schedule);
+   agendaNew := {};
+   for all a in set agenda do
+    if(a.getHealthProfessional() = h)
+     then agendaNew := a.getAgenda();
 (*@
-\label{removeAgenda:39}
+\label{removeAgenda:37}
 @*)
+   return agendaNew);
+ 
  public removeAgenda : Agenda ==> ()
-  removeAgenda(a) == (agenda := (*@\vdmnotcovered{agenda}@*) (*@\vdmnotcovered{\textbackslash }@*) {(*@\vdmnotcovered{a}@*)})
- pre (*@\vdmnotcovered{a}@*) (*@\vdmnotcovered{in}@*) set (*@\vdmnotcovered{agenda}@*)
- post (*@\vdmnotcovered{a}@*) (*@\vdmnotcovered{not}@*) in set (*@\vdmnotcovered{agenda}@*);
- 
+  removeAgenda(a) == (agenda := agenda \ {a})
+ pre a in set agenda
 (*@
-\label{addMedAssociated:44}
+\label{addMedAssociated:42}
 @*)
+ post a not in set agenda;
+ 
  public addMedAssociated: HealthProfessional ==> ()
-  addMedAssociated(d) == (*@\vdmnotcovered{(}@*)
+  addMedAssociated(d) == (
    dcl agendaNew : Agenda;
-   (*@\vdmnotcovered{agendaNew}@*) := new (*@\vdmnotcovered{Agenda}@*)((*@\vdmnotcovered{d}@*));
-   (*@\vdmnotcovered{agenda}@*) := (*@\vdmnotcovered{agenda}@*) union (*@\vdmnotcovered{\{}@*)(*@\vdmnotcovered{agendaNew}@*)};
-   medicalAssociated := {(*@\vdmnotcovered{d}@*)} (*@\vdmnotcovered{union}@*) (*@\vdmnotcovered{medicalAssociated}@*))
- pre d not in set (*@\vdmnotcovered{medicalAssociated}@*)
- post (*@\vdmnotcovered{d}@*) (*@\vdmnotcovered{in}@*) set (*@\vdmnotcovered{medicalAssociated}@*);
-  
+   agendaNew := new Agenda(d);
+   agenda := agenda union {agendaNew};
+   medicalAssociated := {d} union medicalAssociated)
+ pre d not in set medicalAssociated
 (*@
-\label{removeMedAssociated:53}
+\label{removeMedAssociated:51}
 @*)
+ post d in set medicalAssociated;
+  
  public removeMedAssociated: HealthProfessional ==> ()
-  removeMedAssociated(d) == (*@\vdmnotcovered{(}@*)
-   for all t in set (*@\vdmnotcovered{tasks}@*) do
-    if(d (*@\vdmnotcovered{=}@*) (*@\vdmnotcovered{t}@*).(*@\vdmnotcovered{getMedAssoc}@*)())
-     then removeTask((*@\vdmnotcovered{t}@*));
-   for all t in set (*@\vdmnotcovered{trainings}@*) do
-    (*@\vdmnotcovered{if}@*)((*@\vdmnotcovered{d}@*) = t.(*@\vdmnotcovered{getMedAssoc}@*)())
-     then removeTraining((*@\vdmnotcovered{t}@*));
-   for all a in set (*@\vdmnotcovered{agenda}@*) do
-    if(a.(*@\vdmnotcovered{getHealthProfessional}@*)().getCC() (*@\vdmnotcovered{=}@*) (*@\vdmnotcovered{d}@*).(*@\vdmnotcovered{getCC}@*)())
-     then removeAgenda((*@\vdmnotcovered{a}@*));
-   (*@\vdmnotcovered{medicalAssociated}@*) := medicalAssociated (*@\vdmnotcovered{\textbackslash }@*) (*@\vdmnotcovered{\{}@*)(*@\vdmnotcovered{d}@*)})
- pre d in set (*@\vdmnotcovered{medicalAssociated}@*)
- post (*@\vdmnotcovered{d}@*) (*@\vdmnotcovered{not}@*) in set (*@\vdmnotcovered{medicalAssociated}@*);
- 
+  removeMedAssociated(d) == (
+   for all t in set tasks do
+    if(d = t.getMedAssoc())
+     then removeTask(t);
+   for all t in set trainings do
+    if(d = t.getMedAssoc())
+     then removeTraining(t);
+   for all a in set agenda do
+    if(a.getHealthProfessional().getCC() = d.getCC())
+     then removeAgenda(a);
+   medicalAssociated := medicalAssociated \ {d})
+ pre d in set medicalAssociated
 (*@
-\label{addTask:68}
+\label{addTask:66}
 @*)
+ post d not in set medicalAssociated;
+ 
  public addTask: Task ==> ()
-  addTask(d) == (*@\vdmnotcovered{(}@*)
-   if((*@\vdmnotcovered{d}@*).(*@\vdmnotcovered{getPatient}@*)() not in set d.getMedAssoc().(*@\vdmnotcovered{getPatients}@*)())
-    then (*@\vdmnotcovered{d}@*).getMedAssoc().addPatient(d.(*@\vdmnotcovered{getPatient}@*)());
-   (*@\vdmnotcovered{tasks}@*) := {d} union (*@\vdmnotcovered{tasks}@*);
-   (*@\vdmnotcovered{for}@*) all a in set (*@\vdmnotcovered{agenda}@*) do
-    if(a.getHealthProfessional().getCC() = d.(*@\vdmnotcovered{getMedAssoc}@*)().(*@\vdmnotcovered{getCC}@*)())
-      then a.removeSchedule((*@\vdmnotcovered{d}@*).(*@\vdmnotcovered{getSchedule}@*)());)
- pre (*@\vdmnotcovered{d}@*) (*@\vdmnotcovered{not}@*) in set (*@\vdmnotcovered{tasks}@*) (*@\vdmnotcovered{and}@*) (*@\vdmnotcovered{d}@*).(*@\vdmnotcovered{getSchedule}@*)() (*@\vdmnotcovered{in}@*) set (*@\vdmnotcovered{getAgenda}@*)((*@\vdmnotcovered{d}@*).(*@\vdmnotcovered{getMedAssoc}@*)())
- post d in set tasks and d.getPatient() in set d.getMedAssoc().getPatients() and d.getSchedule() not in set (*@\vdmnotcovered{getAgenda}@*)(d.(*@\vdmnotcovered{getMedAssoc}@*)());
-  
+  addTask(d) == (
+   if(d.getPatient() not in set d.getMedAssoc().getPatients())
+    then d.getMedAssoc().addPatient(d.getPatient());
+   tasks := {d} union tasks;
+   for all a in set agenda do
+    if(a.getHealthProfessional().getCC() = d.getMedAssoc().getCC())
+      then a.removeSchedule(d.getSchedule());)
+ pre d not in set tasks and d.getSchedule() in set getAgenda(d.getMedAssoc())
 (*@
-\label{removeTask:79}
+\label{removeTask:77}
 @*)
+ post d in set tasks and d.getPatient() in set d.getMedAssoc().getPatients() and d.getSchedule() not in set getAgenda(d.getMedAssoc());
+  
  public removeTask: Task ==> ()
-  removeTask(d) == (*@\vdmnotcovered{(}@*)
-   for all a in set (*@\vdmnotcovered{agenda}@*) do
-    if(a.(*@\vdmnotcovered{getHealthProfessional}@*)() (*@\vdmnotcovered{=}@*) (*@\vdmnotcovered{d}@*).(*@\vdmnotcovered{getMedAssoc}@*)())
-      then (*@\vdmnotcovered{a}@*).addSchedule((*@\vdmnotcovered{d}@*).(*@\vdmnotcovered{getSchedule}@*)());
-   (*@\vdmnotcovered{tasks}@*) := (*@\vdmnotcovered{tasks}@*) (*@\vdmnotcovered{\textbackslash }@*) (*@\vdmnotcovered{\{}@*)(*@\vdmnotcovered{d}@*)})
- pre d (*@\vdmnotcovered{in}@*) set (*@\vdmnotcovered{tasks}@*) and d.getSchedule() not in set getAgenda(d.(*@\vdmnotcovered{getMedAssoc}@*)())
- post d not in set tasks and d.(*@\vdmnotcovered{getSchedule}@*)() (*@\vdmnotcovered{in}@*) set (*@\vdmnotcovered{getAgenda}@*)(d.(*@\vdmnotcovered{getMedAssoc}@*)());
- 
+  removeTask(d) == (
+   for all a in set agenda do
+    if(a.getHealthProfessional() = d.getMedAssoc())
+      then a.addSchedule(d.getSchedule());
+   tasks := tasks \ {d})
+ pre d in set tasks and d.getSchedule() not in set getAgenda(d.getMedAssoc())
 (*@
-\label{addTraining:88}
+\label{addTraining:86}
 @*)
+ post d not in set tasks and d.getSchedule() in set getAgenda(d.getMedAssoc());
+ 
  public addTraining: Training ==> ()
-  addTraining(d) == (*@\vdmnotcovered{(}@*)
-   for all a in set (*@\vdmnotcovered{agenda}@*) do
-    if((*@\vdmnotcovered{a}@*).(*@\vdmnotcovered{getHealthProfessional}@*)() = d.(*@\vdmnotcovered{getMedAssoc}@*)())
-      then a.removeSchedule(d.(*@\vdmnotcovered{getSchedule}@*)());
-   trainings := {(*@\vdmnotcovered{d}@*)} union (*@\vdmnotcovered{trainings}@*))
- pre d not in set trainings and d.getSchedule() in set (*@\vdmnotcovered{getAgenda}@*)(d.(*@\vdmnotcovered{getMedAssoc}@*)())
- post d in set trainings (*@\vdmnotcovered{and}@*) d.(*@\vdmnotcovered{getSchedule}@*)() (*@\vdmnotcovered{not}@*) in set (*@\vdmnotcovered{getAgenda}@*)(d.(*@\vdmnotcovered{getMedAssoc}@*)());
+  addTraining(d) == (
+   for all a in set agenda do
+    if(a.getHealthProfessional() = d.getMedAssoc())
+      then a.removeSchedule(d.getSchedule());
+   trainings := {d} union trainings)
+ pre d not in set trainings and d.getSchedule() in set getAgenda(d.getMedAssoc())
+(*@
+\label{removeTraining:95}
+@*)
+ post d in set trainings and d.getSchedule() not in set getAgenda(d.getMedAssoc());
   
-(*@
-\label{removeTraining:97}
-@*)
  public removeTraining: Training ==> ()
-  removeTraining(d) == (*@\vdmnotcovered{(}@*)
-   (*@\vdmnotcovered{for}@*) all a in set (*@\vdmnotcovered{agenda}@*) do
-    (*@\vdmnotcovered{if}@*)((*@\vdmnotcovered{a}@*).getHealthProfessional() (*@\vdmnotcovered{=}@*) (*@\vdmnotcovered{d}@*).(*@\vdmnotcovered{getMedAssoc}@*)())
-      then a.addSchedule((*@\vdmnotcovered{d}@*).(*@\vdmnotcovered{getSchedule}@*)());
-   (*@\vdmnotcovered{trainings}@*) := trainings \ {(*@\vdmnotcovered{d}@*)})
- pre (*@\vdmnotcovered{d}@*) (*@\vdmnotcovered{in}@*) set trainings and d.getSchedule() not in set (*@\vdmnotcovered{getAgenda}@*)(d.(*@\vdmnotcovered{getMedAssoc}@*)())
- post (*@\vdmnotcovered{d}@*) (*@\vdmnotcovered{not}@*) in set (*@\vdmnotcovered{trainings}@*) and d.getSchedule() in set getAgenda(d.(*@\vdmnotcovered{getMedAssoc}@*)());
+  removeTraining(d) == (
+   for all a in set agenda do
+    if(a.getHealthProfessional() = d.getMedAssoc())
+      then a.addSchedule(d.getSchedule());
+   trainings := trainings \ {d})
+ pre d in set trainings and d.getSchedule() not in set getAgenda(d.getMedAssoc())
+(*@
+\label{getTasksByType:104}
+@*)
+ post d not in set trainings and d.getSchedule() in set getAgenda(d.getMedAssoc());
  
-(*@
-\label{getTasksByType:106}
-@*)
  pure public getTasksByType: Types`TaskType ==> set of (Task)
-  getTasksByType(s) == (*@\vdmnotcovered{(}@*)
+  getTasksByType(s) == (
    dcl tasksTotal: set of (Task);
-   tasksTotal := (*@\vdmnotcovered{\{}@*)};
-   (*@\vdmnotcovered{for}@*) all t in set (*@\vdmnotcovered{tasks}@*) do
-    (*@\vdmnotcovered{if}@*)((*@\vdmnotcovered{t}@*).getType() (*@\vdmnotcovered{=}@*) (*@\vdmnotcovered{s}@*))
-     then tasksTotal := tasksTotal union (*@\vdmnotcovered{\{}@*)(*@\vdmnotcovered{t}@*)};
+   tasksTotal := {};
+   for all t in set tasks do
+    if(t.getType() = s)
+     then tasksTotal := tasksTotal union {t};
      
-   (*@\vdmnotcovered{return}@*) (*@\vdmnotcovered{tasksTotal}@*));
+(*@
+\label{getTrainingsByType:114}
+@*)
+   return tasksTotal);
               
-(*@
-\label{getTrainingsByType:116}
-@*)
  pure public getTrainingsByType: Types`Purpose ==> set of (Training)
-  getTrainingsByType(s) == (*@\vdmnotcovered{(}@*)
+  getTrainingsByType(s) == (
    dcl train: set of (Training);
-   train := (*@\vdmnotcovered{\{}@*)};
-   for all t in set (*@\vdmnotcovered{trainings}@*) do
-    if(t.(*@\vdmnotcovered{getPurpose}@*)() = (*@\vdmnotcovered{s}@*))
-     then (*@\vdmnotcovered{train}@*) := (*@\vdmnotcovered{train}@*) (*@\vdmnotcovered{union}@*) (*@\vdmnotcovered{\{}@*)(*@\vdmnotcovered{t}@*)};
+   train := {};
+   for all t in set trainings do
+    if(t.getPurpose() = s)
+     then train := train union {t};
      
-   (*@\vdmnotcovered{return}@*) (*@\vdmnotcovered{train}@*));
-
 (*@
-\label{getMedicalAssociatedByType:126}
+\label{getMedicalAssociatedByType:124}
 @*)
+   return train);
+
  pure public getMedicalAssociatedByType: Types`Type ==> set of (HealthProfessional)
-  getMedicalAssociatedByType(type) == (*@\vdmnotcovered{(}@*)
+  getMedicalAssociatedByType(type) == (
    dcl med: set of(HealthProfessional);
-   (*@\vdmnotcovered{med}@*) := (*@\vdmnotcovered{\{}@*)};
-   for all d in set (*@\vdmnotcovered{medicalAssociated}@*) do
-    (*@\vdmnotcovered{if}@*)((*@\vdmnotcovered{d}@*).(*@\vdmnotcovered{getType}@*)() = (*@\vdmnotcovered{type}@*))
-     then med := (*@\vdmnotcovered{med}@*) union (*@\vdmnotcovered{\{}@*)(*@\vdmnotcovered{d}@*)};
+   med := {};
+   for all d in set medicalAssociated do
+    if(d.getType() = type)
+     then med := med union {d};
     
-   return (*@\vdmnotcovered{med}@*));
+   return med);
 end Hospital
 \end{vdmpp}
 \bigskip
@@ -186,38 +186,38 @@ end Hospital
 Function or operation & Line & Coverage & Calls \\
 \hline
 \hline
-\hyperref[Hospital:17]{Hospital} & 17&0.0\% & 0 \\
+\hyperref[Hospital:16]{Hospital} & 16&100.0\% & 28 \\
 \hline
-\hyperref[addMedAssociated:44]{addMedAssociated} & 44&0.0\% & 0 \\
+\hyperref[addMedAssociated:42]{addMedAssociated} & 42&100.0\% & 11 \\
 \hline
-\hyperref[addTask:68]{addTask} & 68&0.0\% & 0 \\
+\hyperref[addTask:66]{addTask} & 66&100.0\% & 12 \\
 \hline
-\hyperref[addTraining:88]{addTraining} & 88&0.0\% & 0 \\
+\hyperref[addTraining:86]{addTraining} & 86&100.0\% & 2 \\
 \hline
-\hyperref[getAddress:26]{getAddress} & 26&0.0\% & 0 \\
+\hyperref[getAddress:24]{getAddress} & 24&100.0\% & 12 \\
 \hline
-\hyperref[getAgenda:32]{getAgenda} & 32&0.0\% & 0 \\
+\hyperref[getAgenda:30]{getAgenda} & 30&100.0\% & 38 \\
 \hline
-\hyperref[getAgendas:29]{getAgendas} & 29&0.0\% & 0 \\
+\hyperref[getAgendas:27]{getAgendas} & 27&100.0\% & 12 \\
 \hline
-\hyperref[getMedicalAssociatedByType:126]{getMedicalAssociatedByType} & 126&0.0\% & 0 \\
+\hyperref[getMedicalAssociatedByType:124]{getMedicalAssociatedByType} & 124&100.0\% & 33 \\
 \hline
-\hyperref[getName:23]{getName} & 23&0.0\% & 0 \\
+\hyperref[getName:21]{getName} & 21&100.0\% & 40 \\
 \hline
-\hyperref[getTasksByType:106]{getTasksByType} & 106&0.0\% & 0 \\
+\hyperref[getTasksByType:104]{getTasksByType} & 104&100.0\% & 24 \\
 \hline
-\hyperref[getTrainingsByType:116]{getTrainingsByType} & 116&0.0\% & 0 \\
+\hyperref[getTrainingsByType:114]{getTrainingsByType} & 114&100.0\% & 3 \\
 \hline
-\hyperref[removeAgenda:39]{removeAgenda} & 39&0.0\% & 0 \\
+\hyperref[removeAgenda:37]{removeAgenda} & 37&100.0\% & 1 \\
 \hline
-\hyperref[removeMedAssociated:53]{removeMedAssociated} & 53&0.0\% & 0 \\
+\hyperref[removeMedAssociated:51]{removeMedAssociated} & 51&100.0\% & 5 \\
 \hline
-\hyperref[removeTask:79]{removeTask} & 79&0.0\% & 0 \\
+\hyperref[removeTask:77]{removeTask} & 77&100.0\% & 2 \\
 \hline
-\hyperref[removeTraining:97]{removeTraining} & 97&0.0\% & 0 \\
+\hyperref[removeTraining:95]{removeTraining} & 95&100.0\% & 2 \\
 \hline
 \hline
-Hospital.vdmpp & & 0.0\% & 0 \\
+Hospital.vdmpp & & 100.0\% & 225 \\
 \hline
 \end{longtable}
 

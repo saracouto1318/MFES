@@ -1,65 +1,63 @@
 \begin{vdmpp}[breaklines=true]
 class Task
 instance variables
-  protected schedule:[Schedule];
-  protected patient:[Patient];
-  protected hospital:[Hospital];
-  protected medicalAssoc:[HealthProfessional];
+  protected schedule: Schedule;
+  protected patient: Patient;
+  protected hospital: Hospital;
+  protected medicalAssoc: HealthProfessional;
   protected taskType : Types`TaskType;
-  
-  inv (*@\vdmnotcovered{patient}@*) (*@\vdmnotcovered{<>}@*) (*@\vdmnotcovered{nil}@*);
-  inv hospital <> (*@\vdmnotcovered{nil}@*);
-  inv (*@\vdmnotcovered{taskType}@*) <> (*@\vdmnotcovered{nil}@*);
+
+  inv taskType <> nil;
 operations
 (*@
-\label{Task:13}
+\label{Task:11}
 @*)
  public Task: HealthProfessional * Schedule * Patient * Hospital * Types`TaskType ==> Task
-  Task(med, s, p, h, t) == (schedule := s; patient := p; (*@\vdmnotcovered{hospital}@*) := h; taskType := (*@\vdmnotcovered{t}@*); (*@\vdmnotcovered{medicalAssoc}@*) := med; return (*@\vdmnotcovered{self}@*))
- pre med.getCC() <> p.(*@\vdmnotcovered{getCC}@*)()
- post schedule = s and patient = p and hospital = h and medicalAssoc (*@\vdmnotcovered{=}@*) (*@\vdmnotcovered{med}@*);
+  Task(med, s, p, h, t) == (schedule := s; patient := p; hospital := h; taskType := t; medicalAssoc := med; return self)
+ pre med.getCC() <> p.getCC()
+ post schedule = s and patient = p and hospital = h and medicalAssoc = med;
  
 (*@
-\label{getSchedule:18}
+\label{getSchedule:16}
 @*)
  pure public getSchedule: () ==> Schedule
-  getSchedule() == (return (*@\vdmnotcovered{schedule}@*));
+  getSchedule() == (return schedule);
   
 (*@
-\label{getPatient:21}
+\label{getPatient:19}
 @*)
  pure public getPatient: () ==> Patient
-  getPatient() == (*@\vdmnotcovered{(}@*)(*@\vdmnotcovered{return}@*) (*@\vdmnotcovered{patient}@*));
+  getPatient() == (return patient);
   
 (*@
-\label{getHospital:24}
+\label{getHospital:22}
 @*)
  pure public getHospital: () ==> Hospital
-  getHospital() == (*@\vdmnotcovered{(}@*)return (*@\vdmnotcovered{hospital}@*));
+  getHospital() == (return hospital);
   
 (*@
-\label{getType:27}
+\label{getType:25}
 @*)
  pure public getType: () ==> Types`TaskType
-  getType() == ((*@\vdmnotcovered{return}@*) (*@\vdmnotcovered{taskType}@*));
+  getType() == (return taskType);
   
 (*@
-\label{getMedAssoc:30}
+\label{getMedAssoc:28}
 @*)
  pure public getMedAssoc : () ==> HealthProfessional
-  getMedAssoc() == (*@\vdmnotcovered{(}@*)(*@\vdmnotcovered{return}@*) (*@\vdmnotcovered{medicalAssoc}@*));
+  getMedAssoc() == (return medicalAssoc);
   
 (*@
-\label{setSchedule:33}
+\label{setSchedule:31}
 @*)
  public setSchedule : Schedule ==> ()
-  setSchedule(s) == (schedule := (*@\vdmnotcovered{s}@*));
+  setSchedule(s) == (schedule := s);
   
 (*@
-\label{getSurgeryPersons:36}
+\label{getSurgeryPersons:34}
 @*)
  pure public getSurgeryPersons : Types`Type ==> set of (HealthProfessional)
-  getSurgeryPersons(t) == (*@\vdmnotcovered{(}@*) (*@\vdmnotcovered{return}@*) (*@\vdmnotcovered{\{}@*)}; );
+  getSurgeryPersons(t) == ( return {}; );
 
 end Task
 \end{vdmpp}
@@ -69,24 +67,24 @@ end Task
 Function or operation & Line & Coverage & Calls \\
 \hline
 \hline
-\hyperref[Task:13]{Task} & 13&0.0\% & 0 \\
+\hyperref[Task:11]{Task} & 11&100.0\% & 80 \\
 \hline
-\hyperref[getHospital:24]{getHospital} & 24&0.0\% & 0 \\
+\hyperref[getHospital:22]{getHospital} & 22&100.0\% & 4 \\
 \hline
-\hyperref[getMedAssoc:30]{getMedAssoc} & 30&0.0\% & 0 \\
+\hyperref[getMedAssoc:28]{getMedAssoc} & 28&100.0\% & 528 \\
 \hline
-\hyperref[getPatient:21]{getPatient} & 21&0.0\% & 0 \\
+\hyperref[getPatient:19]{getPatient} & 19&100.0\% & 140 \\
 \hline
-\hyperref[getSchedule:18]{getSchedule} & 18&0.0\% & 0 \\
+\hyperref[getSchedule:16]{getSchedule} & 16&100.0\% & 348 \\
 \hline
-\hyperref[getSurgeryPersons:36]{getSurgeryPersons} & 36&0.0\% & 0 \\
+\hyperref[getSurgeryPersons:34]{getSurgeryPersons} & 34&100.0\% & 4 \\
 \hline
-\hyperref[getType:27]{getType} & 27&0.0\% & 0 \\
+\hyperref[getType:25]{getType} & 25&100.0\% & 488 \\
 \hline
-\hyperref[setSchedule:33]{setSchedule} & 33&0.0\% & 0 \\
+\hyperref[setSchedule:31]{setSchedule} & 31&100.0\% & 4 \\
 \hline
 \hline
-Task.vdmpp & & 0.0\% & 0 \\
+Task.vdmpp & & 100.0\% & 1596 \\
 \hline
 \end{longtable}
 

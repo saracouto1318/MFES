@@ -9,6 +9,7 @@ instance variables
 	inv card patients >= 0;
   inv card specialties < 5;
 	inv type <> nil;
+	inv len medicalNumber > 5;
 operations
 	public HealthProfessional: Types`String * Types`String * Types`String * Types`String * Types`String * Types`String * Types`Type ==> HealthProfessional
 		HealthProfessional(a, fn, ln, c, pn, s, t) == (medicalNumber := s; type := t; specialties := {}; patients := {}; Person(a, fn, ln, c, pn))

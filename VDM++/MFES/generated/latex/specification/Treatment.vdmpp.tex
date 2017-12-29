@@ -1,30 +1,30 @@
 \begin{vdmpp}[breaklines=true]
 class Treatment is subclass of Task
 instance variables
-  public med: [HealthProfessional];
+  public med: HealthProfessional;
   public name: Types`String;
   
-  inv med.getType() = <Nurse> or med.getType() = (*@\vdmnotcovered{<Technician>}@*);
+  inv med.getType() = <Nurse> or med.getType() = <Technician>;
 operations
 
 (*@
 \label{Treatment:9}
 @*)
  public Treatment: HealthProfessional * Types`String * Schedule * Patient * Hospital ==> Treatment
-  Treatment(m, n, s, p, h) == (name := n; (*@\vdmnotcovered{med}@*) := m; Task(m, s, p, (*@\vdmnotcovered{h}@*), (*@\vdmnotcovered{<Other>}@*)))
- post name = n (*@\vdmnotcovered{and}@*) med = (*@\vdmnotcovered{m}@*);
+  Treatment(m, n, s, p, h) == (name := n; med := m; Task(m, s, p, h, <Other>))
+ post name = n and med = m;
  
 (*@
 \label{getName:13}
 @*)
  pure public getName: () ==> Types`String
-  getName() == ((*@\vdmnotcovered{return}@*) (*@\vdmnotcovered{name}@*));
+  getName() == (return name);
  
 (*@
 \label{getMed:16}
 @*)
  pure public getMed : () ==> HealthProfessional
-  getMed() == (return (*@\vdmnotcovered{med}@*));
+  getMed() == (return med);
 
 end Treatment
 \end{vdmpp}
@@ -34,14 +34,14 @@ end Treatment
 Function or operation & Line & Coverage & Calls \\
 \hline
 \hline
-\hyperref[Treatment:9]{Treatment} & 9&0.0\% & 0 \\
+\hyperref[Treatment:9]{Treatment} & 9&100.0\% & 16 \\
 \hline
-\hyperref[getMed:16]{getMed} & 16&0.0\% & 0 \\
+\hyperref[getMed:16]{getMed} & 16&100.0\% & 4 \\
 \hline
-\hyperref[getName:13]{getName} & 13&0.0\% & 0 \\
+\hyperref[getName:13]{getName} & 13&100.0\% & 4 \\
 \hline
 \hline
-Treatment.vdmpp & & 0.0\% & 0 \\
+Treatment.vdmpp & & 100.0\% & 24 \\
 \hline
 \end{longtable}
 

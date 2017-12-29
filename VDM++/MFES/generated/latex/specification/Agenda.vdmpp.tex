@@ -2,54 +2,52 @@
 class Agenda
 instance variables
 
-private healthProfessional : [HealthProfessional];
+private healthProfessional : HealthProfessional;
 private agenda : set of (Schedule);
 
-inv healthProfessional (*@\vdmnotcovered{<>}@*) (*@\vdmnotcovered{nil}@*);
-inv card (*@\vdmnotcovered{agenda}@*) >= (*@\vdmnotcovered{0}@*);
+inv card agenda >= 0;
 
 operations
 (*@
-\label{Agenda:11}
+\label{Agenda:10}
 @*)
  public Agenda : HealthProfessional ==> Agenda
-  Agenda(h) == (healthProfessional := h; (*@\vdmnotcovered{agenda}@*) := {}; (*@\vdmnotcovered{return}@*) (*@\vdmnotcovered{self}@*))
- pre healthProfessional (*@\vdmnotcovered{<>}@*) (*@\vdmnotcovered{nil}@*)
- post healthProfessional (*@\vdmnotcovered{=}@*) (*@\vdmnotcovered{h}@*) and (*@\vdmnotcovered{agenda}@*) = (*@\vdmnotcovered{\{}@*)};
+  Agenda(h) == (healthProfessional := h; agenda := {}; return self)
+ post healthProfessional = h and agenda = {};
  
 (*@
-\label{getHealthProfessional:16}
+\label{getHealthProfessional:14}
 @*)
  pure public getHealthProfessional : () ==> HealthProfessional
-  getHealthProfessional() == (return (*@\vdmnotcovered{healthProfessional}@*));
+  getHealthProfessional() == (return healthProfessional);
  
 (*@
-\label{getAgenda:19}
+\label{getAgenda:17}
 @*)
  pure public getAgenda : () ==> set of (Schedule)
-  getAgenda() == ((*@\vdmnotcovered{return}@*) (*@\vdmnotcovered{agenda}@*));
+  getAgenda() == (return agenda);
  
 (*@
-\label{addSchedule:22}
+\label{addSchedule:20}
 @*)
  public addSchedule : Schedule ==> ()
-  addSchedule(s) == ((*@\vdmnotcovered{agenda}@*) := agenda (*@\vdmnotcovered{union}@*) {(*@\vdmnotcovered{s}@*)})
- pre s not in set agenda (*@\vdmnotcovered{and}@*) (*@\vdmnotcovered{forall}@*) sch in set (*@\vdmnotcovered{agenda}@*) & (*@\vdmnotcovered{not}@*) overlap((*@\vdmnotcovered{s}@*), (*@\vdmnotcovered{sch}@*))
- post s (*@\vdmnotcovered{in}@*) set (*@\vdmnotcovered{agenda}@*);
+  addSchedule(s) == (agenda := agenda union {s})
+ pre s not in set agenda and forall sch in set agenda & not overlap(s, sch)
+ post s in set agenda;
  
 (*@
-\label{removeSchedule:27}
+\label{removeSchedule:25}
 @*)
  public removeSchedule : Schedule ==> ()
-  removeSchedule(s) == (*@\vdmnotcovered{(}@*)(*@\vdmnotcovered{agenda}@*) := (*@\vdmnotcovered{agenda}@*) (*@\vdmnotcovered{\textbackslash }@*) (*@\vdmnotcovered{\{}@*)(*@\vdmnotcovered{s}@*)})
- pre s (*@\vdmnotcovered{in}@*) set (*@\vdmnotcovered{agenda}@*)
- post s (*@\vdmnotcovered{not}@*) in set (*@\vdmnotcovered{agenda}@*);
+  removeSchedule(s) == (agenda := agenda \ {s})
+ pre s in set agenda
+ post s not in set agenda;
  
 (*@
-\label{overlap:32}
+\label{overlap:30}
 @*)
  pure public overlap: Schedule * Schedule ==> bool
-  overlap(t1, t2) == ((*@\vdmnotcovered{return}@*) t1.overlap((*@\vdmnotcovered{t1}@*), (*@\vdmnotcovered{t2}@*)));
+  overlap(t1, t2) == (return t1.overlap(t1, t2));
 end Agenda
 \end{vdmpp}
 \bigskip
@@ -58,20 +56,20 @@ end Agenda
 Function or operation & Line & Coverage & Calls \\
 \hline
 \hline
-\hyperref[Agenda:11]{Agenda} & 11&0.0\% & 0 \\
+\hyperref[Agenda:10]{Agenda} & 10&100.0\% & 44 \\
 \hline
-\hyperref[addSchedule:22]{addSchedule} & 22&0.0\% & 0 \\
+\hyperref[addSchedule:20]{addSchedule} & 20&100.0\% & 76 \\
 \hline
-\hyperref[getAgenda:19]{getAgenda} & 19&0.0\% & 0 \\
+\hyperref[getAgenda:17]{getAgenda} & 17&100.0\% & 197 \\
 \hline
-\hyperref[getHealthProfessional:16]{getHealthProfessional} & 16&0.0\% & 0 \\
+\hyperref[getHealthProfessional:14]{getHealthProfessional} & 14&100.0\% & 951 \\
 \hline
-\hyperref[overlap:32]{overlap} & 32&0.0\% & 0 \\
+\hyperref[overlap:30]{overlap} & 30&100.0\% & 32 \\
 \hline
-\hyperref[removeSchedule:27]{removeSchedule} & 27&0.0\% & 0 \\
+\hyperref[removeSchedule:25]{removeSchedule} & 25&100.0\% & 60 \\
 \hline
 \hline
-Agenda.vdmpp & & 0.0\% & 0 \\
+Agenda.vdmpp & & 100.0\% & 1360 \\
 \hline
 \end{longtable}
 

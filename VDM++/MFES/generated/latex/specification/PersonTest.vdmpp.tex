@@ -1,137 +1,137 @@
 \begin{vdmpp}[breaklines=true]
 class PersonTest
 instance variables
- private patient: Patient := new Patient("Rua 1 Maio", "Rui", "Andrade", "123456789", "223456111", (*@\vdmnotcovered{"0987654321"}@*));
- private doctor: HealthProfessional := new HealthProfessional("Rua de Cima", "Ana", "Marques", (*@\vdmnotcovered{"123432156"}@*), "921349076", "111111222", (*@\vdmnotcovered{<Doctor>}@*));
- private surgeon: HealthProfessional := new HealthProfessional("Rua 2", "Diogo", "Viana", "234512389", (*@\vdmnotcovered{"921349134"}@*), (*@\vdmnotcovered{"111111232"}@*), (*@\vdmnotcovered{<Surgeon>}@*));
- private nurse: HealthProfessional := new HealthProfessional("Rua de Baixo", "Lisete", "Antunes", "123444654", "921378643", "111222333", (*@\vdmnotcovered{<Nurse>}@*));
- private technician: HealthProfessional := new HealthProfessional("Rua Antero Marques", "Inês", "Pinto", "123432151", (*@\vdmnotcovered{"921348765"}@*), (*@\vdmnotcovered{"123432578"}@*), (*@\vdmnotcovered{<Technician>}@*));
+ private patient: Patient := new Patient("Rua 1 Maio", "Rui", "Andrade", "123456789", "223456111", "0987654321");
+ private doctor: HealthProfessional := new HealthProfessional("Rua de Cima", "Ana", "Marques", "123432156", "921349076", "111111222", <Doctor>);
+ private surgeon: HealthProfessional := new HealthProfessional("Rua 2", "Diogo", "Viana", "234512389", "921349134", "111111232", <Surgeon>);
+ private nurse: HealthProfessional := new HealthProfessional("Rua de Baixo", "Lisete", "Antunes", "123444654", "921378643", "111222333", <Nurse>);
+ private technician: HealthProfessional := new HealthProfessional("Rua Antero Marques", "Inês", "Pinto", "123432151", "921348765", "123432578", <Technician>);
 operations
 (*@
 \label{assertTrue:9}
 @*)
  private assertTrue: bool ==> ()
-  assertTrue(cond) == (*@\vdmnotcovered{return}@*)
- pre (*@\vdmnotcovered{cond}@*);
+  assertTrue(cond) == return
+ pre cond;
  
 (*@
 \label{testGetInformation:13}
 @*)
  public testGetInformation: () ==> ()
-  testGetInformation() == (*@\vdmnotcovered{(}@*)
-   (*@\vdmnotcovered{IO`print}@*)((*@\vdmnotcovered{"\textbackslash n Getting patient informations \textbackslash n"}@*));
-   (*@\vdmnotcovered{assertTrue}@*)(patient.(*@\vdmnotcovered{getHealthNumber}@*)() = (*@\vdmnotcovered{"0987654321"}@*));
-   assertTrue(patient.getCC() = (*@\vdmnotcovered{"123456789"}@*));
-   assertTrue(patient.getInfo() = "Name: " ^ (*@\vdmnotcovered{"Rui"}@*) ^ " " (*@\vdmnotcovered{\^{}}@*) "Andrade" ^ "\nAddress: " ^ (*@\vdmnotcovered{"Rua 1 Maio"}@*) ^ "\nPhone Number: " ^ "223456111" ^ (*@\vdmnotcovered{"\textbackslash nCC: "}@*) ^ (*@\vdmnotcovered{"123456789"}@*));
+  testGetInformation() == (
+   IO`print("\n Getting patient informations \n");
+   assertTrue(patient.getHealthNumber() = "0987654321");
+   assertTrue(patient.getCC() = "123456789");
+   assertTrue(patient.getInfo() = "Name: " ^ "Rui" ^ " " ^ "Andrade" ^ "\nAddress: " ^ "Rua 1 Maio" ^ "\nPhone Number: " ^ "223456111" ^ "\nCC: " ^ "123456789");
    
-   IO`print((*@\vdmnotcovered{"\textbackslash n Getting doctor informations \textbackslash n"}@*));
-   assertTrue((*@\vdmnotcovered{doctor}@*).getMedicalNumber() (*@\vdmnotcovered{=}@*) (*@\vdmnotcovered{"111111222"}@*));
-   assertTrue(doctor.(*@\vdmnotcovered{getCC}@*)() (*@\vdmnotcovered{=}@*) (*@\vdmnotcovered{"123432156"}@*));
-   (*@\vdmnotcovered{assertTrue}@*)(doctor.getInfo() = (*@\vdmnotcovered{"Name: "}@*) ^ "Ana" ^ " " ^ "Marques" ^ "\nAddress: " (*@\vdmnotcovered{\^{}}@*) (*@\vdmnotcovered{"Rua de Cima"}@*) ^ "\nPhone Number: " ^ "921349076" ^ "\nCC: " (*@\vdmnotcovered{\^{}}@*) (*@\vdmnotcovered{"123432156"}@*));
-   assertTrue(doctor.getType() = (*@\vdmnotcovered{<Doctor>}@*));
+   IO`print("\n Getting doctor informations \n");
+   assertTrue(doctor.getMedicalNumber() = "111111222");
+   assertTrue(doctor.getCC() = "123432156");
+   assertTrue(doctor.getInfo() = "Name: " ^ "Ana" ^ " " ^ "Marques" ^ "\nAddress: " ^ "Rua de Cima" ^ "\nPhone Number: " ^ "921349076" ^ "\nCC: " ^ "123432156");
+   assertTrue(doctor.getType() = <Doctor>);
    
-   (*@\vdmnotcovered{IO`print}@*)((*@\vdmnotcovered{"\textbackslash n Getting surgeon informations \textbackslash n"}@*));
-   (*@\vdmnotcovered{assertTrue}@*)(surgeon.getMedicalNumber() (*@\vdmnotcovered{=}@*) (*@\vdmnotcovered{"111111232"}@*));
-   (*@\vdmnotcovered{assertTrue}@*)(surgeon.getCC() = (*@\vdmnotcovered{"234512389"}@*));
-   assertTrue((*@\vdmnotcovered{surgeon}@*).(*@\vdmnotcovered{getInfo}@*)() = "Name: " ^ "Diogo" ^ " " ^ (*@\vdmnotcovered{"Viana"}@*) ^ "\nAddress: " ^ "Rua 2" (*@\vdmnotcovered{\^{}}@*) (*@\vdmnotcovered{"\textbackslash nPhone Number: "}@*) ^ (*@\vdmnotcovered{"921349134"}@*) ^ "\nCC: " ^ (*@\vdmnotcovered{"234512389"}@*));
-   assertTrue(surgeon.getType() (*@\vdmnotcovered{=}@*) (*@\vdmnotcovered{<Surgeon>}@*));
+   IO`print("\n Getting surgeon informations \n");
+   assertTrue(surgeon.getMedicalNumber() = "111111232");
+   assertTrue(surgeon.getCC() = "234512389");
+   assertTrue(surgeon.getInfo() = "Name: " ^ "Diogo" ^ " " ^ "Viana" ^ "\nAddress: " ^ "Rua 2" ^ "\nPhone Number: " ^ "921349134" ^ "\nCC: " ^ "234512389");
+   assertTrue(surgeon.getType() = <Surgeon>);
    
-   IO`print((*@\vdmnotcovered{"\textbackslash n Getting nurse informations \textbackslash n"}@*));
-   assertTrue(nurse.getMedicalNumber() (*@\vdmnotcovered{=}@*) (*@\vdmnotcovered{"111222333"}@*));
-   (*@\vdmnotcovered{assertTrue}@*)(nurse.getCC() = (*@\vdmnotcovered{"123444654"}@*));
-   assertTrue((*@\vdmnotcovered{nurse}@*).getInfo() = "Name: " ^ "Lisete" ^ " " ^ (*@\vdmnotcovered{"Antunes"}@*) ^ "\nAddress: " (*@\vdmnotcovered{\^{}}@*) (*@\vdmnotcovered{"Rua de Baixo"}@*) ^ "\nPhone Number: " ^ "921378643" (*@\vdmnotcovered{\^{}}@*) "\nCC: " (*@\vdmnotcovered{\^{}}@*) (*@\vdmnotcovered{"123444654"}@*));
-   assertTrue(nurse.getType() (*@\vdmnotcovered{=}@*) (*@\vdmnotcovered{<Nurse>}@*));
+   IO`print("\n Getting nurse informations \n");
+   assertTrue(nurse.getMedicalNumber() = "111222333");
+   assertTrue(nurse.getCC() = "123444654");
+   assertTrue(nurse.getInfo() = "Name: " ^ "Lisete" ^ " " ^ "Antunes" ^ "\nAddress: " ^ "Rua de Baixo" ^ "\nPhone Number: " ^ "921378643" ^ "\nCC: " ^ "123444654");
+   assertTrue(nurse.getType() = <Nurse>);
    
-   (*@\vdmnotcovered{IO`print}@*)((*@\vdmnotcovered{"\textbackslash n Getting technician informations \textbackslash n"}@*));
-   (*@\vdmnotcovered{assertTrue}@*)((*@\vdmnotcovered{technician}@*).getMedicalNumber() = (*@\vdmnotcovered{"123432578"}@*));
-   (*@\vdmnotcovered{assertTrue}@*)((*@\vdmnotcovered{technician}@*).(*@\vdmnotcovered{getCC}@*)() (*@\vdmnotcovered{=}@*) (*@\vdmnotcovered{"123432151"}@*));
-   assertTrue(technician.getInfo() = "Name: " ^ "Inês" ^ " " ^ "Pinto" ^ "\nAddress: " ^ "Rua Antero Marques" ^ (*@\vdmnotcovered{"\textbackslash nPhone Number: "}@*) ^ "921348765" ^ (*@\vdmnotcovered{"\textbackslash nCC: "}@*) ^ (*@\vdmnotcovered{"123432151"}@*));
-   assertTrue((*@\vdmnotcovered{technician}@*).(*@\vdmnotcovered{getType}@*)() = (*@\vdmnotcovered{<Technician>}@*));
+   IO`print("\n Getting technician informations \n");
+   assertTrue(technician.getMedicalNumber() = "123432578");
+   assertTrue(technician.getCC() = "123432151");
+   assertTrue(technician.getInfo() = "Name: " ^ "Inês" ^ " " ^ "Pinto" ^ "\nAddress: " ^ "Rua Antero Marques" ^ "\nPhone Number: " ^ "921348765" ^ "\nCC: " ^ "123432151");
+   assertTrue(technician.getType() = <Technician>);
   );
   
 (*@
 \label{testAddRemovePatient:45}
 @*)
  public testAddRemovePatient : () ==> ()
-  testAddRemovePatient() == (*@\vdmnotcovered{(}@*)
-   IO`print((*@\vdmnotcovered{"\textbackslash n Number of patients: "}@*));
-   IO`print((*@\vdmnotcovered{card}@*) (*@\vdmnotcovered{doctor}@*).(*@\vdmnotcovered{getPatients}@*)());
-   (*@\vdmnotcovered{assertTrue}@*)(card doctor.(*@\vdmnotcovered{getPatients}@*)() (*@\vdmnotcovered{=}@*) (*@\vdmnotcovered{0}@*));
+  testAddRemovePatient() == (
+   IO`print("\n Number of patients: ");
+   IO`print(card doctor.getPatients());
+   assertTrue(card doctor.getPatients() = 0);
    
-   (*@\vdmnotcovered{IO`print}@*)((*@\vdmnotcovered{"\textbackslash n Adding a patient \textbackslash n"}@*));
-   (*@\vdmnotcovered{doctor}@*).addPatient((*@\vdmnotcovered{patient}@*));
+   IO`print("\n Adding a patient \n");
+   doctor.addPatient(patient);
    
-   IO`print((*@\vdmnotcovered{"\textbackslash n Number of patients: "}@*));
-   IO`print(card doctor.(*@\vdmnotcovered{getPatients}@*)());
-   assertTrue(card doctor.getPatients() (*@\vdmnotcovered{=}@*) (*@\vdmnotcovered{1}@*));
+   IO`print("\n Number of patients: ");
+   IO`print(card doctor.getPatients());
+   assertTrue(card doctor.getPatients() = 1);
    
-   (*@\vdmnotcovered{IO`print}@*)((*@\vdmnotcovered{"\textbackslash nRemoving a patient \textbackslash n"}@*));
-   doctor.removePatient((*@\vdmnotcovered{patient}@*));
+   IO`print("\nRemoving a patient \n");
+   doctor.removePatient(patient);
    
-   IO`print((*@\vdmnotcovered{"\textbackslash n Number of patients: "}@*));
-   (*@\vdmnotcovered{IO`print}@*)(card doctor.(*@\vdmnotcovered{getPatients}@*)());
-   (*@\vdmnotcovered{assertTrue}@*)(card doctor.getPatients() (*@\vdmnotcovered{=}@*) (*@\vdmnotcovered{0}@*));
+   IO`print("\n Number of patients: ");
+   IO`print(card doctor.getPatients());
+   assertTrue(card doctor.getPatients() = 0);
    
-   (*@\vdmnotcovered{IO`print}@*)((*@\vdmnotcovered{"\textbackslash n Adding a patient \textbackslash n"}@*));
-   assertTrue(card surgeon.getPatients() (*@\vdmnotcovered{=}@*) (*@\vdmnotcovered{0}@*));
+   IO`print("\n Adding a patient \n");
+   assertTrue(card surgeon.getPatients() = 0);
    
-   surgeon.addPatient((*@\vdmnotcovered{patient}@*));
-   (*@\vdmnotcovered{IO`print}@*)((*@\vdmnotcovered{"\textbackslash n Number of patients: "}@*));
-   IO`print(card surgeon.(*@\vdmnotcovered{getPatients}@*)());
-   (*@\vdmnotcovered{assertTrue}@*)((*@\vdmnotcovered{card}@*) surgeon.(*@\vdmnotcovered{getPatients}@*)() = (*@\vdmnotcovered{1}@*));
+   surgeon.addPatient(patient);
+   IO`print("\n Number of patients: ");
+   IO`print(card surgeon.getPatients());
+   assertTrue(card surgeon.getPatients() = 1);
   );
   
 (*@
 \label{testAddRemoveSpecialty:74}
 @*)
  public testAddRemoveSpecialty : () ==> ()
-  testAddRemoveSpecialty() == (*@\vdmnotcovered{(}@*)
-   dcl specialty1: Specialty := new Specialty("General"), specialty2: Specialty := (*@\vdmnotcovered{new}@*) (*@\vdmnotcovered{Specialty}@*)((*@\vdmnotcovered{"Cardio"}@*));
+  testAddRemoveSpecialty() == (
+   dcl specialty1: Specialty := new Specialty("General"), specialty2: Specialty := new Specialty("Cardio");
    
-   IO`print((*@\vdmnotcovered{"\textbackslash n Number of specialties: "}@*));
-   (*@\vdmnotcovered{IO`print}@*)((*@\vdmnotcovered{card}@*) (*@\vdmnotcovered{doctor}@*).(*@\vdmnotcovered{getSpecialties}@*)());
-   assertTrue(card doctor.(*@\vdmnotcovered{getSpecialties}@*)() = (*@\vdmnotcovered{0}@*));
+   IO`print("\n Number of specialties: ");
+   IO`print(card doctor.getSpecialties());
+   assertTrue(card doctor.getSpecialties() = 0);
    
-   IO`print((*@\vdmnotcovered{"\textbackslash n Adding a specialty \textbackslash n"}@*));
-   (*@\vdmnotcovered{doctor}@*).addSpecialty((*@\vdmnotcovered{specialty1}@*));
+   IO`print("\n Adding a specialty \n");
+   doctor.addSpecialty(specialty1);
    
-   IO`print((*@\vdmnotcovered{"\textbackslash n Number of specialties: "}@*));
-   (*@\vdmnotcovered{IO`print}@*)((*@\vdmnotcovered{card}@*) (*@\vdmnotcovered{doctor}@*).(*@\vdmnotcovered{getSpecialties}@*)());
+   IO`print("\n Number of specialties: ");
+   IO`print(card doctor.getSpecialties());
    
-   (*@\vdmnotcovered{assertTrue}@*)(specialty1.getName() (*@\vdmnotcovered{=}@*) (*@\vdmnotcovered{"General"}@*));
-   (*@\vdmnotcovered{assertTrue}@*)(card doctor.getSpecialties() (*@\vdmnotcovered{=}@*) (*@\vdmnotcovered{1}@*));
-   (*@\vdmnotcovered{assertTrue}@*)(doctor.getSpecialties() (*@\vdmnotcovered{=}@*) {(*@\vdmnotcovered{specialty1}@*)});
+   assertTrue(specialty1.getName() = "General");
+   assertTrue(card doctor.getSpecialties() = 1);
+   assertTrue(doctor.getSpecialties() = {specialty1});
    
-   IO`print((*@\vdmnotcovered{"\textbackslash n Adding a specialty \textbackslash n"}@*));
-   doctor.addSpecialty((*@\vdmnotcovered{specialty2}@*));
+   IO`print("\n Adding a specialty \n");
+   doctor.addSpecialty(specialty2);
    
-   (*@\vdmnotcovered{IO`print}@*)((*@\vdmnotcovered{"\textbackslash n Number of specialties: "}@*));
-   IO`print(card (*@\vdmnotcovered{doctor}@*).(*@\vdmnotcovered{getSpecialties}@*)());
+   IO`print("\n Number of specialties: ");
+   IO`print(card doctor.getSpecialties());
    
-   (*@\vdmnotcovered{assertTrue}@*)(specialty2.getName() = (*@\vdmnotcovered{"Cardio"}@*));
-   (*@\vdmnotcovered{assertTrue}@*)((*@\vdmnotcovered{card}@*) doctor.getSpecialties() = (*@\vdmnotcovered{2}@*));
-   assertTrue(doctor.getSpecialties() = {specialty1, (*@\vdmnotcovered{specialty2}@*)});
+   assertTrue(specialty2.getName() = "Cardio");
+   assertTrue(card doctor.getSpecialties() = 2);
+   assertTrue(doctor.getSpecialties() = {specialty1, specialty2});
    
-   (*@\vdmnotcovered{IO`print}@*)((*@\vdmnotcovered{"\textbackslash n Removing a specialty \textbackslash n"}@*));
-   doctor.removeSpecialty((*@\vdmnotcovered{specialty1}@*));
+   IO`print("\n Removing a specialty \n");
+   doctor.removeSpecialty(specialty1);
    
-   (*@\vdmnotcovered{IO`print}@*)((*@\vdmnotcovered{"\textbackslash n Number of specialties: "}@*));
-   (*@\vdmnotcovered{IO`print}@*)(card doctor.(*@\vdmnotcovered{getSpecialties}@*)());
+   IO`print("\n Number of specialties: ");
+   IO`print(card doctor.getSpecialties());
    
-   (*@\vdmnotcovered{assertTrue}@*)((*@\vdmnotcovered{card}@*) doctor.getSpecialties() (*@\vdmnotcovered{=}@*) (*@\vdmnotcovered{1}@*));
-   assertTrue(doctor.getSpecialties() = {(*@\vdmnotcovered{specialty2}@*)});
+   assertTrue(card doctor.getSpecialties() = 1);
+   assertTrue(doctor.getSpecialties() = {specialty2});
   );
   
 (*@
 \label{main:112}
 @*)
  public static main: () ==> ()
-   main() == (*@\vdmnotcovered{(}@*)
-    dcl personTest: PersonTest := new (*@\vdmnotcovered{PersonTest}@*)();
-    IO`print((*@\vdmnotcovered{"\textbackslash n *****Running PersonTest***** \textbackslash n"}@*));
-    (*@\vdmnotcovered{personTest}@*).testGetInformation();
-    (*@\vdmnotcovered{personTest}@*).testAddRemovePatient();
-    (*@\vdmnotcovered{personTest}@*).testAddRemoveSpecialty();
+   main() == (
+    dcl personTest: PersonTest := new PersonTest();
+    IO`print("\n *****Running PersonTest***** \n");
+    personTest.testGetInformation();
+    personTest.testAddRemovePatient();
+    personTest.testAddRemoveSpecialty();
    );
   
 end PersonTest
@@ -142,18 +142,18 @@ end PersonTest
 Function or operation & Line & Coverage & Calls \\
 \hline
 \hline
-\hyperref[assertTrue:9]{assertTrue} & 9&0.0\% & 0 \\
+\hyperref[assertTrue:9]{assertTrue} & 9&100.0\% & 264 \\
 \hline
-\hyperref[main:112]{main} & 112&0.0\% & 0 \\
+\hyperref[main:112]{main} & 112&100.0\% & 4 \\
 \hline
-\hyperref[testAddRemovePatient:45]{testAddRemovePatient} & 45&0.0\% & 0 \\
+\hyperref[testAddRemovePatient:45]{testAddRemovePatient} & 45&100.0\% & 4 \\
 \hline
-\hyperref[testAddRemoveSpecialty:74]{testAddRemoveSpecialty} & 74&0.0\% & 0 \\
+\hyperref[testAddRemoveSpecialty:74]{testAddRemoveSpecialty} & 74&100.0\% & 4 \\
 \hline
-\hyperref[testGetInformation:13]{testGetInformation} & 13&0.0\% & 0 \\
+\hyperref[testGetInformation:13]{testGetInformation} & 13&100.0\% & 4 \\
 \hline
 \hline
-PersonTest.vdmpp & & 0.0\% & 0 \\
+PersonTest.vdmpp & & 100.0\% & 280 \\
 \hline
 \end{longtable}
 

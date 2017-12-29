@@ -1,6 +1,8 @@
 class Patient is subclass of Person
 instance variables
   private healthNumber: Types`String;
+  
+  inv len healthNumber > 5;
 operations
 	public Patient: Types`String * Types`String * Types`String * Types`String * Types`String * Types`String ==> Patient
 		Patient(a, fn, ln, c, pn, n) == ( healthNumber := n; Person(a, fn, ln, c, pn))
