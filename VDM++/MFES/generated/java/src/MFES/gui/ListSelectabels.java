@@ -8,7 +8,7 @@ public class ListSelectabels<T> extends Menu {
     private Menu nextMenu;
     private T selected;
 
-    public ListSelectabels(Scanner reader, T[] selectables, Menu nextMenu) {
+    public ListSelectabels(Scanner reader, T[] selectabels, Menu nextMenu) {
         super(reader);
         this.selectabels = selectabels;
         this.nextMenu = nextMenu;
@@ -26,7 +26,7 @@ public class ListSelectabels<T> extends Menu {
 	@Override
 	public Menu action() {
         Menu next = null;
-        while(next != null) {
+        while(next == null) {
             String str = reader.nextLine();
             next = input(str);
         }
@@ -48,10 +48,12 @@ public class ListSelectabels<T> extends Menu {
             return null;
         }
 
-        if(option < 1 && option > selectabels.length) {
+        if(option < 1 || option > selectabels.length) {
             show();
             return null;
         }
+
+        System.out.println(selectabels.length);
 
         selected = (T)selectabels[option - 1];
 		return nextMenu;
