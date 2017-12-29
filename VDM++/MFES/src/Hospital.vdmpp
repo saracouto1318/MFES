@@ -6,18 +6,17 @@ instance variables
   private address: Types`String;
   private tasks: set of(Task);
   private trainings: set of(Training);
-  private safetyNet: [SafetyNetHospital];
+  private safetyNet: SafetyNetHospital;
  
- inv safetyNet <> nil; 
  inv card medicalAssociated >= 0;
- inv card agenda >= 0;
+ inv card agenda <= card medicalAssociated;
  inv card tasks >= 0;
+ inv card trainings >= 0;
 operations
 
 	public Hospital: Types`String * Types`String * SafetyNetHospital ==> Hospital
 		Hospital(n, a, s) == (name := n; address := a; safetyNet := s; medicalAssociated := {}; tasks := {}; trainings := {}; agenda := {};
 		safetyNet.addHospital(self); return self)
-	pre safetyNet <> nil
 	post name = n and address = a and safetyNet = s and medicalAssociated = {} and tasks = {} and trainings = {} and agenda = {};
 	
 	pure public getName: () ==> Types`String
@@ -31,10 +30,12 @@ operations
 		
 	pure public getAgenda : HealthProfessional ==> set of(Schedule)
 		getAgenda(h) == (
+			dcl agendaNew : set of(Schedule);
+			agendaNew := {};
 			for all a in set agenda do
 				if(a.getHealthProfessional() = h)
-					then return a.getAgenda();
-			return {});
+					then agendaNew := a.getAgenda();
+			return agendaNew);
 	
 	public removeAgenda : Agenda ==> ()
 		removeAgenda(a) == (agenda := agenda \ {a})
@@ -45,8 +46,8 @@ operations
 		addMedAssociated(d) == (
 			dcl agendaNew : Agenda;
 			agendaNew := new Agenda(d);
-			agenda := agenda union {agendaNew};
-			medicalAssociated := {d} union medicalAssociated)
+			medicalAssociated := {d} union medicalAssociated;
+			agenda := agenda union {agendaNew})
 	pre d not in set medicalAssociated
 	post d in set medicalAssociated;
 		

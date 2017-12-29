@@ -38,7 +38,7 @@ operations
 @*)
   public setPriority : Types`Priority ==> ()
    setPriority(p) == (priority := p)
-  pre type = <Urgencies>;
+  pre taskType = <Urgencies>;
   
 (*@
 \label{addPrescription:30}
@@ -64,20 +64,20 @@ end Appointment
 Function or operation & Line & Coverage & Calls \\
 \hline
 \hline
-\hyperref[Appointment:11]{Appointment} & 11&100.0\% & 132 \\
+\hyperref[Appointment:11]{Appointment} & 11&100.0\% & 16 \\
 \hline
-\hyperref[addPrescription:30]{addPrescription} & 30&100.0\% & 116 \\
+\hyperref[addPrescription:30]{addPrescription} & 30&100.0\% & 16 \\
 \hline
-\hyperref[getPrescriptions:23]{getPrescriptions} & 23&100.0\% & 348 \\
+\hyperref[getPrescriptions:23]{getPrescriptions} & 23&100.0\% & 48 \\
 \hline
-\hyperref[getPriority:20]{getPriority} & 20&100.0\% & 87 \\
+\hyperref[getPriority:20]{getPriority} & 20&100.0\% & 12 \\
 \hline
-\hyperref[removePrescription:35]{removePrescription} & 35&100.0\% & 116 \\
+\hyperref[removePrescription:35]{removePrescription} & 35&100.0\% & 16 \\
 \hline
-\hyperref[setPriority:26]{setPriority} & 26&100.0\% & 58 \\
+\hyperref[setPriority:26]{setPriority} & 26&100.0\% & 4 \\
 \hline
 \hline
-Appointment.vdmpp & & 100.0\% & 857 \\
+Appointment.vdmpp & & 100.0\% & 112 \\
 \hline
 \end{longtable}
 

@@ -40,26 +40,26 @@ public class Schedule {
 
     Boolean orResult_1 = false;
 
-    Boolean andResult_34 = false;
+    Boolean andResult_35 = false;
 
     if (lessThan(d1.startHour, d2.startHour)) {
       if (greaterThan(d1.endHour, d2.startHour)) {
-        andResult_34 = true;
+        andResult_35 = true;
       }
     }
 
-    if (andResult_34) {
+    if (andResult_35) {
       orResult_1 = true;
     } else {
-      Boolean andResult_35 = false;
+      Boolean andResult_36 = false;
 
       if (!(lessThan(d1.startHour, d2.startHour))) {
         if (lessThan(d1.startHour, d2.endHour)) {
-          andResult_35 = true;
+          andResult_36 = true;
         }
       }
 
-      orResult_1 = andResult_35;
+      orResult_1 = andResult_36;
     }
 
     if (orResult_1) {

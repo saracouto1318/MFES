@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.18 (MiKTeX 2.9.6500 64-bit) (preloaded format=pdflatex 2017.12.19)  28 DEC 2017 10:59
+This is pdfTeX, Version 3.14159265-2.6-1.40.18 (MiKTeX 2.9.6500 64-bit) (preloaded format=pdflatex 2017.12.19)  29 DEC 2017 08:39
 entering extended mode
 **./MFES.tex
 (MFES.tex
@@ -225,9 +225,6 @@ Package: longtable 2014/10/28 v4.11 Multi-page Table package (DPC)
 
 LaTeX Warning: Label `getName:10' multiply defined.
 
-
-LaTeX Warning: Label `getType:27' multiply defined.
-
 )
 \openout1 = `MFES.aux'.
 
@@ -313,19 +310,15 @@ File: ot1pcr.fd 2001/06/04 font definitions for OT1/pcr.
 LaTeX Font Info:    Font shape `OT1/pcr/bx/n' in size <8> not available
 (Font)              Font shape `OT1/pcr/b/n' tried instead on input line 2.
 
-Underfull \vbox (badness 10000) detected at line 76
+Underfull \vbox (badness 10000) detected at line 74
  []
 
 ) (specification/Appointment.vdmpp.tex [2]
 Underfull \vbox (badness 10000) detected at line 82
  []
 
-
-Overfull \vbox (3.89554pt too high) has occurred while \output is active []
-
-
-[3]) (specification/HealthProfessional.vdmpp.tex [4]
-Underfull \vbox (badness 10000) detected at line 107
+) (specification/HealthProfessional.vdmpp.tex [3] [4]
+Underfull \vbox (badness 10000) detected at line 108
  []
 
 ) (specification/Hospital.vdmpp.tex [5] [6]
@@ -337,15 +330,15 @@ Underfull \vbox (badness 10000) detected at line 35
  []
 
 ) (specification/Patient.vdmpp.tex [8]
-Underfull \vbox (badness 10000) detected at line 34
+Underfull \vbox (badness 10000) detected at line 36
  []
 
 ) (specification/Person.vdmpp.tex
-Underfull \vbox (badness 10000) detected at line 47
+Underfull \vbox (badness 10000) detected at line 48
  []
 
 ) (specification/Prescription.vdmpp.tex [9]
-Underfull \vbox (badness 10000) detected at line 65
+Underfull \vbox (badness 10000) detected at line 66
  []
 
 ) (specification/SafetyNetHospital.vdmpp.tex [10] [11]
@@ -365,11 +358,11 @@ Underfull \vbox (badness 10000) detected at line 100
  []
 
 ) (specification/Task.vdmpp.tex [15]
-Underfull \vbox (badness 10000) detected at line 91
+Underfull \vbox (badness 10000) detected at line 89
  []
 
 ) (specification/Training.vdmpp.tex [16]
-Underfull \vbox (badness 10000) detected at line 74
+Underfull \vbox (badness 10000) detected at line 71
  []
 
 ) (specification/Treatment.vdmpp.tex [17]
@@ -415,7 +408,7 @@ Missing character: There is no í in font pcrr7t!
  [28]
 Missing character: There is no í in font pcrr7t!
  [29] [30] [31]
-Underfull \vbox (badness 10000) detected at line 344
+Underfull \vbox (badness 10000) detected at line 347
  []
 
 ) (specification/TrainingTest.vdmpp.tex [32]
@@ -438,10 +431,10 @@ LaTeX Warning: There were multiply-defined labels.
 Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 55.
  ) 
 Here is how much of TeX's memory you used:
- 8449 strings out of 493312
- 129416 string characters out of 3130261
- 599240 words of memory out of 3000000
- 10227 multiletter control sequences out of 15000+200000
+ 8452 strings out of 493312
+ 129458 string characters out of 3130261
+ 599288 words of memory out of 3000000
+ 10229 multiletter control sequences out of 15000+200000
  16427 words of font info for 39 fonts, out of 3000000 for 9000
  1141 hyphenation exceptions out of 8191
  33i,6n,48p,247b,1785s stack positions out of 5000i,500n,10000p,200000b,50000s
@@ -452,9 +445,9 @@ txfont/lcircle1.pfb><C:/Users/ASUS/AppData/Local/Programs/MiKTeX 2.9/fonts/type
 /type1/urw/courier/ucrr8a.pfb><C:/Users/ASUS/AppData/Local/Programs/MiKTeX 2.9/
 fonts/type1/urw/times/utmb8a.pfb><C:/Users/ASUS/AppData/Local/Programs/MiKTeX 2
 .9/fonts/type1/urw/times/utmr8a.pfb>
-Output written on MFES.pdf (34 pages, 393334 bytes).
+Output written on MFES.pdf (34 pages, 393005 bytes).
 PDF statistics:
- 2342 PDF objects out of 2487 (max. 8388607)
- 1669 named destinations out of 1728 (max. 500000)
+ 2343 PDF objects out of 2487 (max. 8388607)
+ 1670 named destinations out of 1728 (max. 500000)
  169 words of extra memory for PDF output out of 10000 (max. 10000000)
 

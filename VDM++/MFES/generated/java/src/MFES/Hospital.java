@@ -48,13 +48,15 @@ public class Hospital {
 
   public VDMSet getAgenda(final HealthProfessional h) {
 
+    VDMSet agendaNew = null;
+    agendaNew = SetUtil.set();
     for (Iterator iterator_2 = agenda.iterator(); iterator_2.hasNext(); ) {
       Agenda a = (Agenda) iterator_2.next();
       if (Utils.equals(a.getHealthProfessional(), h)) {
-        return a.getAgenda();
+        agendaNew = a.getAgenda();
       }
     }
-    return SetUtil.set();
+    return Utils.copy(agendaNew);
   }
 
   public void removeAgenda(final Agenda a) {
@@ -66,8 +68,8 @@ public class Hospital {
 
     Agenda agendaNew = null;
     agendaNew = new Agenda(d);
-    agenda = SetUtil.union(Utils.copy(agenda), SetUtil.set(agendaNew));
     medicalAssociated = SetUtil.union(SetUtil.set(d), Utils.copy(medicalAssociated));
+    agenda = SetUtil.union(Utils.copy(agenda), SetUtil.set(agendaNew));
   }
 
   public void removeMedAssociated(final HealthProfessional d) {

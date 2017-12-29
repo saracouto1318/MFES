@@ -138,31 +138,31 @@ public class Types {
 
   public static Boolean inv_Time(final Time t) {
 
-    Boolean andResult_50 = false;
+    Boolean andResult_51 = false;
 
     if (t.hour.longValue() >= 0L) {
-      Boolean andResult_51 = false;
+      Boolean andResult_52 = false;
 
       if (t.hour.longValue() < 24L) {
-        Boolean andResult_52 = false;
+        Boolean andResult_53 = false;
 
         if (t.min.longValue() >= 0L) {
           if (t.min.longValue() < 60L) {
-            andResult_52 = true;
+            andResult_53 = true;
           }
         }
 
-        if (andResult_52) {
-          andResult_51 = true;
+        if (andResult_53) {
+          andResult_52 = true;
         }
       }
 
-      if (andResult_51) {
-        andResult_50 = true;
+      if (andResult_52) {
+        andResult_51 = true;
       }
     }
 
-    return andResult_50;
+    return andResult_51;
   }
 
   public static class Date implements Record {
@@ -211,14 +211,14 @@ public class Types {
 
   public static Boolean inv_Date(final Date d) {
 
-    Boolean andResult_56 = false;
+    Boolean andResult_57 = false;
 
     if (d.month.longValue() <= 12L) {
       if (d.day.longValue() <= daysOfMonth(d.month).longValue()) {
-        andResult_56 = true;
+        andResult_57 = true;
       }
     }
 
-    return andResult_56;
+    return andResult_57;
   }
 }

@@ -62,23 +62,23 @@ public class SafetyNetHospital {
         HealthProfessional m = (HealthProfessional) iterator_15.next();
         for (Iterator iterator_16 = list.iterator(); iterator_16.hasNext(); ) {
           Hospital l = (Hospital) iterator_16.next();
-          Boolean andResult_30 = false;
+          Boolean andResult_31 = false;
 
           if (Utils.equals(m.getType(), t)) {
-            Boolean andResult_31 = false;
+            Boolean andResult_32 = false;
 
             if (SetUtil.inSet(m, l.getMedicalAssociatedByType(((Object) t)))) {
               if (!(SetUtil.inSet(m, doctors))) {
-                andResult_31 = true;
+                andResult_32 = true;
               }
             }
 
-            if (andResult_31) {
-              andResult_30 = true;
+            if (andResult_32) {
+              andResult_31 = true;
             }
           }
 
-          if (andResult_30) {
+          if (andResult_31) {
             doctors = SetUtil.union(Utils.copy(doctors), SetUtil.set(m));
           }
         }

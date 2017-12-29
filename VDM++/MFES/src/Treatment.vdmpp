@@ -1,6 +1,6 @@
 class Treatment is subclass of Task
 instance variables
-  public med: [HealthProfessional];
+  public med: HealthProfessional;
   public name: Types`String;
   
   inv med.getType() = <Nurse> or med.getType() = <Technician>;

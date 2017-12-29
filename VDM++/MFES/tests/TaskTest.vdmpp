@@ -78,6 +78,9 @@ operations
 				else
 					agenda4 := a;);
 			
+			assertTrue(hospital.getAgenda(doctor) = {});
+			assertTrue(card hospital.getAgenda(doctor) = 0);
+			
 			agenda1.addSchedule(schedule);
 			
 			assertTrue(agenda1.getHealthProfessional().getCC() = doctor.getCC());

@@ -25,7 +25,7 @@ operations
   
   public setPriority : Types`Priority ==> ()
   	setPriority(p) == (priority := p)
-  pre type = <Urgencies>;
+  pre taskType = <Urgencies>;
   
   public addPrescription : Prescription ==> ()
   	addPrescription(p) == (prescriptions := prescriptions union {p})
