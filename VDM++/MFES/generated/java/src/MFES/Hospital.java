@@ -68,8 +68,8 @@ public class Hospital {
 
     Agenda agendaNew = null;
     agendaNew = new Agenda(d);
-    agenda = SetUtil.union(Utils.copy(agenda), SetUtil.set(agendaNew));
     medicalAssociated = SetUtil.union(SetUtil.set(d), Utils.copy(medicalAssociated));
+    agenda = SetUtil.union(Utils.copy(agenda), SetUtil.set(agendaNew));
   }
 
   public void removeMedAssociated(final HealthProfessional d) {

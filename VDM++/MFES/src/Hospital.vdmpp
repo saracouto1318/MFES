@@ -9,8 +9,9 @@ instance variables
   private safetyNet: SafetyNetHospital;
  
  inv card medicalAssociated >= 0;
- inv card agenda >= 0;
+ inv card agenda <= card medicalAssociated;
  inv card tasks >= 0;
+ inv card trainings >= 0;
 operations
 
 	public Hospital: Types`String * Types`String * SafetyNetHospital ==> Hospital
@@ -45,8 +46,8 @@ operations
 		addMedAssociated(d) == (
 			dcl agendaNew : Agenda;
 			agendaNew := new Agenda(d);
-			agenda := agenda union {agendaNew};
-			medicalAssociated := {d} union medicalAssociated)
+			medicalAssociated := {d} union medicalAssociated;
+			agenda := agenda union {agendaNew})
 	pre d not in set medicalAssociated
 	post d in set medicalAssociated;
 		
