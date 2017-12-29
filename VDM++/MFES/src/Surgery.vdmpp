@@ -5,6 +5,7 @@ instance variables
   
   inv card secondaryDoctors >= 0;
   inv card other >= 0;
+  inv medicalAssoc.getType() = <Surgeon>;
 operations
 	public Surgery: HealthProfessional * Schedule * Patient * Hospital ==> Surgery
 		Surgery(s, sch, p, h) == (medicalAssoc := s ; other := {}; secondaryDoctors := {}; Task(s, sch, p, h, <Surgery>))
