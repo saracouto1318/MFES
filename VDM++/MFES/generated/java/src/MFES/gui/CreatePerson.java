@@ -35,6 +35,7 @@ public class CreatePerson extends Menu {
 	public void show() {
 		switch(state) {
         case CC:
+            System.out.println("\n\nCriar");
             System.out.print("CC: ");
             break;
         case FIRSTNAME:

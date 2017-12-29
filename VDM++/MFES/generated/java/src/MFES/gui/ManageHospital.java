@@ -24,7 +24,7 @@ public class ManageHospital extends Menu {
 		switch(state) {
 		case MAIN:
 			if(first) {
-				System.out.println("\n" + hospital.getName());
+				System.out.println("\n\n" + hospital.getName());
 				first = false;
 			}
 			System.out.println("1. Criar");

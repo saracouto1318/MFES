@@ -1,6 +1,10 @@
 package MFES.gui;
 
+import MFES.Hospital;
+
+import java.util.Iterator;
 import java.util.Scanner;
+import org.overture.codegen.runtime.*;
 
 public class HospitalPicker extends Menu {
     private boolean exit;
@@ -30,6 +34,7 @@ public class HospitalPicker extends Menu {
         return null;
 	}
 
+    @SuppressWarnings("unchecked")
 	@Override
 	public Menu input(String input) {
         int number = 0;
@@ -43,8 +48,28 @@ public class HospitalPicker extends Menu {
 
         if(number == 1)
             return new CreateHospital(reader);
-        else if(number == 2)
-            return null;
+        else if(number == 2) {
+            VDMSet hospitals = Main.snh.getHospitals();
+
+            if(hospitals.size() <= 0) {
+                System.out.println("Neste momento nao ha hospitais disponiveis");
+                show();
+                return null;
+            }
+
+            Hospital[] hArr = new Hospital[hospitals.size()];
+            Iterator<Hospital> iter = hospitals.iterator();
+            int i = 0;
+            while(iter.hasNext()) {
+                hArr[i++] = iter.next();
+                System.out.println("Add " + hArr[i - 1]);
+            }
+
+            ListSelectabels<Hospital> m = new ListSelectabels<>(reader, hArr, this);
+            m.show();
+            m.action();
+            return new ManageHospital(reader, m.getSelected());
+        }
         else if(number == 3)
             exit = true;
         return null;

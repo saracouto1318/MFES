@@ -9,7 +9,7 @@ public class HealthProfessionalPage extends Menu {
 
 	@Override
 	public void show() {
-        System.out.println("Profissional de Saude");
+        System.out.println("\n\nProfissional de Saude");
         System.out.println("1. Agenda");
         System.out.println("2. Adicionar especialidade");
         System.out.println("3. Adicionar agenda");

@@ -17,7 +17,7 @@ public class Main {
     public static SafetyNetHospital snh = new SafetyNetHospital();
 
     public static void main(String[] args) {
-        System.out.println("SAFETY NET HOSPITAL");
+        System.out.println("SAFETY NET HOSPITAL\n");
         
         Main main = new Main();
         main.run();

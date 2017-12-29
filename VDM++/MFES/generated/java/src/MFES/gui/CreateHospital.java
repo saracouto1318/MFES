@@ -18,7 +18,7 @@ public class CreateHospital extends Menu {
 
 	@Override
 	public void show() {
-		System.out.println("\nNovo Hospital");
+		System.out.println("\n\nNovo Hospital");
 		System.out.print("Nome: ");
 	}
 
