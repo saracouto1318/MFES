@@ -8,13 +8,16 @@ instance variables
   protected phoneNumber: Types`String;
   
 operations
+	-- Person constructor
 	public Person: Types`String * Types`String * Types`String * Types`String * Types`String ==> Person
 		Person(a, fn, ln, c, pn) == ( address := a; firstName := fn; lastName := ln; cc := c; phoneNumber := pn; return self)
 	post address = a and firstName = fn and lastName = ln and cc = c and phoneNumber = pn;
-		
+	
+	-- Returns the person's cc number
 	pure public getCC : () ==> Types`String
 		getCC() == (return cc);
-		
+	
+	-- Returns all the person's information
 	pure public getInfo: () ==> Types`String
 		getInfo() == (return "Name: " ^ firstName ^ " " ^ lastName ^ "\nAddress: " ^ address ^ "\nPhone Number: " ^ phoneNumber ^ "\nCC: " ^ cc);
 
