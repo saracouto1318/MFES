@@ -15,6 +15,7 @@ types
 	inv d == d.month <= 12 and d.day <= daysOfMonth(d.month);
 	
 operations
+	-- Gets the days of a month
 	public static pure daysOfMonth : nat1 ==> nat1
 		daysOfMonth(month) == (
 														if(month = 1 or month = 3 or month = 5 or month = 7 or month = 8 or month = 10 or month = 12)
