@@ -7,8 +7,12 @@ operations
  				trainingTest: TrainingTest := new TrainingTest(), safetyNetTest: SafetyNetHospitalTest := new SafetyNetHospitalTest();
  			
  			personTest.main();
- 			taskTest.main(); 			
+			IO`print("\n\n ====== All PersonTest run successfully ====== \n\n");
+ 			taskTest.main(); 
+			IO`print("\n\n ====== All TaskTest run successfully ====== \n\n");
  			trainingTest.main();
+			IO`print("\n\n ====== All TrainingTesr run successfully ====== \n\n");
  			safetyNetTest.main();
+			IO`print("\n\n ====== All SafetyNetHospitalTest run successfully ====== \n\n");
  		);
 end RunTests
