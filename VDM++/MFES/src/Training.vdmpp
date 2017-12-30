@@ -7,22 +7,28 @@ instance variables
 
  inv purpose <> nil;
 operations
+	-- Training constructor
 	public Training: Types`Purpose * Schedule * HealthProfessional ==> Training
  		Training(p, s, h) == (purpose := p; schedule := s; medicalAssociated := h; return self)
 	post purpose = p and schedule = s and medicalAssociated = h;
-
+	
+	-- Returns the training's schedule
 	pure public getSchedule : () ==> Schedule
  		getSchedule() == (return schedule);
 	
+	-- Returns the training's purpose
  	pure public getPurpose : () ==> Types`Purpose
 		getPurpose() == (return purpose);	
 	
+	-- Returns the health professional associated to the training
 	pure public getMedAssoc : () ==> HealthProfessional
 		getMedAssoc() == (return medicalAssociated);	
-
+	
+	-- Sets the training's schedule
 	public setSchedule : Schedule ==> ()
  		setSchedule(s) == (schedule := s);
 	
+	-- Sets the training's purpose
 	public setPurpose : Types`Purpose ==> ()
  		setPurpose(p) == (purpose := p);
  
