@@ -49,17 +49,6 @@ public class TrainingTest {
     assertTrue(Utils.equals(training.getSchedule().getScheduleEnd().day, 25L));
     assertTrue(Utils.equals(training.getSchedule().getScheduleEnd().time.hour, 12L));
     assertTrue(Utils.equals(training.getSchedule().getScheduleEnd().time.min, 30L));
-    training.setSchedule(schedule2);
-    assertTrue(Utils.equals(training.getSchedule().getScheduleStart().year, 2017L));
-    assertTrue(Utils.equals(training.getSchedule().getScheduleStart().month, 12L));
-    assertTrue(Utils.equals(training.getSchedule().getScheduleStart().day, 25L));
-    assertTrue(Utils.equals(training.getSchedule().getScheduleStart().time.hour, 12L));
-    assertTrue(Utils.equals(training.getSchedule().getScheduleStart().time.min, 15L));
-    assertTrue(Utils.equals(training.getSchedule().getScheduleEnd().year, 2017L));
-    assertTrue(Utils.equals(training.getSchedule().getScheduleEnd().month, 12L));
-    assertTrue(Utils.equals(training.getSchedule().getScheduleEnd().day, 25L));
-    assertTrue(Utils.equals(training.getSchedule().getScheduleEnd().time.hour, 12L));
-    assertTrue(Utils.equals(training.getSchedule().getScheduleEnd().time.min, 35L));
   }
 
   public static void main() {

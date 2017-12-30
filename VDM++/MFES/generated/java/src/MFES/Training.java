@@ -37,11 +37,6 @@ public class Training {
     return medicalAssociated;
   }
 
-  public void setSchedule(final Schedule s) {
-
-    schedule = s;
-  }
-
   public void setPurpose(final Object p) {
 
     purpose = p;

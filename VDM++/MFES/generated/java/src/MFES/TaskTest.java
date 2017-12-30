@@ -120,8 +120,8 @@ public class TaskTest {
     hospital.addMedAssociated(doctor2);
     hospital.addMedAssociated(surgeon);
     hospital.addMedAssociated(technician);
-    for (Iterator iterator_23 = hospital.getAgendas().iterator(); iterator_23.hasNext(); ) {
-      Agenda a = (Agenda) iterator_23.next();
+    for (Iterator iterator_24 = hospital.getAgendas().iterator(); iterator_24.hasNext(); ) {
+      Agenda a = (Agenda) iterator_24.next();
       if (Utils.equals(a.getHealthProfessional(), doctor)) {
         agenda1 = a;
       } else {
@@ -139,8 +139,9 @@ public class TaskTest {
     assertTrue(Utils.empty(hospital.getAgenda(doctor)));
     assertTrue(Utils.equals(hospital.getAgenda(doctor).size(), 0L));
     agenda1.addSchedule(schedule);
+    agenda1.addSchedule(schedule3);
     assertTrue(Utils.equals(agenda1.getHealthProfessional().getCC(), doctor.getCC()));
-    assertTrue(Utils.equals(agenda1.getAgenda().size(), 1L));
+    assertTrue(Utils.equals(agenda1.getAgenda().size(), 2L));
     agenda2.addSchedule(schedule);
     assertTrue(Utils.equals(agenda2.getAgenda().size(), 1L));
     agenda3.addSchedule(schedule3);
@@ -199,17 +200,17 @@ public class TaskTest {
     assertTrue(Utils.equals(appointment.getSchedule().getScheduleEnd().day, 25L));
     assertTrue(Utils.equals(appointment.getSchedule().getScheduleEnd().time.hour, 12L));
     assertTrue(Utils.equals(appointment.getSchedule().getScheduleEnd().time.min, 35L));
-    appointment.setSchedule(schedule2);
+    appointment.setSchedule(schedule3);
     assertTrue(Utils.equals(appointment.getSchedule().getScheduleStart().year, 2017L));
     assertTrue(Utils.equals(appointment.getSchedule().getScheduleStart().month, 12L));
     assertTrue(Utils.equals(appointment.getSchedule().getScheduleStart().day, 25L));
     assertTrue(Utils.equals(appointment.getSchedule().getScheduleStart().time.hour, 12L));
-    assertTrue(Utils.equals(appointment.getSchedule().getScheduleStart().time.min, 15L));
+    assertTrue(Utils.equals(appointment.getSchedule().getScheduleStart().time.min, 40L));
     assertTrue(Utils.equals(appointment.getSchedule().getScheduleEnd().year, 2017L));
     assertTrue(Utils.equals(appointment.getSchedule().getScheduleEnd().month, 12L));
     assertTrue(Utils.equals(appointment.getSchedule().getScheduleEnd().day, 25L));
     assertTrue(Utils.equals(appointment.getSchedule().getScheduleEnd().time.hour, 12L));
-    assertTrue(Utils.equals(appointment.getSchedule().getScheduleEnd().time.min, 35L));
+    assertTrue(Utils.equals(appointment.getSchedule().getScheduleEnd().time.min, 50L));
   }
 
   public void testAppointment() {
@@ -275,9 +276,9 @@ public class TaskTest {
     surgery.removeOther(nurse);
     assertTrue(
         Utils.equals(surgery.getSurgeryPersons(MFES.quotes.NurseQuote.getInstance()).size(), 0L));
-    assertTrue(Utils.equals(surgery.getMainDoctor().getCC(), "234512389"));
+    assertTrue(Utils.equals(surgery.getMedAssoc().getCC(), "234512389"));
     surgery.setMainDoctor(secSurgeon);
-    assertTrue(Utils.equals(surgery.getMainDoctor().getCC(), "234512390"));
+    assertTrue(Utils.equals(surgery.getMedAssoc().getCC(), "234512390"));
   }
 
   public void testTreatment() {

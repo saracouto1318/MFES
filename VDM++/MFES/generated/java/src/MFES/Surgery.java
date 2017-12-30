@@ -48,11 +48,6 @@ public class Surgery extends Task {
     medicalAssoc = s;
   }
 
-  public HealthProfessional getMainDoctor() {
-
-    return medicalAssoc;
-  }
-
   public VDMSet getSurgeryPersons(final Object t) {
 
     VDMSet med = null;
