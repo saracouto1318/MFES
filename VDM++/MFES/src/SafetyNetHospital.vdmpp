@@ -4,24 +4,28 @@ instance variables
 	
 	inv card hospitals >= 0;
 operations
-
+	-- Safety Net constructor
 	public SafetyNetHospital : () ==> SafetyNetHospital
 		SafetyNetHospital() == (hospitals := {}; return self)
 	post hospitals = {};
-		
+	
+	-- Adds an hospital to the safety net's hospitals
 	public addHospital : Hospital ==> ()
 		addHospital(h) == (hospitals := hospitals union {h})
 	pre h not in set hospitals
 	post h in set hospitals;
 	
+	-- Removes an hospital from the safety net's hospitals
 	public removeHospital : Hospital ==> ()
 		removeHospital(h) == (hospitals := hospitals \ {h})
 	pre h in set hospitals
 	post h not in set hospitals;
 	
+	-- Returns all the hospitals registered
 	pure public getHospitals : () ==> set of (Hospital)
 		getHospitals() == (return hospitals);
 	
+	-- Returns the hospital with more tasks (by type) created
 	pure public getHospitalsMoreAppointments : Types`TaskType ==> Hospital
 		getHospitalsMoreAppointments(t) == (
 																				dcl max: int, hosp: Hospital;
@@ -30,7 +34,7 @@ operations
 																					if((card h.getTasksByType(t)) > max)
 																						then (max := (card h.getTasksByType(t)); hosp := h);
 																				return hosp);
-	
+	-- Returns the health professionals (by type) that works on more than one hospital
 	pure public getMedMoreHospitals : Types`Type ==> set of(HealthProfessional)
 		getMedMoreHospitals(t) == (
 																		dcl doctors: set of(HealthProfessional);
@@ -49,7 +53,7 @@ operations
 																		
 																		return doctors;
 																	);
-																	 													
+	-- Returns the health professionals by patient and type																 													
 	pure public getMedAssociatedByPatient: Patient * Types`Type ==> map Hospital to set of(HealthProfessional)
 		getMedAssociatedByPatient(p, t) == (
 																					dcl maps: map Hospital to set of(HealthProfessional), med : set of (HealthProfessional);
@@ -63,7 +67,7 @@ operations
 																						maps := maps munion {h |-> med};
 																						med := {};);
 																						return maps);
-	
+	-- Returns the health professionals by type and hospital
 	pure public getMedByHospital: Types`Type ==> map Hospital to set of(HealthProfessional)
 		getMedByHospital(t) == (
 																					dcl maps: map Hospital to set of(HealthProfessional);
