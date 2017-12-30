@@ -8,29 +8,37 @@ instance variables
 
   inv taskType <> nil;
 operations
+	-- Task constructor
 	public Task: HealthProfessional * Schedule * Patient * Hospital * Types`TaskType ==> Task
 		Task(med, s, p, h, t) == (schedule := s; patient := p; hospital := h; taskType := t; medicalAssoc := med; return self)
 	pre med.getCC() <> p.getCC()
 	post schedule = s and patient = p and hospital = h and medicalAssoc = med;
 	
+	-- Returns the task's schedule
 	pure public getSchedule: () ==> Schedule
 		getSchedule() == (return schedule);
-		
+	
+	-- Returns the task's patient
 	pure public getPatient: () ==> Patient
 		getPatient() == (return patient);
-		
+	
+	-- Returns the task's hospital
 	pure public getHospital: () ==> Hospital
 		getHospital() == (return hospital);
-		
+	
+	-- Returns the task's type
 	pure public getType: () ==> Types`TaskType
 		getType() == (return taskType);
-		
+	
+	-- Returns the task's health professional associated
 	pure public getMedAssoc : () ==> HealthProfessional
 		getMedAssoc() == (return medicalAssoc);
-		
+	
+	-- Sets the task's schedule
 	public setSchedule : Schedule ==> ()
 		setSchedule(s) == (schedule := s);
-		
+	
+	-- Returns the surgery's associated
 	pure public getSurgeryPersons : Types`Type ==> set of (HealthProfessional)
 		getSurgeryPersons(t) == ( return {}; );
 
