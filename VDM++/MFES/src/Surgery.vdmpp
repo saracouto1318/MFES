@@ -7,37 +7,45 @@ instance variables
   inv card other >= 0;
   inv medicalAssoc.getType() = <Surgeon>;
 operations
+	-- Surgery constructor
 	public Surgery: HealthProfessional * Schedule * Patient * Hospital ==> Surgery
 		Surgery(s, sch, p, h) == (medicalAssoc := s ; other := {}; secondaryDoctors := {}; Task(s, sch, p, h, <Surgery>))
 	post medicalAssoc = s and other = {} and secondaryDoctors = {};
 	
+	-- Adds an auxiliary surgeon to the surgery
 	public addSecondaryDoctor : HealthProfessional ==> ()
 		addSecondaryDoctor(s) == (secondaryDoctors := secondaryDoctors union {s})
 	pre s <> medicalAssoc and s.getType() = <Surgeon> and  s not in set secondaryDoctors
 	post s in set secondaryDoctors;
-		
+	
+	-- Removes an auxiliary surgeon from the surgery
 	public removeSecondaryDoctor : HealthProfessional ==> ()
 		removeSecondaryDoctor(s) == (secondaryDoctors := secondaryDoctors \ {s})
 	pre s.getType() = <Surgeon> and s in set secondaryDoctors
 	post s not in set secondaryDoctors;
-		
+	
+	-- Adds a nurse to the surgery
 	public addOther : HealthProfessional ==> ()
 		addOther(s) == (other := other union {s})
 	pre s.getType() = <Nurse> and s not in set other
 	post s in set other;
-		
+	
+	-- Removes a nurse from the surgery
 	public removeOther : HealthProfessional ==> ()
 		removeOther(s) == (other := other \ {s})
 	pre s.getType() = <Nurse> and s in set other
 	post s not in set other;
-		
+	
+	-- Sets the surgery's main surgeon
 	public setMainDoctor : HealthProfessional ==> ()
 		setMainDoctor(s) == (medicalAssoc := s)
 	pre s.getType() = <Surgeon> and s not in set secondaryDoctors;
 	
+	-- Returns the surgery's main surgeon
 	public getMainDoctor : () ==> HealthProfessional
 		getMainDoctor() == (return medicalAssoc);
-
+	
+	-- Returns the auxiliary staff of a surgery by type
 	pure public getSurgeryPersons : Types`Type ==> set of (HealthProfessional)
 		getSurgeryPersons(t) == (
 															dcl med : set of (HealthProfessional);
