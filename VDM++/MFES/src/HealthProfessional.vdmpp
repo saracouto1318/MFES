@@ -11,38 +11,47 @@ instance variables
 	inv type <> nil;
 	inv len medicalNumber > 5;
 operations
+	-- Health Professional constructor
 	public HealthProfessional: Types`String * Types`String * Types`String * Types`String * Types`String * Types`String * Types`Type ==> HealthProfessional
 		HealthProfessional(a, fn, ln, c, pn, s, t) == (medicalNumber := s; type := t; specialties := {}; patients := {}; Person(a, fn, ln, c, pn))
 	pre t <> nil and len s > 5
 	post medicalNumber = s and type = t and specialties = {} and patients = {};
 	
+	-- Returns the health professional's number
 	pure public getMedicalNumber: () ==> Types`String
 		getMedicalNumber() == (return medicalNumber);
 	
+	-- Returns the health professional's specialties
 	pure public getSpecialties: () ==> set of (Specialty)
 		getSpecialties() == (return specialties);
 	
+	-- Returns all the health professional's patients
 	pure public getPatients: () ==> set of (Patient)
 		getPatients() == (return patients);
-		
+	
+	-- Returns the health professional's type
 	pure public getType : () ==> Types`Type
 		getType() == (return type);
-		
+	
+	-- Removes a specialty from the health professional's specialties
 	public removeSpecialty: Specialty ==> ()
 		removeSpecialty(s) == (specialties := specialties \ {s})
 	pre s in set specialties
 	post s not in set specialties;
-		
+	
+	-- Adds a specialty to the health professional's specialties
 	public addSpecialty: Specialty ==> ()
 		addSpecialty(s) == (specialties := specialties union {s})
 	pre s not in set specialties
 	post s in set specialties;
 	
+	-- Adds a patient to the health professional's patients
 	public addPatient : Patient ==> ()
 		addPatient(p) == (patients :=  patients union {p})
 	pre p not in set patients
 	post p in set patients;
 	
+	-- Removes a patient from the health professional's patients
 	public removePatient : Patient ==> ()
 		removePatient(p) == (patients := patients \ {p})
 	pre p in set patients
