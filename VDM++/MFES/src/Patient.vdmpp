@@ -4,11 +4,13 @@ instance variables
   
   inv len healthNumber > 5;
 operations
+	-- Patient constructor
 	public Patient: Types`String * Types`String * Types`String * Types`String * Types`String * Types`String ==> Patient
 		Patient(a, fn, ln, c, pn, n) == ( healthNumber := n; Person(a, fn, ln, c, pn))
 	pre len n > 5
 	post healthNumber = n;
 	
+	-- Returns the patient's health number
 	pure public getHealthNumber : () ==> Types`String
 		getHealthNumber() == (return healthNumber);
 
