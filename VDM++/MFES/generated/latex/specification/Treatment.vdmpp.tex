@@ -6,7 +6,7 @@ instance variables
   
   inv med.getType() = <Nurse> or med.getType() = <Technician>;
 operations
-
+ -- Treatment constructor
 (*@
 \label{Treatment:9}
 @*)
@@ -14,14 +14,16 @@ operations
   Treatment(m, n, s, p, h) == (name := n; med := m; Task(m, s, p, h, <Other>))
  post name = n and med = m;
  
+ -- Returns the treatment's name
 (*@
-\label{getName:13}
+\label{getName:14}
 @*)
  pure public getName: () ==> Types`String
   getName() == (return name);
  
+ -- Returns the health professional associated to the treatment
 (*@
-\label{getMed:16}
+\label{getMed:18}
 @*)
  pure public getMed : () ==> HealthProfessional
   getMed() == (return med);
@@ -34,14 +36,14 @@ end Treatment
 Function or operation & Line & Coverage & Calls \\
 \hline
 \hline
-\hyperref[Treatment:9]{Treatment} & 9&100.0\% & 12 \\
+\hyperref[Treatment:9]{Treatment} & 9&100.0\% & 31 \\
 \hline
-\hyperref[getMed:16]{getMed} & 16&100.0\% & 3 \\
+\hyperref[getMed:18]{getMed} & 18&100.0\% & 1 \\
 \hline
-\hyperref[getName:13]{getName} & 13&100.0\% & 3 \\
+\hyperref[getName:14]{getName} & 14&100.0\% & 1 \\
 \hline
 \hline
-Treatment.vdmpp & & 100.0\% & 18 \\
+Treatment.vdmpp & & 100.0\% & 33 \\
 \hline
 \end{longtable}
 

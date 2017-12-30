@@ -8,39 +8,38 @@ instance variables
 
  inv purpose <> nil;
 operations
+ -- Training constructor
 (*@
-\label{Training:10}
+\label{Training:11}
 @*)
  public Training: Types`Purpose * Schedule * HealthProfessional ==> Training
    Training(p, s, h) == (purpose := p; schedule := s; medicalAssociated := h; return self)
  post purpose = p and schedule = s and medicalAssociated = h;
-
+ 
+ -- Returns the training's schedule
 (*@
-\label{getSchedule:14}
+\label{getSchedule:16}
 @*)
  pure public getSchedule : () ==> Schedule
    getSchedule() == (return schedule);
  
+ -- Returns the training's purpose
 (*@
-\label{getPurpose:17}
+\label{getPurpose:20}
 @*)
   pure public getPurpose : () ==> Types`Purpose
   getPurpose() == (return purpose); 
  
+ -- Returns the health professional associated to the training
 (*@
-\label{getMedAssoc:20}
+\label{getMedAssoc:24}
 @*)
  pure public getMedAssoc : () ==> HealthProfessional
   getMedAssoc() == (return medicalAssociated); 
-
-(*@
-\label{setSchedule:23}
-@*)
- public setSchedule : Schedule ==> ()
-   setSchedule(s) == (schedule := s);
  
+ -- Sets the training's purpose
 (*@
-\label{setPurpose:26}
+\label{setSchedule:28}
 @*)
  public setPurpose : Types`Purpose ==> ()
    setPurpose(p) == (purpose := p);
@@ -53,20 +52,20 @@ operations
 Function or operation & Line & Coverage & Calls \\
 \hline
 \hline
-\hyperref[Training:10]{Training} & 10&100.0\% & 18 \\
+\hyperref[Training:11]{Training} & 11&100.0\% & 21 \\
 \hline
-\hyperref[getMedAssoc:20]{getMedAssoc} & 20&100.0\% & 90 \\
+\hyperref[getMedAssoc:24]{getMedAssoc} & 24&100.0\% & 30 \\
 \hline
-\hyperref[getPurpose:17]{getPurpose} & 17&100.0\% & 17 \\
+\hyperref[getPurpose:20]{getPurpose} & 20&100.0\% & 7 \\
 \hline
-\hyperref[getSchedule:14]{getSchedule} & 14&100.0\% & 96 \\
+\hyperref[getSchedule:16]{getSchedule} & 16&100.0\% & 22 \\
 \hline
-\hyperref[setPurpose:26]{setPurpose} & 26&100.0\% & 3 \\
+\hyperref[setPurpose:32]{setPurpose} & 32&100.0\% & 1 \\
 \hline
-\hyperref[setSchedule:23]{setSchedule} & 23&100.0\% & 3 \\
+\hyperref[setSchedule:28]{setSchedule} & 28&100.0\% & 1 \\
 \hline
 \hline
-Training.vdmpp & & 100.0\% & 227 \\
+Training.vdmpp & & 100.0\% & 82 \\
 \hline
 \end{longtable}
 

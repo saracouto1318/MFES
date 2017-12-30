@@ -8,65 +8,69 @@ instance variables
   inv card other >= 0;
   inv medicalAssoc.getType() = <Surgeon>;
 operations
+ -- Surgery constructor
 (*@
-\label{Surgery:10}
+\label{Surgery:11}
 @*)
  public Surgery: HealthProfessional * Schedule * Patient * Hospital ==> Surgery
   Surgery(s, sch, p, h) == (medicalAssoc := s ; other := {}; secondaryDoctors := {}; Task(s, sch, p, h, <Surgery>))
  post medicalAssoc = s and other = {} and secondaryDoctors = {};
  
+ -- Adds an auxiliary surgeon to the surgery
 (*@
-\label{addSecondaryDoctor:14}
+\label{addSecondaryDoctor:16}
 @*)
  public addSecondaryDoctor : HealthProfessional ==> ()
   addSecondaryDoctor(s) == (secondaryDoctors := secondaryDoctors union {s})
  pre s <> medicalAssoc and s.getType() = <Surgeon> and  s not in set secondaryDoctors
  post s in set secondaryDoctors;
-  
+ 
+ -- Removes an auxiliary surgeon from the surgery
 (*@
-\label{removeSecondaryDoctor:19}
+\label{removeSecondaryDoctor:22}
 @*)
  public removeSecondaryDoctor : HealthProfessional ==> ()
   removeSecondaryDoctor(s) == (secondaryDoctors := secondaryDoctors \ {s})
  pre s.getType() = <Surgeon> and s in set secondaryDoctors
  post s not in set secondaryDoctors;
-  
+ 
+ -- Adds a nurse to the surgery
 (*@
-\label{addOther:24}
+\label{addOther:28}
 @*)
  public addOther : HealthProfessional ==> ()
   addOther(s) == (other := other union {s})
  pre s.getType() = <Nurse> and s not in set other
  post s in set other;
-  
+ 
+ -- Removes a nurse from the surgery
 (*@
-\label{removeOther:29}
+\label{removeOther:34}
 @*)
  public removeOther : HealthProfessional ==> ()
   removeOther(s) == (other := other \ {s})
  pre s.getType() = <Nurse> and s in set other
  post s not in set other;
-  
+ 
+ -- Sets the surgery's main surgeon
 (*@
-\label{setMainDoctor:34}
+\label{setMainDoctor:40}
 @*)
  public setMainDoctor : HealthProfessional ==> ()
   setMainDoctor(s) == (medicalAssoc := s)
  pre s.getType() = <Surgeon> and s not in set secondaryDoctors;
  
+ -- Returns the auxiliary staff of a surgery by type
 (*@
-\label{getMainDoctor:38}
-@*)
- public getMainDoctor : () ==> HealthProfessional
-  getMainDoctor() == (return medicalAssoc);
-
-(*@
-\label{getSurgeryPersons:41}
+\label{getMainDoctor:45}
 @*)
  pure public getSurgeryPersons : Types`Type ==> set of (HealthProfessional)
   getSurgeryPersons(t) == (
                dcl med : set of (HealthProfessional);
                if(t = <Surgeon>)
+(*@
+\label{getSurgeryPersons:49}
+@*)
                 then med := secondaryDoctors
                else
                 med := other;
@@ -79,24 +83,24 @@ end Surgery
 Function or operation & Line & Coverage & Calls \\
 \hline
 \hline
-\hyperref[Surgery:10]{Surgery} & 10&100.0\% & 12 \\
+\hyperref[Surgery:11]{Surgery} & 11&100.0\% & 19 \\
 \hline
-\hyperref[addOther:24]{addOther} & 24&100.0\% & 3 \\
+\hyperref[addOther:28]{addOther} & 28&100.0\% & 1 \\
 \hline
-\hyperref[addSecondaryDoctor:14]{addSecondaryDoctor} & 14&100.0\% & 3 \\
+\hyperref[addSecondaryDoctor:16]{addSecondaryDoctor} & 16&100.0\% & 1 \\
 \hline
-\hyperref[getMainDoctor:38]{getMainDoctor} & 38&100.0\% & 6 \\
+\hyperref[getMainDoctor:45]{getMainDoctor} & 45&100.0\% & 6 \\
 \hline
-\hyperref[getSurgeryPersons:41]{getSurgeryPersons} & 41&100.0\% & 18 \\
+\hyperref[getSurgeryPersons:49]{getSurgeryPersons} & 49&100.0\% & 6 \\
 \hline
-\hyperref[removeOther:29]{removeOther} & 29&100.0\% & 3 \\
+\hyperref[removeOther:34]{removeOther} & 34&100.0\% & 1 \\
 \hline
-\hyperref[removeSecondaryDoctor:19]{removeSecondaryDoctor} & 19&100.0\% & 3 \\
+\hyperref[removeSecondaryDoctor:22]{removeSecondaryDoctor} & 22&100.0\% & 1 \\
 \hline
-\hyperref[setMainDoctor:34]{setMainDoctor} & 34&100.0\% & 3 \\
+\hyperref[setMainDoctor:40]{setMainDoctor} & 40&100.0\% & 1 \\
 \hline
 \hline
-Surgery.vdmpp & & 100.0\% & 51 \\
+Surgery.vdmpp & & 100.0\% & 36 \\
 \hline
 \end{longtable}
 

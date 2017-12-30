@@ -5,38 +5,42 @@ instance variables
  
  inv card hospitals >= 0;
 operations
-
+ -- Safety Net constructor
 (*@
 \label{SafetyNetHospital:8}
 @*)
  public SafetyNetHospital : () ==> SafetyNetHospital
   SafetyNetHospital() == (hospitals := {}; return self)
  post hospitals = {};
-  
+ 
+ -- Adds an hospital to the safety net's hospitals
 (*@
-\label{addHospital:12}
+\label{addHospital:13}
 @*)
  public addHospital : Hospital ==> ()
   addHospital(h) == (hospitals := hospitals union {h})
  pre h not in set hospitals
  post h in set hospitals;
  
+ -- Removes an hospital from the safety net's hospitals
 (*@
-\label{removeHospital:17}
+\label{removeHospital:19}
 @*)
  public removeHospital : Hospital ==> ()
   removeHospital(h) == (hospitals := hospitals \ {h})
  pre h in set hospitals
  post h not in set hospitals;
  
+ -- Returns all the hospitals registered
 (*@
-\label{getHospitals:22}
+\label{getHospitals:25}
 @*)
  pure public getHospitals : () ==> set of (Hospital)
   getHospitals() == (return hospitals);
  
+ -- Returns the hospital with more tasks (by type) created
 (*@
-\label{getHospitalsMoreAppointments:25}
+\label{getHospitalsMoreAppointments:29}
 @*)
  pure public getHospitalsMoreAppointments : Types`TaskType ==> Hospital
   getHospitalsMoreAppointments(t) == (
@@ -46,9 +50,9 @@ operations
                      if((card h.getTasksByType(t)) > max)
                       then (max := (card h.getTasksByType(t)); hosp := h);
                     return hosp);
- 
+ -- Returns the health professionals (by type) that works on more than one hospital
 (*@
-\label{getMedMoreHospitals:34}
+\label{getMedMoreHospitals:38}
 @*)
  pure public getMedMoreHospitals : Types`Type ==> set of(HealthProfessional)
   getMedMoreHospitals(t) == (
@@ -68,9 +72,9 @@ operations
                   
                   return doctors;
                  );
-                               
+ -- Returns the health professionals by patient and type                              
 (*@
-\label{getMedAssociatedByPatient:53}
+\label{getMedAssociatedByPatient:57}
 @*)
  pure public getMedAssociatedByPatient: Patient * Types`Type ==> map Hospital to set of(HealthProfessional)
   getMedAssociatedByPatient(p, t) == (
@@ -85,9 +89,9 @@ operations
                       maps := maps munion {h |-> med};
                       med := {};);
                       return maps);
- 
+ -- Returns the health professionals by type and hospital
 (*@
-\label{getMedByHospital:67}
+\label{getMedByHospital:71}
 @*)
  pure public getMedByHospital: Types`Type ==> map Hospital to set of(HealthProfessional)
   getMedByHospital(t) == (
@@ -104,24 +108,24 @@ end SafetyNetHospital
 Function or operation & Line & Coverage & Calls \\
 \hline
 \hline
-\hyperref[SafetyNetHospital:8]{SafetyNetHospital} & 8&100.0\% & 12 \\
+\hyperref[SafetyNetHospital:8]{SafetyNetHospital} & 8&100.0\% & 31 \\
 \hline
-\hyperref[addHospital:12]{addHospital} & 12&100.0\% & 21 \\
+\hyperref[addHospital:13]{addHospital} & 13&100.0\% & 22 \\
 \hline
-\hyperref[getHospitals:22]{getHospitals} & 22&100.0\% & 18 \\
+\hyperref[getHospitals:25]{getHospitals} & 25&100.0\% & 6 \\
 \hline
-\hyperref[getHospitalsMoreAppointments:25]{getHospitalsMoreAppointments} & 25&100.0\% & 12 \\
+\hyperref[getHospitalsMoreAppointments:29]{getHospitalsMoreAppointments} & 29&100.0\% & 4 \\
 \hline
-\hyperref[getMedAssociatedByPatient:53]{getMedAssociatedByPatient} & 53&100.0\% & 3 \\
+\hyperref[getMedAssociatedByPatient:57]{getMedAssociatedByPatient} & 57&100.0\% & 2 \\
 \hline
-\hyperref[getMedByHospital:67]{getMedByHospital} & 67&100.0\% & 6 \\
+\hyperref[getMedByHospital:71]{getMedByHospital} & 71&100.0\% & 2 \\
 \hline
-\hyperref[getMedMoreHospitals:34]{getMedMoreHospitals} & 34&100.0\% & 18 \\
+\hyperref[getMedMoreHospitals:38]{getMedMoreHospitals} & 38&100.0\% & 6 \\
 \hline
-\hyperref[removeHospital:17]{removeHospital} & 17&100.0\% & 6 \\
+\hyperref[removeHospital:19]{removeHospital} & 19&100.0\% & 2 \\
 \hline
 \hline
-SafetyNetHospital.vdmpp & & 100.0\% & 96 \\
+SafetyNetHospital.vdmpp & & 100.0\% & 75 \\
 \hline
 \end{longtable}
 

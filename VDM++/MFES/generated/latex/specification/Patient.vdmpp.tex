@@ -5,16 +5,18 @@ instance variables
   
   inv len healthNumber > 5;
 operations
+ -- Patient constructor
 (*@
-\label{Patient:7}
+\label{Patient:8}
 @*)
  public Patient: Types`String * Types`String * Types`String * Types`String * Types`String * Types`String ==> Patient
   Patient(a, fn, ln, c, pn, n) == ( healthNumber := n; Person(a, fn, ln, c, pn))
  pre len n > 5
  post healthNumber = n;
  
+ -- Returns the patient's health number
 (*@
-\label{getHealthNumber:12}
+\label{getHealthNumber:14}
 @*)
  pure public getHealthNumber : () ==> Types`String
   getHealthNumber() == (return healthNumber);
@@ -27,12 +29,12 @@ end Patient
 Function or operation & Line & Coverage & Calls \\
 \hline
 \hline
-\hyperref[Patient:7]{Patient} & 7&100.0\% & 54 \\
+\hyperref[Patient:8]{Patient} & 8&100.0\% & 88 \\
 \hline
-\hyperref[getHealthNumber:12]{getHealthNumber} & 12&100.0\% & 3 \\
+\hyperref[getHealthNumber:14]{getHealthNumber} & 14&100.0\% & 6 \\
 \hline
 \hline
-Patient.vdmpp & & 100.0\% & 57 \\
+Patient.vdmpp & & 100.0\% & 94 \\
 \hline
 \end{longtable}
 

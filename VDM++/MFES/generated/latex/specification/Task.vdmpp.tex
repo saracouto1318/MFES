@@ -9,53 +9,67 @@ instance variables
 
   inv taskType <> nil;
 operations
+ -- Task constructor
 (*@
-\label{Task:11}
+\label{Task:12}
 @*)
  public Task: HealthProfessional * Schedule * Patient * Hospital * Types`TaskType ==> Task
   Task(med, s, p, h, t) == (schedule := s; patient := p; hospital := h; taskType := t; medicalAssoc := med; return self)
  pre med.getCC() <> p.getCC()
  post schedule = s and patient = p and hospital = h and medicalAssoc = med;
  
+ -- Returns the task's schedule
 (*@
-\label{getSchedule:16}
+\label{getSchedule:18}
 @*)
  pure public getSchedule: () ==> Schedule
   getSchedule() == (return schedule);
-  
+ 
+ -- Returns the task's patient
 (*@
-\label{getPatient:19}
+\label{getPatient:22}
 @*)
  pure public getPatient: () ==> Patient
   getPatient() == (return patient);
-  
+ 
+ -- Returns the task's hospital
 (*@
-\label{getHospital:22}
+\label{getHospital:26}
 @*)
  pure public getHospital: () ==> Hospital
   getHospital() == (return hospital);
-  
+ 
+ -- Returns the task's type
 (*@
-\label{getType:25}
+\label{getType:30}
 @*)
  pure public getType: () ==> Types`TaskType
   getType() == (return taskType);
-  
+ 
+ -- Returns the task's health professional associated
 (*@
-\label{getMedAssoc:28}
+\label{getMedAssoc:34}
 @*)
  pure public getMedAssoc : () ==> HealthProfessional
   getMedAssoc() == (return medicalAssoc);
-  
+ 
+ -- Sets the task's schedule
 (*@
-\label{setSchedule:31}
+\label{setSchedule:38}
 @*)
  public setSchedule : Schedule ==> ()
-  setSchedule(s) == (schedule := s);
-  
+  setSchedule(s) == (
+   for all a in set hospital.getAgendas() do
+    if(a.getHealthProfessional().getCC() = medicalAssoc.getCC())
 (*@
-\label{getSurgeryPersons:34}
+\label{getSurgeryPersons:42}
 @*)
+     then (a.addSchedule(schedule); a.removeSchedule(s));
+   schedule := s)
+ pre s in set hospital.getAgenda(medicalAssoc)
+ post s not in set hospital.getAgenda(medicalAssoc);
+ 
+ -- Returns the surgery's associated
  pure public getSurgeryPersons : Types`Type ==> set of (HealthProfessional)
   getSurgeryPersons(t) == ( return {}; );
 
@@ -67,24 +81,24 @@ end Task
 Function or operation & Line & Coverage & Calls \\
 \hline
 \hline
-\hyperref[Task:11]{Task} & 11&100.0\% & 60 \\
+\hyperref[Task:12]{Task} & 12&100.0\% & 90 \\
 \hline
-\hyperref[getHospital:22]{getHospital} & 22&100.0\% & 3 \\
+\hyperref[getHospital:26]{getHospital} & 26&100.0\% & 4 \\
 \hline
-\hyperref[getMedAssoc:28]{getMedAssoc} & 28&100.0\% & 396 \\
+\hyperref[getMedAssoc:34]{getMedAssoc} & 34&100.0\% & 251 \\
 \hline
-\hyperref[getPatient:19]{getPatient} & 19&100.0\% & 105 \\
+\hyperref[getPatient:22]{getPatient} & 22&100.0\% & 74 \\
 \hline
-\hyperref[getSchedule:16]{getSchedule} & 16&100.0\% & 261 \\
+\hyperref[getSchedule:18]{getSchedule} & 18&100.0\% & 200 \\
 \hline
-\hyperref[getSurgeryPersons:34]{getSurgeryPersons} & 34&100.0\% & 3 \\
+\hyperref[getSurgeryPersons:42]{getSurgeryPersons} & 42&100.0\% & 4 \\
 \hline
-\hyperref[getType:25]{getType} & 25&100.0\% & 366 \\
+\hyperref[getType:30]{getType} & 30&100.0\% & 134 \\
 \hline
-\hyperref[setSchedule:31]{setSchedule} & 31&100.0\% & 3 \\
+\hyperref[setSchedule:38]{setSchedule} & 38&100.0\% & 3 \\
 \hline
 \hline
-Task.vdmpp & & 100.0\% & 1197 \\
+Task.vdmpp & & 100.0\% & 760 \\
 \hline
 \end{longtable}
 
