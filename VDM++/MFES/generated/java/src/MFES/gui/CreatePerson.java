@@ -1,5 +1,6 @@
 package MFES.gui;
 
+import MFES.gui.CreatePerson.CreateType;
 import java.util.Scanner;
 
 import MFES.HealthProfessional;
@@ -134,22 +135,17 @@ public class CreatePerson extends Menu {
 
         switch(type) {
         case MEDIC:
-            h = new HealthProfessional(address, firstName, lastName, cc, phoneNumber, medicalNumber, "MEDIC");
-            hospital.addMedAssociated(h);
         case NURSE:
-            h = new HealthProfessional(address, firstName, lastName, cc, phoneNumber, medicalNumber, "NURSE");
-            hospital.addMedAssociated(h);
         case TECHNICIAN:
-            h = new HealthProfessional(address, firstName, lastName, cc, phoneNumber, medicalNumber, "TECHNICIAN");
-            hospital.addMedAssociated(h);
         case SURGEON:
-            h = new HealthProfessional(address, firstName, lastName, cc, phoneNumber, medicalNumber, "SURGEON");
+            h = new HealthProfessional(address, firstName, lastName, cc, phoneNumber, medicalNumber, type);
             hospital.addMedAssociated(h);
+            person = h;
+            break;
         case PATIENT:
             person = new Patient(address, firstName, lastName, cc, phoneNumber, healthNumber);
         }
 
-        person = h;
         return person;
     }
 

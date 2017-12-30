@@ -7,19 +7,11 @@ import java.util.Scanner;
 import MFES.HealthProfessional;
 import MFES.Hospital;
 import MFES.Patient;
+import MFES.Person;
 import MFES.Agenda;
 import MFES.Schedule;
 import MFES.gui.HospitalPicker;
 import MFES.gui.ListSelectabels;
-
-package MFES.gui;
-
-import java.util.Scanner;
-
-import MFES.HealthProfessional;
-import MFES.Hospital;
-import MFES.Patient;
-import MFES.Person;
 
 public class CreateSchedule extends Menu {
     public static enum CreateState {YEAR, MONTH, DAY, HOUR, MINUTES, DURATION};
@@ -27,12 +19,12 @@ public class CreateSchedule extends Menu {
 
     private Menu nextMenu;
 
-    private int year = null;
-    private int month = null;
-    private int day = null;
-    private int hour = null;
-    private int minutes = null;
-    private int duration = null;
+    private int year = -1;
+    private int month = -1;
+    private int day = -1;
+    private int hour = -1;
+    private int minutes = -1;
+    private int duration = -1;
 
     private Schedule schedule = null;
 
@@ -98,26 +90,38 @@ public class CreateSchedule extends Menu {
 
         switch(state) {
         case YEAR:
+            if(year <= 0)
+                break;
             year = i;
             state = CreateState.MONTH;
             break;
         case MONTH:
+            if(month <= 0 || month > 12)
+                break;
             month = i;
             state = CreateState.DAY;
             break;
         case DAY:
+            if(day <= 0 || day > 31)
+                break;
             day = i;
             state = CreateState.HOUR;
             break;
         case HOUR:
+            if(hour < 0 || hour >= 24)
+                break;
             hour = i;
             state = CreateState.MINUTES;
             break;
         case MINUTES:
+            if(minutes < 0 || minutes >= 60)
+                break;
             minutes = i;
             state = CreateState.DURATION;
             break;
         case DURATION:
+            if(duration <= 0 || duration > 180)
+                break;
             duration = i;
             return nextMenu;
         }
@@ -130,15 +134,10 @@ public class CreateSchedule extends Menu {
 	public void destroy() {}
     
     private boolean endCondition() {
-        return firstName != null && 
-            lastName != null &&
-            address != null &&
-            phoneNumber != null &&
-            ((type != CreateType.PATIENT && medicalNumber != null) || 
-            (type == CreateType.PATIENT && healthNumber != null));
+        return year > 0 && month > 0 && day > 0 && day < 31 && hour >= 0 && hour < 24 && minutes >= 0 && minutes < 60 && duration > 0;
     }
 
-    private Person createSchedule() {
+    private Schedule createSchedule() {
         int tmpM = minutes + duration;
         int h = hour, m = minutes;
         if(tmpM > 60) {
@@ -156,6 +155,21 @@ public class CreateSchedule extends Menu {
         }
 
         m += duration;
+
+        if(h >= 24) {
+            h -= 24;
+            day++;
+        }
+
+        if(day > 31) {
+            day -= 31;
+            month++;
+        }
+
+        if(month > 12) {
+            month -= 12;
+            year++;
+        }
 
         schedule = new Schedule(new Types.Date(year,month,day,new Types.Time(hour, minutes)), 
                                 new Types.Date(year,month,day,new Types.Time(h, m)));

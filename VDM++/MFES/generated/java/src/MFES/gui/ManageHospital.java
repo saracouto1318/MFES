@@ -3,11 +3,12 @@ package MFES.gui;
 import java.util.Scanner;
 
 import MFES.Hospital;
+import MFES.gui.CreateTask;
 
 public class ManageHospital extends Menu {
 	private Hospital hospital;
 
-	private enum MenuState {MAIN, CREATE, APPOINTMENT, URGENCY, SURGERY, TREATMENT, TRAINING};
+	private enum MenuState {MAIN, CREATE, APPOINTMENT, URGENCY, SURGERY, NURSE_TREATMENT, TECHNICIAN_TREATMENT, TRAINING};
 	private MenuState state;
 
 	private boolean first;
@@ -31,9 +32,10 @@ public class ManageHospital extends Menu {
 			System.out.println("2. Consultas");
 			System.out.println("3. Urgencias");
 			System.out.println("4. Cirurgias");
-			System.out.println("5. Tratamentos");
-			System.out.println("6. Treinos");
-			System.out.println("7. Sair");
+			System.out.println("5. Tratamento Enfermeiro");
+			System.out.println("6. Tratamentos Tecnico");
+			System.out.println("7. Treinos");
+			System.out.println("8. Sair");
 			break;
 		case CREATE:
 			System.out.println("1. Medico");
@@ -44,7 +46,8 @@ public class ManageHospital extends Menu {
 			break;
 		case APPOINTMENT:
 		case SURGERY:
-		case TREATMENT:
+		case NURSE_TREATMENT:
+		case TECHNICIAN_TREATMENT:
 			System.out.println("1. Agendar");
 			System.out.println("2. Procurar");
 			System.out.println("3. Listar");
@@ -102,10 +105,12 @@ public class ManageHospital extends Menu {
 			else if(option == 4)
 				state = MenuState.SURGERY;
 			else if(option == 5)
-				state = MenuState.TREATMENT;
+				state = MenuState.NURSE_TREATMENT;
 			else if(option == 6)
+				state = MenuState.TECHNICIAN_TREATMENT;
+			else if(option == 7)
 				state = MenuState.TRAINING;
-			else if(option == 7) {
+			else if(option == 8) {
 				return new HospitalPicker(reader);
 			}
 
@@ -131,13 +136,53 @@ public class ManageHospital extends Menu {
 
 			break;
 		case APPOINTMENT:
+			if(option < 1 && option > 4)
+				return null;
+
+			if(option == 1) 
+				return new CreateTask(reader, CreateTask.TaskType.APPOINTMENT, CreatePerson.CreateType.MEDIC, hospital);
+			else if(option == 2)
+				state = MenuState.MAIN;
+			else if(option == 3)
+				state = MenuState.MAIN;
+			else if(option == 4)
+				state = MenuState.MAIN;
+
+			break;
 		case SURGERY:
-		case TREATMENT:
 			if(option < 1 && option > 4)
 				return null;
 
 			if(option == 1)
+				return new CreateTask(reader, CreateTask.TaskType.SURGERY, CreatePerson.CreateType.SURGEON, hospital);
+			else if(option == 2)
 				state = MenuState.MAIN;
+			else if(option == 3)
+				state = MenuState.MAIN;
+			else if(option == 4)
+				state = MenuState.MAIN;
+
+			break;
+		case NURSE_TREATMENT:
+			if(option < 1 && option > 4)
+				return null;
+
+			if(option == 1)
+				return new CreateTask(reader, CreateTask.TaskType.TREATMENT, CreatePerson.CreateType.NURSE, hospital);
+			else if(option == 2)
+				state = MenuState.MAIN;
+			else if(option == 3)
+				state = MenuState.MAIN;
+			else if(option == 4)
+				state = MenuState.MAIN;
+
+			break;
+		case TECHNICIAN_TREATMENT:
+			if(option < 1 && option > 4)
+				return null;
+
+			if(option == 1)
+				return new CreateTask(reader, CreateTask.TaskType.TREATMENT, CreatePerson.CreateType.TECHNICIAN, hospital);
 			else if(option == 2)
 				state = MenuState.MAIN;
 			else if(option == 3)
@@ -147,6 +192,17 @@ public class ManageHospital extends Menu {
 
 			break;
 		case URGENCY:
+			if(option < 1 && option > 3)
+				return null;
+
+			if(option == 1)
+				return new CreateTask(reader, CreateTask.TaskType.URGENCIES, CreatePerson.CreateType.MEDIC, hospital);
+			else if(option == 2)
+				state = MenuState.MAIN;
+			else if(option == 3)
+				state = MenuState.MAIN;
+
+			break;
 		case TRAINING:
 			if(option < 1 && option > 3)
 				return null;

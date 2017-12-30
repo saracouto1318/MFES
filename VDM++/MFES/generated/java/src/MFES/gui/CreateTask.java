@@ -1,8 +1,6 @@
 package MFES.gui;
 
-import MFES.Schedule;
-import MFES.Task;
-
+import java.util.Iterator;
 import java.util.Scanner;
 
 import MFES.HealthProfessional;
@@ -10,17 +8,23 @@ import MFES.Hospital;
 import MFES.Patient;
 import MFES.Agenda;
 import MFES.Schedule;
+import MFES.Task;
+import MFES.gui.CreatePerson.CreateType;
 import MFES.gui.CreateSchedule;
 import MFES.gui.HospitalPicker;
 import MFES.gui.ListSelectabels;
 import MFES.gui.ManageHospital;
 
+import org.overture.codegen.runtime.*;
+
 public class CreateTask extends Menu {
-    private static enum CreateState {PATIENT_LIST, HEALTHPROFESSIONAL_LIST, SCHEDULE, INVALID};
+    public static enum CreateState {PATIENT_LIST, HEALTHPROFESSIONAL_LIST, SCHEDULE, INVALID};
     private CreateState state;
 
     public static enum TaskType {APPOINTMENT, SURGERY, TREATMENT, URGENCIES};
     private TaskType type;
+
+    private CreatePerson.CreateType personType;
 
     private Hospital hospital;
     private Patient patient = null;
@@ -29,10 +33,11 @@ public class CreateTask extends Menu {
 
     private boolean invalid;
 
-    public CreateTask(Scanner reader, TaskType type, Hospital hospital) {
+    public CreateTask(Scanner reader, TaskType type, CreatePerson.CreateType personType, Hospital hospital) {
         super(reader);
-        state = PATIENT_LIST;
+        state = CreateState.PATIENT_LIST;
         this.type = type;
+        this.personType = personType;
         this.hospital = hospital;
         invalid = false;
     }
@@ -57,19 +62,12 @@ public class CreateTask extends Menu {
             Iterator<Agenda> iter = agendas.iterator();
             int i = 0;
             while(iter.hasNext()) {
-                hArr[i++] = iter.next();
+                selectabels[i++] = iter.next();
             }
 
             ListSelectabels<Agenda> menu = new ListSelectabels<>(reader, selectabels, this);
 
             System.out.println("Informacao paciente");
-
-            /*
-            CreatePerson menu = new CreatePerson(reader, CreatePerson.CreateType.PATIENT, hospital);
-            menu.show();
-            menu.action();
-            patient = (Patient)menu.getPerson();
-            */
             break;
         case HEALTHPROFESSIONAL_LIST:
             System.out.println("\nEscolher medico");
@@ -90,11 +88,13 @@ public class CreateTask extends Menu {
 
         Menu returnedMenu = null;
 
-        while(!endCondition(returnedMenu)) {
+        while(!endCondition(returnedMenu) && !invalid) {
             String str = reader.nextLine();
             returnedMenu = input(str);
         }
 
+        if(invalid)
+            return new ManageHospital(reader, hospital);
 		return returnedMenu;
 	}
 
@@ -116,14 +116,34 @@ public class CreateTask extends Menu {
 
             break;
         case HEALTHPROFESSIONAL_LIST:
-            System.out.println("\nEscolher medico");
+            VDMSet medics = hospital.getMedicalAssociatedByType(personType);
+
+            if(medics.size() <= 0) {
+                System.out.println("Neste momento nao ha medicos disponiveis");
+                invalid = true;
+                return null;
+            }
+
+            HealthProfessional[] selectabels = new HealthProfessional[medics.size()];
+            Iterator<HealthProfessional> iter = medics.iterator();
+            int i = 0;
+            while(iter.hasNext()) {
+                selectabels[i++] = iter.next();
+            }
+
+            ListSelectabels<HealthProfessional> medicsList = new ListSelectabels<>(reader, selectabels, this);
+            medicsList.show();
+            medicsList.action();
+
+            healthProfessional = medicsList.getSelected();
+
             state = CreateState.SCHEDULE;
             break;
         case SCHEDULE:
-            CreateSchedule menu = new CreateSchedule(reader);
-            menu.show();
-            menu.action();
-            schedule = (Schedule)menu.getSchedule();
+            CreateSchedule cSchedule = new CreateSchedule(reader, this);
+            cSchedule.show();
+            cSchedule.action();
+            schedule = (Schedule)cSchedule.getSchedule();
             
             if(createTask() == null)
                 state = CreateState.INVALID;
@@ -150,6 +170,23 @@ public class CreateTask extends Menu {
     private Task createTask() {
         Task t = new Task(healthProfessional, schedule, patient, hospital, type);
         hospital.addTask(t);
+
+        VDMSet tasks = hospital.getTasksByType(type);
+
+        if(tasks.size() <= 0) {
+            System.out.println("Neste momento nao ha medicos disponiveis");
+        } else {
+            Task[] hArr = new Task[tasks.size()];
+            Iterator<Task> iter = tasks.iterator();
+            int i = 0;
+            while(iter.hasNext()) {
+                hArr[i++] = iter.next();
+            }
+
+            ListSelectabels<Task> m = new ListSelectabels<>(reader, hArr, this);
+            m.show();
+        }
+
         return t;
     }
 
