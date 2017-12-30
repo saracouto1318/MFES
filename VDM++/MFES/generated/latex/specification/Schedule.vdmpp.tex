@@ -6,37 +6,42 @@ instance variables
   private endHour: Types`Date;
   
   inv lessThan(startHour, endHour);
-operations 
+operations
+ -- Schedule constructor
 (*@
-\label{Schedule:9}
+\label{Schedule:10}
 @*)
  public Schedule: Types`Date * Types`Date ==> Schedule
   Schedule(d, d2) == (startHour := d; endHour := d2; return self)
  pre lessThan(d, d2)
  post startHour = d and endHour = d2;
  
+ -- Sets the schedule start hour and endHour's values
 (*@
-\label{setSchedule:14}
+\label{setSchedule:16}
 @*)
  public setSchedule : Types`Date * Types`Date ==> ()
   setSchedule(d1, d2) == (startHour := d1; endHour := d2;)
  pre lessThan(d1, d2)
  post startHour = d1 and endHour = d2;
-  
+ 
+ -- Returns the startHour's value
 (*@
-\label{getScheduleStart:19}
+\label{getScheduleStart:22}
 @*)
  pure public getScheduleStart : () ==> Types`Date
   getScheduleStart() == (return startHour);
-  
+ 
+ -- Returns the endHour's value
 (*@
-\label{getScheduleEnd:22}
+\label{getScheduleEnd:26}
 @*)
  pure public getScheduleEnd : () ==> Types`Date
   getScheduleEnd() == (return endHour);
  
+ -- Checks if two schedules overlap
 (*@
-\label{overlap:25}
+\label{overlap:30}
 @*)
  pure public overlap : Schedule * Schedule ==> bool
   overlap(d1, d2) == (
@@ -44,9 +49,9 @@ operations
           (not lessThan(d1.startHour, d2.startHour) and lessThan(d1.startHour, d2.endHour)))
            then return true;
           return false;);
-
+ -- Checks if a date is lower than other
 (*@
-\label{lessThan:32}
+\label{lessThan:37}
 @*)
  pure static public lessThan : Types`Date * Types`Date ==> bool
   lessThan(d1, d2) == (
@@ -67,9 +72,9 @@ operations
           else if(d1.time.hour > d2.time.hour)
            then return false;
           return (d1.time.min < d2.time.min););
-          
+ -- Checks if a date is greater than other         
 (*@
-\label{greaterThan:52}
+\label{greaterThan:57}
 @*)
  pure static public greaterThan : Types`Date * Types`Date ==> bool
   greaterThan(d1, d2) == (
@@ -98,22 +103,22 @@ end Schedule
 Function or operation & Line & Coverage & Calls \\
 \hline
 \hline
-\hyperref[Schedule:9]{Schedule} & 9&100.0\% & 81 \\
+\hyperref[Schedule:10]{Schedule} & 10&100.0\% & 112 \\
 \hline
-\hyperref[getScheduleEnd:22]{getScheduleEnd} & 22&100.0\% & 84 \\
+\hyperref[getScheduleEnd:26]{getScheduleEnd} & 26&100.0\% & 56 \\
 \hline
-\hyperref[getScheduleStart:19]{getScheduleStart} & 19&100.0\% & 156 \\
+\hyperref[getScheduleStart:22]{getScheduleStart} & 22&100.0\% & 85 \\
 \hline
-\hyperref[greaterThan:52]{greaterThan} & 52&100.0\% & 3 \\
+\hyperref[greaterThan:57]{greaterThan} & 57&100.0\% & 26 \\
 \hline
-\hyperref[lessThan:32]{lessThan} & 32&100.0\% & 3 \\
+\hyperref[lessThan:37]{lessThan} & 37&100.0\% & 828 \\
 \hline
-\hyperref[overlap:25]{overlap} & 25&100.0\% & 27 \\
+\hyperref[overlap:30]{overlap} & 30&100.0\% & 18 \\
 \hline
-\hyperref[setSchedule:14]{setSchedule} & 14&100.0\% & 3 \\
+\hyperref[setSchedule:16]{setSchedule} & 16&100.0\% & 4 \\
 \hline
 \hline
-Schedule.vdmpp & & 100.0\% & 357 \\
+Schedule.vdmpp & & 100.0\% & 1129 \\
 \hline
 \end{longtable}
 

@@ -41,10 +41,6 @@ operations
 		setMainDoctor(s) == (medicalAssoc := s)
 	pre s.getType() = <Surgeon> and s not in set secondaryDoctors;
 	
-	-- Returns the surgery's main surgeon
-	public getMainDoctor : () ==> HealthProfessional
-		getMainDoctor() == (return medicalAssoc);
-	
 	-- Returns the auxiliary staff of a surgery by type
 	pure public getSurgeryPersons : Types`Type ==> set of (HealthProfessional)
 		getSurgeryPersons(t) == (

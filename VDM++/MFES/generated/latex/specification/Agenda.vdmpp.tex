@@ -8,43 +8,49 @@ private agenda : set of (Schedule);
 inv card agenda >= 0;
 
 operations
+ -- Agenda constructor
 (*@
-\label{Agenda:10}
+\label{Agenda:11}
 @*)
  public Agenda : HealthProfessional ==> Agenda
   Agenda(h) == (healthProfessional := h; agenda := {}; return self)
  post healthProfessional = h and agenda = {};
  
+ -- Returns the agenda's health professional
 (*@
-\label{getHealthProfessional:14}
+\label{getHealthProfessional:16}
 @*)
  pure public getHealthProfessional : () ==> HealthProfessional
   getHealthProfessional() == (return healthProfessional);
  
+ -- Returns the agenda's schedules
 (*@
-\label{getAgenda:17}
+\label{getAgenda:20}
 @*)
  pure public getAgenda : () ==> set of (Schedule)
   getAgenda() == (return agenda);
  
+ -- Adds a schedule to the agenda
 (*@
-\label{addSchedule:20}
+\label{addSchedule:24}
 @*)
  public addSchedule : Schedule ==> ()
   addSchedule(s) == (agenda := agenda union {s})
  pre s not in set agenda and forall sch in set agenda & not overlap(s, sch)
  post s in set agenda;
  
+ -- Removes a schedule from the agenda
 (*@
-\label{removeSchedule:25}
+\label{removeSchedule:30}
 @*)
  public removeSchedule : Schedule ==> ()
   removeSchedule(s) == (agenda := agenda \ {s})
  pre s in set agenda
  post s not in set agenda;
  
+ -- Checks if a schedule overlaps with other schedule
 (*@
-\label{overlap:30}
+\label{overlap:36}
 @*)
  pure public overlap: Schedule * Schedule ==> bool
   overlap(t1, t2) == (return t1.overlap(t1, t2));
@@ -56,20 +62,20 @@ end Agenda
 Function or operation & Line & Coverage & Calls \\
 \hline
 \hline
-\hyperref[Agenda:10]{Agenda} & 10&100.0\% & 33 \\
+\hyperref[Agenda:11]{Agenda} & 11&100.0\% & 31 \\
 \hline
-\hyperref[addSchedule:20]{addSchedule} & 20&100.0\% & 57 \\
+\hyperref[addSchedule:24]{addSchedule} & 24&100.0\% & 44 \\
 \hline
-\hyperref[getAgenda:17]{getAgenda} & 17&100.0\% & 150 \\
+\hyperref[getAgenda:20]{getAgenda} & 20&100.0\% & 110 \\
 \hline
-\hyperref[getHealthProfessional:14]{getHealthProfessional} & 14&100.0\% & 900 \\
+\hyperref[getHealthProfessional:16]{getHealthProfessional} & 16&100.0\% & 573 \\
 \hline
-\hyperref[overlap:30]{overlap} & 30&100.0\% & 24 \\
+\hyperref[overlap:36]{overlap} & 36&100.0\% & 16 \\
 \hline
-\hyperref[removeSchedule:25]{removeSchedule} & 25&100.0\% & 45 \\
+\hyperref[removeSchedule:30]{removeSchedule} & 30&100.0\% & 32 \\
 \hline
 \hline
-Agenda.vdmpp & & 100.0\% & 1209 \\
+Agenda.vdmpp & & 100.0\% & 806 \\
 \hline
 \end{longtable}
 

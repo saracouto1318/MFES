@@ -9,21 +9,24 @@ instance variables
   protected phoneNumber: Types`String;
   
 operations
+ -- Person constructor
 (*@
-\label{Person:11}
+\label{Person:12}
 @*)
  public Person: Types`String * Types`String * Types`String * Types`String * Types`String ==> Person
   Person(a, fn, ln, c, pn) == ( address := a; firstName := fn; lastName := ln; cc := c; phoneNumber := pn; return self)
  post address = a and firstName = fn and lastName = ln and cc = c and phoneNumber = pn;
-  
+ 
+ -- Returns the person's cc number
 (*@
-\label{getCC:15}
+\label{getCC:17}
 @*)
  pure public getCC : () ==> Types`String
   getCC() == (return cc);
-  
+ 
+ -- Returns all the person's information
 (*@
-\label{getInfo:18}
+\label{getInfo:21}
 @*)
  pure public getInfo: () ==> Types`String
   getInfo() == (return "Name: " ^ firstName ^ " " ^ lastName ^ "\nAddress: " ^ address ^ "\nPhone Number: " ^ phoneNumber ^ "\nCC: " ^ cc);
@@ -36,14 +39,14 @@ end Person
 Function or operation & Line & Coverage & Calls \\
 \hline
 \hline
-\hyperref[Person:11]{Person} & 11&100.0\% & 156 \\
+\hyperref[Person:12]{Person} & 12&100.0\% & 257 \\
 \hline
-\hyperref[getCC:15]{getCC} & 15&100.0\% & 561 \\
+\hyperref[getCC:17]{getCC} & 17&100.0\% & 492 \\
 \hline
-\hyperref[getInfo:18]{getInfo} & 18&100.0\% & 15 \\
+\hyperref[getInfo:21]{getInfo} & 21&100.0\% & 30 \\
 \hline
 \hline
-Person.vdmpp & & 100.0\% & 732 \\
+Person.vdmpp & & 100.0\% & 779 \\
 \hline
 \end{longtable}
 

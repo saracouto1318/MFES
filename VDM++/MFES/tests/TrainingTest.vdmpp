@@ -42,20 +42,6 @@ operations
 			assertTrue(training.getSchedule().getScheduleEnd().day = 25);
 			assertTrue(training.getSchedule().getScheduleEnd().time.hour = 12);
 			assertTrue(training.getSchedule().getScheduleEnd().time.min = 30);
-			
-			training.setSchedule(schedule2);
-			
-			assertTrue(training.getSchedule().getScheduleStart().year = 2017);
-			assertTrue(training.getSchedule().getScheduleStart().month = 12);
-			assertTrue(training.getSchedule().getScheduleStart().day = 25);
-			assertTrue(training.getSchedule().getScheduleStart().time.hour = 12);
-			assertTrue(training.getSchedule().getScheduleStart().time.min = 15);
-			
-			assertTrue(training.getSchedule().getScheduleEnd().year = 2017);
-			assertTrue(training.getSchedule().getScheduleEnd().month = 12);
-			assertTrue(training.getSchedule().getScheduleEnd().day = 25);
-			assertTrue(training.getSchedule().getScheduleEnd().time.hour = 12);
-			assertTrue(training.getSchedule().getScheduleEnd().time.min = 35);
 		);
 
 	public static main: () ==> ()

@@ -9,47 +9,54 @@ instance variables
   inv card prescriptions >= 0;
   inv medicalAssoc.getType() = <Doctor>;
 operations
+ -- Appointment constructor
 (*@
-\label{Appointment:11}
+\label{Appointment:12}
 @*)
  public Appointment: HealthProfessional * Schedule * Patient * Hospital==> Appointment
   Appointment(d, s, p, h) == (medicalAssoc := d; priority := <Medium>; prescriptions := {}; Task(d, s, p, h, <Appointment>))
  post medicalAssoc = d and prescriptions = {} and priority = <Medium>;
  
+ -- Urgency Apppointment constructor
  public Appointment: HealthProfessional * Types`Priority * Schedule * Patient * Hospital ==> Appointment
   Appointment(d, p, s, pat, h) == (medicalAssoc := d; priority := p; prescriptions := {}; Task(d, s, pat, h, <Urgencies>))
  pre p <> nil
  post medicalAssoc = d and prescriptions = {} and priority = p;
 
+ -- Returns the appointment's priority
 (*@
-\label{getPriority:20}
+\label{getPriority:23}
 @*)
  pure public getPriority : () ==> Types`Priority
   getPriority() == (return priority);
- 
+
+-- Returns the appointment's prescriptions
 (*@
-\label{getPrescriptions:23}
+\label{getPrescriptions:27}
 @*)
   pure public getPrescriptions : () ==> set of (Prescription)
    getPrescriptions() == (return prescriptions);
   
+  -- Sets the appointment's priority
 (*@
-\label{setPriority:26}
+\label{setPriority:31}
 @*)
   public setPriority : Types`Priority ==> ()
    setPriority(p) == (priority := p)
   pre taskType = <Urgencies>;
   
+  -- Adds a prescription to the appointment
 (*@
-\label{addPrescription:30}
+\label{addPrescription:36}
 @*)
   public addPrescription : Prescription ==> ()
    addPrescription(p) == (prescriptions := prescriptions union {p})
   pre p not in set prescriptions
   post p in set prescriptions;
-                 
+   
+ -- Removes a prescription from the appointment
 (*@
-\label{removePrescription:35}
+\label{removePrescription:42}
 @*)
  public removePrescription : Prescription ==> ()
    removePrescription(p) == (prescriptions := prescriptions \ {p})
@@ -64,20 +71,20 @@ end Appointment
 Function or operation & Line & Coverage & Calls \\
 \hline
 \hline
-\hyperref[Appointment:11]{Appointment} & 11&100.0\% & 12 \\
+\hyperref[Appointment:12]{Appointment} & 12&100.0\% & 19 \\
 \hline
-\hyperref[addPrescription:30]{addPrescription} & 30&100.0\% & 12 \\
+\hyperref[addPrescription:36]{addPrescription} & 36&100.0\% & 2 \\
 \hline
-\hyperref[getPrescriptions:23]{getPrescriptions} & 23&100.0\% & 36 \\
+\hyperref[getPrescriptions:27]{getPrescriptions} & 27&100.0\% & 12 \\
 \hline
-\hyperref[getPriority:20]{getPriority} & 20&100.0\% & 9 \\
+\hyperref[getPriority:23]{getPriority} & 23&100.0\% & 3 \\
 \hline
-\hyperref[removePrescription:35]{removePrescription} & 35&100.0\% & 12 \\
+\hyperref[removePrescription:42]{removePrescription} & 42&100.0\% & 4 \\
 \hline
-\hyperref[setPriority:26]{setPriority} & 26&100.0\% & 3 \\
+\hyperref[setPriority:31]{setPriority} & 31&100.0\% & 1 \\
 \hline
 \hline
-Appointment.vdmpp & & 100.0\% & 84 \\
+Appointment.vdmpp & & 100.0\% & 41 \\
 \hline
 \end{longtable}
 

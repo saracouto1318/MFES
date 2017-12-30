@@ -24,10 +24,6 @@ operations
 	pure public getMedAssoc : () ==> HealthProfessional
 		getMedAssoc() == (return medicalAssociated);	
 	
-	-- Sets the training's schedule
-	public setSchedule : Schedule ==> ()
- 		setSchedule(s) == (schedule := s);
-	
 	-- Sets the training's purpose
 	public setPurpose : Types`Purpose ==> ()
  		setPurpose(p) == (purpose := p);

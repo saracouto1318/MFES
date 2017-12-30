@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.18 (MiKTeX 2.9.6500 64-bit) (preloaded format=pdflatex 2017.12.19)  30 DEC 2017 16:32
+This is pdfTeX, Version 3.14159265-2.6-1.40.18 (MiKTeX 2.9.6500 64-bit) (preloaded format=pdflatex 2017.12.19)  30 DEC 2017 18:18
 entering extended mode
 **./MFES.tex
 (MFES.tex
@@ -223,7 +223,10 @@ Package: longtable 2014/10/28 v4.11 Multi-page Table package (DPC)
 \LT@p@ftn=\toks16
 ) (MFES.aux
 
-LaTeX Warning: Label `getName:10' multiply defined.
+LaTeX Warning: Label `getName:12' multiply defined.
+
+
+LaTeX Warning: Label `main:292' multiply defined.
 
 )
 \openout1 = `MFES.aux'.
@@ -309,117 +312,128 @@ File: ot1pcr.fd 2001/06/04 font definitions for OT1/pcr.
 )
 LaTeX Font Info:    Font shape `OT1/pcr/bx/n' in size <8> not available
 (Font)              Font shape `OT1/pcr/b/n' tried instead on input line 2.
+LaTeX Font Info:    Font shape `OT1/pcr/m/it' in size <8> not available
+(Font)              Font shape `OT1/pcr/m/sl' tried instead on input line 11.
 
-Underfull \vbox (badness 10000) detected at line 74
+Underfull \vbox (badness 10000) detected at line 80
  []
 
 ) (specification/Appointment.vdmpp.tex [2]
-Underfull \vbox (badness 10000) detected at line 82
- []
-
-) (specification/HealthProfessional.vdmpp.tex [3] [4]
-Underfull \vbox (badness 10000) detected at line 108
- []
-
-) (specification/Hospital.vdmpp.tex [5] [6]
-Underfull \vbox (badness 10000) detected at line 239
- []
-
-[7]) (specification/Medicament.vdmpp.tex
-Underfull \vbox (badness 10000) detected at line 35
- []
-
-) (specification/Patient.vdmpp.tex [8]
-Underfull \vbox (badness 10000) detected at line 37
- []
-
-) (specification/Person.vdmpp.tex
-Underfull \vbox (badness 10000) detected at line 48
- []
-
-[9]) (specification/Prescription.vdmpp.tex
-Underfull \vbox (badness 10000) detected at line 67
- []
-
-) (specification/SafetyNetHospital.vdmpp.tex [10] [11]
-Underfull \vbox (badness 10000) detected at line 126
- []
-
-) (specification/Schedule.vdmpp.tex [12] [13]
-Underfull \vbox (badness 10000) detected at line 118
- []
-
-) (specification/Specialty.vdmpp.tex
-Underfull \vbox (badness 10000) detected at line 35
- []
-
-) (specification/Surgery.vdmpp.tex [14]
-Underfull \vbox (badness 10000) detected at line 101
- []
-
-) (specification/Task.vdmpp.tex [15]
 Underfull \vbox (badness 10000) detected at line 89
  []
 
-[16]) (specification/Training.vdmpp.tex
-Underfull \vbox (badness 10000) detected at line 71
+[3]) (specification/HealthProfessional.vdmpp.tex [4]
+Underfull \vbox (badness 10000) detected at line 117
  []
 
-) (specification/Treatment.vdmpp.tex [17]
-Underfull \vbox (badness 10000) detected at line 46
+) (specification/Hospital.vdmpp.tex [5] [6] [7]
+Underfull \vbox (badness 10000) detected at line 252
  []
 
-) (specification/Types.vdmpp.tex [18]
-Underfull \vbox (badness 10000) detected at line 44
+) (specification/Medicament.vdmpp.tex [8]
+Underfull \vbox (badness 10000) detected at line 37
+ []
+
+) (specification/Patient.vdmpp.tex
+Underfull \vbox (badness 10000) detected at line 39
+ []
+
+) (specification/Person.vdmpp.tex [9]
+Underfull \vbox (badness 10000) detected at line 51
+ []
+
+) (specification/Prescription.vdmpp.tex [10]
+Underfull \vbox (badness 10000) detected at line 72
+ []
+
+) (specification/SafetyNetHospital.vdmpp.tex [11] [12]
+Underfull \vbox (badness 10000) detected at line 130
+ []
+
+) (specification/Schedule.vdmpp.tex [13]
+Underfull \vbox (badness 10000) detected at line 123
+ []
+
+[14]) (specification/Specialty.vdmpp.tex
+Underfull \vbox (badness 10000) detected at line 37
+ []
+
+) (specification/Surgery.vdmpp.tex [15]
+Underfull \vbox (badness 10000) detected at line 105
+ []
+
+) (specification/Task.vdmpp.tex [16]
+Underfull \vbox (badness 10000) detected at line 103
+ []
+
+[17]) (specification/Training.vdmpp.tex
+
+LaTeX Warning: Hyper reference `setPurpose:32' on page 18 undefined on input li
+ne 63.
+
+
+Underfull \vbox (badness 10000) detected at line 70
+ []
+
+[18]) (specification/Treatment.vdmpp.tex
+Underfull \vbox (badness 10000) detected at line 48
+ []
+
+) (specification/Types.vdmpp.tex [19]
+Underfull \vbox (badness 10000) detected at line 45
  []
 
 ) (specification/PersonTest.vdmpp.tex
 Missing character: There is no Ã in font pcrr7t!
- [19]
-Missing character: There is no Ã in font pcrr7t!
  [20]
+Missing character: There is no Ã in font pcrr7t!
+ [21]
 Underfull \vbox (badness 10000) detected at line 158
  []
 
-) (specification/RunTests.vdmpp.tex [21]
+) (specification/RunTests.vdmpp.tex [22]
 Underfull \vbox (badness 10000) detected at line 35
  []
 
-) (specification/SafetyNetHospitalTest.vdmpp.tex
+) (specification/SafetyNetHospitalTest.vdmpp.tex [23]
 Missing character: There is no é in font pcrr7t!
- [22]
 Missing character: There is no í in font pcrr7t!
 Missing character: There is no í in font pcrr7t!
 Missing character: There is no í in font pcrr7t!
- [23] [24] [25]
+ [24] [25] [26]
 Missing character: There is no é in font pcrr7t!
 Missing character: There is no é in font pcrr7t!
 Missing character: There is no é in font pcrr7t!
 Missing character: There is no é in font pcrr7t!
 Missing character: There is no é in font pcrr7t!
- [26]
+ [27]
 Underfull \vbox (badness 10000) detected at line 368
  []
 
-) (specification/TaskTest.vdmpp.tex [27]
+) (specification/TaskTest.vdmpp.tex [28]
 Missing character: There is no Ã in font pcrr7t!
 Missing character: There is no ­ in font pcrr7t!
 Missing character: There is no Ã in font pcrr7t!
 Missing character: There is no ­ in font pcrr7t!
- [28]
+ [29] [30]
 Missing character: There is no Ã in font pcrr7t!
 Missing character: There is no ­ in font pcrr7t!
- [29] [30] [31] [32]
-Underfull \vbox (badness 10000) detected at line 350
+ [31] [32] [33]
+Underfull \vbox (badness 10000) detected at line 351
  []
 
-) (specification/TrainingTest.vdmpp.tex [33]
-Underfull \vbox (badness 10000) detected at line 94
+) (specification/TrainingTest.vdmpp.tex [34]
+
+LaTeX Warning: Hyper reference `main:61' on page 35 undefined on input line 70.
+
+
+
+Underfull \vbox (badness 10000) detected at line 77
  []
 
 )
 Package atveryend Info: Empty hook `BeforeClearDocument' on input line 55.
- [34]
+ [35]
 Package atveryend Info: Empty hook `AfterLastShipout' on input line 55.
  (MFES.aux)
 Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 55.
@@ -428,16 +442,19 @@ Package rerunfilecheck Info: File `MFES.out' has not changed.
 (rerunfilecheck)             Checksum: 8B34F4DCC8E1D1E28D2A11B473485D0F;984.
 
 
+LaTeX Warning: There were undefined references.
+
+
 LaTeX Warning: There were multiply-defined labels.
 
 Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 55.
  ) 
 Here is how much of TeX's memory you used:
- 8482 strings out of 493312
- 129943 string characters out of 3130261
- 597363 words of memory out of 3000000
+ 8551 strings out of 493312
+ 130987 string characters out of 3130261
+ 576238 words of memory out of 3000000
  10233 multiletter control sequences out of 15000+200000
- 16427 words of font info for 39 fonts, out of 3000000 for 9000
+ 17044 words of font info for 41 fonts, out of 3000000 for 9000
  1141 hyphenation exceptions out of 8191
  33i,6n,48p,248b,1785s stack positions out of 5000i,500n,10000p,200000b,50000s
 {C:/Users/ASUS/AppData/Local/Programs/MiKTeX 2.9/fonts/enc/dvips/base/8r.enc}
@@ -445,11 +462,12 @@ Here is how much of TeX's memory you used:
 txfont/lcircle1.pfb><C:/Users/ASUS/AppData/Local/Programs/MiKTeX 2.9/fonts/type
 1/urw/courier/ucrb8a.pfb><C:/Users/ASUS/AppData/Local/Programs/MiKTeX 2.9/fonts
 /type1/urw/courier/ucrr8a.pfb><C:/Users/ASUS/AppData/Local/Programs/MiKTeX 2.9/
-fonts/type1/urw/times/utmb8a.pfb><C:/Users/ASUS/AppData/Local/Programs/MiKTeX 2
-.9/fonts/type1/urw/times/utmr8a.pfb>
-Output written on MFES.pdf (34 pages, 398585 bytes).
+fonts/type1/urw/courier/ucrro8a.pfb><C:/Users/ASUS/AppData/Local/Programs/MiKTe
+X 2.9/fonts/type1/urw/times/utmb8a.pfb><C:/Users/ASUS/AppData/Local/Programs/Mi
+KTeX 2.9/fonts/type1/urw/times/utmr8a.pfb>
+Output written on MFES.pdf (35 pages, 423096 bytes).
 PDF statistics:
- 2376 PDF objects out of 2487 (max. 8388607)
- 1696 named destinations out of 1728 (max. 500000)
+ 2461 PDF objects out of 2487 (max. 8388607)
+ 1763 named destinations out of 2073 (max. 500000)
  169 words of extra memory for PDF output out of 10000 (max. 10000000)
 

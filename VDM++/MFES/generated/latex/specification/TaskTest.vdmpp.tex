@@ -89,10 +89,11 @@ operations
    assertTrue(card hospital.getAgenda(doctor) = 0);
    
    agenda1.addSchedule(schedule);
+   agenda1.addSchedule(schedule3);
    
    assertTrue(agenda1.getHealthProfessional().getCC() = doctor.getCC());
    
-   assertTrue(card agenda1.getAgenda() = 1);
+   assertTrue(card agenda1.getAgenda() = 2);
    
    agenda2.addSchedule(schedule);
    
@@ -162,24 +163,24 @@ operations
    assertTrue(appointment.getSchedule().getScheduleEnd().time.hour = 12);
    assertTrue(appointment.getSchedule().getScheduleEnd().time.min = 35);
    
-   appointment.setSchedule(schedule2);
+   appointment.setSchedule(schedule3);
    
    assertTrue(appointment.getSchedule().getScheduleStart().year = 2017);
    assertTrue(appointment.getSchedule().getScheduleStart().month = 12);
    assertTrue(appointment.getSchedule().getScheduleStart().day = 25);
    assertTrue(appointment.getSchedule().getScheduleStart().time.hour = 12);
-   assertTrue(appointment.getSchedule().getScheduleStart().time.min = 15);
+   assertTrue(appointment.getSchedule().getScheduleStart().time.min = 40);
    
    assertTrue(appointment.getSchedule().getScheduleEnd().year = 2017);
    assertTrue(appointment.getSchedule().getScheduleEnd().month = 12);
    assertTrue(appointment.getSchedule().getScheduleEnd().day = 25);
    assertTrue(appointment.getSchedule().getScheduleEnd().time.hour = 12);
-   assertTrue(appointment.getSchedule().getScheduleEnd().time.min = 35);
+   assertTrue(appointment.getSchedule().getScheduleEnd().time.min = 50);
   );
-  
 (*@
 \label{testAppointment:173}
 @*)
+  
  public testAppointment : () ==> ()
   testAppointment() == (
    IO`print("\n Checking appointment priority \n");
@@ -230,10 +231,10 @@ operations
    assertTrue(card appointment.getPrescriptions() = 0);
    assertTrue(card urgencies.getPrescriptions() = 0);
   );
-  
 (*@
 \label{testSurgery:224}
 @*)
+  
  public testSurgery: () ==> ()
   testSurgery() == (
    IO`print("\n Checking surgery informations \n");
@@ -252,14 +253,14 @@ operations
    surgery.removeOther(nurse);
    assertTrue(card surgery.getSurgeryPersons(<Nurse>) = 0);
    
-   assertTrue(surgery.getMainDoctor().getCC() = "234512389");
+   assertTrue(surgery.getMedAssoc().getCC() = "234512389");
    surgery.setMainDoctor(secSurgeon);
-   assertTrue(surgery.getMainDoctor().getCC() = "234512390");
+   assertTrue(surgery.getMedAssoc().getCC() = "234512390");
  );
- 
 (*@
 \label{testTreatment:247}
 @*)
+ 
  public testTreatment : () ==> ()
   testTreatment() == (
    IO`print("\n Checking treatment informations \n");
@@ -267,10 +268,10 @@ operations
    assertTrue(treatment.getName() = "Fisioterapia");
    assertTrue(treatment.getMed().getCC() = "123444655");
   );
-  
 (*@
 \label{testScheduleFunctions:255}
 @*)
+  
   public testScheduleFunctions: () ==> ()
   testScheduleFunctions() == (
    dcl sch : Schedule, sch1 : Schedule, sch2 : Schedule, dateNew: Types`Date, dateNew2 : Types`Date;
@@ -307,10 +308,10 @@ operations
    IO`print("\n Checking overlap \n");
    assertTrue(schedule.overlap(schedule, schedule2));
   );
-  
 (*@
 \label{main:292}
 @*)
+  
   public static main: () ==> ()
    main() == (
     dcl taskTest: TaskTest := new TaskTest();
@@ -330,22 +331,22 @@ end TaskTest
 Function or operation & Line & Coverage & Calls \\
 \hline
 \hline
-\hyperref[assertTrue:59]{assertTrue} & 59&100.0\% & 546 \\
+\hyperref[assertTrue:59]{assertTrue} & 59&100.0\% & 990 \\
 \hline
-\hyperref[main:292]{main} & 292&100.0\% & 3 \\
+\hyperref[main:292]{main} & 292&100.0\% & 8 \\
 \hline
-\hyperref[testAppointment:173]{testAppointment} & 173&100.0\% & 9 \\
+\hyperref[testAppointment:173]{testAppointment} & 173&100.0\% & 1 \\
 \hline
 \hyperref[testGetsSetsTask:63]{testGetsSetsTask} & 63&100.0\% & 3 \\
 \hline
-\hyperref[testScheduleFunctions:255]{testScheduleFunctions} & 255&100.0\% & 3 \\
+\hyperref[testScheduleFunctions:255]{testScheduleFunctions} & 255&100.0\% & 1 \\
 \hline
-\hyperref[testSurgery:224]{testSurgery} & 224&100.0\% & 3 \\
+\hyperref[testSurgery:224]{testSurgery} & 224&100.0\% & 1 \\
 \hline
-\hyperref[testTreatment:247]{testTreatment} & 247&100.0\% & 3 \\
+\hyperref[testTreatment:247]{testTreatment} & 247&100.0\% & 1 \\
 \hline
 \hline
-TaskTest.vdmpp & & 100.0\% & 570 \\
+TaskTest.vdmpp & & 100.0\% & 1005 \\
 \hline
 \end{longtable}
 
