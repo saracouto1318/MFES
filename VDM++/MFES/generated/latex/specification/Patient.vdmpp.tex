@@ -10,10 +10,11 @@ operations
 @*)
  public Patient: Types`String * Types`String * Types`String * Types`String * Types`String * Types`String ==> Patient
   Patient(a, fn, ln, c, pn, n) == ( healthNumber := n; Person(a, fn, ln, c, pn))
+ pre len n > 5
  post healthNumber = n;
  
 (*@
-\label{getHealthNumber:11}
+\label{getHealthNumber:12}
 @*)
  pure public getHealthNumber : () ==> Types`String
   getHealthNumber() == (return healthNumber);
@@ -26,12 +27,12 @@ end Patient
 Function or operation & Line & Coverage & Calls \\
 \hline
 \hline
-\hyperref[Patient:7]{Patient} & 7&100.0\% & 75 \\
+\hyperref[Patient:7]{Patient} & 7&100.0\% & 54 \\
 \hline
-\hyperref[getHealthNumber:11]{getHealthNumber} & 11&100.0\% & 4 \\
+\hyperref[getHealthNumber:12]{getHealthNumber} & 12&100.0\% & 3 \\
 \hline
 \hline
-Patient.vdmpp & & 100.0\% & 79 \\
+Patient.vdmpp & & 100.0\% & 57 \\
 \hline
 \end{longtable}
 

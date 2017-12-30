@@ -24,6 +24,12 @@ operations
 	
 	pure public getAddress: () ==> Types`String
 		getAddress() == (return address);
+		
+	pure public getTasks: () ==> set of (Task)
+		getTasks() == (return tasks);
+	
+	pure public getTrainings : () ==> set of (Training)
+		getTrainings() == (return trainings);
 	
 	pure public getAgendas : () ==> set of(Agenda)
 		getAgendas() == (return agenda);

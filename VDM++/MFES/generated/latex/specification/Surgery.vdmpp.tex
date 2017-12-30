@@ -6,16 +6,17 @@ instance variables
   
   inv card secondaryDoctors >= 0;
   inv card other >= 0;
+  inv medicalAssoc.getType() = <Surgeon>;
 operations
 (*@
-\label{Surgery:9}
+\label{Surgery:10}
 @*)
  public Surgery: HealthProfessional * Schedule * Patient * Hospital ==> Surgery
   Surgery(s, sch, p, h) == (medicalAssoc := s ; other := {}; secondaryDoctors := {}; Task(s, sch, p, h, <Surgery>))
  post medicalAssoc = s and other = {} and secondaryDoctors = {};
  
 (*@
-\label{addSecondaryDoctor:13}
+\label{addSecondaryDoctor:14}
 @*)
  public addSecondaryDoctor : HealthProfessional ==> ()
   addSecondaryDoctor(s) == (secondaryDoctors := secondaryDoctors union {s})
@@ -23,7 +24,7 @@ operations
  post s in set secondaryDoctors;
   
 (*@
-\label{removeSecondaryDoctor:18}
+\label{removeSecondaryDoctor:19}
 @*)
  public removeSecondaryDoctor : HealthProfessional ==> ()
   removeSecondaryDoctor(s) == (secondaryDoctors := secondaryDoctors \ {s})
@@ -31,7 +32,7 @@ operations
  post s not in set secondaryDoctors;
   
 (*@
-\label{addOther:23}
+\label{addOther:24}
 @*)
  public addOther : HealthProfessional ==> ()
   addOther(s) == (other := other union {s})
@@ -39,7 +40,7 @@ operations
  post s in set other;
   
 (*@
-\label{removeOther:28}
+\label{removeOther:29}
 @*)
  public removeOther : HealthProfessional ==> ()
   removeOther(s) == (other := other \ {s})
@@ -47,20 +48,20 @@ operations
  post s not in set other;
   
 (*@
-\label{setMainDoctor:33}
+\label{setMainDoctor:34}
 @*)
  public setMainDoctor : HealthProfessional ==> ()
   setMainDoctor(s) == (medicalAssoc := s)
  pre s.getType() = <Surgeon> and s not in set secondaryDoctors;
  
 (*@
-\label{getMainDoctor:37}
+\label{getMainDoctor:38}
 @*)
  public getMainDoctor : () ==> HealthProfessional
   getMainDoctor() == (return medicalAssoc);
 
 (*@
-\label{getSurgeryPersons:40}
+\label{getSurgeryPersons:41}
 @*)
  pure public getSurgeryPersons : Types`Type ==> set of (HealthProfessional)
   getSurgeryPersons(t) == (
@@ -78,24 +79,24 @@ end Surgery
 Function or operation & Line & Coverage & Calls \\
 \hline
 \hline
-\hyperref[Surgery:9]{Surgery} & 9&100.0\% & 16 \\
+\hyperref[Surgery:10]{Surgery} & 10&100.0\% & 12 \\
 \hline
-\hyperref[addOther:23]{addOther} & 23&100.0\% & 4 \\
+\hyperref[addOther:24]{addOther} & 24&100.0\% & 3 \\
 \hline
-\hyperref[addSecondaryDoctor:13]{addSecondaryDoctor} & 13&100.0\% & 4 \\
+\hyperref[addSecondaryDoctor:14]{addSecondaryDoctor} & 14&100.0\% & 3 \\
 \hline
-\hyperref[getMainDoctor:37]{getMainDoctor} & 37&100.0\% & 8 \\
+\hyperref[getMainDoctor:38]{getMainDoctor} & 38&100.0\% & 6 \\
 \hline
-\hyperref[getSurgeryPersons:40]{getSurgeryPersons} & 40&100.0\% & 12 \\
+\hyperref[getSurgeryPersons:41]{getSurgeryPersons} & 41&100.0\% & 18 \\
 \hline
-\hyperref[removeOther:28]{removeOther} & 28&100.0\% & 4 \\
+\hyperref[removeOther:29]{removeOther} & 29&100.0\% & 3 \\
 \hline
-\hyperref[removeSecondaryDoctor:18]{removeSecondaryDoctor} & 18&100.0\% & 4 \\
+\hyperref[removeSecondaryDoctor:19]{removeSecondaryDoctor} & 19&100.0\% & 3 \\
 \hline
-\hyperref[setMainDoctor:33]{setMainDoctor} & 33&100.0\% & 12 \\
+\hyperref[setMainDoctor:34]{setMainDoctor} & 34&100.0\% & 3 \\
 \hline
 \hline
-Surgery.vdmpp & & 100.0\% & 64 \\
+Surgery.vdmpp & & 100.0\% & 51 \\
 \hline
 \end{longtable}
 

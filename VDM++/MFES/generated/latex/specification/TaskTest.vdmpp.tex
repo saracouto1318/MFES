@@ -41,13 +41,13 @@ instance variables
  private patient3: Patient := new Patient("Rua 1 Maio", "Vitor", "Andrade", "135790864", "912345334", "123432130");
  private patient4: Patient := new Patient("Rua 1 Maio", "Simone", "Andrade", "234123765", "931238654", "0987654143"); 
   
-  private hospital: Hospital := new Hospital("Hospital dos Lusíadas", "Rua de Cima", safetyNet);
+  private hospital: Hospital := new Hospital("Hospital dos LusÃ­adas", "Rua de Cima", safetyNet);
   private doctor: HealthProfessional := new HealthProfessional("Rua de Cima", "Ana", "Marques", "123432156", "921349076", "111111222", <Doctor>);
   private doctor2: HealthProfessional := new HealthProfessional("Rua de Cima", "Anabela", "Marques", "123432157", "921349077", "111111223", <Doctor>);
   private surgeon: HealthProfessional := new HealthProfessional("Rua 2", "Diogo", "Viana", "234512389", "921349134", "111111232", <Surgeon>);
   private secSurgeon: HealthProfessional := new HealthProfessional("Rua 2", "Diana", "Viana", "234512390", "921349135", "111111235", <Surgeon>);
  private nurse: HealthProfessional := new HealthProfessional("Rua de Baixo", "Lisete", "Antunes", "123444654", "921378643", "111222333", <Nurse>);
- private technician: HealthProfessional := new HealthProfessional("Rua de Baixo", "Luís", "Antunes", "123444655", "921377654", "111222345", <Technician>);
+ private technician: HealthProfessional := new HealthProfessional("Rua de Baixo", "LuÃ­s", "Antunes", "123444655", "921377654", "111222345", <Technician>);
  
  private appointment: Appointment := new Appointment(doctor, schedule, patient, hospital);
  private urgencies: Appointment := new Appointment(doctor2, <High>, schedule, patient2, hospital);
@@ -121,7 +121,7 @@ operations
    
    IO`print("\n Getting appointment informations \n");
    assertTrue(appointment.getPatient().getCC() = "123456789");
-   assertTrue(appointment.getHospital().getName() = "Hospital dos Lusíadas");
+   assertTrue(appointment.getHospital().getName() = "Hospital dos LusÃ­adas");
    
    assertTrue(appointment.getType() = <Appointment>);
    assertTrue(urgencies.getType() = <Urgencies>);
@@ -303,15 +303,18 @@ operations
    assertTrue(sch1.greaterThan(sch1.getScheduleStart(), sch.getScheduleStart()));
    assertTrue(schedule.greaterThan(schedule.getScheduleStart(), sch.getScheduleStart()));
    assertTrue(not(sch.greaterThan(sch.getScheduleStart(), sch1.getScheduleStart())));
+   
+   IO`print("\n Checking overlap \n");
+   assertTrue(schedule.overlap(schedule, schedule2));
   );
   
 (*@
-\label{main:289}
+\label{main:292}
 @*)
   public static main: () ==> ()
    main() == (
     dcl taskTest: TaskTest := new TaskTest();
-    IO`print("\n *****Running TaskTest***** \n");
+    IO`print("\n\n *****Running TaskTest***** \n");
     taskTest.testGetsSetsTask();
     taskTest.testAppointment();
     taskTest.testSurgery();
@@ -327,22 +330,22 @@ end TaskTest
 Function or operation & Line & Coverage & Calls \\
 \hline
 \hline
-\hyperref[assertTrue:59]{assertTrue} & 59&100.0\% & 714 \\
+\hyperref[assertTrue:59]{assertTrue} & 59&100.0\% & 546 \\
 \hline
-\hyperref[main:289]{main} & 289&100.0\% & 2 \\
+\hyperref[main:292]{main} & 292&100.0\% & 3 \\
 \hline
-\hyperref[testAppointment:173]{testAppointment} & 173&100.0\% & 6 \\
+\hyperref[testAppointment:173]{testAppointment} & 173&100.0\% & 9 \\
 \hline
-\hyperref[testGetsSetsTask:63]{testGetsSetsTask} & 63&100.0\% & 2 \\
+\hyperref[testGetsSetsTask:63]{testGetsSetsTask} & 63&100.0\% & 3 \\
 \hline
-\hyperref[testScheduleFunctions:255]{testScheduleFunctions} & 255&100.0\% & 2 \\
+\hyperref[testScheduleFunctions:255]{testScheduleFunctions} & 255&100.0\% & 3 \\
 \hline
 \hyperref[testSurgery:224]{testSurgery} & 224&100.0\% & 3 \\
 \hline
-\hyperref[testTreatment:247]{testTreatment} & 247&100.0\% & 2 \\
+\hyperref[testTreatment:247]{testTreatment} & 247&100.0\% & 3 \\
 \hline
 \hline
-TaskTest.vdmpp & & 100.0\% & 731 \\
+TaskTest.vdmpp & & 100.0\% & 570 \\
 \hline
 \end{longtable}
 

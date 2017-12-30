@@ -17,7 +17,7 @@ operations
 @*)
  public HealthProfessional: Types`String * Types`String * Types`String * Types`String * Types`String * Types`String * Types`Type ==> HealthProfessional
   HealthProfessional(a, fn, ln, c, pn, s, t) == (medicalNumber := s; type := t; specialties := {}; patients := {}; Person(a, fn, ln, c, pn))
- pre t <> nil
+ pre t <> nil and len s > 5
  post medicalNumber = s and type = t and specialties = {} and patients = {};
  
 (*@
@@ -84,26 +84,26 @@ end HealthProfessional
 Function or operation & Line & Coverage & Calls \\
 \hline
 \hline
-\hyperref[HealthProfessional:14]{HealthProfessional} & 14&100.0\% & 136 \\
+\hyperref[HealthProfessional:14]{HealthProfessional} & 14&100.0\% & 102 \\
 \hline
-\hyperref[addPatient:41]{addPatient} & 41&100.0\% & 48 \\
+\hyperref[addPatient:41]{addPatient} & 41&100.0\% & 36 \\
 \hline
-\hyperref[addSpecialty:36]{addSpecialty} & 36&100.0\% & 8 \\
+\hyperref[addSpecialty:36]{addSpecialty} & 36&100.0\% & 6 \\
 \hline
-\hyperref[getMedicalNumber:19]{getMedicalNumber} & 19&100.0\% & 16 \\
+\hyperref[getMedicalNumber:19]{getMedicalNumber} & 19&100.0\% & 12 \\
 \hline
-\hyperref[getPatients:25]{getPatients} & 25&100.0\% & 144 \\
+\hyperref[getPatients:25]{getPatients} & 25&100.0\% & 108 \\
 \hline
-\hyperref[getSpecialties:22]{getSpecialties} & 22&100.0\% & 44 \\
+\hyperref[getSpecialties:22]{getSpecialties} & 22&100.0\% & 33 \\
 \hline
-\hyperref[getType:28]{getType} & 28&100.0\% & 664 \\
+\hyperref[getType:28]{getType} & 28&100.0\% & 531 \\
 \hline
-\hyperref[removePatient:46]{removePatient} & 46&100.0\% & 4 \\
+\hyperref[removePatient:46]{removePatient} & 46&100.0\% & 3 \\
 \hline
-\hyperref[removeSpecialty:31]{removeSpecialty} & 31&100.0\% & 4 \\
+\hyperref[removeSpecialty:31]{removeSpecialty} & 31&100.0\% & 3 \\
 \hline
 \hline
-HealthProfessional.vdmpp & & 100.0\% & 1068 \\
+HealthProfessional.vdmpp & & 100.0\% & 834 \\
 \hline
 \end{longtable}
 

@@ -5,7 +5,7 @@ instance variables
  private doctor: HealthProfessional := new HealthProfessional("Rua de Cima", "Ana", "Marques", "123432156", "921349076", "111111222", <Doctor>);
  private surgeon: HealthProfessional := new HealthProfessional("Rua 2", "Diogo", "Viana", "234512389", "921349134", "111111232", <Surgeon>);
  private nurse: HealthProfessional := new HealthProfessional("Rua de Baixo", "Lisete", "Antunes", "123444654", "921378643", "111222333", <Nurse>);
- private technician: HealthProfessional := new HealthProfessional("Rua Antero Marques", "Inês", "Pinto", "123432151", "921348765", "123432578", <Technician>);
+ private technician: HealthProfessional := new HealthProfessional("Rua Antero Marques", "InÃªs", "Pinto", "123432151", "921348765", "123432578", <Technician>);
 operations
 (*@
 \label{assertTrue:9}
@@ -45,7 +45,7 @@ operations
    IO`print("\n Getting technician informations \n");
    assertTrue(technician.getMedicalNumber() = "123432578");
    assertTrue(technician.getCC() = "123432151");
-   assertTrue(technician.getInfo() = "Name: " ^ "Inês" ^ " " ^ "Pinto" ^ "\nAddress: " ^ "Rua Antero Marques" ^ "\nPhone Number: " ^ "921348765" ^ "\nCC: " ^ "123432151");
+   assertTrue(technician.getInfo() = "Name: " ^ "InÃªs" ^ " " ^ "Pinto" ^ "\nAddress: " ^ "Rua Antero Marques" ^ "\nPhone Number: " ^ "921348765" ^ "\nCC: " ^ "123432151");
    assertTrue(technician.getType() = <Technician>);
   );
   
@@ -65,7 +65,7 @@ operations
    IO`print(card doctor.getPatients());
    assertTrue(card doctor.getPatients() = 1);
    
-   IO`print("\nRemoving a patient \n");
+   IO`print("\n Removing a patient \n");
    doctor.removePatient(patient);
    
    IO`print("\n Number of patients: ");
@@ -142,18 +142,18 @@ end PersonTest
 Function or operation & Line & Coverage & Calls \\
 \hline
 \hline
-\hyperref[assertTrue:9]{assertTrue} & 9&100.0\% & 264 \\
+\hyperref[assertTrue:9]{assertTrue} & 9&100.0\% & 198 \\
 \hline
-\hyperref[main:112]{main} & 112&100.0\% & 4 \\
+\hyperref[main:112]{main} & 112&100.0\% & 3 \\
 \hline
-\hyperref[testAddRemovePatient:45]{testAddRemovePatient} & 45&100.0\% & 4 \\
+\hyperref[testAddRemovePatient:45]{testAddRemovePatient} & 45&100.0\% & 3 \\
 \hline
-\hyperref[testAddRemoveSpecialty:74]{testAddRemoveSpecialty} & 74&100.0\% & 4 \\
+\hyperref[testAddRemoveSpecialty:74]{testAddRemoveSpecialty} & 74&100.0\% & 3 \\
 \hline
-\hyperref[testGetInformation:13]{testGetInformation} & 13&100.0\% & 4 \\
+\hyperref[testGetInformation:13]{testGetInformation} & 13&100.0\% & 3 \\
 \hline
 \hline
-PersonTest.vdmpp & & 100.0\% & 280 \\
+PersonTest.vdmpp & & 100.0\% & 210 \\
 \hline
 \end{longtable}
 
