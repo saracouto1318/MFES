@@ -3,10 +3,12 @@ class Specialty
 instance variables
   private name: Types`String;
 operations
+	-- Specialty constructor
 	public Specialty : Types`String ==> Specialty
 		Specialty(n) == (name := n; return self)
 	post name = n;
-		
+	
+	-- Returns the specialty's name
 	pure public getName : () ==> Types`String
 		getName() == (return name);
 
