@@ -37,7 +37,7 @@ public class PersonTest {
   private HealthProfessional technician =
       new HealthProfessional(
           "Rua Antero Marques",
-          "Inês",
+          "InÃªs",
           "Pinto",
           "123432151",
           "921348765",
@@ -125,7 +125,7 @@ public class PersonTest {
         Utils.equals(
             technician.getInfo(),
             "Name: "
-                + "Inês"
+                + "InÃªs"
                 + " "
                 + "Pinto"
                 + "\nAddress: "
@@ -147,7 +147,7 @@ public class PersonTest {
     IO.print("\n Number of patients: ");
     IO.print(doctor.getPatients().size());
     assertTrue(Utils.equals(doctor.getPatients().size(), 1L));
-    IO.print("\nRemoving a patient \n");
+    IO.print("\n Removing a patient \n");
     doctor.removePatient(patient);
     IO.print("\n Number of patients: ");
     IO.print(doctor.getPatients().size());

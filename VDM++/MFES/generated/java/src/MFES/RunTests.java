@@ -15,6 +15,10 @@ public class RunTests {
     taskTest.main();
     trainingTest.main();
     safetyNetTest.main();
+    IO.print("\n\n ====== All TaskTest run successfully ====== \n\n");
+    IO.print("\n\n ====== All TrainingTesr run successfully ====== \n\n");
+    IO.print("\n\n ====== All PersonTest run successfully ====== \n\n");
+    IO.print("\n\n ====== All SafetyNetHospitalTest run successfully ====== \n\n");
   }
 
   public RunTests() {}

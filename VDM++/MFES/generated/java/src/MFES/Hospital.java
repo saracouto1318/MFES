@@ -41,6 +41,16 @@ public class Hospital {
     return address;
   }
 
+  public VDMSet getTasks() {
+
+    return Utils.copy(tasks);
+  }
+
+  public VDMSet getTrainings() {
+
+    return Utils.copy(trainings);
+  }
+
   public VDMSet getAgendas() {
 
     return Utils.copy(agenda);
@@ -187,7 +197,6 @@ public class Hospital {
   public String toString() {
 
     return "Hospital "
-        + "name -> "
         + Utils.toString(name);
   }
 }

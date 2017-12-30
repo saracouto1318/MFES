@@ -41,7 +41,7 @@ public class TaskTest {
       new Patient("Rua 1 Maio", "Vitor", "Andrade", "135790864", "912345334", "123432130");
   private Patient patient4 =
       new Patient("Rua 1 Maio", "Simone", "Andrade", "234123765", "931238654", "0987654143");
-  private Hospital hospital = new Hospital("Hospital dos Lusíadas", "Rua de Cima", safetyNet);
+  private Hospital hospital = new Hospital("Hospital dos LusÃ­adas", "Rua de Cima", safetyNet);
   private HealthProfessional doctor =
       new HealthProfessional(
           "Rua de Cima",
@@ -90,7 +90,7 @@ public class TaskTest {
   private HealthProfessional technician =
       new HealthProfessional(
           "Rua de Baixo",
-          "Luís",
+          "LuÃ­s",
           "Antunes",
           "123444655",
           "921377654",
@@ -157,7 +157,7 @@ public class TaskTest {
     hospital.addTask(treatment);
     IO.print("\n Getting appointment informations \n");
     assertTrue(Utils.equals(appointment.getPatient().getCC(), "123456789"));
-    assertTrue(Utils.equals(appointment.getHospital().getName(), "Hospital dos Lusíadas"));
+    assertTrue(Utils.equals(appointment.getHospital().getName(), "Hospital dos LusÃ­adas"));
     assertTrue(Utils.equals(appointment.getType(), MFES.quotes.AppointmentQuote.getInstance()));
     assertTrue(Utils.equals(urgencies.getType(), MFES.quotes.UrgenciesQuote.getInstance()));
     assertTrue(Utils.equals(surgery.getType(), MFES.quotes.SurgeryQuote.getInstance()));
@@ -339,12 +339,14 @@ public class TaskTest {
     assertTrue(sch1.greaterThan(sch1.getScheduleStart(), sch.getScheduleStart()));
     assertTrue(schedule.greaterThan(schedule.getScheduleStart(), sch.getScheduleStart()));
     assertTrue(!(sch.greaterThan(sch.getScheduleStart(), sch1.getScheduleStart())));
+    IO.print("\n Checking overlap \n");
+    assertTrue(schedule.overlap(schedule, schedule2));
   }
 
   public static void main() {
 
     TaskTest taskTest = new TaskTest();
-    IO.print("\n *****Running TaskTest***** \n");
+    IO.print("\n\n *****Running TaskTest***** \n");
     taskTest.testGetsSetsTask();
     taskTest.testAppointment();
     taskTest.testSurgery();

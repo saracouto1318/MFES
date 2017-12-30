@@ -249,6 +249,9 @@ public class SafetyNetHospitalTest {
     IO.print(hospital.getTasksByType(MFES.quotes.SurgeryQuote.getInstance()).size());
     IO.print("\n Total number of other treatments: ");
     IO.print(hospital.getTasksByType(MFES.quotes.OtherQuote.getInstance()).size());
+    IO.print("\n\n Total number of tasks: ");
+    IO.print(hospital.getTasks().size());
+    assertTrue(Utils.equals(hospital.getTasks().size(), 6L));
     assertTrue(
         Utils.equals(
             hospital.getTasksByType(MFES.quotes.AppointmentQuote.getInstance()).size(), 3L));
@@ -258,7 +261,7 @@ public class SafetyNetHospitalTest {
         Utils.equals(hospital.getTasksByType(MFES.quotes.SurgeryQuote.getInstance()).size(), 1L));
     assertTrue(
         Utils.equals(hospital.getTasksByType(MFES.quotes.OtherQuote.getInstance()).size(), 1L));
-    IO.print("\n Removing an appointment \n");
+    IO.print("\n\n Removing an appointment \n");
     hospital.removeTask(appointment);
     assertTrue(
         Utils.equals(
@@ -295,6 +298,11 @@ public class SafetyNetHospitalTest {
     IO.print(
         hospital.getTrainingsByType(MFES.quotes.TrainingQuote.getInstance()).size()
             + hospital.getTrainingsByType(MFES.quotes.AddSkillsQuote.getInstance()).size());
+    assertTrue(
+        Utils.equals(
+            hospital.getTrainings().size(),
+            hospital.getTrainingsByType(MFES.quotes.TrainingQuote.getInstance()).size()
+                + hospital.getTrainingsByType(MFES.quotes.AddSkillsQuote.getInstance()).size()));
     IO.print("\n Removing a training \n");
     hospital.removeTraining(training);
     assertTrue(
