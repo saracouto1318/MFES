@@ -5,30 +5,35 @@ instance variables
   private endHour: Types`Date;
   
   inv lessThan(startHour, endHour);
-operations	
+operations
+	-- Schedule constructor
 	public Schedule: Types`Date * Types`Date ==> Schedule
 		Schedule(d, d2) == (startHour := d; endHour := d2; return self)
 	pre lessThan(d, d2)
 	post startHour = d and endHour = d2;
 	
+	-- Sets the schedule start hour and endHour's values
 	public setSchedule : Types`Date * Types`Date ==> ()
 		setSchedule(d1, d2) == (startHour := d1; endHour := d2;)
 	pre lessThan(d1, d2)
 	post startHour = d1 and endHour = d2;
-		
+	
+	-- Returns the startHour's value
 	pure public getScheduleStart : () ==> Types`Date
 		getScheduleStart() == (return startHour);
-		
+	
+	-- Returns the endHour's value
 	pure public getScheduleEnd : () ==> Types`Date
 		getScheduleEnd() == (return endHour);
 	
+	-- Checks if two schedules overlap
 	pure public overlap : Schedule * Schedule ==> bool
 		overlap(d1, d2) == (
 										if((lessThan(d1.startHour, d2.startHour) and greaterThan(d1.endHour, d2.startHour)) or
 										(not lessThan(d1.startHour, d2.startHour) and lessThan(d1.startHour, d2.endHour)))
 											then return true;
 										return false;);
-
+	-- Checks if a date is lower than other
 	pure static public lessThan : Types`Date * Types`Date ==> bool
 		lessThan(d1, d2) == (
 										if(d1.year < d2.year)
@@ -48,7 +53,7 @@ operations
 										else if(d1.time.hour > d2.time.hour)
 											then return false;
 										return (d1.time.min < d2.time.min););
-										
+	-- Checks if a date is greater than other									
 	pure static public greaterThan : Types`Date * Types`Date ==> bool
 		greaterThan(d1, d2) == (
 										if(d1.year < d2.year)
