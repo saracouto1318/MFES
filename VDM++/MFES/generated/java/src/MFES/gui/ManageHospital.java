@@ -1,8 +1,12 @@
 package MFES.gui;
 
+import java.util.Iterator;
 import java.util.Scanner;
 
+import org.overture.codegen.runtime.VDMSet;
+
 import MFES.Hospital;
+import MFES.Task;
 import MFES.gui.CreateTask;
 
 public class ManageHospital extends Menu {
@@ -48,11 +52,6 @@ public class ManageHospital extends Menu {
 		case SURGERY:
 		case NURSE_TREATMENT:
 		case TECHNICIAN_TREATMENT:
-			System.out.println("1. Agendar");
-			System.out.println("2. Procurar");
-			System.out.println("3. Listar");
-			System.out.println("4. Atras");
-			break;
 		case URGENCY:
 		case TRAINING:
 			System.out.println("1. Registar");
@@ -75,6 +74,7 @@ public class ManageHospital extends Menu {
 		return returnedMenu;
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public Menu input(String input) {        
 		if(input == null || input.equals("")) {
@@ -116,7 +116,7 @@ public class ManageHospital extends Menu {
 
 			break;
 		case CREATE:
-			if(option < 1 && option > 4)
+			if(option < 1 && option > 3)
 				return null;
 
 			if(option == 1) {
@@ -136,58 +136,102 @@ public class ManageHospital extends Menu {
 
 			break;
 		case APPOINTMENT:
-			if(option < 1 && option > 4)
+			if(option < 1 && option > 3)
 				return null;
 
 			if(option == 1) 
 				return new CreateTask(reader, CreateTask.TaskType.APPOINTMENT, CreatePerson.CreateType.MEDIC, hospital);
-			else if(option == 2)
-				state = MenuState.MAIN;
+			else if(option == 2) {
+		    	VDMSet tasks = hospital.getTasksByType(MFES.quotes.AppointmentQuote.getInstance());
+		        if(tasks.size() <= 0) {
+		            System.out.println("Neste momento nao ha medicos disponiveis");
+		        } else {
+		            Task[] hArr = new Task[tasks.size()];
+		            Iterator<Task> iter = tasks.iterator();
+		            int i = 0;
+		            while(iter.hasNext())
+		                hArr[i++] = iter.next();
+
+		            ListSelectabels<Task> m = new ListSelectabels<>(reader, hArr, this);
+		            m.show();
+		        }
+			}
 			else if(option == 3)
-				state = MenuState.MAIN;
-			else if(option == 4)
 				state = MenuState.MAIN;
 
 			break;
 		case SURGERY:
-			if(option < 1 && option > 4)
+			if(option < 1 && option > 3)
 				return null;
 
 			if(option == 1)
 				return new CreateTask(reader, CreateTask.TaskType.SURGERY, CreatePerson.CreateType.SURGEON, hospital);
-			else if(option == 2)
-				state = MenuState.MAIN;
+			else if(option == 2) {
+		    	VDMSet tasks = hospital.getTasksByType(MFES.quotes.SurgeryQuote.getInstance());
+		        if(tasks.size() <= 0) {
+		            System.out.println("Neste momento nao ha medicos disponiveis");
+		        } else {
+		            Task[] hArr = new Task[tasks.size()];
+		            Iterator<Task> iter = tasks.iterator();
+		            int i = 0;
+		            while(iter.hasNext())
+		                hArr[i++] = iter.next();
+
+		            ListSelectabels<Task> m = new ListSelectabels<>(reader, hArr, this);
+		            m.show();
+		        }
+			}
 			else if(option == 3)
-				state = MenuState.MAIN;
-			else if(option == 4)
 				state = MenuState.MAIN;
 
 			break;
 		case NURSE_TREATMENT:
-			if(option < 1 && option > 4)
+			if(option < 1 && option > 3)
 				return null;
 
 			if(option == 1)
 				return new CreateTask(reader, CreateTask.TaskType.TREATMENT, CreatePerson.CreateType.NURSE, hospital);
-			else if(option == 2)
-				state = MenuState.MAIN;
+			else if(option == 2) {
+		    	VDMSet tasks = hospital.getTasksByType(MFES.quotes.OtherQuote.getInstance());
+		        if(tasks.size() <= 0) {
+		            System.out.println("Neste momento nao ha medicos disponiveis");
+		        } else {
+		            Task[] hArr = new Task[tasks.size()];
+		            Iterator<Task> iter = tasks.iterator();
+		            int i = 0;
+		            while(iter.hasNext())
+		                hArr[i++] = iter.next();
+
+		            ListSelectabels<Task> m = new ListSelectabels<>(reader, hArr, this);
+		            m.show();
+		        }
+			}
 			else if(option == 3)
-				state = MenuState.MAIN;
-			else if(option == 4)
 				state = MenuState.MAIN;
 
 			break;
 		case TECHNICIAN_TREATMENT:
-			if(option < 1 && option > 4)
+			if(option < 1 && option > 3)
 				return null;
 
 			if(option == 1)
 				return new CreateTask(reader, CreateTask.TaskType.TREATMENT, CreatePerson.CreateType.TECHNICIAN, hospital);
-			else if(option == 2)
-				state = MenuState.MAIN;
+			else if(option == 2) {
+		    	VDMSet tasks = hospital.getTasksByType(MFES.quotes.OtherQuote.getInstance());
+		        if(tasks.size() <= 0) {
+		            System.out.println("Neste momento nao ha medicos disponiveis");
+		        } else {
+		            Task[] hArr = new Task[tasks.size()];
+		            Iterator<Task> iter = tasks.iterator();
+		            int i = 0;
+		            while(iter.hasNext())
+		                hArr[i++] = iter.next();
+
+		            ListSelectabels<Task> m = new ListSelectabels<>(reader, hArr, this);
+		            m.show();
+		        }
+			}
 			else if(option == 3)
-				state = MenuState.MAIN;
-			else if(option == 4)
 				state = MenuState.MAIN;
 
 			break;
@@ -197,8 +241,21 @@ public class ManageHospital extends Menu {
 
 			if(option == 1)
 				return new CreateTask(reader, CreateTask.TaskType.URGENCY, CreatePerson.CreateType.MEDIC, hospital);
-			else if(option == 2)
-				state = MenuState.MAIN;
+			else if(option == 2) {
+		    	VDMSet tasks = hospital.getTasksByType(MFES.quotes.AppointmentQuote.getInstance());
+		        if(tasks.size() <= 0) {
+		            System.out.println("Neste momento nao ha medicos disponiveis");
+		        } else {
+		            Task[] hArr = new Task[tasks.size()];
+		            Iterator<Task> iter = tasks.iterator();
+		            int i = 0;
+		            while(iter.hasNext())
+		                hArr[i++] = iter.next();
+
+		            ListSelectabels<Task> m = new ListSelectabels<>(reader, hArr, this);
+		            m.show();
+		        }
+			}
 			else if(option == 3)
 				state = MenuState.MAIN;
 
@@ -209,8 +266,21 @@ public class ManageHospital extends Menu {
 
 			if(option == 1)
 				state = MenuState.MAIN;
-			else if(option == 2)
-				state = MenuState.MAIN;
+			else if(option == 2) {
+		    	VDMSet tasks = hospital.getTrainings();
+		        if(tasks.size() <= 0) {
+		            System.out.println("Neste momento nao ha medicos disponiveis");
+		        } else {
+		            Task[] hArr = new Task[tasks.size()];
+		            Iterator<Task> iter = tasks.iterator();
+		            int i = 0;
+		            while(iter.hasNext())
+		                hArr[i++] = iter.next();
+
+		            ListSelectabels<Task> m = new ListSelectabels<>(reader, hArr, this);
+		            m.show();
+		        }
+			}
 			else if(option == 3)
 				state = MenuState.MAIN;
 
