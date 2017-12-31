@@ -49,11 +49,9 @@ public class Agenda {
 
   public String toString() {
 
-    return "Agenda{"
-        + "healthProfessional := "
+    return "Agenda "
         + Utils.toString(healthProfessional)
-        + ", agenda := "
-        + Utils.toString(agenda)
-        + "}";
+        + " slots " 
+        + Utils.toString(agenda);
   }
 }
