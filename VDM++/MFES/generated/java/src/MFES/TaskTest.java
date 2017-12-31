@@ -136,8 +136,8 @@ public class TaskTest {
         }
       }
     }
-    assertTrue(Utils.empty(hospital.getAgenda(doctor)));
-    assertTrue(Utils.equals(hospital.getAgenda(doctor).size(), 0L));
+    assertTrue(Utils.empty(hospital.getAgenda(doctor).getAgenda()));
+    assertTrue(Utils.equals(hospital.getAgenda(doctor).getAgenda().size(), 0L));
     agenda1.addSchedule(schedule);
     agenda1.addSchedule(schedule3);
     assertTrue(Utils.equals(agenda1.getHealthProfessional().getCC(), doctor.getCC()));

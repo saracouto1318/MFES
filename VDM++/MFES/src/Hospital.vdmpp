@@ -40,14 +40,13 @@ operations
 		getAgendas() == (return agenda);
 	
 	-- Returns the schedules of a health professional's agenda
-	pure public getAgenda : HealthProfessional ==> set of(Schedule)
+	pure public getAgenda : HealthProfessional ==> Agenda
 		getAgenda(h) == (
-			dcl agendaNew : set of(Schedule);
-			agendaNew := {};
-			for all a in set agenda do
-				if(a.getHealthProfessional() = h)
-					then agendaNew := a.getAgenda();
-			return agendaNew);
+			dcl a1 : Agenda;
+			for all a2 in set agenda do
+				if(a2.getHealthProfessional() = h)
+					then return a2;
+			return a1);
 	
 	-- Removes an agenda
 	public removeAgenda : Agenda ==> ()
@@ -90,8 +89,8 @@ operations
 			for all a in set agenda do
 				if(a.getHealthProfessional().getCC() = d.getMedAssoc().getCC())
 						then a.removeSchedule(d.getSchedule());)
-	pre d not in set tasks and d.getSchedule() in set getAgenda(d.getMedAssoc())
-	post d in set tasks and d.getPatient() in set d.getMedAssoc().getPatients() and d.getSchedule() not in set getAgenda(d.getMedAssoc());
+	pre d not in set tasks and d.getSchedule() in set getAgenda(d.getMedAssoc()).getAgenda()
+	post d in set tasks and d.getPatient() in set d.getMedAssoc().getPatients() and d.getSchedule() not in set getAgenda(d.getMedAssoc()).getAgenda();
 		
 	-- Removes a task from the hospital
 	public removeTask: Task ==> ()
@@ -100,8 +99,8 @@ operations
 				if(a.getHealthProfessional() = d.getMedAssoc())
 						then a.addSchedule(d.getSchedule());
 			tasks := tasks \ {d})
-	pre d in set tasks and d.getSchedule() not in set getAgenda(d.getMedAssoc())
-	post d not in set tasks and d.getSchedule() in set getAgenda(d.getMedAssoc());
+	pre d in set tasks and d.getSchedule() not in set getAgenda(d.getMedAssoc()).getAgenda()
+	post d not in set tasks and d.getSchedule() in set getAgenda(d.getMedAssoc()).getAgenda();
 	
 	-- Adds a training to the hospital
 	public addTraining: Training ==> ()
@@ -110,8 +109,8 @@ operations
 				if(a.getHealthProfessional() = d.getMedAssoc())
 						then a.removeSchedule(d.getSchedule());
 			trainings := {d} union trainings)
-	pre d not in set trainings and d.getSchedule() in set getAgenda(d.getMedAssoc())
-	post d in set trainings and d.getSchedule() not in set getAgenda(d.getMedAssoc());
+	pre d not in set trainings and d.getSchedule() in set getAgenda(d.getMedAssoc()).getAgenda()
+	post d in set trainings and d.getSchedule() not in set getAgenda(d.getMedAssoc()).getAgenda();
 	
 	-- Removes a training from the hospital
 	public removeTraining: Training ==> ()
@@ -120,8 +119,8 @@ operations
 				if(a.getHealthProfessional() = d.getMedAssoc())
 						then a.addSchedule(d.getSchedule());
 			trainings := trainings \ {d})
-	pre d in set trainings and d.getSchedule() not in set getAgenda(d.getMedAssoc())
-	post d not in set trainings and d.getSchedule() in set getAgenda(d.getMedAssoc());
+	pre d in set trainings and d.getSchedule() not in set getAgenda(d.getMedAssoc()).getAgenda()
+	post d not in set trainings and d.getSchedule() in set getAgenda(d.getMedAssoc()).getAgenda();
 	
 	-- Returns the tasks of a hospital by its type
 	pure public getTasksByType: Types`TaskType ==> set of (Task)

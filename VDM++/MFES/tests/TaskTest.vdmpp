@@ -78,8 +78,8 @@ operations
 				else
 					agenda4 := a;);
 			
-			assertTrue(hospital.getAgenda(doctor) = {});
-			assertTrue(card hospital.getAgenda(doctor) = 0);
+			assertTrue(hospital.getAgenda(doctor).getAgenda() = {});
+			assertTrue(card hospital.getAgenda(doctor).getAgenda() = 0);
 			
 			agenda1.addSchedule(schedule);
 			agenda1.addSchedule(schedule3);

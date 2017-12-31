@@ -41,8 +41,8 @@ operations
 				if(a.getHealthProfessional().getCC() = medicalAssoc.getCC())
 					then (a.addSchedule(schedule); a.removeSchedule(s));
 			schedule := s)
-	pre s in set hospital.getAgenda(medicalAssoc)
-	post s not in set hospital.getAgenda(medicalAssoc);
+	pre s in set hospital.getAgenda(medicalAssoc).getAgenda()
+	post s not in set hospital.getAgenda(medicalAssoc).getAgenda();
 	
 	-- Returns the surgery's associated
 	pure public getSurgeryPersons : Types`Type ==> set of (HealthProfessional)

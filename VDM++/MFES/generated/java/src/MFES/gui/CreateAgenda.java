@@ -8,18 +8,13 @@ import org.overture.codegen.runtime.VDMSet;
 import MFES.HealthProfessional;
 import MFES.Hospital;
 import MFES.Schedule;
-import MFES.Agenda;
 
 
 public class CreateAgenda extends Menu {
-	public static enum CreateState {CHOOSE_HOSPITAL, CREATE_SCHEDULE};
-	private CreateState state;
-
 	private HealthProfessional hp;
 	
 	public CreateAgenda(Scanner reader, HealthProfessional hp) {
 		super(reader);
-		state = CreateState.CHOOSE_HOSPITAL;
 		this.hp = hp;				
 	}
 
@@ -52,7 +47,9 @@ public class CreateAgenda extends Menu {
         
         Schedule s = cs.getSchedule();
         
-        //h.getAgenda(hp).
+        h.getAgenda(hp).addSchedule(s);
+        
+        System.out.println("Sucesso");
 	}
 
 	@Override
