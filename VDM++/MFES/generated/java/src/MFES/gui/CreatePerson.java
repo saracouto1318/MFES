@@ -134,15 +134,28 @@ public class CreatePerson extends Menu {
 
         switch(type) {
         case MEDIC:
+            h = new HealthProfessional(address, firstName, lastName, cc, phoneNumber, medicalNumber, MFES.quotes.DoctorQuote.getInstance());
+            hospital.addMedAssociated(h);
+            person = h;
+            break;
         case NURSE:
+            h = new HealthProfessional(address, firstName, lastName, cc, phoneNumber, medicalNumber, MFES.quotes.NurseQuote.getInstance());
+            hospital.addMedAssociated(h);
+            person = h;
+            break;
         case TECHNICIAN:
+            h = new HealthProfessional(address, firstName, lastName, cc, phoneNumber, medicalNumber, MFES.quotes.TechnicianQuote.getInstance());
+            hospital.addMedAssociated(h);
+            person = h;
+            break;
         case SURGEON:
-            h = new HealthProfessional(address, firstName, lastName, cc, phoneNumber, medicalNumber, type);
+            h = new HealthProfessional(address, firstName, lastName, cc, phoneNumber, medicalNumber, MFES.quotes.SurgeonQuote.getInstance());
             hospital.addMedAssociated(h);
             person = h;
             break;
         case PATIENT:
             person = new Patient(address, firstName, lastName, cc, phoneNumber, healthNumber);
+            break;
         }
 
         return person;

@@ -292,8 +292,5 @@ public class ManageHospital extends Menu {
 	}
 
 	@Override
-	public void destroy() {
-		
-	}
-
+	public void destroy() {}
 }

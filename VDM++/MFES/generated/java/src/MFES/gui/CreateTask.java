@@ -87,7 +87,7 @@ public class CreateTask extends Menu {
 	@Override
 	public Menu action() {
         if(invalid)
-            return new HospitalPicker(reader);
+            return new ManageHospital(reader, hospital);
 
         Menu returnedMenu = null;
 
