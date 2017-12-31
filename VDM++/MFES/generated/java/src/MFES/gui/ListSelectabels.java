@@ -1,6 +1,5 @@
 package MFES.gui;
 
-import java.util.List;
 import java.util.Scanner;
 
 public class ListSelectabels<T> extends Menu {

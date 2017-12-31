@@ -196,7 +196,7 @@ public class ManageHospital extends Menu {
 				return null;
 
 			if(option == 1)
-				return new CreateTask(reader, CreateTask.TaskType.URGENCIES, CreatePerson.CreateType.MEDIC, hospital);
+				return new CreateTask(reader, CreateTask.TaskType.URGENCY, CreatePerson.CreateType.MEDIC, hospital);
 			else if(option == 2)
 				state = MenuState.MAIN;
 			else if(option == 3)

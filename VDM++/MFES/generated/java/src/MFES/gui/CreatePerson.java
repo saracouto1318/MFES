@@ -1,6 +1,5 @@
 package MFES.gui;
 
-import MFES.gui.CreatePerson.CreateType;
 import java.util.Scanner;
 
 import MFES.HealthProfessional;

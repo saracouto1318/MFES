@@ -7,9 +7,11 @@ import MFES.HealthProfessional;
 import MFES.Hospital;
 import MFES.Patient;
 import MFES.Agenda;
+import MFES.Appointment;
 import MFES.Schedule;
+import MFES.Surgery;
 import MFES.Task;
-import MFES.gui.CreatePerson.CreateType;
+import MFES.Treatment;
 import MFES.gui.CreateSchedule;
 import MFES.gui.HospitalPicker;
 import MFES.gui.ListSelectabels;
@@ -21,7 +23,7 @@ public class CreateTask extends Menu {
     public static enum CreateState {PATIENT_LIST, HEALTHPROFESSIONAL_LIST, SCHEDULE, INVALID};
     private CreateState state;
 
-    public static enum TaskType {APPOINTMENT, SURGERY, TREATMENT, URGENCIES};
+    public static enum TaskType {APPOINTMENT, SURGERY, TREATMENT, URGENCY};
     private TaskType type;
 
     private CreatePerson.CreateType personType;
@@ -66,6 +68,7 @@ public class CreateTask extends Menu {
             }
 
             ListSelectabels<Agenda> menu = new ListSelectabels<>(reader, selectabels, this);
+            menu.show();
 
             System.out.println("Informacao paciente");
             break;
@@ -98,6 +101,7 @@ public class CreateTask extends Menu {
 		return returnedMenu;
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public Menu input(String input) {
         if(input == null || input.equals("")) {
@@ -167,21 +171,50 @@ public class CreateTask extends Menu {
         return patient != null && healthProfessional != null && schedule != null && !invalid;
     }
 
-    private Task createTask() {
-        Task t = new Task(healthProfessional, schedule, patient, hospital, type);
-        hospital.addTask(t);
+    @SuppressWarnings("unchecked")
+	private Task createTask() {
+    	Task t = null;
+    	VDMSet tasks = null;
+    	
+        switch(type) {
+        case APPOINTMENT:
+        	t = new Appointment(healthProfessional, schedule, patient, hospital);
+            hospital.addTask(t);
+            
+            tasks = hospital.getTasksByType(MFES.quotes.AppointmentQuote.getInstance());
 
-        VDMSet tasks = hospital.getTasksByType(type);
+            break;
+        case URGENCY:
+        	t = new Appointment(healthProfessional, MFES.quotes.MediumQuote.getInstance(), schedule, patient, hospital);
+            hospital.addTask(t);
+            
+            tasks = hospital.getTasksByType(MFES.quotes.AppointmentQuote.getInstance());
 
+            break;
+        case SURGERY:
+        	t = new Surgery(healthProfessional, schedule, patient, hospital);
+            hospital.addTask(t);
+            
+            tasks = hospital.getTasksByType(MFES.quotes.SurgeryQuote.getInstance());
+
+            break;
+        case TREATMENT:
+        	t = new Treatment(healthProfessional, "name...", schedule, patient, hospital);
+            hospital.addTask(t);
+            
+            tasks = hospital.getTasksByType(MFES.quotes.OtherQuote.getInstance());
+
+        	break;
+        }
+        
         if(tasks.size() <= 0) {
             System.out.println("Neste momento nao ha medicos disponiveis");
         } else {
             Task[] hArr = new Task[tasks.size()];
             Iterator<Task> iter = tasks.iterator();
             int i = 0;
-            while(iter.hasNext()) {
+            while(iter.hasNext())
                 hArr[i++] = iter.next();
-            }
 
             ListSelectabels<Task> m = new ListSelectabels<>(reader, hArr, this);
             m.show();

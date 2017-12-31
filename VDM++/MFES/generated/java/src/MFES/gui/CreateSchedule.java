@@ -4,15 +4,6 @@ import MFES.Schedule;
 import MFES.Types;
 import java.util.Scanner;
 
-import MFES.HealthProfessional;
-import MFES.Hospital;
-import MFES.Patient;
-import MFES.Person;
-import MFES.Agenda;
-import MFES.Schedule;
-import MFES.gui.HospitalPicker;
-import MFES.gui.ListSelectabels;
-
 public class CreateSchedule extends Menu {
     public static enum CreateState {YEAR, MONTH, DAY, HOUR, MINUTES, DURATION};
     private CreateState state;
