@@ -83,6 +83,7 @@ public class CreateTask extends Menu {
         }
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public Menu action() {
         if(invalid)
@@ -91,8 +92,58 @@ public class CreateTask extends Menu {
         Menu returnedMenu = null;
 
         while(!endCondition(returnedMenu) && !invalid) {
-            String str = reader.nextLine();
-            returnedMenu = input(str);
+
+            switch(state) {
+            case PATIENT_LIST:
+                CreatePerson menu = new CreatePerson(reader, CreatePerson.CreateType.PATIENT, hospital);
+                menu.show();
+                menu.action();
+                patient = (Patient)menu.getPerson();
+
+                state = CreateState.HEALTHPROFESSIONAL_LIST;
+
+                break;
+            case HEALTHPROFESSIONAL_LIST:
+                VDMSet medics = hospital.getMedicalAssociatedByType(personType);
+
+                if(medics.size() <= 0) {
+                    System.out.println("Neste momento nao ha medicos disponiveis");
+                    invalid = true;
+                    return null;
+                }
+
+                HealthProfessional[] selectabels = new HealthProfessional[medics.size()];
+                Iterator<HealthProfessional> iter = medics.iterator();
+                int i = 0;
+                while(iter.hasNext()) {
+                    selectabels[i++] = iter.next();
+                }
+
+                ListSelectabels<HealthProfessional> medicsList = new ListSelectabels<>(reader, selectabels, this);
+                medicsList.show();
+                medicsList.action();
+
+                healthProfessional = medicsList.getSelected();
+
+                state = CreateState.SCHEDULE;
+                break;
+            case SCHEDULE:
+                CreateSchedule cSchedule = new CreateSchedule(reader, this);
+                cSchedule.show();
+                cSchedule.action();
+                schedule = (Schedule)cSchedule.getSchedule();
+                
+                if(createTask() == null)
+                    state = CreateState.INVALID;
+                else
+                    return new ManageHospital(reader, hospital);
+            case INVALID:
+                show();
+                state = CreateState.PATIENT_LIST;
+                break;
+            }
+            
+            show();                        
         }
 
         if(invalid)
@@ -100,66 +151,8 @@ public class CreateTask extends Menu {
 		return returnedMenu;
 	}
 
-	@SuppressWarnings("unchecked")
 	@Override
 	public Menu input(String input) {
-        if(input == null || input.equals("")) {
-            show();
-            return null;
-        }
-
-        switch(state) {
-        case PATIENT_LIST:
-            CreatePerson menu = new CreatePerson(reader, CreatePerson.CreateType.PATIENT, hospital);
-            menu.show();
-            menu.action();
-            patient = (Patient)menu.getPerson();
-
-            state = CreateState.HEALTHPROFESSIONAL_LIST;
-
-            break;
-        case HEALTHPROFESSIONAL_LIST:
-            VDMSet medics = hospital.getMedicalAssociatedByType(personType);
-
-            if(medics.size() <= 0) {
-                System.out.println("Neste momento nao ha medicos disponiveis");
-                invalid = true;
-                return null;
-            }
-
-            HealthProfessional[] selectabels = new HealthProfessional[medics.size()];
-            Iterator<HealthProfessional> iter = medics.iterator();
-            int i = 0;
-            while(iter.hasNext()) {
-                selectabels[i++] = iter.next();
-            }
-
-            ListSelectabels<HealthProfessional> medicsList = new ListSelectabels<>(reader, selectabels, this);
-            medicsList.show();
-            medicsList.action();
-
-            healthProfessional = medicsList.getSelected();
-
-            state = CreateState.SCHEDULE;
-            break;
-        case SCHEDULE:
-            CreateSchedule cSchedule = new CreateSchedule(reader, this);
-            cSchedule.show();
-            cSchedule.action();
-            schedule = (Schedule)cSchedule.getSchedule();
-            
-            if(createTask() == null)
-                state = CreateState.INVALID;
-            else
-                return new ManageHospital(reader, hospital);
-
-            show();
-        case INVALID:
-            state = CreateState.PATIENT_LIST;
-            break;
-        }
-
-        show();
 		return null;
 	}
 
