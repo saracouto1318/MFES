@@ -9,6 +9,7 @@ public class TaskTest {
   private Types.Time time1 = new Types.Time(12L, 10L);
   private Types.Date date = new Types.Date(2017L, 11L, 25L, time1);
   private Types.Date d = new Types.Date(2017L, 2L, 25L, time1);
+  private Types.Date d2 = new Types.Date(2016L, 2L, 25L, time1);
   private Types.Date date1 = new Types.Date(2017L, 12L, 25L, time1);
   private Types.Time time2 = new Types.Time(12L, 30L);
   private Types.Date date2 = new Types.Date(2017L, 12L, 25L, time2);
@@ -102,8 +103,6 @@ public class TaskTest {
   private Surgery surgery = new Surgery(surgeon, schedule3, patient3, hospital);
   private Treatment treatment =
       new Treatment(technician, "Fisioterapia", schedule, patient4, hospital);
-  private Medicament medicament = new Medicament("Brufen");
-  private Prescription prescription = new Prescription("123");
 
   private void assertTrue(final Boolean cond) {
 
@@ -220,41 +219,6 @@ public class TaskTest {
     assertTrue(Utils.equals(urgencies.getPriority(), MFES.quotes.HighQuote.getInstance()));
     urgencies.setPriority(MFES.quotes.LowQuote.getInstance());
     assertTrue(Utils.equals(urgencies.getPriority(), MFES.quotes.LowQuote.getInstance()));
-    IO.print("\n Checking appointment prescriptions \n");
-    IO.print("\n Number of prescriptions: ");
-    IO.print(appointment.getPrescriptions().size() + urgencies.getPrescriptions().size());
-    assertTrue(Utils.equals(appointment.getPrescriptions().size(), 0L));
-    assertTrue(Utils.equals(urgencies.getPrescriptions().size(), 0L));
-    IO.print("\n\n Getting prescription code and medicament name \n");
-    assertTrue(Utils.equals(medicament.getName(), "Brufen"));
-    assertTrue(Utils.equals(prescription.getCode(), "123"));
-    assertTrue(Utils.equals(prescription.getMedicaments().size(), 0L));
-    IO.print("\n Adding medicament \n");
-    IO.print("\n Number of medicaments: ");
-    IO.print(prescription.getMedicaments().size());
-    prescription.addMedicament(medicament);
-    assertTrue(Utils.equals(prescription.getMedicaments().size(), 1L));
-    assertTrue(Utils.equals(prescription.getMedicaments(), SetUtil.set(medicament)));
-    IO.print("\n\n Removing medicament \n");
-    IO.print("\n Number of medicaments: ");
-    IO.print(prescription.getMedicaments().size());
-    prescription.removeMedicament(medicament);
-    assertTrue(Utils.equals(prescription.getMedicaments().size(), 0L));
-    assertTrue(Utils.empty(prescription.getMedicaments()));
-    IO.print("\n Adding a prescription \n");
-    IO.print("\n Number of prescriptions: ");
-    IO.print(appointment.getPrescriptions().size() + urgencies.getPrescriptions().size());
-    appointment.addPrescription(prescription);
-    urgencies.addPrescription(prescription);
-    assertTrue(Utils.equals(appointment.getPrescriptions().size(), 1L));
-    assertTrue(Utils.equals(urgencies.getPrescriptions().size(), 1L));
-    IO.print("\n\n Removing a prescription \n");
-    IO.print("\n Number of prescriptions: ");
-    IO.print(appointment.getPrescriptions().size() + urgencies.getPrescriptions().size());
-    appointment.removePrescription(prescription);
-    urgencies.removePrescription(prescription);
-    assertTrue(Utils.equals(appointment.getPrescriptions().size(), 0L));
-    assertTrue(Utils.equals(urgencies.getPrescriptions().size(), 0L));
   }
 
   public void testSurgery() {
@@ -368,6 +332,8 @@ public class TaskTest {
         + Utils.toString(date)
         + ", d := "
         + Utils.toString(d)
+        + ", d2 := "
+        + Utils.toString(d2)
         + ", date1 := "
         + Utils.toString(date1)
         + ", time2 := "
@@ -446,10 +412,6 @@ public class TaskTest {
         + Utils.toString(surgery)
         + ", treatment := "
         + Utils.toString(treatment)
-        + ", medicament := "
-        + Utils.toString(medicament)
-        + ", prescription := "
-        + Utils.toString(prescription)
         + "}";
   }
 }

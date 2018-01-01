@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.18 (MiKTeX 2.9.6500 64-bit) (preloaded format=pdflatex 2017.12.19)  30 DEC 2017 18:18
+This is pdfTeX, Version 3.14159265-2.6-1.40.18 (MiKTeX 2.9.6500 64-bit) (preloaded format=pdflatex 2017.12.19)  1 JAN 2018 16:54
 entering extended mode
 **./MFES.tex
 (MFES.tex
@@ -221,14 +221,7 @@ Package: longtable 2014/10/28 v4.11 Multi-page Table package (DPC)
 \c@LT@tables=\count108
 \c@LT@chunks=\count109
 \LT@p@ftn=\toks16
-) (MFES.aux
-
-LaTeX Warning: Label `getName:12' multiply defined.
-
-
-LaTeX Warning: Label `main:292' multiply defined.
-
-)
+) (MFES.aux)
 \openout1 = `MFES.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 6.
@@ -246,7 +239,8 @@ LaTeX Font Info:    ... okay on input line 6.
 LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 6.
 LaTeX Font Info:    ... okay on input line 6.
 LaTeX Font Info:    Try loading font information for OT1+ptm on input line 6.
- ("C:\Users\ASUS\AppData\Local\Programs\MiKTeX 2.9\tex\latex\psnfss\ot1ptm.fd"
+
+("C:\Users\ASUS\AppData\Local\Programs\MiKTeX 2.9\tex\latex\psnfss\ot1ptm.fd"
 File: ot1ptm.fd 2001/06/04 font definitions for OT1/ptm.
 )
 \c@lstlisting=\count110
@@ -302,14 +296,14 @@ LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <10> not available
 \openout4 = `MFES.toc'.
 
  (specification/Agenda.vdmpp.tex
-[1
-
-{C:/Users/ASUS/AppData/Local/MiKTeX/2.9/pdftex/config/pdftex.map}]
 LaTeX Font Info:    Try loading font information for OT1+pcr on input line 1.
 
 ("C:\Users\ASUS\AppData\Local\Programs\MiKTeX 2.9\tex\latex\psnfss\ot1pcr.fd"
 File: ot1pcr.fd 2001/06/04 font definitions for OT1/pcr.
 )
+[1
+
+{C:/Users/ASUS/AppData/Local/MiKTeX/2.9/pdftex/config/pdftex.map}]
 LaTeX Font Info:    Font shape `OT1/pcr/bx/n' in size <8> not available
 (Font)              Font shape `OT1/pcr/b/n' tried instead on input line 2.
 LaTeX Font Info:    Font shape `OT1/pcr/m/it' in size <8> not available
@@ -319,144 +313,147 @@ Underfull \vbox (badness 10000) detected at line 80
  []
 
 ) (specification/Appointment.vdmpp.tex [2]
-Underfull \vbox (badness 10000) detected at line 89
+
+LaTeX Warning: Hyper reference `addPrescription:36' on page 3 undefined on inpu
+t line 49.
+
+
+LaTeX Warning: Hyper reference `removePrescription:42' on page 3 undefined on i
+nput line 55.
+
+
+LaTeX Warning: Hyper reference `setPriority:31' on page 3 undefined on input li
+ne 57.
+
+
+Underfull \vbox (badness 10000) detected at line 62
  []
 
-[3]) (specification/HealthProfessional.vdmpp.tex [4]
+) (specification/HealthProfessional.vdmpp.tex [3] [4]
 Underfull \vbox (badness 10000) detected at line 117
  []
 
 ) (specification/Hospital.vdmpp.tex [5] [6] [7]
-Underfull \vbox (badness 10000) detected at line 252
+Underfull \vbox (badness 10000) detected at line 260
  []
 
-) (specification/Medicament.vdmpp.tex [8]
-Underfull \vbox (badness 10000) detected at line 37
- []
-
-) (specification/Patient.vdmpp.tex
+) (specification/Patient.vdmpp.tex [8]
 Underfull \vbox (badness 10000) detected at line 39
  []
 
-) (specification/Person.vdmpp.tex [9]
+) (specification/Person.vdmpp.tex
 Underfull \vbox (badness 10000) detected at line 51
  []
 
-) (specification/Prescription.vdmpp.tex [10]
-Underfull \vbox (badness 10000) detected at line 72
- []
-
-) (specification/SafetyNetHospital.vdmpp.tex [11] [12]
+) (specification/SafetyNetHospital.vdmpp.tex [9] [10]
 Underfull \vbox (badness 10000) detected at line 130
  []
 
-) (specification/Schedule.vdmpp.tex [13]
+) (specification/Schedule.vdmpp.tex [11] [12]
 Underfull \vbox (badness 10000) detected at line 123
  []
 
-[14]) (specification/Specialty.vdmpp.tex
+) (specification/Specialty.vdmpp.tex
 Underfull \vbox (badness 10000) detected at line 37
  []
 
-) (specification/Surgery.vdmpp.tex [15]
-Underfull \vbox (badness 10000) detected at line 105
+) (specification/Surgery.vdmpp.tex [13]
+Underfull \vbox (badness 10000) detected at line 100
  []
 
-) (specification/Task.vdmpp.tex [16]
+[14]) (specification/Task.vdmpp.tex [15]
 Underfull \vbox (badness 10000) detected at line 103
  []
 
-[17]) (specification/Training.vdmpp.tex
-
-LaTeX Warning: Hyper reference `setPurpose:32' on page 18 undefined on input li
-ne 63.
-
-
-Underfull \vbox (badness 10000) detected at line 70
+) (specification/Training.vdmpp.tex [16]
+Underfull \vbox (badness 10000) detected at line 68
  []
 
-[18]) (specification/Treatment.vdmpp.tex
+) (specification/Treatment.vdmpp.tex
 Underfull \vbox (badness 10000) detected at line 48
  []
 
-) (specification/Types.vdmpp.tex [19]
-Underfull \vbox (badness 10000) detected at line 45
+
+Overfull \vbox (1.79839pt too high) has occurred while \output is active []
+
+
+[17]) (specification/Types.vdmpp.tex
+Underfull \vbox (badness 10000) detected at line 47
  []
 
 ) (specification/PersonTest.vdmpp.tex
 Missing character: There is no Ã in font pcrr7t!
- [20]
+ [18]
 Missing character: There is no Ã in font pcrr7t!
- [21]
+ [19]
 Underfull \vbox (badness 10000) detected at line 158
  []
 
-) (specification/RunTests.vdmpp.tex [22]
+[20]) (specification/RunTests.vdmpp.tex
 Underfull \vbox (badness 10000) detected at line 35
  []
 
-) (specification/SafetyNetHospitalTest.vdmpp.tex [23]
+) (specification/SafetyNetHospitalTest.vdmpp.tex [21]
 Missing character: There is no é in font pcrr7t!
 Missing character: There is no í in font pcrr7t!
 Missing character: There is no í in font pcrr7t!
+ [22]
 Missing character: There is no í in font pcrr7t!
- [24] [25] [26]
+ [23] [24] [25]
 Missing character: There is no é in font pcrr7t!
 Missing character: There is no é in font pcrr7t!
 Missing character: There is no é in font pcrr7t!
 Missing character: There is no é in font pcrr7t!
 Missing character: There is no é in font pcrr7t!
- [27]
-Underfull \vbox (badness 10000) detected at line 368
+
+[26]
+Underfull \vbox (badness 10000) detected at line 377
  []
 
-) (specification/TaskTest.vdmpp.tex [28]
+) (specification/TaskTest.vdmpp.tex [27]
 Missing character: There is no Ã in font pcrr7t!
 Missing character: There is no ­ in font pcrr7t!
+Missing character: There is no Ã in font pcrr7t!
+Missing character: There is no ­ in font pcrr7t!
+ [28]
 Missing character: There is no Ã in font pcrr7t!
 Missing character: There is no ­ in font pcrr7t!
  [29] [30]
-Missing character: There is no Ã in font pcrr7t!
-Missing character: There is no ­ in font pcrr7t!
- [31] [32] [33]
-Underfull \vbox (badness 10000) detected at line 351
+
+LaTeX Warning: Hyper reference `main:293' on page 31 undefined on input line 29
+0.
+
+
+Underfull \vbox (badness 10000) detected at line 305
  []
 
-) (specification/TrainingTest.vdmpp.tex [34]
-
-LaTeX Warning: Hyper reference `main:61' on page 35 undefined on input line 70.
-
-
-
-Underfull \vbox (badness 10000) detected at line 77
+[31]) (specification/TrainingTest.vdmpp.tex [32]
+Underfull \vbox (badness 10000) detected at line 80
  []
 
 )
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 55.
- [35]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 55.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 51.
+ [33]
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 51.
  (MFES.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 55.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 55.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 51.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 51.
 Package rerunfilecheck Info: File `MFES.out' has not changed.
-(rerunfilecheck)             Checksum: 8B34F4DCC8E1D1E28D2A11B473485D0F;984.
+(rerunfilecheck)             Checksum: 640A30A328972B0425459B825BDACF59;886.
 
 
 LaTeX Warning: There were undefined references.
 
-
-LaTeX Warning: There were multiply-defined labels.
-
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 55.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 51.
  ) 
 Here is how much of TeX's memory you used:
- 8551 strings out of 493312
- 130987 string characters out of 3130261
- 576238 words of memory out of 3000000
- 10233 multiletter control sequences out of 15000+200000
+ 8410 strings out of 493312
+ 128538 string characters out of 3130261
+ 571737 words of memory out of 3000000
+ 10212 multiletter control sequences out of 15000+200000
  17044 words of font info for 41 fonts, out of 3000000 for 9000
  1141 hyphenation exceptions out of 8191
- 33i,6n,48p,248b,1785s stack positions out of 5000i,500n,10000p,200000b,50000s
+ 33i,6n,48p,248b,1912s stack positions out of 5000i,500n,10000p,200000b,50000s
 {C:/Users/ASUS/AppData/Local/Programs/MiKTeX 2.9/fonts/enc/dvips/base/8r.enc}
 <C:/Users/ASUS/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/public/amsfonts/la
 txfont/lcircle1.pfb><C:/Users/ASUS/AppData/Local/Programs/MiKTeX 2.9/fonts/type
@@ -465,9 +462,9 @@ txfont/lcircle1.pfb><C:/Users/ASUS/AppData/Local/Programs/MiKTeX 2.9/fonts/type
 fonts/type1/urw/courier/ucrro8a.pfb><C:/Users/ASUS/AppData/Local/Programs/MiKTe
 X 2.9/fonts/type1/urw/times/utmb8a.pfb><C:/Users/ASUS/AppData/Local/Programs/Mi
 KTeX 2.9/fonts/type1/urw/times/utmr8a.pfb>
-Output written on MFES.pdf (35 pages, 423096 bytes).
+Output written on MFES.pdf (33 pages, 399497 bytes).
 PDF statistics:
- 2461 PDF objects out of 2487 (max. 8388607)
- 1763 named destinations out of 2073 (max. 500000)
- 169 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 2300 PDF objects out of 2487 (max. 8388607)
+ 1649 named destinations out of 1728 (max. 500000)
+ 153 words of extra memory for PDF output out of 10000 (max. 10000000)
 

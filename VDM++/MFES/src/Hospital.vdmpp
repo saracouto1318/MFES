@@ -45,7 +45,7 @@ operations
 			dcl a1 : Agenda;
 			for all a2 in set agenda do
 				if(a2.getHealthProfessional() = h)
-					then return a2;
+					then a1 := a2;
 			return a1);
 	
 	-- Removes an agenda

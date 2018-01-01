@@ -1,47 +1,29 @@
 class Appointment is subclass of Task
 
 instance variables
-  private prescriptions:set of (Prescription);
   private priority : Types`Priority;
   
   inv priority <> nil;
-  inv card prescriptions >= 0;
   inv medicalAssoc.getType() = <Doctor>;
 operations
 	-- Appointment constructor
 	public Appointment: HealthProfessional * Schedule * Patient * Hospital==> Appointment
-		Appointment(d, s, p, h) == (medicalAssoc := d; priority := <Medium>; prescriptions := {}; Task(d, s, p, h, <Appointment>))
-	post medicalAssoc = d and prescriptions = {} and priority = <Medium>;
+		Appointment(d, s, p, h) == (medicalAssoc := d; priority := <Medium>; Task(d, s, p, h, <Appointment>))
+	post medicalAssoc = d and priority = <Medium>;
 	
 	-- Urgency Apppointment constructor
 	public Appointment: HealthProfessional * Types`Priority * Schedule * Patient * Hospital ==> Appointment
-		Appointment(d, p, s, pat, h) == (medicalAssoc := d; priority := p; prescriptions := {}; Task(d, s, pat, h, <Urgencies>))
+		Appointment(d, p, s, pat, h) == (medicalAssoc := d; priority := p; Task(d, s, pat, h, <Urgencies>))
 	pre p <> nil
-	post medicalAssoc = d and prescriptions = {} and priority = p;
+	post medicalAssoc = d and priority = p;
 
 	-- Returns the appointment's priority
 	pure public getPriority : () ==> Types`Priority
 		getPriority() == (return priority);
 
--- Returns the appointment's prescriptions
-  pure public getPrescriptions : () ==> set of (Prescription)
-  	getPrescriptions() == (return prescriptions);
-  
   -- Sets the appointment's priority
   public setPriority : Types`Priority ==> ()
   	setPriority(p) == (priority := p)
   pre taskType = <Urgencies>;
   
-  -- Adds a prescription to the appointment
-  public addPrescription : Prescription ==> ()
-  	addPrescription(p) == (prescriptions := prescriptions union {p})
-  pre p not in set prescriptions
-  post p in set prescriptions;
-  	
-	-- Removes a prescription from the appointment
-	public removePrescription : Prescription ==> ()
-  	removePrescription(p) == (prescriptions := prescriptions \ {p})
-  pre p in set prescriptions
-  post p not in set prescriptions;
-  	
 end Appointment

@@ -62,15 +62,12 @@ operations
  
  -- Returns the auxiliary staff of a surgery by type
 (*@
-\label{getMainDoctor:45}
+\label{getSurgeryPersons:45}
 @*)
  pure public getSurgeryPersons : Types`Type ==> set of (HealthProfessional)
   getSurgeryPersons(t) == (
                dcl med : set of (HealthProfessional);
                if(t = <Surgeon>)
-(*@
-\label{getSurgeryPersons:49}
-@*)
                 then med := secondaryDoctors
                else
                 med := other;
@@ -83,24 +80,22 @@ end Surgery
 Function or operation & Line & Coverage & Calls \\
 \hline
 \hline
-\hyperref[Surgery:11]{Surgery} & 11&100.0\% & 19 \\
+\hyperref[Surgery:11]{Surgery} & 11&100.0\% & 16 \\
 \hline
-\hyperref[addOther:28]{addOther} & 28&100.0\% & 1 \\
+\hyperref[addOther:28]{addOther} & 28&100.0\% & 4 \\
 \hline
-\hyperref[addSecondaryDoctor:16]{addSecondaryDoctor} & 16&100.0\% & 1 \\
+\hyperref[addSecondaryDoctor:16]{addSecondaryDoctor} & 16&100.0\% & 4 \\
 \hline
-\hyperref[getMainDoctor:45]{getMainDoctor} & 45&100.0\% & 6 \\
+\hyperref[getSurgeryPersons:45]{getSurgeryPersons} & 45&100.0\% & 24 \\
 \hline
-\hyperref[getSurgeryPersons:49]{getSurgeryPersons} & 49&100.0\% & 6 \\
+\hyperref[removeOther:34]{removeOther} & 34&100.0\% & 4 \\
 \hline
-\hyperref[removeOther:34]{removeOther} & 34&100.0\% & 1 \\
+\hyperref[removeSecondaryDoctor:22]{removeSecondaryDoctor} & 22&100.0\% & 4 \\
 \hline
-\hyperref[removeSecondaryDoctor:22]{removeSecondaryDoctor} & 22&100.0\% & 1 \\
-\hline
-\hyperref[setMainDoctor:40]{setMainDoctor} & 40&100.0\% & 1 \\
+\hyperref[setMainDoctor:40]{setMainDoctor} & 40&100.0\% & 4 \\
 \hline
 \hline
-Surgery.vdmpp & & 100.0\% & 36 \\
+Surgery.vdmpp & & 100.0\% & 60 \\
 \hline
 \end{longtable}
 

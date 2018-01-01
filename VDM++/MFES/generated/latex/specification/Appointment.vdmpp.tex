@@ -2,67 +2,40 @@
 class Appointment is subclass of Task
 
 instance variables
-  private prescriptions:set of (Prescription);
   private priority : Types`Priority;
   
   inv priority <> nil;
-  inv card prescriptions >= 0;
   inv medicalAssoc.getType() = <Doctor>;
 operations
  -- Appointment constructor
+ public Appointment: HealthProfessional * Schedule * Patient * Hospital==> Appointment
+  Appointment(d, s, p, h) == (medicalAssoc := d; priority := <Medium>; Task(d, s, p, h, <Appointment>))
 (*@
 \label{Appointment:12}
 @*)
- public Appointment: HealthProfessional * Schedule * Patient * Hospital==> Appointment
-  Appointment(d, s, p, h) == (medicalAssoc := d; priority := <Medium>; prescriptions := {}; Task(d, s, p, h, <Appointment>))
- post medicalAssoc = d and prescriptions = {} and priority = <Medium>;
+ post medicalAssoc = d and priority = <Medium>;
  
  -- Urgency Apppointment constructor
  public Appointment: HealthProfessional * Types`Priority * Schedule * Patient * Hospital ==> Appointment
-  Appointment(d, p, s, pat, h) == (medicalAssoc := d; priority := p; prescriptions := {}; Task(d, s, pat, h, <Urgencies>))
+  Appointment(d, p, s, pat, h) == (medicalAssoc := d; priority := p; Task(d, s, pat, h, <Urgencies>))
  pre p <> nil
- post medicalAssoc = d and prescriptions = {} and priority = p;
+ post medicalAssoc = d and priority = p;
 
  -- Returns the appointment's priority
+ pure public getPriority : () ==> Types`Priority
+  getPriority() == (return priority);
 (*@
 \label{getPriority:23}
 @*)
- pure public getPriority : () ==> Types`Priority
-  getPriority() == (return priority);
 
--- Returns the appointment's prescriptions
+  -- Sets the appointment's priority
+  public setPriority : Types`Priority ==> ()
+   setPriority(p) == (priority := p)
 (*@
 \label{getPrescriptions:27}
 @*)
-  pure public getPrescriptions : () ==> set of (Prescription)
-   getPrescriptions() == (return prescriptions);
-  
-  -- Sets the appointment's priority
-(*@
-\label{setPriority:31}
-@*)
-  public setPriority : Types`Priority ==> ()
-   setPriority(p) == (priority := p)
   pre taskType = <Urgencies>;
   
-  -- Adds a prescription to the appointment
-(*@
-\label{addPrescription:36}
-@*)
-  public addPrescription : Prescription ==> ()
-   addPrescription(p) == (prescriptions := prescriptions union {p})
-  pre p not in set prescriptions
-  post p in set prescriptions;
-   
- -- Removes a prescription from the appointment
-(*@
-\label{removePrescription:42}
-@*)
- public removePrescription : Prescription ==> ()
-   removePrescription(p) == (prescriptions := prescriptions \ {p})
-  pre p in set prescriptions
-  post p not in set prescriptions;
-   
 end Appointment
 \end{vdmpp}
 \bigskip
@@ -71,20 +44,20 @@ end Appointment
 Function or operation & Line & Coverage & Calls \\
 \hline
 \hline
-\hyperref[Appointment:12]{Appointment} & 12&100.0\% & 19 \\
+\hyperref[Appointment:12]{Appointment} & 12&100.0\% & 16 \\
 \hline
-\hyperref[addPrescription:36]{addPrescription} & 36&100.0\% & 2 \\
+\hyperref[addPrescription:36]{addPrescription} & 36&0.0\% & 0 \\
 \hline
-\hyperref[getPrescriptions:27]{getPrescriptions} & 27&100.0\% & 12 \\
+\hyperref[getPrescriptions:27]{getPrescriptions} & 27&100.0\% & 4 \\
 \hline
-\hyperref[getPriority:23]{getPriority} & 23&100.0\% & 3 \\
+\hyperref[getPriority:23]{getPriority} & 23&100.0\% & 12 \\
 \hline
-\hyperref[removePrescription:42]{removePrescription} & 42&100.0\% & 4 \\
+\hyperref[removePrescription:42]{removePrescription} & 42&0.0\% & 0 \\
 \hline
-\hyperref[setPriority:31]{setPriority} & 31&100.0\% & 1 \\
+\hyperref[setPriority:31]{setPriority} & 31&100.0\% & 4 \\
 \hline
 \hline
-Appointment.vdmpp & & 100.0\% & 41 \\
+Appointment.vdmpp & & 100.0\% & 36 \\
 \hline
 \end{longtable}
 

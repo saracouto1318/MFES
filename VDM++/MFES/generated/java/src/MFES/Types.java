@@ -5,7 +5,7 @@ import org.overture.codegen.runtime.*;
 
 @SuppressWarnings("all")
 public class Types {
-  public static Number daysOfMonth(final Number month) {
+  public static Number daysOfMonth(final Number month, final Number year) {
 
     Boolean orResult_2 = false;
 
@@ -87,9 +87,31 @@ public class Types {
         return 30L;
 
       } else {
-        return 28L;
+        if (Utils.equals(month, 2L)) {
+          Boolean orResult_11 = false;
+
+          Boolean andResult_48 = false;
+
+          if (Utils.equals(Utils.mod(year.longValue(), 4L), 0L)) {
+            if (!(Utils.equals(Utils.mod(year.longValue(), 100L), 0L))) {
+              andResult_48 = true;
+            }
+          }
+
+          if (andResult_48) {
+            orResult_11 = true;
+          } else {
+            orResult_11 = Utils.equals(Utils.mod(year.longValue(), 400L), 0L);
+          }
+
+          if (orResult_11) {
+            return 29L;
+          }
+        }
       }
     }
+
+    return 28L;
   }
 
   public Types() {}
@@ -138,31 +160,31 @@ public class Types {
 
   public static Boolean inv_Time(final Time t) {
 
-    Boolean andResult_51 = false;
+    Boolean andResult_49 = false;
 
     if (t.hour.longValue() >= 0L) {
-      Boolean andResult_52 = false;
+      Boolean andResult_50 = false;
 
       if (t.hour.longValue() < 24L) {
-        Boolean andResult_53 = false;
+        Boolean andResult_51 = false;
 
         if (t.min.longValue() >= 0L) {
           if (t.min.longValue() < 60L) {
-            andResult_53 = true;
+            andResult_51 = true;
           }
         }
 
-        if (andResult_53) {
-          andResult_52 = true;
+        if (andResult_51) {
+          andResult_50 = true;
         }
       }
 
-      if (andResult_52) {
-        andResult_51 = true;
+      if (andResult_50) {
+        andResult_49 = true;
       }
     }
 
-    return andResult_51;
+    return andResult_49;
   }
 
   public static class Date implements Record {
@@ -211,14 +233,14 @@ public class Types {
 
   public static Boolean inv_Date(final Date d) {
 
-    Boolean andResult_57 = false;
+    Boolean andResult_55 = false;
 
     if (d.month.longValue() <= 12L) {
-      if (d.day.longValue() <= daysOfMonth(d.month).longValue()) {
-        andResult_57 = true;
+      if (d.day.longValue() <= daysOfMonth(d.month, d.year).longValue()) {
+        andResult_55 = true;
       }
     }
 
-    return andResult_57;
+    return andResult_55;
   }
 }

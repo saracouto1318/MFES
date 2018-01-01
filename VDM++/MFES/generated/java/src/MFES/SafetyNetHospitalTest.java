@@ -152,6 +152,7 @@ public class SafetyNetHospitalTest {
     hospital.addMedAssociated(surgeon);
     hospital.addMedAssociated(nurse);
     hospital.addMedAssociated(technician);
+    IO.print("\n Adding agendas to health professionals \n");
     for (Iterator iterator_21 = hospital.getAgendas().iterator(); iterator_21.hasNext(); ) {
       Agenda a = (Agenda) iterator_21.next();
       if (Utils.equals(a.getHealthProfessional(), doctor)) {
@@ -172,6 +173,9 @@ public class SafetyNetHospitalTest {
         }
       }
     }
+    IO.print("\n Checking agenda \n");
+    assertTrue(Utils.equals(hospital.getAgenda(doctor), agenda1));
+    IO.print("\n Adding schedules to agendas \n");
     agenda1.addSchedule(schedule);
     agenda1.addSchedule(schedule3);
     agenda1.addSchedule(schedule4);
@@ -180,6 +184,7 @@ public class SafetyNetHospitalTest {
     agenda3.addSchedule(schedule);
     agenda4.addSchedule(schedule3);
     agenda5.addSchedule(schedule);
+    IO.print("\n Checking agendas \n");
     assertTrue(Utils.equals(agenda1.getAgenda().size(), 3L));
     assertTrue(Utils.equals(agenda2.getAgenda().size(), 2L));
     assertTrue(Utils.equals(agenda3.getAgenda().size(), 1L));
@@ -212,6 +217,7 @@ public class SafetyNetHospitalTest {
     assertTrue(
         Utils.equals(
             hospital.getMedicalAssociatedByType(MFES.quotes.DoctorQuote.getInstance()).size(), 2L));
+    assertTrue(Utils.equals(hospital.getMedicalAssociated().size(), 5L));
     IO.print("\n Removing a doctor \n");
     hospital.addTask(appointment);
     hospital.addTraining(train);
@@ -235,6 +241,7 @@ public class SafetyNetHospitalTest {
 
   public void testAddRemoveTaskHospital() {
 
+    IO.print("\n Adding tasks \n");
     hospital.addTask(appointment);
     hospital.addTask(appointment2);
     hospital.addTask(appointment3);

@@ -6,6 +6,7 @@ instance variables
 	private time1: Types`Time := mk_Types`Time(12, 10);
 	private date: Types`Date := mk_Types`Date(2017, 11, 25, time1);
 	private d: Types`Date := mk_Types`Date(2017, 2, 25, time1);
+	private d2: Types`Date := mk_Types`Date(2016, 2, 25, time1);
 	private date1: Types`Date := mk_Types`Date(2017, 12, 25, time1);
 	private time2: Types`Time := mk_Types`Time(12, 30);
 	private date2: Types`Date := mk_Types`Date(2017, 12, 25, time2);
@@ -52,9 +53,6 @@ instance variables
 	private urgencies: Appointment := new Appointment(doctor2, <High>, schedule, patient2, hospital);
 	private surgery: Surgery := new Surgery(surgeon, schedule3, patient3, hospital);
 	private treatment: Treatment := new Treatment(technician, "Fisioterapia", schedule, patient4, hospital);
-	
-	private medicament: Medicament := new Medicament("Brufen");
-	private prescription: Prescription := new Prescription("123");
 operations
 	private assertTrue: bool ==> ()
 		assertTrue(cond) == return
@@ -179,47 +177,6 @@ operations
 			
 			urgencies.setPriority(<Low>);
 			assertTrue(urgencies.getPriority() = <Low>);
-			
-			IO`print("\n Checking appointment prescriptions \n");
-			IO`print("\n Number of prescriptions: ");
-			IO`print(card appointment.getPrescriptions() + card urgencies.getPrescriptions());
-			assertTrue(card appointment.getPrescriptions() = 0);
-			assertTrue(card urgencies.getPrescriptions() = 0);
-			
-			IO`print("\n\n Getting prescription code and medicament name \n");
-			assertTrue(medicament.getName() = "Brufen");
-			assertTrue(prescription.getCode() = "123");
-			assertTrue(card prescription.getMedicaments() = 0);
-			
-			IO`print("\n Adding medicament \n");
-			IO`print("\n Number of medicaments: ");
-			IO`print(card prescription.getMedicaments());
-			prescription.addMedicament(medicament);
-			assertTrue(card prescription.getMedicaments() = 1);
-			assertTrue(prescription.getMedicaments() = {medicament});
-			
-			IO`print("\n\n Removing medicament \n");
-			IO`print("\n Number of medicaments: ");
-			IO`print(card prescription.getMedicaments());
-			prescription.removeMedicament(medicament);
-			assertTrue(card prescription.getMedicaments() = 0);
-			assertTrue(prescription.getMedicaments() = {});
-			
-			IO`print("\n Adding a prescription \n");
-			IO`print("\n Number of prescriptions: ");
-			IO`print(card appointment.getPrescriptions() + card urgencies.getPrescriptions());
-			appointment.addPrescription(prescription);
-			urgencies.addPrescription(prescription);
-			assertTrue(card appointment.getPrescriptions() = 1);
-			assertTrue(card urgencies.getPrescriptions() = 1);
-			
-			IO`print("\n\n Removing a prescription \n");
-			IO`print("\n Number of prescriptions: ");
-			IO`print(card appointment.getPrescriptions() + card urgencies.getPrescriptions());
-			appointment.removePrescription(prescription);
-			urgencies.removePrescription(prescription);
-			assertTrue(card appointment.getPrescriptions() = 0);
-			assertTrue(card urgencies.getPrescriptions() = 0);
 		);
 		
 	public testSurgery: () ==> ()

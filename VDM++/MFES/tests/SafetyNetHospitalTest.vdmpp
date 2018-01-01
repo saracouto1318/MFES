@@ -94,15 +94,16 @@ operations
 		
 		public testAddRemoveMedHospital : () ==> ()
 		testAddRemoveMedHospital() == (
-					dcl agenda1 : Agenda, agenda2 : Agenda, agenda3 : Agenda, agenda4: Agenda, agenda5: Agenda;
+				dcl agenda1 : Agenda, agenda2 : Agenda, agenda3 : Agenda, agenda4: Agenda, agenda5: Agenda;
 					
-					IO`print("\n Adding health professionals \n");
-					hospital.addMedAssociated(doctor);
-					hospital.addMedAssociated(doctor2);
-					hospital.addMedAssociated(surgeon);
-					hospital.addMedAssociated(nurse);
-					hospital.addMedAssociated(technician);	
+				IO`print("\n Adding health professionals \n");
+				hospital.addMedAssociated(doctor);
+				hospital.addMedAssociated(doctor2);
+				hospital.addMedAssociated(surgeon);
+				hospital.addMedAssociated(nurse);
+				hospital.addMedAssociated(technician);	
 			
+				IO`print("\n Adding agendas to health professionals \n");
 				for all a in set hospital.getAgendas() do(
 					if(a.getHealthProfessional() = doctor)
 						then agenda1 := a
@@ -114,68 +115,76 @@ operations
 						then agenda4 := a
 					else
 						agenda5 := a;);
-						
-						agenda1.addSchedule(schedule);
-						agenda1.addSchedule(schedule3);
-						agenda1.addSchedule(schedule4);
-						
-						agenda2.addSchedule(schedule);
-						agenda2.addSchedule(schedule3);
-						
-						agenda3.addSchedule(schedule);
-						
-						agenda4.addSchedule(schedule3);
-						
-						agenda5.addSchedule(schedule);
-						
-						assertTrue(card agenda1.getAgenda() = 3);
-						assertTrue(card agenda2.getAgenda() = 2);
-						assertTrue(card agenda3.getAgenda() = 1);
-						assertTrue(card agenda4.getAgenda() = 1);
-						assertTrue(card agenda5.getAgenda() = 1);
-						
-						IO`print("\n Total number of doctors: ");
-						IO`print(card hospital.getMedicalAssociatedByType(<Doctor>));
-						IO`print("\n Total number of surgeons: ");
-						IO`print(card hospital.getMedicalAssociatedByType(<Surgeon>));
-						IO`print("\n Total number of nurses: ");
-						IO`print(card hospital.getMedicalAssociatedByType(<Nurse>));
-						IO`print("\n Total number of technicians: ");
-						IO`print(card hospital.getMedicalAssociatedByType(<Technician>));
-						
-						assertTrue(card hospital.getMedicalAssociatedByType(<Doctor>) = 2);
-						assertTrue(card hospital.getMedicalAssociatedByType(<Surgeon>) = 1);
-						assertTrue(card hospital.getMedicalAssociatedByType(<Nurse>) = 1);
-						assertTrue(card hospital.getMedicalAssociatedByType(<Technician>) = 1);
-						
-						IO`print("\n Total number of doctors: ");
-						IO`print(card hospital.getMedicalAssociatedByType(<Doctor>));
-						
-						assertTrue(card hospital.getMedicalAssociatedByType(<Doctor>) = 2);
-						
-						IO`print("\n Removing a doctor \n");
-						hospital.addTask(appointment);
-						hospital.addTraining(train);
-						hospital.removeMedAssociated(doctor);
-						assertTrue(card hospital.getMedicalAssociatedByType(<Doctor>) = 1);	
-						
-						IO`print("\n Total number of doctors: ");
-						IO`print(card hospital.getMedicalAssociatedByType(<Doctor>));
-						
-						hospital.addMedAssociated(doctor);
-						
-						for all a in set hospital.getAgendas() do
-							if(a.getHealthProfessional().getCC() = doctor.getCC())
-								then agenda1 := a;
-						
-						agenda1.addSchedule(schedule);
-						agenda1.addSchedule(schedule3);
-						assertTrue(card agenda1.getAgenda() = 2);
+					
+					IO`print("\n Checking agenda \n");	
+					assertTrue(hospital.getAgenda(doctor) = agenda1);
+					
+					IO`print("\n Adding schedules to agendas \n");	
+					agenda1.addSchedule(schedule);
+					agenda1.addSchedule(schedule3);
+					agenda1.addSchedule(schedule4);
+					
+					agenda2.addSchedule(schedule);
+					agenda2.addSchedule(schedule3);
+					
+					agenda3.addSchedule(schedule);
+					
+					agenda4.addSchedule(schedule3);
+					
+					agenda5.addSchedule(schedule);
+					
+					IO`print("\n Checking agendas \n");	
+					assertTrue(card agenda1.getAgenda() = 3);
+					assertTrue(card agenda2.getAgenda() = 2);
+					assertTrue(card agenda3.getAgenda() = 1);
+					assertTrue(card agenda4.getAgenda() = 1);
+					assertTrue(card agenda5.getAgenda() = 1);
+					
+					IO`print("\n Total number of doctors: ");
+					IO`print(card hospital.getMedicalAssociatedByType(<Doctor>));
+					IO`print("\n Total number of surgeons: ");
+					IO`print(card hospital.getMedicalAssociatedByType(<Surgeon>));
+					IO`print("\n Total number of nurses: ");
+					IO`print(card hospital.getMedicalAssociatedByType(<Nurse>));
+					IO`print("\n Total number of technicians: ");
+					IO`print(card hospital.getMedicalAssociatedByType(<Technician>));
+					
+					assertTrue(card hospital.getMedicalAssociatedByType(<Doctor>) = 2);
+					assertTrue(card hospital.getMedicalAssociatedByType(<Surgeon>) = 1);
+					assertTrue(card hospital.getMedicalAssociatedByType(<Nurse>) = 1);
+					assertTrue(card hospital.getMedicalAssociatedByType(<Technician>) = 1);
+					
+					IO`print("\n Total number of doctors: ");
+					IO`print(card hospital.getMedicalAssociatedByType(<Doctor>));
+					
+					assertTrue(card hospital.getMedicalAssociatedByType(<Doctor>) = 2);
+					
+					assertTrue(card hospital.getMedicalAssociated() = 5);
+					
+					IO`print("\n Removing a doctor \n");
+					hospital.addTask(appointment);
+					hospital.addTraining(train);
+					hospital.removeMedAssociated(doctor);
+					assertTrue(card hospital.getMedicalAssociatedByType(<Doctor>) = 1);	
+					
+					IO`print("\n Total number of doctors: ");
+					IO`print(card hospital.getMedicalAssociatedByType(<Doctor>));
+					
+					hospital.addMedAssociated(doctor);
+					
+					for all a in set hospital.getAgendas() do
+						if(a.getHealthProfessional().getCC() = doctor.getCC())
+							then agenda1 := a;
+					
+					agenda1.addSchedule(schedule);
+					agenda1.addSchedule(schedule3);
+					assertTrue(card agenda1.getAgenda() = 2);
 							
 		);
 		
 				public testAddRemoveTaskHospital : () ==> ()
-				testAddRemoveTaskHospital() == (						
+				testAddRemoveTaskHospital() == (
+					IO`print("\n Adding tasks \n");							
 						hospital.addTask(appointment);
 						hospital.addTask(appointment2);
 						hospital.addTask(appointment3);

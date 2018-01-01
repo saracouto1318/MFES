@@ -104,15 +104,16 @@ operations
 @*)
   public testAddRemoveMedHospital : () ==> ()
   testAddRemoveMedHospital() == (
-     dcl agenda1 : Agenda, agenda2 : Agenda, agenda3 : Agenda, agenda4: Agenda, agenda5: Agenda;
+    dcl agenda1 : Agenda, agenda2 : Agenda, agenda3 : Agenda, agenda4: Agenda, agenda5: Agenda;
      
-     IO`print("\n Adding health professionals \n");
-     hospital.addMedAssociated(doctor);
-     hospital.addMedAssociated(doctor2);
-     hospital.addMedAssociated(surgeon);
-     hospital.addMedAssociated(nurse);
-     hospital.addMedAssociated(technician); 
+    IO`print("\n Adding health professionals \n");
+    hospital.addMedAssociated(doctor);
+    hospital.addMedAssociated(doctor2);
+    hospital.addMedAssociated(surgeon);
+    hospital.addMedAssociated(nurse);
+    hospital.addMedAssociated(technician); 
    
+    IO`print("\n Adding agendas to health professionals \n");
     for all a in set hospital.getAgendas() do(
      if(a.getHealthProfessional() = doctor)
       then agenda1 := a
@@ -124,71 +125,79 @@ operations
       then agenda4 := a
      else
       agenda5 := a;);
-      
-      agenda1.addSchedule(schedule);
-      agenda1.addSchedule(schedule3);
-      agenda1.addSchedule(schedule4);
-      
-      agenda2.addSchedule(schedule);
-      agenda2.addSchedule(schedule3);
-      
-      agenda3.addSchedule(schedule);
-      
-      agenda4.addSchedule(schedule3);
-      
-      agenda5.addSchedule(schedule);
-      
-      assertTrue(card agenda1.getAgenda() = 3);
-      assertTrue(card agenda2.getAgenda() = 2);
-      assertTrue(card agenda3.getAgenda() = 1);
-      assertTrue(card agenda4.getAgenda() = 1);
-      assertTrue(card agenda5.getAgenda() = 1);
-      
-      IO`print("\n Total number of doctors: ");
-      IO`print(card hospital.getMedicalAssociatedByType(<Doctor>));
-      IO`print("\n Total number of surgeons: ");
-      IO`print(card hospital.getMedicalAssociatedByType(<Surgeon>));
-      IO`print("\n Total number of nurses: ");
-      IO`print(card hospital.getMedicalAssociatedByType(<Nurse>));
-      IO`print("\n Total number of technicians: ");
-      IO`print(card hospital.getMedicalAssociatedByType(<Technician>));
-      
-      assertTrue(card hospital.getMedicalAssociatedByType(<Doctor>) = 2);
-      assertTrue(card hospital.getMedicalAssociatedByType(<Surgeon>) = 1);
-      assertTrue(card hospital.getMedicalAssociatedByType(<Nurse>) = 1);
-      assertTrue(card hospital.getMedicalAssociatedByType(<Technician>) = 1);
-      
-      IO`print("\n Total number of doctors: ");
-      IO`print(card hospital.getMedicalAssociatedByType(<Doctor>));
-      
-      assertTrue(card hospital.getMedicalAssociatedByType(<Doctor>) = 2);
-      
-      IO`print("\n Removing a doctor \n");
-      hospital.addTask(appointment);
-      hospital.addTraining(train);
-      hospital.removeMedAssociated(doctor);
-      assertTrue(card hospital.getMedicalAssociatedByType(<Doctor>) = 1); 
-      
-      IO`print("\n Total number of doctors: ");
-      IO`print(card hospital.getMedicalAssociatedByType(<Doctor>));
-      
-      hospital.addMedAssociated(doctor);
-      
-      for all a in set hospital.getAgendas() do
-       if(a.getHealthProfessional().getCC() = doctor.getCC())
-        then agenda1 := a;
-      
-      agenda1.addSchedule(schedule);
-      agenda1.addSchedule(schedule3);
-      assertTrue(card agenda1.getAgenda() = 2);
-       
-  );
-  
+     
+     IO`print("\n Checking agenda \n"); 
+     assertTrue(hospital.getAgenda(doctor) = agenda1);
+     
+     IO`print("\n Adding schedules to agendas \n"); 
+     agenda1.addSchedule(schedule);
+     agenda1.addSchedule(schedule3);
+     agenda1.addSchedule(schedule4);
+     
+     agenda2.addSchedule(schedule);
+     agenda2.addSchedule(schedule3);
+     
+     agenda3.addSchedule(schedule);
+     
+     agenda4.addSchedule(schedule3);
+     
+     agenda5.addSchedule(schedule);
+     
+     IO`print("\n Checking agendas \n"); 
+     assertTrue(card agenda1.getAgenda() = 3);
+     assertTrue(card agenda2.getAgenda() = 2);
+     assertTrue(card agenda3.getAgenda() = 1);
+     assertTrue(card agenda4.getAgenda() = 1);
+     assertTrue(card agenda5.getAgenda() = 1);
+     
+     IO`print("\n Total number of doctors: ");
+     IO`print(card hospital.getMedicalAssociatedByType(<Doctor>));
+     IO`print("\n Total number of surgeons: ");
+     IO`print(card hospital.getMedicalAssociatedByType(<Surgeon>));
+     IO`print("\n Total number of nurses: ");
+     IO`print(card hospital.getMedicalAssociatedByType(<Nurse>));
+     IO`print("\n Total number of technicians: ");
+     IO`print(card hospital.getMedicalAssociatedByType(<Technician>));
+     
+     assertTrue(card hospital.getMedicalAssociatedByType(<Doctor>) = 2);
+     assertTrue(card hospital.getMedicalAssociatedByType(<Surgeon>) = 1);
+     assertTrue(card hospital.getMedicalAssociatedByType(<Nurse>) = 1);
+     assertTrue(card hospital.getMedicalAssociatedByType(<Technician>) = 1);
+     
+     IO`print("\n Total number of doctors: ");
+     IO`print(card hospital.getMedicalAssociatedByType(<Doctor>));
+     
+     assertTrue(card hospital.getMedicalAssociatedByType(<Doctor>) = 2);
+     
+     assertTrue(card hospital.getMedicalAssociated() = 5);
+     
+     IO`print("\n Removing a doctor \n");
+     hospital.addTask(appointment);
+     hospital.addTraining(train);
+     hospital.removeMedAssociated(doctor);
+     assertTrue(card hospital.getMedicalAssociatedByType(<Doctor>) = 1); 
+     
+     IO`print("\n Total number of doctors: ");
+     IO`print(card hospital.getMedicalAssociatedByType(<Doctor>));
+     
+     hospital.addMedAssociated(doctor);
+     
+     for all a in set hospital.getAgendas() do
+      if(a.getHealthProfessional().getCC() = doctor.getCC())
 (*@
 \label{testAddRemoveTaskHospital:177}
 @*)
+       then agenda1 := a;
+     
+     agenda1.addSchedule(schedule);
+     agenda1.addSchedule(schedule3);
+     assertTrue(card agenda1.getAgenda() = 2);
+       
+  );
+  
     public testAddRemoveTaskHospital : () ==> ()
-    testAddRemoveTaskHospital() == (      
+    testAddRemoveTaskHospital() == (
+     IO`print("\n Adding tasks \n");       
       hospital.addTask(appointment);
       hospital.addTask(appointment2);
       hospital.addTask(appointment3);
@@ -221,6 +230,9 @@ operations
       
       IO`print("\n Total number of appointments: ");
       IO`print(card hospital.getTasksByType(<Appointment>));
+(*@
+\label{testAddRemoveTrainingHospital:220}
+@*)
       
       IO`print("\n Adding an appointment \n");
       hospital.addTask(appointment);
@@ -230,9 +242,6 @@ operations
       IO`print(card hospital.getTasksByType(<Appointment>));  
   );
   
-(*@
-\label{testAddRemoveTrainingHospital:220}
-@*)
   public testAddRemoveTrainingHospital : () ==> ()
    testAddRemoveTrainingHospital() == (
     IO`print("\n\n Total number of trainings: ");
@@ -249,6 +258,9 @@ operations
     IO`print(card hospital.getTrainingsByType(<Training>) + card hospital.getTrainingsByType(<AddSkills>));
     
     assertTrue(card hospital.getTrainings() = (card hospital.getTrainingsByType(<Training>) + card hospital.getTrainingsByType(<AddSkills>)));
+(*@
+\label{testGetHospitalsMoreAppointments:245}
+@*)
     
     IO`print("\n Removing a training \n");
     hospital.removeTraining(training);
@@ -259,7 +271,7 @@ operations
   );
   
 (*@
-\label{testGetHospitalsMoreAppointments:245}
+\label{testGetMedMoreHospitals:254}
 @*)
   public testGetHospitalsMoreAppointments : () ==> ()
    testGetHospitalsMoreAppointments() == ( 
@@ -270,13 +282,13 @@ operations
     assertTrue(safetyNet.getHospitalsMoreAppointments(<Other>).getName() = "Hospital das Camélias");
    );
    
-(*@
-\label{testGetMedMoreHospitals:254}
-@*)
   public testGetMedMoreHospitals : () ==> ()
    testGetMedMoreHospitals() == (
     for all t in set safetyNet.getHospitals() do
      if(t.getName() <> "Hospital das Camélias")
+(*@
+\label{testGetMedAssociatedByPatient:267}
+@*)
       then t.addMedAssociated(doctor);
     
     IO`print("\n Checking Safety Net Doctors that works in more than 1 hospital \n");
@@ -286,10 +298,10 @@ operations
     assertTrue(safetyNet.getMedMoreHospitals(<Doctor>) = {doctor});  
    );
   
-(*@
-\label{testGetMedAssociatedByPatient:267}
-@*)
   public testGetMedAssociatedByPatient : () ==> ()
+(*@
+\label{testGetMedByHospital:277}
+@*)
    testGetMedAssociatedByPatient() == (
     dcl mapTest : map Hospital to set of (HealthProfessional);
     IO`print("\n\n Getting Doctors associated by patient by hospital \n");
@@ -299,15 +311,15 @@ operations
     assertTrue(mapTest(hospital) = {doctor, doctor2});
    );
    
-(*@
-\label{testGetMedByHospital:277}
-@*)
   public testGetMedByHospital : () ==> ()
    testGetMedByHospital() == (
     dcl mapTest : map Hospital to set of (HealthProfessional);
     IO`print("\n\n Getting Doctors associated by hospital \n");
     mapTest := safetyNet.getMedByHospital(<Doctor>);
     
+(*@
+\label{main:292}
+@*)
     assertTrue(card mapTest(hospital) = 2);
     assertTrue(mapTest(hospital) = {doctor, doctor2});
     
@@ -317,9 +329,6 @@ operations
     assertTrue(mapTest(hospital) = {surgeon});
    );
    
-(*@
-\label{main:292}
-@*)
   public static main: () ==> ()
    main() == (
     dcl safetyNetTest: SafetyNetHospitalTest := new SafetyNetHospitalTest();
@@ -342,28 +351,28 @@ end SafetyNetHospitalTest
 Function or operation & Line & Coverage & Calls \\
 \hline
 \hline
-\hyperref[assertTrue:60]{assertTrue} & 60&100.0\% & 176 \\
+\hyperref[assertTrue:60]{assertTrue} & 60&100.0\% & 186 \\
 \hline
-\hyperref[main:292]{main} & 292&100.0\% & 2 \\
+\hyperref[main:292]{main} & 292&100.0\% & 3 \\
 \hline
 \hyperref[testAddRemoveHospitals:64]{testAddRemoveHospitals} & 64&100.0\% & 4 \\
 \hline
-\hyperref[testAddRemoveMedHospital:95]{testAddRemoveMedHospital} & 95&100.0\% & 4 \\
+\hyperref[testAddRemoveMedHospital:95]{testAddRemoveMedHospital} & 95&100.0\% & 3 \\
 \hline
-\hyperref[testAddRemoveTaskHospital:177]{testAddRemoveTaskHospital} & 177&100.0\% & 2 \\
+\hyperref[testAddRemoveTaskHospital:177]{testAddRemoveTaskHospital} & 177&100.0\% & 3 \\
 \hline
-\hyperref[testAddRemoveTrainingHospital:220]{testAddRemoveTrainingHospital} & 220&100.0\% & 2 \\
+\hyperref[testAddRemoveTrainingHospital:220]{testAddRemoveTrainingHospital} & 220&100.0\% & 4 \\
 \hline
-\hyperref[testGetHospitalsMoreAppointments:245]{testGetHospitalsMoreAppointments} & 245&100.0\% & 2 \\
+\hyperref[testGetHospitalsMoreAppointments:245]{testGetHospitalsMoreAppointments} & 245&100.0\% & 3 \\
 \hline
-\hyperref[testGetMedAssociatedByPatient:267]{testGetMedAssociatedByPatient} & 267&100.0\% & 2 \\
+\hyperref[testGetMedAssociatedByPatient:267]{testGetMedAssociatedByPatient} & 267&100.0\% & 3 \\
 \hline
-\hyperref[testGetMedByHospital:277]{testGetMedByHospital} & 277&100.0\% & 2 \\
+\hyperref[testGetMedByHospital:277]{testGetMedByHospital} & 277&100.0\% & 3 \\
 \hline
-\hyperref[testGetMedMoreHospitals:254]{testGetMedMoreHospitals} & 254&100.0\% & 2 \\
+\hyperref[testGetMedMoreHospitals:254]{testGetMedMoreHospitals} & 254&100.0\% & 3 \\
 \hline
 \hline
-SafetyNetHospitalTest.vdmpp & & 100.0\% & 198 \\
+SafetyNetHospitalTest.vdmpp & & 100.0\% & 215 \\
 \hline
 \end{longtable}
 

@@ -62,7 +62,7 @@ public class Hospital {
     for (Iterator iterator_2 = agenda.iterator(); iterator_2.hasNext(); ) {
       Agenda a2 = (Agenda) iterator_2.next();
       if (Utils.equals(a2.getHealthProfessional(), h)) {
-        return a2;
+        a1 = a2;
       }
     }
     return a1;
@@ -200,7 +200,7 @@ public class Hospital {
 
   public String toString() {
 
-    return "Hospital{"
+     return "Hospital{"
         + "medicalAssociated := "
         + Utils.toString(medicalAssociated)
         + ", agenda := "

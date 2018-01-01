@@ -5,7 +5,6 @@ import org.overture.codegen.runtime.*;
 
 @SuppressWarnings("all")
 public class Appointment extends Task {
-  private VDMSet prescriptions;
   private Object priority;
 
   public void cg_init_Appointment_2(
@@ -17,7 +16,6 @@ public class Appointment extends Task {
 
     medicalAssoc = d;
     priority = p;
-    prescriptions = SetUtil.set();
     cg_init_Task_1(d, s, pat, h, MFES.quotes.UrgenciesQuote.getInstance());
   }
 
@@ -26,7 +24,6 @@ public class Appointment extends Task {
 
     medicalAssoc = d;
     priority = MFES.quotes.MediumQuote.getInstance();
-    prescriptions = SetUtil.set();
     cg_init_Task_1(d, s, p, h, MFES.quotes.AppointmentQuote.getInstance());
   }
 
@@ -51,35 +48,15 @@ public class Appointment extends Task {
     return priority;
   }
 
-  public VDMSet getPrescriptions() {
-
-    return Utils.copy(prescriptions);
-  }
-
   public void setPriority(final Object p) {
 
     priority = p;
-  }
-
-  public void addPrescription(final Prescription p) {
-
-    prescriptions = SetUtil.union(Utils.copy(prescriptions), SetUtil.set(p));
-  }
-
-  public void removePrescription(final Prescription p) {
-
-    prescriptions = SetUtil.diff(Utils.copy(prescriptions), SetUtil.set(p));
   }
 
   public Appointment() {}
 
   public String toString() {
 
-    return "Appointment{"
-        + "prescriptions := "
-        + Utils.toString(prescriptions)
-        + ", priority := "
-        + Utils.toString(priority)
-        + "}";
+    return "Appointment{" + "priority := " + Utils.toString(priority) + "}";
   }
 }
