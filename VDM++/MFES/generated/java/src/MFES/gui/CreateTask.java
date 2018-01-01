@@ -13,7 +13,6 @@ import MFES.Surgery;
 import MFES.Task;
 import MFES.Treatment;
 import MFES.gui.CreateSchedule;
-import MFES.gui.HospitalPicker;
 import MFES.gui.ListSelectabels;
 import MFES.gui.ManageHospital;
 
