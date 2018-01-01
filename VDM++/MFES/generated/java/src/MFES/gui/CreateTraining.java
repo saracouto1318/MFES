@@ -5,18 +5,10 @@ import java.util.Scanner;
 
 import org.overture.codegen.runtime.VDMSet;
 
-import MFES.Agenda;
-import MFES.Appointment;
 import MFES.HealthProfessional;
 import MFES.Hospital;
-import MFES.Patient;
 import MFES.Schedule;
-import MFES.Surgery;
-import MFES.Task;
 import MFES.Training;
-import MFES.Treatment;
-import MFES.gui.CreateTask.CreateState;
-import MFES.gui.CreateTask.TaskType;
 
 public class CreateTraining extends Menu {
     public static enum CreateState {HEALTHPROFESSIONAL_LIST, SCHEDULE, INVALID};
@@ -35,7 +27,6 @@ public class CreateTraining extends Menu {
         this.hospital = hospital;
     }
 
-    @SuppressWarnings("unchecked")
 	@Override
 	public void show() {
 		switch(state) {

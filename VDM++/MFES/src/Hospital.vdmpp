@@ -142,6 +142,11 @@ operations
 					then train := train union {t};	
 			return train);
 
+	-- Returns the health professionals of a hospital
+	pure public getMedicalAssociated: () ==> set of (HealthProfessional)
+		getMedicalAssociated() == (
+			return medicalAssociated);
+
 	-- Returns the health professionals of a hospital by its type
 	pure public getMedicalAssociatedByType: Types`Type ==> set of (HealthProfessional)
 		getMedicalAssociatedByType(type) == (

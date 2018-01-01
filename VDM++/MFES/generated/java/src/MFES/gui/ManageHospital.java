@@ -1,8 +1,6 @@
 package MFES.gui;
 
-import java.util.ArrayList;
 import java.util.Iterator;
-import java.util.List;
 import java.util.Scanner;
 
 import org.overture.codegen.runtime.VDMSet;
@@ -103,29 +101,16 @@ public class ManageHospital extends Menu {
 			if(option == 1)
 				state = MenuState.CREATE;
 			else if(option == 2) {
-				List<HealthProfessional> hpList = new ArrayList<>();
+                VDMSet hps = hospital.getMedicalAssociated();
+
+				HealthProfessional[] hpList = new HealthProfessional[hps.size()];
 				
-				VDMSet hps = this.hospital.getMedicalAssociatedByType(MFES.quotes.DoctorQuote.getInstance());
 	            Iterator<HealthProfessional> iter = hps.iterator();
+	            int i = 0;
 	            while(iter.hasNext())
-	            	hpList.add(iter.next());
+	            	hpList[i++] = iter.next();
 	            
-	            hps = this.hospital.getMedicalAssociatedByType(MFES.quotes.SurgeonQuote.getInstance());
-	            iter = hps.iterator();
-	            while(iter.hasNext())
-	            	hpList.add(iter.next());
-
-	            hps = this.hospital.getMedicalAssociatedByType(MFES.quotes.NurseQuote.getInstance());
-	            iter = hps.iterator();
-	            while(iter.hasNext())
-	            	hpList.add(iter.next());
-
-	            hps = this.hospital.getMedicalAssociatedByType(MFES.quotes.TechnicianQuote.getInstance());
-	            iter = hps.iterator();
-	            while(iter.hasNext())
-	            	hpList.add(iter.next());
-	            
-	            ListSelectabels<HealthProfessional> m = new ListSelectabels<>(reader, hpList.toArray(new HealthProfessional[0]), this);
+	            ListSelectabels<HealthProfessional> m = new ListSelectabels<>(reader, hpList, this);
 	            m.show();
 	            m.action();
 				return new HealthProfessionalPage(reader, m.getSelected());

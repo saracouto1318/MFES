@@ -178,6 +178,11 @@ public class Hospital {
     return Utils.copy(train);
   }
 
+  public VDMSet getMedicalAssociated() {
+
+    return Utils.copy(medicalAssociated);
+  }
+
   public VDMSet getMedicalAssociatedByType(final Object type) {
 
     VDMSet med = null;
@@ -195,7 +200,21 @@ public class Hospital {
 
   public String toString() {
 
-    return  "Hospital "
-            + Utils.toString(name);
+    return "Hospital{"
+        + "medicalAssociated := "
+        + Utils.toString(medicalAssociated)
+        + ", agenda := "
+        + Utils.toString(agenda)
+        + ", name := "
+        + Utils.toString(name)
+        + ", address := "
+        + Utils.toString(address)
+        + ", tasks := "
+        + Utils.toString(tasks)
+        + ", trainings := "
+        + Utils.toString(trainings)
+        + ", safetyNet := "
+        + Utils.toString(safetyNet)
+        + "}";
   }
 }
