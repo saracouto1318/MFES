@@ -15,9 +15,10 @@ public class HealthProfessionalPage extends Menu {
 	private HealthProfessional healthProfessional;
 	private Hospital hospital;
 	
-    public HealthProfessionalPage(Scanner reader) {
+    public HealthProfessionalPage(Scanner reader, HealthProfessional healthProfessional) {
         super(reader);
         state = PageState.MAIN;
+        this.healthProfessional = healthProfessional;
     }
 
 	@SuppressWarnings("unchecked")

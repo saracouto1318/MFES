@@ -1,10 +1,13 @@
 package MFES.gui;
 
+import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Scanner;
 
 import org.overture.codegen.runtime.VDMSet;
 
+import MFES.HealthProfessional;
 import MFES.Hospital;
 import MFES.Task;
 import MFES.gui.CreateTask;
@@ -33,13 +36,14 @@ public class ManageHospital extends Menu {
 				first = false;
 			}
 			System.out.println("1. Criar");
-			System.out.println("2. Consultas");
-			System.out.println("3. Urgencias");
-			System.out.println("4. Cirurgias");
-			System.out.println("5. Tratamento Enfermeiro");
-			System.out.println("6. Tratamentos Tecnico");
-			System.out.println("7. Treinos");
-			System.out.println("8. Sair");
+			System.out.println("2. Health professionals");
+			System.out.println("3. Consultas");
+			System.out.println("4. Urgencias");
+			System.out.println("5. Cirurgias");
+			System.out.println("6. Tratamento Enfermeiro");
+			System.out.println("7. Tratamentos Tecnico");
+			System.out.println("8. Treinos");
+			System.out.println("9. Sair");
 			break;
 		case CREATE:
 			System.out.println("1. Medico");
@@ -98,6 +102,34 @@ public class ManageHospital extends Menu {
 
 			if(option == 1)
 				state = MenuState.CREATE;
+			else if(option == 2) {
+				List<HealthProfessional> hpList = new ArrayList<>();
+				
+				VDMSet hps = this.hospital.getMedicalAssociatedByType(MFES.quotes.DoctorQuote.getInstance());
+	            Iterator<HealthProfessional> iter = hps.iterator();
+	            while(iter.hasNext())
+	            	hpList.add(iter.next());
+	            
+	            hps = this.hospital.getMedicalAssociatedByType(MFES.quotes.SurgeonQuote.getInstance());
+	            iter = hps.iterator();
+	            while(iter.hasNext())
+	            	hpList.add(iter.next());
+
+	            hps = this.hospital.getMedicalAssociatedByType(MFES.quotes.NurseQuote.getInstance());
+	            iter = hps.iterator();
+	            while(iter.hasNext())
+	            	hpList.add(iter.next());
+
+	            hps = this.hospital.getMedicalAssociatedByType(MFES.quotes.TechnicianQuote.getInstance());
+	            iter = hps.iterator();
+	            while(iter.hasNext())
+	            	hpList.add(iter.next());
+	            
+	            ListSelectabels<HealthProfessional> m = new ListSelectabels<>(reader, hpList.toArray(new HealthProfessional[0]), this);
+	            m.show();
+	            m.action();
+				return new HealthProfessionalPage(reader, m.getSelected());
+			}
 			else if(option == 2)
 				state = MenuState.APPOINTMENT;
 			else if(option == 3)

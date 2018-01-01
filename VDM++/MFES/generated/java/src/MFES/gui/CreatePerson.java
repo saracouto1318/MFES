@@ -107,10 +107,12 @@ public class CreatePerson extends Menu {
             break;
         case MEDICALNUMBER:
             medicalNumber = input;
-            return new HealthProfessionalPage(reader);
+            createPerson();
+            return new HealthProfessionalPage(reader, (HealthProfessional)person);
         case HEALTHNUMBER:
             healthNumber = input;
-            return new HealthProfessionalPage(reader);
+            createPerson();
+            return new HospitalPicker(reader);
         }
 
         show();
