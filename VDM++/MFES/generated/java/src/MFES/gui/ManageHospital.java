@@ -115,19 +115,19 @@ public class ManageHospital extends Menu {
 	            m.action();
 				return new HealthProfessionalPage(reader, m.getSelected());
 			}
-			else if(option == 2)
-				state = MenuState.APPOINTMENT;
 			else if(option == 3)
-				state = MenuState.URGENCY;
+				state = MenuState.APPOINTMENT;
 			else if(option == 4)
-				state = MenuState.SURGERY;
+				state = MenuState.URGENCY;
 			else if(option == 5)
-				state = MenuState.NURSE_TREATMENT;
+				state = MenuState.SURGERY;
 			else if(option == 6)
-				state = MenuState.TECHNICIAN_TREATMENT;
+				state = MenuState.NURSE_TREATMENT;
 			else if(option == 7)
+				state = MenuState.TECHNICIAN_TREATMENT;
+			else if(option == 8)
 				state = MenuState.TRAINING;
-			else if(option == 8) {
+			else if(option == 9) {
 				return new HospitalPicker(reader);
 			}
 
@@ -282,7 +282,7 @@ public class ManageHospital extends Menu {
 				return null;
 
 			if(option == 1)
-				state = MenuState.MAIN;
+				return new CreateTraining(reader, hospital);
 			else if(option == 2) {
 		    	VDMSet tasks = hospital.getTrainings();
 		        if(tasks.size() <= 0) {
