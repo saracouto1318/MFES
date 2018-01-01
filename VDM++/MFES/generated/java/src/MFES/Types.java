@@ -7,104 +7,104 @@ import org.overture.codegen.runtime.*;
 public class Types {
   public static Number daysOfMonth(final Number month, final Number year) {
 
-    Boolean orResult_2 = false;
+    Boolean orResult_4 = false;
 
     if (Utils.equals(month, 1L)) {
-      orResult_2 = true;
+      orResult_4 = true;
     } else {
-      Boolean orResult_3 = false;
+      Boolean orResult_5 = false;
 
       if (Utils.equals(month, 3L)) {
-        orResult_3 = true;
+        orResult_5 = true;
       } else {
-        Boolean orResult_4 = false;
+        Boolean orResult_6 = false;
 
         if (Utils.equals(month, 5L)) {
-          orResult_4 = true;
+          orResult_6 = true;
         } else {
-          Boolean orResult_5 = false;
+          Boolean orResult_7 = false;
 
           if (Utils.equals(month, 7L)) {
-            orResult_5 = true;
+            orResult_7 = true;
           } else {
-            Boolean orResult_6 = false;
+            Boolean orResult_8 = false;
 
             if (Utils.equals(month, 8L)) {
-              orResult_6 = true;
+              orResult_8 = true;
             } else {
-              Boolean orResult_7 = false;
+              Boolean orResult_9 = false;
 
               if (Utils.equals(month, 10L)) {
-                orResult_7 = true;
+                orResult_9 = true;
               } else {
-                orResult_7 = Utils.equals(month, 12L);
+                orResult_9 = Utils.equals(month, 12L);
               }
 
-              orResult_6 = orResult_7;
+              orResult_8 = orResult_9;
             }
 
-            orResult_5 = orResult_6;
+            orResult_7 = orResult_8;
           }
 
-          orResult_4 = orResult_5;
+          orResult_6 = orResult_7;
         }
 
-        orResult_3 = orResult_4;
+        orResult_5 = orResult_6;
       }
 
-      orResult_2 = orResult_3;
+      orResult_4 = orResult_5;
     }
 
-    if (orResult_2) {
+    if (orResult_4) {
       return 31L;
 
     } else {
-      Boolean orResult_8 = false;
+      Boolean orResult_10 = false;
 
       if (Utils.equals(month, 4L)) {
-        orResult_8 = true;
+        orResult_10 = true;
       } else {
-        Boolean orResult_9 = false;
+        Boolean orResult_11 = false;
 
         if (Utils.equals(month, 6L)) {
-          orResult_9 = true;
+          orResult_11 = true;
         } else {
-          Boolean orResult_10 = false;
+          Boolean orResult_12 = false;
 
           if (Utils.equals(month, 9L)) {
-            orResult_10 = true;
+            orResult_12 = true;
           } else {
-            orResult_10 = Utils.equals(month, 11L);
+            orResult_12 = Utils.equals(month, 11L);
           }
 
-          orResult_9 = orResult_10;
+          orResult_11 = orResult_12;
         }
 
-        orResult_8 = orResult_9;
+        orResult_10 = orResult_11;
       }
 
-      if (orResult_8) {
+      if (orResult_10) {
         return 30L;
 
       } else {
         if (Utils.equals(month, 2L)) {
-          Boolean orResult_11 = false;
+          Boolean orResult_13 = false;
 
-          Boolean andResult_48 = false;
+          Boolean andResult_56 = false;
 
           if (Utils.equals(Utils.mod(year.longValue(), 4L), 0L)) {
             if (!(Utils.equals(Utils.mod(year.longValue(), 100L), 0L))) {
-              andResult_48 = true;
+              andResult_56 = true;
             }
           }
 
-          if (andResult_48) {
-            orResult_11 = true;
+          if (andResult_56) {
+            orResult_13 = true;
           } else {
-            orResult_11 = Utils.equals(Utils.mod(year.longValue(), 400L), 0L);
+            orResult_13 = Utils.equals(Utils.mod(year.longValue(), 400L), 0L);
           }
 
-          if (orResult_11) {
+          if (orResult_13) {
             return 29L;
           }
         }
@@ -160,31 +160,31 @@ public class Types {
 
   public static Boolean inv_Time(final Time t) {
 
-    Boolean andResult_49 = false;
+    Boolean andResult_57 = false;
 
     if (t.hour.longValue() >= 0L) {
-      Boolean andResult_50 = false;
+      Boolean andResult_58 = false;
 
       if (t.hour.longValue() < 24L) {
-        Boolean andResult_51 = false;
+        Boolean andResult_59 = false;
 
         if (t.min.longValue() >= 0L) {
           if (t.min.longValue() < 60L) {
-            andResult_51 = true;
+            andResult_59 = true;
           }
         }
 
-        if (andResult_51) {
-          andResult_50 = true;
+        if (andResult_59) {
+          andResult_58 = true;
         }
       }
 
-      if (andResult_50) {
-        andResult_49 = true;
+      if (andResult_58) {
+        andResult_57 = true;
       }
     }
 
-    return andResult_49;
+    return andResult_57;
   }
 
   public static class Date implements Record {
@@ -233,14 +233,14 @@ public class Types {
 
   public static Boolean inv_Date(final Date d) {
 
-    Boolean andResult_55 = false;
+    Boolean andResult_63 = false;
 
     if (d.month.longValue() <= 12L) {
       if (d.day.longValue() <= daysOfMonth(d.month, d.year).longValue()) {
-        andResult_55 = true;
+        andResult_63 = true;
       }
     }
 
-    return andResult_55;
+    return andResult_63;
   }
 }

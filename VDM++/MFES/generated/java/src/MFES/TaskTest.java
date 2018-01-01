@@ -115,12 +115,16 @@ public class TaskTest {
     Agenda agenda2 = null;
     Agenda agenda3 = null;
     Agenda agenda4 = null;
+    Agenda agenda5 = null;
+    Agenda agenda6 = null;
     hospital.addMedAssociated(doctor);
     hospital.addMedAssociated(doctor2);
     hospital.addMedAssociated(surgeon);
     hospital.addMedAssociated(technician);
-    for (Iterator iterator_24 = hospital.getAgendas().iterator(); iterator_24.hasNext(); ) {
-      Agenda a = (Agenda) iterator_24.next();
+    hospital.addMedAssociated(nurse);
+    hospital.addMedAssociated(secSurgeon);
+    for (Iterator iterator_26 = hospital.getAgendas().iterator(); iterator_26.hasNext(); ) {
+      Agenda a = (Agenda) iterator_26.next();
       if (Utils.equals(a.getHealthProfessional(), doctor)) {
         agenda1 = a;
       } else {
@@ -130,7 +134,15 @@ public class TaskTest {
           if (Utils.equals(a.getHealthProfessional(), surgeon)) {
             agenda3 = a;
           } else {
-            agenda4 = a;
+            if (Utils.equals(a.getHealthProfessional(), secSurgeon)) {
+              agenda5 = a;
+            } else {
+              if (Utils.equals(a.getHealthProfessional(), nurse)) {
+                agenda6 = a;
+              } else {
+                agenda4 = a;
+              }
+            }
           }
         }
       }
@@ -151,6 +163,10 @@ public class TaskTest {
     assertTrue(Utils.equals(agenda4.getAgenda().size(), 0L));
     agenda4.addSchedule(schedule);
     assertTrue(Utils.equals(agenda4.getAgenda().size(), 1L));
+    agenda5.addSchedule(schedule3);
+    assertTrue(Utils.equals(agenda5.getAgenda().size(), 1L));
+    agenda6.addSchedule(schedule3);
+    assertTrue(Utils.equals(agenda6.getAgenda().size(), 1L));
     hospital.addTask(appointment);
     hospital.addTask(urgencies);
     hospital.addTask(surgery);

@@ -21,40 +21,48 @@ operations
 \label{addSecondaryDoctor:16}
 @*)
  public addSecondaryDoctor : HealthProfessional ==> ()
-  addSecondaryDoctor(s) == (secondaryDoctors := secondaryDoctors union {s})
- pre s <> medicalAssoc and s.getType() = <Surgeon> and  s not in set secondaryDoctors
- post s in set secondaryDoctors;
+  addSecondaryDoctor(s) == (
+   removeScheduleAuxiliaries(s);
+   secondaryDoctors := secondaryDoctors union {s})
+ pre s <> medicalAssoc and s.getType() = <Surgeon> and s not in set secondaryDoctors and schedule in set hospital.getAgenda(s).getAgenda()
+ post s in set secondaryDoctors and schedule not in set hospital.getAgenda(s).getAgenda();
  
  -- Removes an auxiliary surgeon from the surgery
 (*@
-\label{removeSecondaryDoctor:22}
+\label{removeSecondaryDoctor:24}
 @*)
  public removeSecondaryDoctor : HealthProfessional ==> ()
-  removeSecondaryDoctor(s) == (secondaryDoctors := secondaryDoctors \ {s})
- pre s.getType() = <Surgeon> and s in set secondaryDoctors
- post s not in set secondaryDoctors;
+  removeSecondaryDoctor(s) == (
+   addScheduleAuxiliaries(s);
+   secondaryDoctors := secondaryDoctors \ {s})
+ pre s.getType() = <Surgeon> and s in set secondaryDoctors and schedule not in set hospital.getAgenda(s).getAgenda()
+ post s not in set secondaryDoctors and schedule in set hospital.getAgenda(s).getAgenda();
  
  -- Adds a nurse to the surgery
 (*@
-\label{addOther:28}
+\label{addOther:32}
 @*)
  public addOther : HealthProfessional ==> ()
-  addOther(s) == (other := other union {s})
- pre s.getType() = <Nurse> and s not in set other
- post s in set other;
+  addOther(s) == (
+   removeScheduleAuxiliaries(s);
+   other := other union {s})
+ pre s.getType() = <Nurse> and s not in set other and schedule in set hospital.getAgenda(s).getAgenda()
+ post s in set other and schedule not in set hospital.getAgenda(s).getAgenda();
  
  -- Removes a nurse from the surgery
 (*@
-\label{removeOther:34}
+\label{removeOther:40}
 @*)
  public removeOther : HealthProfessional ==> ()
-  removeOther(s) == (other := other \ {s})
- pre s.getType() = <Nurse> and s in set other
- post s not in set other;
+  removeOther(s) == (
+   addScheduleAuxiliaries(s);
+   other := other \ {s})
+ pre s.getType() = <Nurse> and s in set other and schedule not in set hospital.getAgenda(s).getAgenda()
+ post s not in set other and schedule in set hospital.getAgenda(s).getAgenda();
  
  -- Sets the surgery's main surgeon
 (*@
-\label{setMainDoctor:40}
+\label{setMainDoctor:48}
 @*)
  public setMainDoctor : HealthProfessional ==> ()
   setMainDoctor(s) == (medicalAssoc := s)
@@ -62,7 +70,7 @@ operations
  
  -- Returns the auxiliary staff of a surgery by type
 (*@
-\label{getSurgeryPersons:45}
+\label{getSurgeryPersons:53}
 @*)
  pure public getSurgeryPersons : Types`Type ==> set of (HealthProfessional)
   getSurgeryPersons(t) == (
@@ -72,6 +80,29 @@ operations
                else
                 med := other;
                return med);
+ 
+ -- Adds the surgery schedule to the auxiliary's agenda            
+(*@
+\label{addScheduleAuxiliaries:63}
+@*)
+ public addScheduleAuxiliaries : HealthProfessional ==> ()
+  addScheduleAuxiliaries(s) == (
+   for all a in set hospital.getAgendas() do
+    if(a.getHealthProfessional().getCC() = s.getCC())
+     then a.addSchedule(schedule))
+ pre s.getType() = <Surgeon> or s.getType() = <Nurse>;
+ 
+ -- Removes the surgery schedule from the auxiliary's agenda
+(*@
+\label{removeScheduleAuxiliaries:71}
+@*)
+ public removeScheduleAuxiliaries : HealthProfessional ==> ()
+  removeScheduleAuxiliaries(s) == (
+   for all a in set hospital.getAgendas() do
+    if(a.getHealthProfessional().getCC() = s.getCC())
+     then a.removeSchedule(schedule))
+ pre s.getType() = <Surgeon> or s.getType() = <Nurse>;
+ 
 end Surgery
 \end{vdmpp}
 \bigskip
@@ -80,22 +111,26 @@ end Surgery
 Function or operation & Line & Coverage & Calls \\
 \hline
 \hline
-\hyperref[Surgery:11]{Surgery} & 11&100.0\% & 16 \\
+\hyperref[Surgery:11]{Surgery} & 11&100.0\% & 13 \\
 \hline
-\hyperref[addOther:28]{addOther} & 28&100.0\% & 4 \\
+\hyperref[addOther:32]{addOther} & 32&100.0\% & 1 \\
 \hline
-\hyperref[addSecondaryDoctor:16]{addSecondaryDoctor} & 16&100.0\% & 4 \\
+\hyperref[addScheduleAuxiliaries:63]{addScheduleAuxiliaries} & 63&100.0\% & 2 \\
 \hline
-\hyperref[getSurgeryPersons:45]{getSurgeryPersons} & 45&100.0\% & 24 \\
+\hyperref[addSecondaryDoctor:16]{addSecondaryDoctor} & 16&100.0\% & 3 \\
 \hline
-\hyperref[removeOther:34]{removeOther} & 34&100.0\% & 4 \\
+\hyperref[getSurgeryPersons:53]{getSurgeryPersons} & 53&100.0\% & 11 \\
 \hline
-\hyperref[removeSecondaryDoctor:22]{removeSecondaryDoctor} & 22&100.0\% & 4 \\
+\hyperref[removeOther:40]{removeOther} & 40&100.0\% & 1 \\
 \hline
-\hyperref[setMainDoctor:40]{setMainDoctor} & 40&100.0\% & 4 \\
+\hyperref[removeScheduleAuxiliaries:71]{removeScheduleAuxiliaries} & 71&100.0\% & 18 \\
+\hline
+\hyperref[removeSecondaryDoctor:24]{removeSecondaryDoctor} & 24&100.0\% & 1 \\
+\hline
+\hyperref[setMainDoctor:48]{setMainDoctor} & 48&100.0\% & 1 \\
 \hline
 \hline
-Surgery.vdmpp & & 100.0\% & 60 \\
+Surgery.vdmpp & & 100.0\% & 51 \\
 \hline
 \end{longtable}
 

@@ -60,11 +60,13 @@ operations
 	
 	public testGetsSetsTask : () ==> ()
 		testGetsSetsTask() == (
-			dcl agenda1 : Agenda, agenda2 : Agenda, agenda3 : Agenda, agenda4: Agenda;
+			dcl agenda1 : Agenda, agenda2 : Agenda, agenda3 : Agenda, agenda4: Agenda, agenda5: Agenda, agenda6: Agenda;
 			hospital.addMedAssociated(doctor);
 			hospital.addMedAssociated(doctor2);
 			hospital.addMedAssociated(surgeon);
 			hospital.addMedAssociated(technician);
+			hospital.addMedAssociated(nurse);
+			hospital.addMedAssociated(secSurgeon);
 			
 			for all a in set hospital.getAgendas() do(
 				if(a.getHealthProfessional() = doctor)
@@ -73,6 +75,10 @@ operations
 					then agenda2 := a
 				else if(a.getHealthProfessional() = surgeon)
 					then agenda3 := a
+				else if(a.getHealthProfessional() = secSurgeon)
+					then agenda5 := a
+				else if(a.getHealthProfessional() = nurse)
+					then agenda6 := a
 				else
 					agenda4 := a;);
 			
@@ -105,6 +111,14 @@ operations
 			agenda4.addSchedule(schedule);
 			
 			assertTrue(card agenda4.getAgenda() = 1);
+			
+			agenda5.addSchedule(schedule3);
+			
+			assertTrue(card agenda5.getAgenda() = 1);
+			
+			agenda6.addSchedule(schedule3);
+			
+			assertTrue(card agenda6.getAgenda() = 1);
 			
 			hospital.addTask(appointment);
 			hospital.addTask(urgencies);

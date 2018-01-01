@@ -34,9 +34,9 @@
     {1}{50.01991pt}\LT@entry 
     {1}{32.55956pt}}
 \@writefile{toc}{\contentsline {section}{\numberline {2}Appointment}{3}{section.2}}
-\newlabel{Appointment:12}{{12}{3}{Appointment}{lstnumber.-2.12}{}}
-\newlabel{getPriority:23}{{24}{3}{Appointment}{lstnumber.-2.24}{}}
-\newlabel{getPrescriptions:27}{{29}{3}{Appointment}{lstnumber.-2.29}{}}
+\newlabel{Appointment:10}{{10}{3}{Appointment}{lstnumber.-2.10}{}}
+\newlabel{getPriority:21}{{22}{3}{Appointment}{lstnumber.-2.22}{}}
+\newlabel{setPriority:25}{{27}{3}{Appointment}{lstnumber.-2.27}{}}
 \@writefile{toc}{\contentsline {section}{\numberline {3}HealthProfessional}{3}{section.3}}
 \newlabel{HealthProfessional:15}{{15}{4}{HealthProfessional}{lstnumber.-3.15}{}}
 \newlabel{getMedicalNumber:21}{{22}{4}{HealthProfessional}{lstnumber.-3.22}{}}
@@ -57,7 +57,7 @@
 \newlabel{getName:23}{{24}{5}{Hospital}{lstnumber.-4.24}{}}
 \newlabel{getAddress:27}{{29}{5}{Hospital}{lstnumber.-4.29}{}}
 \newlabel{getTasks:31}{{34}{5}{Hospital}{lstnumber.-4.34}{}}
-\newlabel{getTrainings:35}{{39}{6}{Hospital}{lstnumber.-4.39}{}}
+\newlabel{getTrainings:35}{{39}{5}{Hospital}{lstnumber.-4.39}{}}
 \newlabel{getAgendas:39}{{44}{6}{Hospital}{lstnumber.-4.44}{}}
 \newlabel{getAgenda:43}{{49}{6}{Hospital}{lstnumber.-4.49}{}}
 \newlabel{removeAgenda:52}{{59}{6}{Hospital}{lstnumber.-4.59}{}}
@@ -70,14 +70,15 @@
 \newlabel{getTasksByType:126}{{140}{7}{Hospital}{lstnumber.-4.140}{}}
 \newlabel{getTrainingsByType:136}{{151}{7}{Hospital}{lstnumber.-4.151}{}}
 \newlabel{getMedicalAssociated:146}{{162}{7}{Hospital}{lstnumber.-4.162}{}}
+\newlabel{getMedicalAssociatedByType:151}{{168}{7}{Hospital}{lstnumber.-4.168}{}}
 \gdef \LT@iv {\LT@entry 
     {1}{132.28862pt}\LT@entry 
     {1}{30.32983pt}\LT@entry 
     {1}{50.01991pt}\LT@entry 
     {1}{32.55956pt}}
-\newlabel{getMedicalAssociatedByType:151}{{168}{8}{Hospital}{lstnumber.-4.168}{}}
 \@writefile{toc}{\contentsline {section}{\numberline {5}Patient}{8}{section.5}}
 \newlabel{Patient:8}{{8}{8}{Patient}{lstnumber.-5.8}{}}
+\newlabel{getHealthNumber:14}{{15}{8}{Patient}{lstnumber.-5.15}{}}
 \gdef \LT@v {\LT@entry 
     {1}{98.65926pt}\LT@entry 
     {1}{30.32983pt}\LT@entry 
@@ -88,28 +89,27 @@
     {1}{30.32983pt}\LT@entry 
     {1}{50.01991pt}\LT@entry 
     {1}{32.55956pt}}
-\newlabel{getHealthNumber:14}{{15}{9}{Patient}{lstnumber.-5.15}{}}
 \@writefile{toc}{\contentsline {section}{\numberline {6}Person}{9}{section.6}}
 \newlabel{Person:12}{{12}{9}{Person}{lstnumber.-6.12}{}}
 \newlabel{getCC:17}{{18}{9}{Person}{lstnumber.-6.18}{}}
 \newlabel{getInfo:21}{{23}{9}{Person}{lstnumber.-6.23}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {7}SafetyNetHospital}{10}{section.7}}
+\@writefile{toc}{\contentsline {section}{\numberline {7}SafetyNetHospital}{9}{section.7}}
 \newlabel{SafetyNetHospital:8}{{8}{10}{SafetyNetHospital}{lstnumber.-7.8}{}}
 \newlabel{addHospital:13}{{14}{10}{SafetyNetHospital}{lstnumber.-7.14}{}}
 \newlabel{removeHospital:19}{{21}{10}{SafetyNetHospital}{lstnumber.-7.21}{}}
 \newlabel{getHospitals:25}{{28}{10}{SafetyNetHospital}{lstnumber.-7.28}{}}
 \newlabel{getHospitalsMoreAppointments:29}{{33}{10}{SafetyNetHospital}{lstnumber.-7.33}{}}
 \newlabel{getMedMoreHospitals:38}{{43}{10}{SafetyNetHospital}{lstnumber.-7.43}{}}
+\newlabel{getMedAssociatedByPatient:57}{{63}{10}{SafetyNetHospital}{lstnumber.-7.63}{}}
 \gdef \LT@vii {\LT@entry 
     {1}{140.32838pt}\LT@entry 
     {1}{30.32983pt}\LT@entry 
     {1}{50.01991pt}\LT@entry 
     {1}{32.55956pt}}
-\newlabel{getMedAssociatedByPatient:57}{{63}{11}{SafetyNetHospital}{lstnumber.-7.63}{}}
 \newlabel{getMedByHospital:71}{{78}{11}{SafetyNetHospital}{lstnumber.-7.78}{}}
 \@writefile{toc}{\contentsline {section}{\numberline {8}Schedule}{11}{section.8}}
 \newlabel{Schedule:10}{{10}{11}{Schedule}{lstnumber.-8.10}{}}
-\newlabel{setSchedule:16}{{17}{12}{Schedule}{lstnumber.-8.17}{}}
+\newlabel{setSchedule:16}{{17}{11}{Schedule}{lstnumber.-8.17}{}}
 \newlabel{getScheduleStart:22}{{24}{12}{Schedule}{lstnumber.-8.24}{}}
 \newlabel{getScheduleEnd:26}{{29}{12}{Schedule}{lstnumber.-8.29}{}}
 \newlabel{overlap:30}{{34}{12}{Schedule}{lstnumber.-8.34}{}}
@@ -129,111 +129,114 @@
 \newlabel{Specialty:7}{{7}{13}{Specialty}{lstnumber.-9.7}{}}
 \newlabel{getName:12}{{13}{13}{Specialty}{lstnumber.-9.13}{}}
 \@writefile{toc}{\contentsline {section}{\numberline {10}Surgery}{13}{section.10}}
+\newlabel{Surgery:11}{{11}{13}{Surgery}{lstnumber.-10.11}{}}
+\newlabel{addSecondaryDoctor:16}{{17}{14}{Surgery}{lstnumber.-10.17}{}}
+\newlabel{removeSecondaryDoctor:24}{{26}{14}{Surgery}{lstnumber.-10.26}{}}
+\newlabel{addOther:32}{{35}{14}{Surgery}{lstnumber.-10.35}{}}
+\newlabel{removeOther:40}{{44}{14}{Surgery}{lstnumber.-10.44}{}}
+\newlabel{setMainDoctor:48}{{53}{14}{Surgery}{lstnumber.-10.53}{}}
+\newlabel{getSurgeryPersons:53}{{59}{14}{Surgery}{lstnumber.-10.59}{}}
+\newlabel{addScheduleAuxiliaries:63}{{70}{14}{Surgery}{lstnumber.-10.70}{}}
 \gdef \LT@x {\LT@entry 
-    {1}{111.66942pt}\LT@entry 
+    {1}{122.78886pt}\LT@entry 
     {1}{30.32983pt}\LT@entry 
     {1}{50.01991pt}\LT@entry 
     {1}{32.55956pt}}
-\newlabel{Surgery:11}{{11}{14}{Surgery}{lstnumber.-10.11}{}}
-\newlabel{addSecondaryDoctor:16}{{17}{14}{Surgery}{lstnumber.-10.17}{}}
-\newlabel{removeSecondaryDoctor:22}{{24}{14}{Surgery}{lstnumber.-10.24}{}}
-\newlabel{addOther:28}{{31}{14}{Surgery}{lstnumber.-10.31}{}}
-\newlabel{removeOther:34}{{38}{14}{Surgery}{lstnumber.-10.38}{}}
-\newlabel{setMainDoctor:40}{{45}{14}{Surgery}{lstnumber.-10.45}{}}
-\newlabel{getSurgeryPersons:45}{{51}{14}{Surgery}{lstnumber.-10.51}{}}
+\newlabel{removeScheduleAuxiliaries:71}{{79}{15}{Surgery}{lstnumber.-10.79}{}}
 \@writefile{toc}{\contentsline {section}{\numberline {11}Task}{15}{section.11}}
 \newlabel{Task:12}{{12}{15}{Task}{lstnumber.-11.12}{}}
 \newlabel{getSchedule:18}{{19}{15}{Task}{lstnumber.-11.19}{}}
-\newlabel{getPatient:22}{{24}{15}{Task}{lstnumber.-11.24}{}}
-\newlabel{getHospital:26}{{29}{15}{Task}{lstnumber.-11.29}{}}
-\newlabel{getType:30}{{34}{15}{Task}{lstnumber.-11.34}{}}
-\newlabel{getMedAssoc:34}{{39}{15}{Task}{lstnumber.-11.39}{}}
-\newlabel{setSchedule:38}{{44}{15}{Task}{lstnumber.-11.44}{}}
 \gdef \LT@xi {\LT@entry 
     {1}{98.65926pt}\LT@entry 
     {1}{30.32983pt}\LT@entry 
     {1}{50.01991pt}\LT@entry 
     {1}{32.55956pt}}
+\newlabel{getPatient:22}{{24}{16}{Task}{lstnumber.-11.24}{}}
+\newlabel{getHospital:26}{{29}{16}{Task}{lstnumber.-11.29}{}}
+\newlabel{getType:30}{{34}{16}{Task}{lstnumber.-11.34}{}}
+\newlabel{getMedAssoc:34}{{39}{16}{Task}{lstnumber.-11.39}{}}
+\newlabel{setSchedule:38}{{44}{16}{Task}{lstnumber.-11.44}{}}
 \newlabel{getSurgeryPersons:48}{{55}{16}{Task}{lstnumber.-11.55}{}}
 \@writefile{toc}{\contentsline {section}{\numberline {12}Training}{16}{section.12}}
-\newlabel{Training:11}{{11}{16}{Training}{lstnumber.-12.11}{}}
-\newlabel{getSchedule:16}{{17}{16}{Training}{lstnumber.-12.17}{}}
-\newlabel{getPurpose:20}{{22}{16}{Training}{lstnumber.-12.22}{}}
-\newlabel{getMedAssoc:24}{{27}{16}{Training}{lstnumber.-12.27}{}}
 \gdef \LT@xii {\LT@entry 
     {1}{98.65926pt}\LT@entry 
     {1}{30.32983pt}\LT@entry 
     {1}{50.01991pt}\LT@entry 
     {1}{32.55956pt}}
+\newlabel{Training:11}{{11}{17}{Training}{lstnumber.-12.11}{}}
+\newlabel{getSchedule:16}{{17}{17}{Training}{lstnumber.-12.17}{}}
+\newlabel{getPurpose:20}{{22}{17}{Training}{lstnumber.-12.22}{}}
+\newlabel{getMedAssoc:24}{{27}{17}{Training}{lstnumber.-12.27}{}}
+\newlabel{setPurpose:28}{{32}{17}{Training}{lstnumber.-12.32}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {13}Treatment}{17}{section.13}}
+\newlabel{Treatment:9}{{9}{17}{Treatment}{lstnumber.-13.9}{}}
 \gdef \LT@xiii {\LT@entry 
     {1}{98.65926pt}\LT@entry 
     {1}{30.32983pt}\LT@entry 
     {1}{50.01991pt}\LT@entry 
     {1}{32.55956pt}}
-\newlabel{setPurpose:28}{{32}{17}{Training}{lstnumber.-12.32}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {13}Treatment}{17}{section.13}}
-\newlabel{Treatment:9}{{9}{17}{Treatment}{lstnumber.-13.9}{}}
-\newlabel{getName:14}{{15}{17}{Treatment}{lstnumber.-13.15}{}}
-\newlabel{getMed:18}{{20}{17}{Treatment}{lstnumber.-13.20}{}}
+\newlabel{getName:14}{{15}{18}{Treatment}{lstnumber.-13.15}{}}
+\newlabel{getMed:18}{{20}{18}{Treatment}{lstnumber.-13.20}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {14}Types}{18}{section.14}}
+\newlabel{daysOfMonth:19}{{19}{18}{Types}{lstnumber.-14.19}{}}
 \gdef \LT@xiv {\LT@entry 
     {1}{98.65926pt}\LT@entry 
     {1}{30.32983pt}\LT@entry 
     {1}{50.01991pt}\LT@entry 
     {1}{32.55956pt}}
-\@writefile{toc}{\contentsline {section}{\numberline {14}Types}{18}{section.14}}
-\newlabel{daysOfMonth:19}{{19}{18}{Types}{lstnumber.-14.19}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {15}PersonTest}{18}{section.15}}
-\newlabel{assertTrue:9}{{9}{18}{PersonTest}{lstnumber.-15.9}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {15}PersonTest}{19}{section.15}}
+\newlabel{assertTrue:9}{{9}{19}{PersonTest}{lstnumber.-15.9}{}}
 \newlabel{testGetInformation:13}{{14}{19}{PersonTest}{lstnumber.-15.14}{}}
-\newlabel{testAddRemovePatient:45}{{47}{19}{PersonTest}{lstnumber.-15.47}{}}
+\newlabel{testAddRemovePatient:45}{{47}{20}{PersonTest}{lstnumber.-15.47}{}}
+\newlabel{testAddRemoveSpecialty:74}{{77}{20}{PersonTest}{lstnumber.-15.77}{}}
 \gdef \LT@xv {\LT@entry 
     {1}{113.35893pt}\LT@entry 
     {1}{30.32983pt}\LT@entry 
     {1}{50.01991pt}\LT@entry 
     {1}{32.55956pt}}
-\newlabel{testAddRemoveSpecialty:74}{{77}{20}{PersonTest}{lstnumber.-15.77}{}}
-\newlabel{main:112}{{116}{20}{PersonTest}{lstnumber.-15.116}{}}
 \gdef \LT@xvi {\LT@entry 
     {1}{98.65926pt}\LT@entry 
     {1}{30.32983pt}\LT@entry 
     {1}{50.01991pt}\LT@entry 
     {1}{32.55956pt}}
+\newlabel{main:112}{{116}{21}{PersonTest}{lstnumber.-15.116}{}}
 \@writefile{toc}{\contentsline {section}{\numberline {16}RunTests}{21}{section.16}}
 \newlabel{main:4}{{4}{21}{RunTests}{lstnumber.-16.4}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {17}SafetyNetHospitalTest}{21}{section.17}}
-\newlabel{assertTrue:60}{{60}{22}{SafetyNetHospitalTest}{lstnumber.-17.60}{}}
-\newlabel{testAddRemoveHospitals:64}{{65}{22}{SafetyNetHospitalTest}{lstnumber.-17.65}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {17}SafetyNetHospitalTest}{22}{section.17}}
+\newlabel{assertTrue:60}{{60}{23}{SafetyNetHospitalTest}{lstnumber.-17.60}{}}
+\newlabel{testAddRemoveHospitals:64}{{65}{23}{SafetyNetHospitalTest}{lstnumber.-17.65}{}}
 \newlabel{testAddRemoveMedHospital:95}{{97}{23}{SafetyNetHospitalTest}{lstnumber.-17.97}{}}
-\newlabel{testAddRemoveTaskHospital:177}{{180}{24}{SafetyNetHospitalTest}{lstnumber.-17.180}{}}
-\newlabel{testAddRemoveTrainingHospital:220}{{224}{25}{SafetyNetHospitalTest}{lstnumber.-17.224}{}}
-\newlabel{testGetHospitalsMoreAppointments:245}{{250}{25}{SafetyNetHospitalTest}{lstnumber.-17.250}{}}
-\newlabel{testGetMedMoreHospitals:254}{{260}{26}{SafetyNetHospitalTest}{lstnumber.-17.260}{}}
-\newlabel{testGetMedAssociatedByPatient:267}{{274}{26}{SafetyNetHospitalTest}{lstnumber.-17.274}{}}
-\newlabel{testGetMedByHospital:277}{{285}{26}{SafetyNetHospitalTest}{lstnumber.-17.285}{}}
-\newlabel{main:292}{{301}{26}{SafetyNetHospitalTest}{lstnumber.-17.301}{}}
+\newlabel{testAddRemoveTaskHospital:185}{{188}{25}{SafetyNetHospitalTest}{lstnumber.-17.188}{}}
+\newlabel{testAddRemoveTrainingHospital:229}{{233}{25}{SafetyNetHospitalTest}{lstnumber.-17.233}{}}
+\newlabel{testGetHospitalsMoreAppointments:254}{{259}{26}{SafetyNetHospitalTest}{lstnumber.-17.259}{}}
+\newlabel{testGetMedMoreHospitals:263}{{269}{26}{SafetyNetHospitalTest}{lstnumber.-17.269}{}}
+\newlabel{testGetMedAssociatedByPatient:276}{{283}{26}{SafetyNetHospitalTest}{lstnumber.-17.283}{}}
+\newlabel{testGetMedByHospital:286}{{294}{26}{SafetyNetHospitalTest}{lstnumber.-17.294}{}}
 \gdef \LT@xvii {\LT@entry 
     {1}{156.43797pt}\LT@entry 
     {1}{30.32983pt}\LT@entry 
     {1}{50.01991pt}\LT@entry 
     {1}{32.55956pt}}
+\newlabel{main:301}{{310}{27}{SafetyNetHospitalTest}{lstnumber.-17.310}{}}
 \@writefile{toc}{\contentsline {section}{\numberline {18}TaskTest}{27}{section.18}}
-\newlabel{assertTrue:59}{{59}{28}{TaskTest}{lstnumber.-18.59}{}}
-\newlabel{testGetsSetsTask:63}{{64}{28}{TaskTest}{lstnumber.-18.64}{}}
-\newlabel{testAppointment:174}{{176}{30}{TaskTest}{lstnumber.-18.176}{}}
+\newlabel{assertTrue:57}{{57}{28}{TaskTest}{lstnumber.-18.57}{}}
+\newlabel{testGetsSetsTask:61}{{62}{29}{TaskTest}{lstnumber.-18.62}{}}
+\newlabel{testAppointment:186}{{188}{30}{TaskTest}{lstnumber.-18.188}{}}
+\newlabel{testSurgery:196}{{199}{31}{TaskTest}{lstnumber.-18.199}{}}
+\newlabel{testTreatment:219}{{223}{31}{TaskTest}{lstnumber.-18.223}{}}
+\newlabel{testScheduleFunctions:227}{{232}{31}{TaskTest}{lstnumber.-18.232}{}}
 \gdef \LT@xviii {\LT@entry 
     {1}{101.99884pt}\LT@entry 
     {1}{30.32983pt}\LT@entry 
     {1}{50.01991pt}\LT@entry 
     {1}{32.55956pt}}
-\newlabel{testSurgery:225}{{228}{31}{TaskTest}{lstnumber.-18.228}{}}
-\newlabel{testTreatment:248}{{252}{31}{TaskTest}{lstnumber.-18.252}{}}
-\newlabel{testScheduleFunctions:256}{{261}{31}{TaskTest}{lstnumber.-18.261}{}}
+\newlabel{main:264}{{270}{32}{TaskTest}{lstnumber.-18.270}{}}
 \@writefile{toc}{\contentsline {section}{\numberline {19}TrainingTest}{32}{section.19}}
-\newlabel{assertTrue:21}{{21}{32}{TrainingTest}{lstnumber.-19.21}{}}
-\newlabel{testGetsSets:25}{{26}{32}{TrainingTest}{lstnumber.-19.26}{}}
 \gdef \LT@xix {\LT@entry 
     {1}{98.65926pt}\LT@entry 
     {1}{30.32983pt}\LT@entry 
     {1}{50.01991pt}\LT@entry 
     {1}{32.55956pt}}
+\newlabel{assertTrue:21}{{21}{33}{TrainingTest}{lstnumber.-19.21}{}}
+\newlabel{testGetsSets:25}{{26}{33}{TrainingTest}{lstnumber.-19.26}{}}
 \newlabel{main:47}{{49}{33}{TrainingTest}{lstnumber.-19.49}{}}

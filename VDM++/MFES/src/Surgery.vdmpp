@@ -14,27 +14,35 @@ operations
 	
 	-- Adds an auxiliary surgeon to the surgery
 	public addSecondaryDoctor : HealthProfessional ==> ()
-		addSecondaryDoctor(s) == (secondaryDoctors := secondaryDoctors union {s})
-	pre s <> medicalAssoc and s.getType() = <Surgeon> and  s not in set secondaryDoctors
-	post s in set secondaryDoctors;
+		addSecondaryDoctor(s) == (
+			removeScheduleAuxiliaries(s);
+			secondaryDoctors := secondaryDoctors union {s})
+	pre s <> medicalAssoc and s.getType() = <Surgeon> and s not in set secondaryDoctors and schedule in set hospital.getAgenda(s).getAgenda()
+	post s in set secondaryDoctors and schedule not in set hospital.getAgenda(s).getAgenda();
 	
 	-- Removes an auxiliary surgeon from the surgery
 	public removeSecondaryDoctor : HealthProfessional ==> ()
-		removeSecondaryDoctor(s) == (secondaryDoctors := secondaryDoctors \ {s})
-	pre s.getType() = <Surgeon> and s in set secondaryDoctors
-	post s not in set secondaryDoctors;
+		removeSecondaryDoctor(s) == (
+			addScheduleAuxiliaries(s);
+			secondaryDoctors := secondaryDoctors \ {s})
+	pre s.getType() = <Surgeon> and s in set secondaryDoctors and schedule not in set hospital.getAgenda(s).getAgenda()
+	post s not in set secondaryDoctors and schedule in set hospital.getAgenda(s).getAgenda();
 	
 	-- Adds a nurse to the surgery
 	public addOther : HealthProfessional ==> ()
-		addOther(s) == (other := other union {s})
-	pre s.getType() = <Nurse> and s not in set other
-	post s in set other;
+		addOther(s) == (
+			removeScheduleAuxiliaries(s);
+			other := other union {s})
+	pre s.getType() = <Nurse> and s not in set other and schedule in set hospital.getAgenda(s).getAgenda()
+	post s in set other and schedule not in set hospital.getAgenda(s).getAgenda();
 	
 	-- Removes a nurse from the surgery
 	public removeOther : HealthProfessional ==> ()
-		removeOther(s) == (other := other \ {s})
-	pre s.getType() = <Nurse> and s in set other
-	post s not in set other;
+		removeOther(s) == (
+			addScheduleAuxiliaries(s);
+			other := other \ {s})
+	pre s.getType() = <Nurse> and s in set other and schedule not in set hospital.getAgenda(s).getAgenda()
+	post s not in set other and schedule in set hospital.getAgenda(s).getAgenda();
 	
 	-- Sets the surgery's main surgeon
 	public setMainDoctor : HealthProfessional ==> ()
@@ -50,4 +58,21 @@ operations
 															else
 																med := other;
 															return med);
+	
+	-- Adds the surgery schedule to the	auxiliary's agenda												
+	public addScheduleAuxiliaries : HealthProfessional ==> ()
+		addScheduleAuxiliaries(s) == (
+			for all a in set hospital.getAgendas() do
+				if(a.getHealthProfessional().getCC() = s.getCC())
+					then a.addSchedule(schedule))
+	pre s.getType() = <Surgeon> or s.getType() = <Nurse>;
+	
+	-- Removes the surgery schedule from the	auxiliary's agenda
+	public removeScheduleAuxiliaries : HealthProfessional ==> ()
+		removeScheduleAuxiliaries(s) == (
+			for all a in set hospital.getAgendas() do
+				if(a.getHealthProfessional().getCC() = s.getCC())
+					then a.removeSchedule(schedule))
+	pre s.getType() = <Surgeon> or s.getType() = <Nurse>;
+	
 end Surgery

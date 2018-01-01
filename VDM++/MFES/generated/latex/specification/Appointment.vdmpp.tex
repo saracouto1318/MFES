@@ -8,11 +8,11 @@ instance variables
   inv medicalAssoc.getType() = <Doctor>;
 operations
  -- Appointment constructor
+(*@
+\label{Appointment:10}
+@*)
  public Appointment: HealthProfessional * Schedule * Patient * Hospital==> Appointment
   Appointment(d, s, p, h) == (medicalAssoc := d; priority := <Medium>; Task(d, s, p, h, <Appointment>))
-(*@
-\label{Appointment:12}
-@*)
  post medicalAssoc = d and priority = <Medium>;
  
  -- Urgency Apppointment constructor
@@ -22,18 +22,18 @@ operations
  post medicalAssoc = d and priority = p;
 
  -- Returns the appointment's priority
+(*@
+\label{getPriority:21}
+@*)
  pure public getPriority : () ==> Types`Priority
   getPriority() == (return priority);
-(*@
-\label{getPriority:23}
-@*)
 
   -- Sets the appointment's priority
+(*@
+\label{setPriority:25}
+@*)
   public setPriority : Types`Priority ==> ()
    setPriority(p) == (priority := p)
-(*@
-\label{getPrescriptions:27}
-@*)
   pre taskType = <Urgencies>;
   
 end Appointment
@@ -44,20 +44,14 @@ end Appointment
 Function or operation & Line & Coverage & Calls \\
 \hline
 \hline
-\hyperref[Appointment:12]{Appointment} & 12&100.0\% & 16 \\
+\hyperref[Appointment:10]{Appointment} & 10&100.0\% & 13 \\
 \hline
-\hyperref[addPrescription:36]{addPrescription} & 36&0.0\% & 0 \\
+\hyperref[getPriority:21]{getPriority} & 21&100.0\% & 12 \\
 \hline
-\hyperref[getPrescriptions:27]{getPrescriptions} & 27&100.0\% & 4 \\
-\hline
-\hyperref[getPriority:23]{getPriority} & 23&100.0\% & 12 \\
-\hline
-\hyperref[removePrescription:42]{removePrescription} & 42&0.0\% & 0 \\
-\hline
-\hyperref[setPriority:31]{setPriority} & 31&100.0\% & 4 \\
+\hyperref[setPriority:25]{setPriority} & 25&100.0\% & 4 \\
 \hline
 \hline
-Appointment.vdmpp & & 100.0\% & 36 \\
+Appointment.vdmpp & & 100.0\% & 29 \\
 \hline
 \end{longtable}
 

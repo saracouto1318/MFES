@@ -55,23 +55,25 @@ instance variables
  private surgery: Surgery := new Surgery(surgeon, schedule3, patient3, hospital);
  private treatment: Treatment := new Treatment(technician, "Fisioterapia", schedule, patient4, hospital);
 operations
+(*@
+\label{assertTrue:57}
+@*)
  private assertTrue: bool ==> ()
   assertTrue(cond) == return
-(*@
-\label{assertTrue:59}
-@*)
  pre cond;
  
+(*@
+\label{testGetsSetsTask:61}
+@*)
  public testGetsSetsTask : () ==> ()
   testGetsSetsTask() == (
-(*@
-\label{testGetsSetsTask:63}
-@*)
-   dcl agenda1 : Agenda, agenda2 : Agenda, agenda3 : Agenda, agenda4: Agenda;
+   dcl agenda1 : Agenda, agenda2 : Agenda, agenda3 : Agenda, agenda4: Agenda, agenda5: Agenda, agenda6: Agenda;
    hospital.addMedAssociated(doctor);
    hospital.addMedAssociated(doctor2);
    hospital.addMedAssociated(surgeon);
    hospital.addMedAssociated(technician);
+   hospital.addMedAssociated(nurse);
+   hospital.addMedAssociated(secSurgeon);
    
    for all a in set hospital.getAgendas() do(
     if(a.getHealthProfessional() = doctor)
@@ -80,6 +82,10 @@ operations
      then agenda2 := a
     else if(a.getHealthProfessional() = surgeon)
      then agenda3 := a
+    else if(a.getHealthProfessional() = secSurgeon)
+     then agenda5 := a
+    else if(a.getHealthProfessional() = nurse)
+     then agenda6 := a
     else
      agenda4 := a;);
    
@@ -112,6 +118,14 @@ operations
    agenda4.addSchedule(schedule);
    
    assertTrue(card agenda4.getAgenda() = 1);
+   
+   agenda5.addSchedule(schedule3);
+   
+   assertTrue(card agenda5.getAgenda() = 1);
+   
+   agenda6.addSchedule(schedule3);
+   
+   assertTrue(card agenda6.getAgenda() = 1);
    
    hospital.addTask(appointment);
    hospital.addTask(urgencies);
@@ -176,11 +190,11 @@ operations
    assertTrue(appointment.getSchedule().getScheduleEnd().time.min = 50);
   );
   
+(*@
+\label{testAppointment:186}
+@*)
  public testAppointment : () ==> ()
   testAppointment() == (
-(*@
-\label{testAppointment:174}
-@*)
    IO`print("\n Checking appointment priority \n");
    assertTrue(appointment.getPriority() = <Medium>);
    assertTrue(urgencies.getPriority() = <High>);
@@ -189,6 +203,9 @@ operations
    assertTrue(urgencies.getPriority() = <Low>);
   );
   
+(*@
+\label{testSurgery:196}
+@*)
  public testSurgery: () ==> ()
   testSurgery() == (
    IO`print("\n Checking surgery informations \n");
@@ -212,6 +229,9 @@ operations
    assertTrue(surgery.getMedAssoc().getCC() = "234512390");
  );
  
+(*@
+\label{testTreatment:219}
+@*)
  public testTreatment : () ==> ()
   testTreatment() == (
    IO`print("\n Checking treatment informations \n");
@@ -220,6 +240,9 @@ operations
    assertTrue(treatment.getMed().getCC() = "123444655");
   );
   
+(*@
+\label{testScheduleFunctions:227}
+@*)
   public testScheduleFunctions: () ==> ()
   testScheduleFunctions() == (
    dcl sch : Schedule, sch1 : Schedule, sch2 : Schedule, dateNew: Types`Date, dateNew2 : Types`Date;
@@ -232,9 +255,6 @@ operations
    sch1 := new Schedule(dateNew, dateNew2);
    
    dateNew := mk_Types`Date(2017, 11, 26, time1);
-(*@
-\label{testSurgery:225}
-@*)
    dateNew2 := mk_Types`Date(2017, 11, 26, time2);
    sch2 := new Schedule(dateNew, dateNew2);
    
@@ -258,20 +278,17 @@ operations
    
    IO`print("\n Checking overlap \n");
    assertTrue(schedule.overlap(schedule, schedule2));
-(*@
-\label{testTreatment:248}
-@*)
   );
   
+(*@
+\label{main:264}
+@*)
   public static main: () ==> ()
    main() == (
     dcl taskTest: TaskTest := new TaskTest();
     IO`print("\n\n *****Running TaskTest***** \n");
     taskTest.testGetsSetsTask();
     taskTest.testAppointment();
-(*@
-\label{testScheduleFunctions:256}
-@*)
     taskTest.testSurgery();
     taskTest.testTreatment();
     taskTest.testScheduleFunctions();
@@ -285,22 +302,22 @@ end TaskTest
 Function or operation & Line & Coverage & Calls \\
 \hline
 \hline
-\hyperref[assertTrue:59]{assertTrue} & 59&100.0\% & 156 \\
+\hyperref[assertTrue:57]{assertTrue} & 57&100.0\% & 248 \\
 \hline
-\hyperref[main:293]{main} & 293&100.0\% & 2 \\
+\hyperref[main:264]{main} & 264&100.0\% & 1 \\
 \hline
-\hyperref[testAppointment:174]{testAppointment} & 174&100.0\% & 2 \\
+\hyperref[testAppointment:186]{testAppointment} & 186&100.0\% & 3 \\
 \hline
-\hyperref[testGetsSetsTask:63]{testGetsSetsTask} & 63&100.0\% & 2 \\
+\hyperref[testGetsSetsTask:61]{testGetsSetsTask} & 61&100.0\% & 3 \\
 \hline
-\hyperref[testScheduleFunctions:256]{testScheduleFunctions} & 256&100.0\% & 2 \\
+\hyperref[testScheduleFunctions:227]{testScheduleFunctions} & 227&100.0\% & 1 \\
 \hline
-\hyperref[testSurgery:225]{testSurgery} & 225&100.0\% & 2 \\
+\hyperref[testSurgery:196]{testSurgery} & 196&100.0\% & 3 \\
 \hline
-\hyperref[testTreatment:248]{testTreatment} & 248&100.0\% & 2 \\
+\hyperref[testTreatment:219]{testTreatment} & 219&100.0\% & 1 \\
 \hline
 \hline
-TaskTest.vdmpp & & 100.0\% & 168 \\
+TaskTest.vdmpp & & 100.0\% & 260 \\
 \hline
 \end{longtable}
 

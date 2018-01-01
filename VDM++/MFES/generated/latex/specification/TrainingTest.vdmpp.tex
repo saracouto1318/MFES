@@ -23,25 +23,25 @@ operations
 \label{assertTrue:21}
 @*)
  private assertTrue: bool ==> ()
-  assertTrue(cond) == return
- pre cond;
+  assertTrue(cond) == (*@\vdmnotcovered{return}@*)
+ pre (*@\vdmnotcovered{cond}@*);
  
 (*@
 \label{testGetsSets:25}
 @*)
  public testGetsSets : () ==> ()
-  testGetsSets() == (
-   IO`print("\n Testing Training gets and sets \n");
-   assertTrue(training.getPurpose() = <Training>);
-   assertTrue(training.getMedAssoc().getCC() = "123432156");
+  testGetsSets() == (*@\vdmnotcovered{(}@*)
+   IO`print((*@\vdmnotcovered{"\textbackslash n Testing Training gets and sets \textbackslash n"}@*));
+   assertTrue(training.getPurpose() (*@\vdmnotcovered{=}@*) (*@\vdmnotcovered{<Training>}@*));
+   (*@\vdmnotcovered{assertTrue}@*)((*@\vdmnotcovered{training}@*).(*@\vdmnotcovered{getMedAssoc}@*)().(*@\vdmnotcovered{getCC}@*)() = (*@\vdmnotcovered{"123432156"}@*));
    
-   training.setPurpose(<AddSkills>);
-   assertTrue(training.getPurpose() = <AddSkills>);
+   training.setPurpose((*@\vdmnotcovered{<AddSkills>}@*));
+   assertTrue(training.(*@\vdmnotcovered{getPurpose}@*)() = (*@\vdmnotcovered{<AddSkills>}@*));
    
-   assertTrue(training.getSchedule().getScheduleStart().year = 2017);
-   assertTrue(training.getSchedule().getScheduleStart().month = 12);
-   assertTrue(training.getSchedule().getScheduleStart().day = 25);
-   assertTrue(training.getSchedule().getScheduleStart().time.hour = 12);
+   (*@\vdmnotcovered{assertTrue}@*)(training.getSchedule().(*@\vdmnotcovered{getScheduleStart}@*)().year = (*@\vdmnotcovered{2017}@*));
+   (*@\vdmnotcovered{assertTrue}@*)((*@\vdmnotcovered{training}@*).getSchedule().(*@\vdmnotcovered{getScheduleStart}@*)().(*@\vdmnotcovered{month}@*) = (*@\vdmnotcovered{12}@*));
+   (*@\vdmnotcovered{assertTrue}@*)(training.getSchedule().getScheduleStart().day (*@\vdmnotcovered{=}@*) (*@\vdmnotcovered{25}@*));
+   (*@\vdmnotcovered{assertTrue}@*)(training.getSchedule().getScheduleStart().time.hour = 12);
    assertTrue(training.getSchedule().getScheduleStart().time.min = 10);
    
    assertTrue(training.getSchedule().getScheduleEnd().year = 2017);
@@ -55,10 +55,10 @@ operations
 \label{main:47}
 @*)
  public static main: () ==> ()
-   main() == (
-    dcl trainingTest: TrainingTest := new TrainingTest();
-    IO`print("\n *****Running TrainingTest***** \n");
-    trainingTest.testGetsSets();
+   main() == (*@\vdmnotcovered{(}@*)
+    dcl trainingTest: TrainingTest := (*@\vdmnotcovered{new}@*) (*@\vdmnotcovered{TrainingTest}@*)();
+    IO`print((*@\vdmnotcovered{"\textbackslash n *****Running TrainingTest***** \textbackslash n"}@*));
+    (*@\vdmnotcovered{trainingTest}@*).testGetsSets();
    );
 end TrainingTest
 \end{vdmpp}
@@ -68,14 +68,14 @@ end TrainingTest
 Function or operation & Line & Coverage & Calls \\
 \hline
 \hline
-\hyperref[assertTrue:21]{assertTrue} & 21&100.0\% & 52 \\
+\hyperref[assertTrue:21]{assertTrue} & 21&0.0\% & 0 \\
 \hline
-\hyperref[main:47]{main} & 47&100.0\% & 2 \\
+\hyperref[main:47]{main} & 47&0.0\% & 0 \\
 \hline
-\hyperref[testGetsSets:25]{testGetsSets} & 25&100.0\% & 2 \\
+\hyperref[testGetsSets:25]{testGetsSets} & 25&0.0\% & 0 \\
 \hline
 \hline
-TrainingTest.vdmpp & & 100.0\% & 56 \\
+TrainingTest.vdmpp & & 51.8\% & 0 \\
 \hline
 \end{longtable}
 

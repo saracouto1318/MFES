@@ -63,8 +63,8 @@ public class Task {
 
   public void setSchedule(final Schedule s) {
 
-    for (Iterator iterator_20 = hospital.getAgendas().iterator(); iterator_20.hasNext(); ) {
-      Agenda a = (Agenda) iterator_20.next();
+    for (Iterator iterator_22 = hospital.getAgendas().iterator(); iterator_22.hasNext(); ) {
+      Agenda a = (Agenda) iterator_22.next();
       if (Utils.equals(a.getHealthProfessional().getCC(), medicalAssoc.getCC())) {
         a.addSchedule(schedule);
         a.removeSchedule(s);

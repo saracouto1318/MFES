@@ -25,21 +25,25 @@ public class Surgery extends Task {
 
   public void addSecondaryDoctor(final HealthProfessional s) {
 
+    removeScheduleAuxiliaries(s);
     secondaryDoctors = SetUtil.union(Utils.copy(secondaryDoctors), SetUtil.set(s));
   }
 
   public void removeSecondaryDoctor(final HealthProfessional s) {
 
+    addScheduleAuxiliaries(s);
     secondaryDoctors = SetUtil.diff(Utils.copy(secondaryDoctors), SetUtil.set(s));
   }
 
   public void addOther(final HealthProfessional s) {
 
+    removeScheduleAuxiliaries(s);
     other = SetUtil.union(Utils.copy(other), SetUtil.set(s));
   }
 
   public void removeOther(final HealthProfessional s) {
 
+    addScheduleAuxiliaries(s);
     other = SetUtil.diff(Utils.copy(other), SetUtil.set(s));
   }
 
@@ -58,6 +62,26 @@ public class Surgery extends Task {
     }
 
     return Utils.copy(med);
+  }
+
+  public void addScheduleAuxiliaries(final HealthProfessional s) {
+
+    for (Iterator iterator_20 = hospital.getAgendas().iterator(); iterator_20.hasNext(); ) {
+      Agenda a = (Agenda) iterator_20.next();
+      if (Utils.equals(a.getHealthProfessional().getCC(), s.getCC())) {
+        a.addSchedule(schedule);
+      }
+    }
+  }
+
+  public void removeScheduleAuxiliaries(final HealthProfessional s) {
+
+    for (Iterator iterator_21 = hospital.getAgendas().iterator(); iterator_21.hasNext(); ) {
+      Agenda a = (Agenda) iterator_21.next();
+      if (Utils.equals(a.getHealthProfessional().getCC(), s.getCC())) {
+        a.removeSchedule(schedule);
+      }
+    }
   }
 
   public Surgery() {}
