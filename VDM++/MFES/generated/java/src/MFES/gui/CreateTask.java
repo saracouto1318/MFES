@@ -185,7 +185,7 @@ public class CreateTask extends Menu {
 	                        if(medicsList.getSelected() == null)
 	                        	finish = true;
 	                        else
-	                        	nurse.add(medicsList.getSelected());
+	                        	medics.add(medicsList.getSelected());
 	                	}
                     }
                     
@@ -299,6 +299,10 @@ public class CreateTask extends Menu {
             break;
         case SURGERY:
         	t = new Surgery(healthProfessional, schedule, patient, hospital);
+        	for(HealthProfessional h : medics)
+            	((Surgery)t).addSecondaryDoctor(h);
+        	for(HealthProfessional h : nurse)
+            	((Surgery)t).addOther(h);
             hospital.addTask(t);
             break;
         case TREATMENT:
