@@ -52,7 +52,7 @@ public class HospitalPicker extends Menu {
             VDMSet hospitals = Main.snh.getHospitals();
 
             if(hospitals.size() <= 0) {
-                System.out.println("Neste momento nao ha hospitais disponiveis");
+                System.out.println("\nNeste momento nao ha hospitais disponiveis");
                 show();
                 return null;
             }

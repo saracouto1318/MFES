@@ -27,6 +27,7 @@ public class Specialty {
 
   public String toString() {
 
-    return "Specialty{" + "name := " + Utils.toString(name) + "}";
+    return "Specialty " 
+    		+ name;
   }
 }

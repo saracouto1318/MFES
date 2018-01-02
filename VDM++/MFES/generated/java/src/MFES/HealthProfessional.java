@@ -82,10 +82,12 @@ public class HealthProfessional extends Person {
 
   public String toString() {
 
-    return Utils.toString(medicalNumber)
-    		+ " - "
-    		+ Utils.toString(firstName)
+    return firstName
     		+ " " 
-    		+ Utils.toString(lastName);
+    		+ lastName
+    		+ " - "
+    		+ medicalNumber
+    		+ " specialities " 
+    		+ Utils.toString(specialties);
   }
 }

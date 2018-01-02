@@ -48,9 +48,7 @@ public class CreateTraining extends Menu {
         if(invalid)
             return new ManageHospital(reader, hospital);
 
-        Menu returnedMenu = null;
-
-        while(!endCondition(returnedMenu) && !invalid) {
+        while(!endCondition()) {
 
             switch(state) {
             case HEALTHPROFESSIONAL_LIST:
@@ -58,8 +56,7 @@ public class CreateTraining extends Menu {
 
                 if(medics.size() <= 0) {
                     System.out.println("Neste momento nao ha medicos disponiveis");
-                    invalid = true;
-                    return null;
+                    return new ManageHospital(reader, hospital);
                 }
 
                 HealthProfessional[] selectabels = new HealthProfessional[medics.size()];
@@ -96,9 +93,7 @@ public class CreateTraining extends Menu {
             show();
         }
 
-        if(invalid)
-            return new ManageHospital(reader, hospital);
-		return returnedMenu;
+        return new ManageHospital(reader, hospital);
 	}
 
 	@Override
@@ -109,7 +104,7 @@ public class CreateTraining extends Menu {
 	@Override
 	public void destroy() {}
     
-    private boolean endCondition(Menu returnedMenu) {
+    private boolean endCondition() {
         return healthProfessional != null && schedule != null && !invalid;
     }
 

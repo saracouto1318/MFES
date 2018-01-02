@@ -102,6 +102,11 @@ public class ManageHospital extends Menu {
 				state = MenuState.CREATE;
 			else if(option == 2) {
                 VDMSet hps = hospital.getMedicalAssociated();
+                if(hps.size() <= 0) {
+                	System.out.println("\nNeste momento nao ha medicos disponiveis");
+                	first = true;
+                	break;
+                }
 
 				HealthProfessional[] hpList = new HealthProfessional[hps.size()];
 				
@@ -161,7 +166,7 @@ public class ManageHospital extends Menu {
 			else if(option == 2) {
 		    	VDMSet tasks = hospital.getTasksByType(MFES.quotes.AppointmentQuote.getInstance());
 		        if(tasks.size() <= 0) {
-		            System.out.println("Neste momento nao ha medicos disponiveis");
+		            System.out.println("\nNeste momento nao ha consultas disponiveis\n");
 		        } else {
 		            Task[] hArr = new Task[tasks.size()];
 		            Iterator<Task> iter = tasks.iterator();
@@ -186,7 +191,7 @@ public class ManageHospital extends Menu {
 			else if(option == 2) {
 		    	VDMSet tasks = hospital.getTasksByType(MFES.quotes.SurgeryQuote.getInstance());
 		        if(tasks.size() <= 0) {
-		            System.out.println("Neste momento nao ha medicos disponiveis");
+		            System.out.println("\nNeste momento nao ha cirurgias disponiveis\n");
 		        } else {
 		            Task[] hArr = new Task[tasks.size()];
 		            Iterator<Task> iter = tasks.iterator();
@@ -211,7 +216,7 @@ public class ManageHospital extends Menu {
 			else if(option == 2) {
 		    	VDMSet tasks = hospital.getTasksByType(MFES.quotes.OtherQuote.getInstance());
 		        if(tasks.size() <= 0) {
-		            System.out.println("Neste momento nao ha medicos disponiveis");
+		            System.out.println("\nNeste momento nao ha tratamentos disponiveis\n");
 		        } else {
 		            Task[] hArr = new Task[tasks.size()];
 		            Iterator<Task> iter = tasks.iterator();
@@ -236,7 +241,7 @@ public class ManageHospital extends Menu {
 			else if(option == 2) {
 		    	VDMSet tasks = hospital.getTasksByType(MFES.quotes.OtherQuote.getInstance());
 		        if(tasks.size() <= 0) {
-		            System.out.println("Neste momento nao ha medicos disponiveis");
+		            System.out.println("\nNeste momento nao ha tratamentos disponiveis\n");
 		        } else {
 		            Task[] hArr = new Task[tasks.size()];
 		            Iterator<Task> iter = tasks.iterator();
@@ -261,7 +266,7 @@ public class ManageHospital extends Menu {
 			else if(option == 2) {
 		    	VDMSet tasks = hospital.getTasksByType(MFES.quotes.AppointmentQuote.getInstance());
 		        if(tasks.size() <= 0) {
-		            System.out.println("Neste momento nao ha medicos disponiveis");
+		            System.out.println("\nNeste momento nao ha urgencias disponiveis\n");
 		        } else {
 		            Task[] hArr = new Task[tasks.size()];
 		            Iterator<Task> iter = tasks.iterator();
@@ -286,7 +291,7 @@ public class ManageHospital extends Menu {
 			else if(option == 2) {
 		    	VDMSet tasks = hospital.getTrainings();
 		        if(tasks.size() <= 0) {
-		            System.out.println("Neste momento nao ha medicos disponiveis");
+		            System.out.println("\nNeste momento nao ha treinos disponiveis\n");
 		        } else {
 		            Task[] hArr = new Task[tasks.size()];
 		            Iterator<Task> iter = tasks.iterator();

@@ -89,9 +89,7 @@ public class CreateTask extends Menu {
         if(invalid)
             return new ManageHospital(reader, hospital);
 
-        Menu returnedMenu = null;
-
-        while(!endCondition(returnedMenu) && !invalid) {
+        while(!endCondition() && !invalid) {
 
             switch(state) {
             case PATIENT_LIST:
@@ -108,8 +106,7 @@ public class CreateTask extends Menu {
 
                 if(medics.size() <= 0) {
                     System.out.println("Neste momento nao ha medicos disponiveis");
-                    invalid = true;
-                    return null;
+                    return new ManageHospital(reader, hospital);
                 }
 
                 HealthProfessional[] selectabels = new HealthProfessional[medics.size()];
@@ -146,9 +143,7 @@ public class CreateTask extends Menu {
             show();                        
         }
 
-        if(invalid)
-            return new ManageHospital(reader, hospital);
-		return returnedMenu;
+        return new ManageHospital(reader, hospital);
 	}
 
 	@Override
@@ -159,7 +154,7 @@ public class CreateTask extends Menu {
 	@Override
 	public void destroy() {}
     
-    private boolean endCondition(Menu returnedMenu) {
+    private boolean endCondition() {
         return patient != null && healthProfessional != null && schedule != null && !invalid;
     }
 

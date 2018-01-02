@@ -39,6 +39,10 @@ public class Patient extends Person {
 
   public String toString() {
 
-    return "Patient{" + "healthNumber := " + Utils.toString(healthNumber) + "}";
+	    return firstName
+	    		+ " " 
+	    		+ lastName
+	    		+ " - "
+	    		+ healthNumber;
   }
 }

@@ -20,6 +20,8 @@ public class ListSelectabels<T> extends Menu {
         int i = 1;
         for(T t : selectabels)
             System.out.println(i++ + ". " + t.toString());
+        
+        System.out.print("Opcao: ");
 	}
 
 	@Override

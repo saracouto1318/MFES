@@ -78,40 +78,40 @@ public class CreateSchedule extends Menu {
             show();
             return null;
         }
-
+        
         switch(state) {
         case YEAR:
-            if(year <= 0)
+            if(i <= 0)
                 break;
             year = i;
             state = CreateState.MONTH;
             break;
         case MONTH:
-            if(month <= 0 || month > 12)
+            if(i <= 0 || i > 12)
                 break;
             month = i;
             state = CreateState.DAY;
             break;
         case DAY:
-            if(day <= 0 || day > 31)
+            if(i <= 0 || i > 31)
                 break;
             day = i;
             state = CreateState.HOUR;
             break;
         case HOUR:
-            if(hour < 0 || hour >= 24)
+            if(i < 0 || i >= 24)
                 break;
             hour = i;
             state = CreateState.MINUTES;
             break;
         case MINUTES:
-            if(minutes < 0 || minutes >= 60)
+            if(i < 0 || i >= 60)
                 break;
             minutes = i;
             state = CreateState.DURATION;
             break;
         case DURATION:
-            if(duration <= 0 || duration > 180)
+            if(i <= 0 || i > 180)
                 break;
             duration = i;
             return nextMenu;
