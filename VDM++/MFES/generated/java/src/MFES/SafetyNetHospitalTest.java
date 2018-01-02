@@ -153,8 +153,8 @@ public class SafetyNetHospitalTest {
     hospital.addMedAssociated(nurse);
     hospital.addMedAssociated(technician);
     IO.print("\n Adding agendas to health professionals \n");
-    for (Iterator iterator_26 = hospital.getAgendas().iterator(); iterator_26.hasNext(); ) {
-      Agenda a = (Agenda) iterator_26.next();
+    for (Iterator iterator_33 = hospital.getAgendas().iterator(); iterator_33.hasNext(); ) {
+      Agenda a = (Agenda) iterator_33.next();
       if (Utils.equals(a.getHealthProfessional(), doctor)) {
         agenda1 = a;
       } else {
@@ -228,8 +228,8 @@ public class SafetyNetHospitalTest {
     IO.print("\n Total number of doctors: ");
     IO.print(hospital.getMedicalAssociatedByType(MFES.quotes.DoctorQuote.getInstance()).size());
     hospital.addMedAssociated(doctor);
-    for (Iterator iterator_27 = hospital.getAgendas().iterator(); iterator_27.hasNext(); ) {
-      Agenda a = (Agenda) iterator_27.next();
+    for (Iterator iterator_34 = hospital.getAgendas().iterator(); iterator_34.hasNext(); ) {
+      Agenda a = (Agenda) iterator_34.next();
       if (Utils.equals(a.getHealthProfessional().getCC(), doctor.getCC())) {
         agenda1 = a;
       }
@@ -350,8 +350,8 @@ public class SafetyNetHospitalTest {
 
   public void testGetMedMoreHospitals() {
 
-    for (Iterator iterator_28 = safetyNet.getHospitals().iterator(); iterator_28.hasNext(); ) {
-      Hospital t = (Hospital) iterator_28.next();
+    for (Iterator iterator_35 = safetyNet.getHospitals().iterator(); iterator_35.hasNext(); ) {
+      Hospital t = (Hospital) iterator_35.next();
       if (!(Utils.equals(t.getName(), "Hospital das CamÃ©lias"))) {
         t.addMedAssociated(doctor);
       }

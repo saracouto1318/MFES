@@ -37,8 +37,8 @@ public class Agenda {
 
   public void removeSchedule(final Schedule s) {
 
-    for (Iterator iterator_30 = agenda.iterator(); iterator_30.hasNext(); ) {
-      Schedule sch = (Schedule) iterator_30.next();
+    for (Iterator iterator_3 = agenda.iterator(); iterator_3.hasNext(); ) {
+      Schedule sch = (Schedule) iterator_3.next();
       if (overlap(s, sch)) {
         agenda = SetUtil.diff(Utils.copy(agenda), SetUtil.set(sch));
         return;
@@ -55,9 +55,11 @@ public class Agenda {
 
   public String toString() {
 
-    return "Agenda "
+    return "Agenda{"
+        + "healthProfessional := "
         + Utils.toString(healthProfessional)
-        + " - "
-        + Utils.toString(agenda);
+        + ", agenda := "
+        + Utils.toString(agenda)
+        + "}";
   }
 }
