@@ -26,11 +26,12 @@ operations
 	pre s not in set agenda and forall sch in set agenda & not overlap(s, sch)
 	post s in set agenda;
 	
-	-- Removes a schedule from the agenda
+	-- Removes the schedule that overlaps another from the agenda
 	public removeSchedule : Schedule ==> ()
-		removeSchedule(s) == (agenda := agenda \ {s})
-	pre s in set agenda
-	post s not in set agenda;
+		removeSchedule(s) == (
+			for all sch in set agenda do
+				if(overlap(s, sch))
+					then agenda := agenda \ {sch});
 	
 	-- Checks if a schedule overlaps with other schedule
 	pure public overlap: Schedule * Schedule ==> bool

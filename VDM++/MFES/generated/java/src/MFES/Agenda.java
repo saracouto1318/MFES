@@ -37,7 +37,12 @@ public class Agenda {
 
   public void removeSchedule(final Schedule s) {
 
-    agenda = SetUtil.diff(Utils.copy(agenda), SetUtil.set(s));
+    for (Iterator iterator_30 = agenda.iterator(); iterator_30.hasNext(); ) {
+      Schedule sch = (Schedule) iterator_30.next();
+      if (overlap(s, sch)) {
+        agenda = SetUtil.diff(Utils.copy(agenda), SetUtil.set(sch));
+      }
+    }
   }
 
   public Boolean overlap(final Schedule t1, final Schedule t2) {
@@ -49,9 +54,11 @@ public class Agenda {
 
   public String toString() {
 
-    return "Agenda "
+    return "Agenda{"
+        + "healthProfessional := "
         + Utils.toString(healthProfessional)
-        + " - "
-        + Utils.toString(agenda);
+        + ", agenda := "
+        + Utils.toString(agenda)
+        + "}";
   }
 }
