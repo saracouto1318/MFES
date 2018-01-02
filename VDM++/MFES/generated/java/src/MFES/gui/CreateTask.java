@@ -52,8 +52,8 @@ public class CreateTask extends Menu {
     private Hospital hospital;
     private Patient patient = null;
     private HealthProfessional healthProfessional = null;
-    private List<HealthProfessional> medics;
-    private List<HealthProfessional> nurse;
+    private List<HealthProfessional> additionalMedics;
+    private List<HealthProfessional> additionalNurses;
     private Schedule schedule = null;
 
     private boolean invalid;
@@ -63,8 +63,8 @@ public class CreateTask extends Menu {
         state = CreateState.PATIENT_LIST;
         this.type = type;
         this.hospital = hospital;
-        medics = new LinkedList<>();
-        nurse = new LinkedList<>();
+        additionalMedics = new LinkedList<>();
+        additionalNurses = new LinkedList<>();
         invalid = false;
     }
 
@@ -148,7 +148,7 @@ public class CreateTask extends Menu {
                 healthProfessional = medicsList.getSelected();
 
                 if(type == TaskType.SURGERY) {
-                    System.out.println("Adicionar medicos");
+                    System.out.println("Adicionar medicos " + additionalMedics.size());
                     medics = hospital.getMedicalAssociatedByType(MFES.quotes.DoctorQuote.getInstance());
 
                     if(medics.size() <= 0) {
@@ -157,35 +157,39 @@ public class CreateTask extends Menu {
                     } else {
 	                	boolean finish = false;
 	                	while(!finish) {
-	                		if(medics.size() - nurse.size() <= 0)
+	                		if(medics.size() - additionalMedics.size() <= 0)
 	                			break;
+	                		
+	                        System.out.println(medics.size() + " minus " + additionalMedics.size());
 
 	                		// Get list of doctors
-		                    selectabels = new HealthProfessional[medics.size() - nurse.size()];
+		                    selectabels = new HealthProfessional[medics.size() - additionalMedics.size()];
 		                    iter = medics.iterator();
 		                    i = 0;
 		                    while(iter.hasNext()) {
 		                    	boolean add = true;
 		                    	HealthProfessional hp = iter.next();
-		                    	for(HealthProfessional hp2 : nurse) {
+		                    	for(HealthProfessional hp2 : additionalMedics) {
 		                    		if(hp.getCC().equals(hp2.getCC())) {
 		                    			add = false;
 		                    			break;
 		                    		}
 		                    	}
-		                    	if(add)
-		                    		selectabels[i++] = iter.next();
+		                    	if(add) {
+			                        System.out.println("I value " + i);
+		                    		selectabels[i++] = hp;
+		                    	}
 		                    	else
 		                    		add = true;
 		                    }
 		                    
-		                    medicsList = new ListSelectabels<>(reader, selectabels, this);
+		                    medicsList = new ListSelectabelsOption<>(reader, selectabels, this);
 	                        medicsList.show();
 	                        medicsList.action();
 	                        if(medicsList.getSelected() == null)
 	                        	finish = true;
 	                        else
-	                        	medics.add(medicsList.getSelected());
+	                        	additionalMedics.add(medicsList.getSelected());
 	                	}
                     }
                     
@@ -199,35 +203,35 @@ public class CreateTask extends Menu {
                     } else {	                    
 	                	boolean finish = false;
 	                	while(!finish) {
-	                		if(medics.size() - nurse.size() <= 0)
+	                		if(medics.size() - additionalNurses.size() <= 0)
 	                			break;
 
 	                		// Get list of nurses
-		                    selectabels = new HealthProfessional[medics.size() - nurse.size()];
+		                    selectabels = new HealthProfessional[medics.size() - additionalNurses.size()];
 		                    iter = medics.iterator();
 		                    i = 0;
 		                    while(iter.hasNext()) {
 		                    	boolean add = true;
 		                    	HealthProfessional hp = iter.next();
-		                    	for(HealthProfessional hp2 : nurse) {
+		                    	for(HealthProfessional hp2 : additionalNurses) {
 		                    		if(hp.getCC().equals(hp2.getCC())) {
 		                    			add = false;
 		                    			break;
 		                    		}
 		                    	}
 		                    	if(add)
-		                    		selectabels[i++] = iter.next();
+		                    		selectabels[i++] = hp;
 		                    	else
 		                    		add = true;
 		                    }
 		                    
-		                    medicsList = new ListSelectabels<>(reader, selectabels, this);
+		                    medicsList = new ListSelectabelsOption<>(reader, selectabels, this);
 	                        medicsList.show();
 	                        medicsList.action();
 	                        if(medicsList.getSelected() == null)
 	                        	finish = true;
 	                        else
-	                        	nurse.add(medicsList.getSelected());
+	                        	additionalNurses.add(medicsList.getSelected());
 	                	}
                 	}
                 }
@@ -299,9 +303,9 @@ public class CreateTask extends Menu {
             break;
         case SURGERY:
         	t = new Surgery(healthProfessional, schedule, patient, hospital);
-        	for(HealthProfessional h : medics)
+        	for(HealthProfessional h : additionalMedics)
             	((Surgery)t).addSecondaryDoctor(h);
-        	for(HealthProfessional h : nurse)
+        	for(HealthProfessional h : additionalNurses)
             	((Surgery)t).addOther(h);
             hospital.addTask(t);
             break;

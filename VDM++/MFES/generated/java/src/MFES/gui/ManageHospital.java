@@ -38,7 +38,7 @@ public class ManageHospital extends Menu {
 			System.out.println("3. Consultas");
 			System.out.println("4. Urgencias");
 			System.out.println("5. Cirurgias");
-			System.out.println("6. Tratamento Enfermeiro");
+			System.out.println("6. Tratamentos Enfermeiro");
 			System.out.println("7. Tratamentos Tecnico");
 			System.out.println("8. Treinos");
 			System.out.println("9. Sair");
