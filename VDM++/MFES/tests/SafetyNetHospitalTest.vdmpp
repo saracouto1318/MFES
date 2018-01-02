@@ -101,7 +101,7 @@ operations
 				hospital.addMedAssociated(doctor2);
 				hospital.addMedAssociated(surgeon);
 				hospital.addMedAssociated(nurse);
-				hospital.addMedAssociated(technician);	
+				hospital.addMedAssociated(technician);
 			
 				IO`print("\n Adding agendas to health professionals \n");
 				for all a in set hospital.getAgendas() do(

@@ -59,8 +59,8 @@ public class Hospital {
   public Agenda getAgenda(final HealthProfessional h) {
 
     Agenda a1 = null;
-    for (Iterator iterator_2 = agenda.iterator(); iterator_2.hasNext(); ) {
-      Agenda a2 = (Agenda) iterator_2.next();
+    for (Iterator iterator_3 = agenda.iterator(); iterator_3.hasNext(); ) {
+      Agenda a2 = (Agenda) iterator_3.next();
       if (Utils.equals(a2.getHealthProfessional(), h)) {
         a1 = a2;
       }
@@ -83,20 +83,20 @@ public class Hospital {
 
   public void removeMedAssociated(final HealthProfessional d) {
 
-    for (Iterator iterator_3 = tasks.iterator(); iterator_3.hasNext(); ) {
-      Task t = (Task) iterator_3.next();
+    for (Iterator iterator_4 = tasks.iterator(); iterator_4.hasNext(); ) {
+      Task t = (Task) iterator_4.next();
       if (Utils.equals(d, t.getMedAssoc())) {
         removeTask(t);
       }
     }
-    for (Iterator iterator_4 = trainings.iterator(); iterator_4.hasNext(); ) {
-      Training t = (Training) iterator_4.next();
+    for (Iterator iterator_5 = trainings.iterator(); iterator_5.hasNext(); ) {
+      Training t = (Training) iterator_5.next();
       if (Utils.equals(d, t.getMedAssoc())) {
         removeTraining(t);
       }
     }
-    for (Iterator iterator_5 = agenda.iterator(); iterator_5.hasNext(); ) {
-      Agenda a = (Agenda) iterator_5.next();
+    for (Iterator iterator_6 = agenda.iterator(); iterator_6.hasNext(); ) {
+      Agenda a = (Agenda) iterator_6.next();
       if (Utils.equals(a.getHealthProfessional().getCC(), d.getCC())) {
         removeAgenda(a);
       }
@@ -111,8 +111,8 @@ public class Hospital {
     }
 
     tasks = SetUtil.union(SetUtil.set(d), Utils.copy(tasks));
-    for (Iterator iterator_6 = agenda.iterator(); iterator_6.hasNext(); ) {
-      Agenda a = (Agenda) iterator_6.next();
+    for (Iterator iterator_7 = agenda.iterator(); iterator_7.hasNext(); ) {
+      Agenda a = (Agenda) iterator_7.next();
       if (Utils.equals(a.getHealthProfessional().getCC(), d.getMedAssoc().getCC())) {
         a.removeSchedule(d.getSchedule());
       }
@@ -121,8 +121,8 @@ public class Hospital {
 
   public void removeTask(final Task d) {
 
-    for (Iterator iterator_7 = agenda.iterator(); iterator_7.hasNext(); ) {
-      Agenda a = (Agenda) iterator_7.next();
+    for (Iterator iterator_8 = agenda.iterator(); iterator_8.hasNext(); ) {
+      Agenda a = (Agenda) iterator_8.next();
       if (Utils.equals(a.getHealthProfessional(), d.getMedAssoc())) {
         a.addSchedule(d.getSchedule());
       }
@@ -132,8 +132,8 @@ public class Hospital {
 
   public void addTraining(final Training d) {
 
-    for (Iterator iterator_8 = agenda.iterator(); iterator_8.hasNext(); ) {
-      Agenda a = (Agenda) iterator_8.next();
+    for (Iterator iterator_9 = agenda.iterator(); iterator_9.hasNext(); ) {
+      Agenda a = (Agenda) iterator_9.next();
       if (Utils.equals(a.getHealthProfessional(), d.getMedAssoc())) {
         a.removeSchedule(d.getSchedule());
       }
@@ -143,8 +143,8 @@ public class Hospital {
 
   public void removeTraining(final Training d) {
 
-    for (Iterator iterator_9 = agenda.iterator(); iterator_9.hasNext(); ) {
-      Agenda a = (Agenda) iterator_9.next();
+    for (Iterator iterator_10 = agenda.iterator(); iterator_10.hasNext(); ) {
+      Agenda a = (Agenda) iterator_10.next();
       if (Utils.equals(a.getHealthProfessional(), d.getMedAssoc())) {
         a.addSchedule(d.getSchedule());
       }
@@ -156,8 +156,8 @@ public class Hospital {
 
     VDMSet tasksTotal = null;
     tasksTotal = SetUtil.set();
-    for (Iterator iterator_10 = tasks.iterator(); iterator_10.hasNext(); ) {
-      Task t = (Task) iterator_10.next();
+    for (Iterator iterator_11 = tasks.iterator(); iterator_11.hasNext(); ) {
+      Task t = (Task) iterator_11.next();
       if (Utils.equals(t.getType(), s)) {
         tasksTotal = SetUtil.union(Utils.copy(tasksTotal), SetUtil.set(t));
       }
@@ -169,8 +169,8 @@ public class Hospital {
 
     VDMSet train = null;
     train = SetUtil.set();
-    for (Iterator iterator_11 = trainings.iterator(); iterator_11.hasNext(); ) {
-      Training t = (Training) iterator_11.next();
+    for (Iterator iterator_12 = trainings.iterator(); iterator_12.hasNext(); ) {
+      Training t = (Training) iterator_12.next();
       if (Utils.equals(t.getPurpose(), s)) {
         train = SetUtil.union(Utils.copy(train), SetUtil.set(t));
       }
@@ -187,8 +187,8 @@ public class Hospital {
 
     VDMSet med = null;
     med = SetUtil.set();
-    for (Iterator iterator_12 = medicalAssociated.iterator(); iterator_12.hasNext(); ) {
-      HealthProfessional d = (HealthProfessional) iterator_12.next();
+    for (Iterator iterator_13 = medicalAssociated.iterator(); iterator_13.hasNext(); ) {
+      HealthProfessional d = (HealthProfessional) iterator_13.next();
       if (Utils.equals(d.getType(), type)) {
         med = SetUtil.union(Utils.copy(med), SetUtil.set(d));
       }
@@ -200,10 +200,10 @@ public class Hospital {
 
     VDMSet med = null;
     med = SetUtil.set();
-    for (Iterator iterator_13 = medicalAssociated.iterator(); iterator_13.hasNext(); ) {
-      HealthProfessional d = (HealthProfessional) iterator_13.next();
-      for (Iterator iterator_14 = d.getSpecialties().iterator(); iterator_14.hasNext(); ) {
-        Specialty s = (Specialty) iterator_14.next();
+    for (Iterator iterator_14 = medicalAssociated.iterator(); iterator_14.hasNext(); ) {
+      HealthProfessional d = (HealthProfessional) iterator_14.next();
+      for (Iterator iterator_15 = d.getSpecialties().iterator(); iterator_15.hasNext(); ) {
+        Specialty s = (Specialty) iterator_15.next();
         if (Utils.equals(s.getName(), spec)) {
           med = SetUtil.union(Utils.copy(med), SetUtil.set(d));
         }
