@@ -12,7 +12,6 @@ import MFES.Schedule;
 import MFES.Surgery;
 import MFES.Task;
 import MFES.Treatment;
-import MFES.gui.CreateSchedule;
 import MFES.gui.ListSelectabels;
 import MFES.gui.ManageHospital;
 
@@ -22,10 +21,31 @@ public class CreateTask extends Menu {
     public static enum CreateState {PATIENT_LIST, HEALTHPROFESSIONAL_LIST, SCHEDULE, INVALID};
     private CreateState state;
 
-    public static enum TaskType {APPOINTMENT, SURGERY, TREATMENT, URGENCY};
+    public static enum TaskType {
+		APPOINTMENT {
+			@Override
+			public Object healthAssociatedType() {
+				return MFES.quotes.DoctorQuote.getInstance();
+			}
+		}, SURGERY {
+			@Override
+			public Object healthAssociatedType() {
+				return MFES.quotes.SurgeonQuote.getInstance();
+			}
+		}, TREATMENT {
+			@Override
+			public Object healthAssociatedType() {
+				return MFES.quotes.OtherQuote.getInstance();
+			}
+		}, URGENCY {
+			@Override
+			public Object healthAssociatedType() {
+				return MFES.quotes.DoctorQuote.getInstance();
+			}
+		};
+    	public abstract Object healthAssociatedType();
+    };
     private TaskType type;
-
-    private CreatePerson.CreateType personType;
 
     private Hospital hospital;
     private Patient patient = null;
@@ -34,11 +54,10 @@ public class CreateTask extends Menu {
 
     private boolean invalid;
 
-    public CreateTask(Scanner reader, TaskType type, CreatePerson.CreateType personType, Hospital hospital) {
+    public CreateTask(Scanner reader, TaskType type, Hospital hospital) {
         super(reader);
         state = CreateState.PATIENT_LIST;
         this.type = type;
-        this.personType = personType;
         this.hospital = hospital;
         invalid = false;
     }
@@ -102,7 +121,7 @@ public class CreateTask extends Menu {
 
                 break;
             case HEALTHPROFESSIONAL_LIST:
-                VDMSet medics = hospital.getMedicalAssociatedByType(personType);
+                VDMSet medics = hospital.getMedicalAssociatedByType(type.healthAssociatedType());
 
                 if(medics.size() <= 0) {
                     System.out.println("Neste momento nao ha medicos disponiveis");
@@ -125,10 +144,25 @@ public class CreateTask extends Menu {
                 state = CreateState.SCHEDULE;
                 break;
             case SCHEDULE:
-                CreateSchedule cSchedule = new CreateSchedule(reader, this);
-                cSchedule.show();
-                cSchedule.action();
-                schedule = (Schedule)cSchedule.getSchedule();
+                VDMSet schedules = hospital.getAgenda(healthProfessional).getAgenda();
+
+                if(schedules.size() <= 0) {
+                    System.out.println("O medico nao se encontra disponivel");
+                    return new ManageHospital(reader, hospital);
+                }
+
+                Schedule[] schSelectabels = new Schedule[schedules.size()];
+                Iterator<Schedule> schIter = schedules.iterator();
+                int j = 0;
+                while(schIter.hasNext()) {
+                	schSelectabels[j++] = schIter.next();
+                }
+
+                ListSelectabels<Schedule> scheduleList = new ListSelectabels<>(reader, schSelectabels, this);
+                scheduleList.show();
+                scheduleList.action();
+
+                schedule = scheduleList.getSelected();
                 
                 if(createTask() == null)
                     state = CreateState.INVALID;
@@ -167,35 +201,25 @@ public class CreateTask extends Menu {
         case APPOINTMENT:
         	t = new Appointment(healthProfessional, schedule, patient, hospital);
             hospital.addTask(t);
-            
-            tasks = hospital.getTasksByType(MFES.quotes.AppointmentQuote.getInstance());
-
             break;
         case URGENCY:
         	t = new Appointment(healthProfessional, MFES.quotes.MediumQuote.getInstance(), schedule, patient, hospital);
             hospital.addTask(t);
-            
-            tasks = hospital.getTasksByType(MFES.quotes.AppointmentQuote.getInstance());
-
             break;
         case SURGERY:
         	t = new Surgery(healthProfessional, schedule, patient, hospital);
             hospital.addTask(t);
-            
-            tasks = hospital.getTasksByType(MFES.quotes.SurgeryQuote.getInstance());
-
             break;
         case TREATMENT:
         	t = new Treatment(healthProfessional, "name...", schedule, patient, hospital);
             hospital.addTask(t);
-            
-            tasks = hospital.getTasksByType(MFES.quotes.OtherQuote.getInstance());
-
         	break;
         }
+
+        tasks = hospital.getTasks();
         
         if(tasks.size() <= 0) {
-            System.out.println("Neste momento nao ha medicos disponiveis");
+            System.out.println("Neste momento nao ha tarefas disponiveis");
         } else {
             Task[] hArr = new Task[tasks.size()];
             Iterator<Task> iter = tasks.iterator();

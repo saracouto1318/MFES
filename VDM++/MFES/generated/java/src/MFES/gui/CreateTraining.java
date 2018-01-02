@@ -75,10 +75,25 @@ public class CreateTraining extends Menu {
                 state = CreateState.SCHEDULE;
                 break;
             case SCHEDULE:
-                CreateSchedule cSchedule = new CreateSchedule(reader, this);
-                cSchedule.show();
-                cSchedule.action();
-                schedule = (Schedule)cSchedule.getSchedule();
+                VDMSet schedules = hospital.getAgenda(healthProfessional).getAgenda();
+
+                if(schedules.size() <= 0) {
+                    System.out.println("O medico nao se encontra disponivel");
+                    return new ManageHospital(reader, hospital);
+                }
+
+                Schedule[] schSelectabels = new Schedule[schedules.size()];
+                Iterator<Schedule> schIter = schedules.iterator();
+                int j = 0;
+                while(schIter.hasNext()) {
+                	schSelectabels[j++] = schIter.next();
+                }
+
+                ListSelectabels<Schedule> scheduleList = new ListSelectabels<>(reader, schSelectabels, this);
+                scheduleList.show();
+                scheduleList.action();
+
+                schedule = scheduleList.getSelected();
                 
                 if(createTraining() == null)
                     state = CreateState.INVALID;
@@ -108,11 +123,27 @@ public class CreateTraining extends Menu {
         return healthProfessional != null && schedule != null && !invalid;
     }
 
+	@SuppressWarnings("unchecked")
 	private Training createTraining() {
     	Training t = null;
 	
     	t = new Training(MFES.quotes.AddSkillsQuote.getInstance(), schedule, healthProfessional);
         hospital.addTraining(t);
+        
+        VDMSet trainings = hospital.getTrainings();
+        
+        if(trainings.size() <= 0) {
+            System.out.println("Neste momento nao ha tarefas disponiveis");
+        } else {
+            Training[] hArr = new Training[trainings.size()];
+            Iterator<Training> iter = trainings.iterator();
+            int i = 0;
+            while(iter.hasNext())
+                hArr[i++] = iter.next();
+
+            ListSelectabels<Training> m = new ListSelectabels<>(reader, hArr, this);
+            m.show();
+        }
 
         return t;
     }

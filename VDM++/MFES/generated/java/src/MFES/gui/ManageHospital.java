@@ -162,7 +162,7 @@ public class ManageHospital extends Menu {
 				return null;
 
 			if(option == 1) 
-				return new CreateTask(reader, CreateTask.TaskType.APPOINTMENT, CreatePerson.CreateType.MEDIC, hospital);
+				return new CreateTask(reader, CreateTask.TaskType.APPOINTMENT, hospital);
 			else if(option == 2) {
 		    	VDMSet tasks = hospital.getTasksByType(MFES.quotes.AppointmentQuote.getInstance());
 		        if(tasks.size() <= 0) {
@@ -187,7 +187,7 @@ public class ManageHospital extends Menu {
 				return null;
 
 			if(option == 1)
-				return new CreateTask(reader, CreateTask.TaskType.SURGERY, CreatePerson.CreateType.SURGEON, hospital);
+				return new CreateTask(reader, CreateTask.TaskType.SURGERY, hospital);
 			else if(option == 2) {
 		    	VDMSet tasks = hospital.getTasksByType(MFES.quotes.SurgeryQuote.getInstance());
 		        if(tasks.size() <= 0) {
@@ -212,7 +212,7 @@ public class ManageHospital extends Menu {
 				return null;
 
 			if(option == 1)
-				return new CreateTask(reader, CreateTask.TaskType.TREATMENT, CreatePerson.CreateType.NURSE, hospital);
+				return new CreateTask(reader, CreateTask.TaskType.TREATMENT, hospital);
 			else if(option == 2) {
 		    	VDMSet tasks = hospital.getTasksByType(MFES.quotes.OtherQuote.getInstance());
 		        if(tasks.size() <= 0) {
@@ -237,7 +237,7 @@ public class ManageHospital extends Menu {
 				return null;
 
 			if(option == 1)
-				return new CreateTask(reader, CreateTask.TaskType.TREATMENT, CreatePerson.CreateType.TECHNICIAN, hospital);
+				return new CreateTask(reader, CreateTask.TaskType.TREATMENT, hospital);
 			else if(option == 2) {
 		    	VDMSet tasks = hospital.getTasksByType(MFES.quotes.OtherQuote.getInstance());
 		        if(tasks.size() <= 0) {
@@ -262,7 +262,7 @@ public class ManageHospital extends Menu {
 				return null;
 
 			if(option == 1)
-				return new CreateTask(reader, CreateTask.TaskType.URGENCY, CreatePerson.CreateType.MEDIC, hospital);
+				return new CreateTask(reader, CreateTask.TaskType.URGENCY, hospital);
 			else if(option == 2) {
 		    	VDMSet tasks = hospital.getTasksByType(MFES.quotes.AppointmentQuote.getInstance());
 		        if(tasks.size() <= 0) {
