@@ -1,0 +1,49 @@
+\begin{vdmpp}[breaklines=true]
+class Treatment is subclass of Task
+instance variables
+  public med: HealthProfessional;
+  public name: Types`String;
+  
+  inv med.getType() = <Nurse> or med.getType() = <Technician>;
+operations
+ -- Treatment constructor
+(*@
+\label{Treatment:9}
+@*)
+ public Treatment: HealthProfessional * Types`String * Schedule * Patient * Hospital ==> Treatment
+  Treatment(m, n, s, p, h) == (name := n; med := m; Task(m, s, p, h, <Other>))
+ post name = n and med = m;
+ 
+ -- Returns the treatment's name
+(*@
+\label{getName:14}
+@*)
+ pure public getName: () ==> Types`String
+  getName() == (return name);
+ 
+ -- Returns the health professional associated to the treatment
+(*@
+\label{getMed:18}
+@*)
+ pure public getMed : () ==> HealthProfessional
+  getMed() == (return med);
+
+end Treatment
+\end{vdmpp}
+\bigskip
+\begin{longtable}{|l|r|r|r|}
+\hline
+Function or operation & Line & Coverage & Calls \\
+\hline
+\hline
+\hyperref[Treatment:9]{Treatment} & 9&100.0\% & 4 \\
+\hline
+\hyperref[getMed:18]{getMed} & 18&100.0\% & 1 \\
+\hline
+\hyperref[getName:14]{getName} & 14&100.0\% & 1 \\
+\hline
+\hline
+Treatment.vdmpp & & 100.0\% & 6 \\
+\hline
+\end{longtable}
+

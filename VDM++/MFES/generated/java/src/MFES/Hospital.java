@@ -216,7 +216,21 @@ public class Hospital {
 
   public String toString() {
 
-    return "Hospital "
-        + name;
+    return "Hospital{"
+        + "medicalAssociated := "
+        + Utils.toString(medicalAssociated)
+        + ", agenda := "
+        + Utils.toString(agenda)
+        + ", name := "
+        + Utils.toString(name)
+        + ", address := "
+        + Utils.toString(address)
+        + ", tasks := "
+        + Utils.toString(tasks)
+        + ", trainings := "
+        + Utils.toString(trainings)
+        + ", safetyNet := "
+        + Utils.toString(safetyNet)
+        + "}";
   }
 }

@@ -10,6 +10,7 @@ operations
 		assertTrue(cond) == return
 	pre cond;
 	
+	-- Tests the person's main information (gets created)
 	public testGetInformation: () ==> ()
 		testGetInformation() == (
 			IO`print("\n Getting patient informations \n");
@@ -41,7 +42,8 @@ operations
 			assertTrue(technician.getInfo() = "Name: " ^ "Inês" ^ " " ^ "Pinto" ^ "\nAddress: " ^ "Rua Antero Marques" ^ "\nPhone Number: " ^ "921348765" ^ "\nCC: " ^ "123432151");
 			assertTrue(technician.getType() = <Technician>);
 		);
-		
+	
+	-- Tests the add and remove patients' operation from a health professional
 	public testAddRemovePatient : () ==> ()
 		testAddRemovePatient() == (
 			IO`print("\n Number of patients: ");
@@ -70,7 +72,8 @@ operations
 			IO`print(card surgeon.getPatients());
 			assertTrue(card surgeon.getPatients() = 1);
 		);
-		
+	
+	-- Tests the add and remove a specialty from a health professional
 	public testAddRemoveSpecialty : () ==> ()
 		testAddRemoveSpecialty() == (
 			dcl specialty1: Specialty := new Specialty("General"), specialty2: Specialty := new Specialty("Cardio");

@@ -39,7 +39,7 @@ public class SafetyNetHospitalTest {
       new Patient("Rua 1 Maio", "Vitor", "Andrade", "135790864", "912345334", "123432130");
   private Patient patient4 =
       new Patient("Rua 1 Maio", "Simone", "Andrade", "234123765", "931238654", "0987654143");
-  private Hospital hospital = new Hospital("Hospital das Camélias", "Rua de Cima", safetyNet);
+  private Hospital hospital = new Hospital("Hospital das CamÃ©lias", "Rua de Cima", safetyNet);
   private HealthProfessional doctor =
       new HealthProfessional(
           "Rua de Cima",
@@ -88,7 +88,7 @@ public class SafetyNetHospitalTest {
   private HealthProfessional technician =
       new HealthProfessional(
           "Rua de Baixo",
-          "Luís",
+          "LuÃ­s",
           "Antunes",
           "123444655",
           "921377654",
@@ -116,13 +116,13 @@ public class SafetyNetHospitalTest {
     Hospital h1 = null;
     Hospital h2 = null;
     Hospital h3 = null;
-    h1 = new Hospital("Hospital dos Lusíadas", "Rua de Cima", safetyNet);
+    h1 = new Hospital("Hospital dos LusÃ­adas", "Rua de Cima", safetyNet);
     h2 = new Hospital("Hospital Novo", "Rua 1 de Maio", safetyNet);
     h3 = new Hospital("Hospital da Trofa", "Rua da Trofa", safetyNet);
     IO.print("\n Number of hospitals: ");
     IO.print(safetyNet.getHospitals().size());
     IO.print("\n\n Getting hospitals information \n");
-    assertTrue(Utils.equals(h1.getName(), "Hospital dos Lusíadas"));
+    assertTrue(Utils.equals(h1.getName(), "Hospital dos LusÃ­adas"));
     assertTrue(Utils.equals(h2.getName(), "Hospital Novo"));
     assertTrue(Utils.equals(h3.getName(), "Hospital da Trofa"));
     assertTrue(Utils.equals(h1.getAddress(), "Rua de Cima"));
@@ -329,30 +329,30 @@ public class SafetyNetHospitalTest {
             safetyNet
                 .getHospitalsMoreAppointments(MFES.quotes.AppointmentQuote.getInstance())
                 .getName(),
-            "Hospital das Camélias"));
+            "Hospital das CamÃ©lias"));
     assertTrue(
         Utils.equals(
             safetyNet
                 .getHospitalsMoreAppointments(MFES.quotes.UrgenciesQuote.getInstance())
                 .getName(),
-            "Hospital das Camélias"));
+            "Hospital das CamÃ©lias"));
     assertTrue(
         Utils.equals(
             safetyNet
                 .getHospitalsMoreAppointments(MFES.quotes.SurgeryQuote.getInstance())
                 .getName(),
-            "Hospital das Camélias"));
+            "Hospital das CamÃ©lias"));
     assertTrue(
         Utils.equals(
             safetyNet.getHospitalsMoreAppointments(MFES.quotes.OtherQuote.getInstance()).getName(),
-            "Hospital das Camélias"));
+            "Hospital das CamÃ©lias"));
   }
 
   public void testGetMedMoreHospitals() {
 
     for (Iterator iterator_28 = safetyNet.getHospitals().iterator(); iterator_28.hasNext(); ) {
       Hospital t = (Hospital) iterator_28.next();
-      if (!(Utils.equals(t.getName(), "Hospital das Camélias"))) {
+      if (!(Utils.equals(t.getName(), "Hospital das CamÃ©lias"))) {
         t.addMedAssociated(doctor);
       }
     }
