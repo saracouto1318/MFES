@@ -1,0 +1,40 @@
+\begin{vdmpp}[breaklines=true]
+class Patient is subclass of Person
+instance variables
+  private healthNumber: Types`String;
+  
+  inv len healthNumber > 5;
+operations
+ -- Patient constructor
+(*@
+\label{Patient:8}
+@*)
+ public Patient: Types`String * Types`String * Types`String * Types`String * Types`String * Types`String ==> Patient
+  Patient(a, fn, ln, c, pn, n) == ( healthNumber := n; Person(a, fn, ln, c, pn))
+ pre len n > 5
+ post healthNumber = n;
+ 
+ -- Returns the patient's health number
+(*@
+\label{getHealthNumber:14}
+@*)
+ pure public getHealthNumber : () ==> Types`String
+  getHealthNumber() == (return healthNumber);
+
+end Patient
+\end{vdmpp}
+\bigskip
+\begin{longtable}{|l|r|r|r|}
+\hline
+Function or operation & Line & Coverage & Calls \\
+\hline
+\hline
+\hyperref[Patient:8]{Patient} & 8&100.0\% & 18 \\
+\hline
+\hyperref[getHealthNumber:14]{getHealthNumber} & 14&100.0\% & 1 \\
+\hline
+\hline
+Patient.vdmpp & & 100.0\% & 19 \\
+\hline
+\end{longtable}
+

@@ -1,0 +1,124 @@
+\begin{vdmpp}[breaklines=true]
+class Schedule
+
+instance variables
+  private startHour: Types`Date;
+  private endHour: Types`Date;
+  
+  inv lessThan(startHour, endHour);
+operations
+ -- Schedule constructor
+(*@
+\label{Schedule:10}
+@*)
+ public Schedule: Types`Date * Types`Date ==> Schedule
+  Schedule(d, d2) == (startHour := d; endHour := d2; return self)
+ pre lessThan(d, d2)
+ post startHour = d and endHour = d2;
+ 
+ -- Sets the schedule start hour and endHour's values
+(*@
+\label{setSchedule:16}
+@*)
+ public setSchedule : Types`Date * Types`Date ==> ()
+  setSchedule(d1, d2) == (startHour := d1; endHour := d2;)
+ pre lessThan(d1, d2)
+ post startHour = d1 and endHour = d2;
+ 
+ -- Returns the startHour's value
+(*@
+\label{getScheduleStart:22}
+@*)
+ pure public getScheduleStart : () ==> Types`Date
+  getScheduleStart() == (return startHour);
+ 
+ -- Returns the endHour's value
+(*@
+\label{getScheduleEnd:26}
+@*)
+ pure public getScheduleEnd : () ==> Types`Date
+  getScheduleEnd() == (return endHour);
+ 
+ -- Checks if two schedules overlap
+(*@
+\label{overlap:30}
+@*)
+ pure public overlap : Schedule * Schedule ==> bool
+  overlap(d1, d2) == (
+          if((lessThan(d1.startHour, d2.startHour) and greaterThan(d1.endHour, d2.startHour)) or
+          (not lessThan(d1.startHour, d2.startHour) and lessThan(d1.startHour, d2.endHour)))
+           then return true;
+          return false;);
+ -- Checks if a date is lower than other
+(*@
+\label{lessThan:37}
+@*)
+ pure static public lessThan : Types`Date * Types`Date ==> bool
+  lessThan(d1, d2) == (
+          if(d1.year < d2.year)
+           then return true
+          else if(d1.year > d2.year)
+           then return false;
+          if(d1.month < d2.month)
+           then return true
+          else if(d1.month > d2.month)
+           then return false;
+          if(d1.day < d2.day)
+           then return true
+          else if(d1.day > d2.day)
+           then return false;
+          if(d1.time.hour < d2.time.hour)
+           then return true
+          else if(d1.time.hour > d2.time.hour)
+           then return false;
+          return (d1.time.min < d2.time.min););
+ -- Checks if a date is greater than other         
+(*@
+\label{greaterThan:57}
+@*)
+ pure static public greaterThan : Types`Date * Types`Date ==> bool
+  greaterThan(d1, d2) == (
+          if(d1.year < d2.year)
+           then return false
+          else if(d1.year > d2.year)
+           then return true;
+          if(d1.month < d2.month)
+           then return false
+          else if(d1.month > d2.month)
+           then return true;
+          if(d1.day < d2.day)
+           then return false
+          else if(d1.day > d2.day)
+           then return true;
+          if(d1.time.hour < d2.time.hour)
+           then return false
+          else if(d1.time.hour > d2.time.hour)
+           then return true;
+          return (d1.time.min > d2.time.min););
+end Schedule
+\end{vdmpp}
+\bigskip
+\begin{longtable}{|l|r|r|r|}
+\hline
+Function or operation & Line & Coverage & Calls \\
+\hline
+\hline
+\hyperref[Schedule:10]{Schedule} & 10&100.0\% & 27 \\
+\hline
+\hyperref[getScheduleEnd:26]{getScheduleEnd} & 26&100.0\% & 23 \\
+\hline
+\hyperref[getScheduleStart:22]{getScheduleStart} & 22&100.0\% & 47 \\
+\hline
+\hyperref[greaterThan:57]{greaterThan} & 57&100.0\% & 30 \\
+\hline
+\hyperref[lessThan:37]{lessThan} & 37&100.0\% & 432 \\
+\hline
+\hyperref[overlap:30]{overlap} & 30&100.0\% & 52 \\
+\hline
+\hyperref[setSchedule:16]{setSchedule} & 16&100.0\% & 1 \\
+\hline
+\hline
+Schedule.vdmpp & & 100.0\% & 612 \\
+\hline
+\end{longtable}
+

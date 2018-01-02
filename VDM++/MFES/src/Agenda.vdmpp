@@ -31,7 +31,7 @@ operations
 		removeSchedule(s) == (
 			for all sch in set agenda do
 				if(overlap(s, sch))
-					then agenda := agenda \ {sch});
+					then (agenda := agenda \ {sch}; return););
 	
 	-- Checks if a schedule overlaps with other schedule
 	pure public overlap: Schedule * Schedule ==> bool

@@ -41,6 +41,7 @@ public class Agenda {
       Schedule sch = (Schedule) iterator_30.next();
       if (overlap(s, sch)) {
         agenda = SetUtil.diff(Utils.copy(agenda), SetUtil.set(sch));
+        return;
       }
     }
   }
