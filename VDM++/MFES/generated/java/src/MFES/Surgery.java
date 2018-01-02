@@ -66,8 +66,8 @@ public class Surgery extends Task {
 
   public void addScheduleAuxiliaries(final HealthProfessional s) {
 
-    for (Iterator iterator_22 = hospital.getAgendas().iterator(); iterator_22.hasNext(); ) {
-      Agenda a = (Agenda) iterator_22.next();
+    for (Iterator iterator_23 = hospital.getAgendas().iterator(); iterator_23.hasNext(); ) {
+      Agenda a = (Agenda) iterator_23.next();
       if (Utils.equals(a.getHealthProfessional().getCC(), s.getCC())) {
         a.addSchedule(schedule);
       }
@@ -76,8 +76,8 @@ public class Surgery extends Task {
 
   public void removeScheduleAuxiliaries(final HealthProfessional s) {
 
-    for (Iterator iterator_23 = hospital.getAgendas().iterator(); iterator_23.hasNext(); ) {
-      Agenda a = (Agenda) iterator_23.next();
+    for (Iterator iterator_24 = hospital.getAgendas().iterator(); iterator_24.hasNext(); ) {
+      Agenda a = (Agenda) iterator_24.next();
       if (Utils.equals(a.getHealthProfessional().getCC(), s.getCC())) {
         a.removeSchedule(schedule);
       }

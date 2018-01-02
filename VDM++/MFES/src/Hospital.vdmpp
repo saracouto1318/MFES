@@ -61,7 +61,7 @@ operations
 			agendaNew := new Agenda(d);
 			medicalAssociated := {d} union medicalAssociated;
 			agenda := agenda union {agendaNew})
-	pre d not in set medicalAssociated
+	pre d not in set medicalAssociated and forall med in set medicalAssociated & d.getCC() <> med.getCC()
 	post d in set medicalAssociated;
 	
 	-- Removes a health professional from the hospital's health professionals

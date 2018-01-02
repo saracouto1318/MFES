@@ -82,7 +82,7 @@ public class HealthProfessional extends Person {
 
   public String toString() {
 
-    return firstName
+     return firstName
     		+ " " 
     		+ lastName
     		+ " - "
