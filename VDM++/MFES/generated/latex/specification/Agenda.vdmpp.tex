@@ -1,0 +1,82 @@
+\begin{vdmpp}[breaklines=true]
+class Agenda
+instance variables
+
+private healthProfessional : HealthProfessional;
+private agenda : set of (Schedule);
+
+inv card agenda >= 0;
+
+operations
+ -- Agenda constructor
+(*@
+\label{Agenda:11}
+@*)
+ public Agenda : HealthProfessional ==> Agenda
+  Agenda(h) == (healthProfessional := h; agenda := {}; return self)
+ post healthProfessional = h and agenda = {};
+ 
+ -- Returns the agenda's health professional
+(*@
+\label{getHealthProfessional:16}
+@*)
+ pure public getHealthProfessional : () ==> HealthProfessional
+  getHealthProfessional() == (return healthProfessional);
+ 
+ -- Returns the agenda's schedules
+(*@
+\label{getAgenda:20}
+@*)
+ pure public getAgenda : () ==> set of (Schedule)
+  getAgenda() == (return agenda);
+ 
+ -- Adds a schedule to the agenda
+(*@
+\label{addSchedule:24}
+@*)
+ public addSchedule : Schedule ==> ()
+  addSchedule(s) == (agenda := agenda union {s})
+ pre s not in set agenda and forall sch in set agenda & not overlap(s, sch)
+ post s in set agenda;
+ 
+ -- Removes the schedule that overlaps another from the agenda
+(*@
+\label{removeSchedule:30}
+@*)
+ public removeSchedule : Schedule ==> ()
+  removeSchedule(s) == (
+   for all sch in set agenda do
+    if(overlap(s, sch))
+     then agenda := agenda \ {sch});
+ 
+(*@
+\label{overlap:36}
+@*)
+ -- Checks if a schedule overlaps with other schedule
+ pure public overlap: Schedule * Schedule ==> bool
+  overlap(t1, t2) == (return t1.overlap(t1, t2));
+end Agenda
+\end{vdmpp}
+\bigskip
+\begin{longtable}{|l|r|r|r|}
+\hline
+Function or operation & Line & Coverage & Calls \\
+\hline
+\hline
+\hyperref[Agenda:11]{Agenda} & 11&100.0\% & 13 \\
+\hline
+\hyperref[addSchedule:24]{addSchedule} & 24&100.0\% & 25 \\
+\hline
+\hyperref[getAgenda:20]{getAgenda} & 20&100.0\% & 68 \\
+\hline
+\hyperref[getHealthProfessional:16]{getHealthProfessional} & 16&100.0\% & 470 \\
+\hline
+\hyperref[overlap:36]{overlap} & 36&100.0\% & 105 \\
+\hline
+\hyperref[removeSchedule:30]{removeSchedule} & 30&100.0\% & 18 \\
+\hline
+\hline
+Agenda.vdmpp & & 100.0\% & 699 \\
+\hline
+\end{longtable}
+

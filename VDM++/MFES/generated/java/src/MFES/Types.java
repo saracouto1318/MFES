@@ -90,15 +90,15 @@ public class Types {
         if (Utils.equals(month, 2L)) {
           Boolean orResult_13 = false;
 
-          Boolean andResult_59 = false;
+          Boolean andResult_57 = false;
 
           if (Utils.equals(Utils.mod(year.longValue(), 4L), 0L)) {
             if (!(Utils.equals(Utils.mod(year.longValue(), 100L), 0L))) {
-              andResult_59 = true;
+              andResult_57 = true;
             }
           }
 
-          if (andResult_59) {
+          if (andResult_57) {
             orResult_13 = true;
           } else {
             orResult_13 = Utils.equals(Utils.mod(year.longValue(), 400L), 0L);
@@ -160,31 +160,31 @@ public class Types {
 
   public static Boolean inv_Time(final Time t) {
 
-    Boolean andResult_60 = false;
+    Boolean andResult_58 = false;
 
     if (t.hour.longValue() >= 0L) {
-      Boolean andResult_61 = false;
+      Boolean andResult_59 = false;
 
       if (t.hour.longValue() < 24L) {
-        Boolean andResult_62 = false;
+        Boolean andResult_60 = false;
 
         if (t.min.longValue() >= 0L) {
           if (t.min.longValue() < 60L) {
-            andResult_62 = true;
+            andResult_60 = true;
           }
         }
 
-        if (andResult_62) {
-          andResult_61 = true;
+        if (andResult_60) {
+          andResult_59 = true;
         }
       }
 
-      if (andResult_61) {
-        andResult_60 = true;
+      if (andResult_59) {
+        andResult_58 = true;
       }
     }
 
-    return andResult_60;
+    return andResult_58;
   }
 
   public static class Date implements Record {
@@ -233,14 +233,14 @@ public class Types {
 
   public static Boolean inv_Date(final Date d) {
 
-    Boolean andResult_66 = false;
+    Boolean andResult_64 = false;
 
     if (d.month.longValue() <= 12L) {
       if (d.day.longValue() <= daysOfMonth(d.month, d.year).longValue()) {
-        andResult_66 = true;
+        andResult_64 = true;
       }
     }
 
-    return andResult_66;
+    return andResult_64;
   }
 }

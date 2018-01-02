@@ -41,14 +41,4 @@ public class Treatment extends Task {
   }
 
   public Treatment() {}
-
-  public String toString() {
-
-    return "Treatment{"
-        + "med := "
-        + Utils.toString(med)
-        + ", name := "
-        + Utils.toString(name)
-        + "}";
-  }
 }

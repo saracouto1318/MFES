@@ -63,8 +63,8 @@ public class Task {
 
   public void setSchedule(final Schedule s) {
 
-    for (Iterator iterator_32 = hospital.getAgendas().iterator(); iterator_32.hasNext(); ) {
-      Agenda a = (Agenda) iterator_32.next();
+    for (Iterator iterator_25 = hospital.getAgendas().iterator(); iterator_25.hasNext(); ) {
+      Agenda a = (Agenda) iterator_25.next();
       if (Utils.equals(a.getHealthProfessional().getCC(), medicalAssoc.getCC())) {
         a.addSchedule(schedule);
         a.removeSchedule(s);
@@ -81,18 +81,13 @@ public class Task {
   public Task() {}
 
   public String toString() {
-
-    return "Task{"
-        + "schedule := "
-        + Utils.toString(schedule)
-        + ", patient := "
-        + Utils.toString(patient)
-        + ", hospital := "
+    return "Tarefa "
         + Utils.toString(hospital)
-        + ", medicalAssoc := "
+        + " de "
+        + Utils.toString(patient)
+        + " para "
         + Utils.toString(medicalAssoc)
-        + ", taskType := "
-        + Utils.toString(taskType)
-        + "}";
+        + " tipo "
+        + Utils.toString(taskType);
   }
 }

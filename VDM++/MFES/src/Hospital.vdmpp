@@ -80,56 +80,27 @@ operations
 	pre d in set medicalAssociated
 	post d not in set medicalAssociated;
 	
-		-- Adds a task to the hospital
+	-- Adds a task to the hospital
 	public addTask: Task ==> ()
 		addTask(d) == (
 			if(d.getPatient() not in set d.getMedAssoc().getPatients())
 				then d.getMedAssoc().addPatient(d.getPatient());
 			tasks := {d} union tasks;
-			if(d.getType() = <Surgery>)
-				then removeScheduleSurgery(d);
 			for all a in set agenda do
 				if(a.getHealthProfessional().getCC() = d.getMedAssoc().getCC())
-						then a.removeSchedule(d.getSchedule()))
+						then a.removeSchedule(d.getSchedule());)
 	pre d not in set tasks and d.getSchedule() in set getAgenda(d.getMedAssoc()).getAgenda()
 	post d in set tasks and d.getPatient() in set d.getMedAssoc().getPatients() and d.getSchedule() not in set getAgenda(d.getMedAssoc()).getAgenda();
-	
-	-- Removes the schedule of a surgery
-	public removeScheduleSurgery : Surgery ==> ()
-		removeScheduleSurgery(s) == (
-			for all a in set agenda do(
-				for all surg in set s.getSurgeryPersons(<Surgeon>) do
-					if(a.getHealthProfessional().getCC() = surg.getCC())
-						then a.removeSchedule(s.getSchedule());
-				for all surg in set s.getSurgeryPersons(<Nurse>) do
-					if(a.getHealthProfessional().getCC() = surg.getCC())
-						then a.removeSchedule(s.getSchedule()););
-	);
-	
-	-- Adds the schedule of a surgery
-	public addScheduleSurgery : Surgery ==> ()
-		addScheduleSurgery(s) == (
-			for all a in set agenda do(
-				for all surg in set s.getSurgeryPersons(<Surgeon>) do
-					if(a.getHealthProfessional().getCC() = surg.getCC())
-						then a.addSchedule(s.getSchedule());
-				for all surg in set s.getSurgeryPersons(<Nurse>) do
-					if(a.getHealthProfessional().getCC() = surg.getCC())
-						then a.addSchedule(s.getSchedule()););
-	);
 		
 	-- Removes a task from the hospital
 	public removeTask: Task ==> ()
 		removeTask(d) == (
-			if(d.getType() = <Surgery>)
-				then addScheduleSurgery(d);
 			for all a in set agenda do
 				if(a.getHealthProfessional() = d.getMedAssoc())
 						then a.addSchedule(d.getSchedule());
 			tasks := tasks \ {d})
 	pre d in set tasks and d.getSchedule() not in set getAgenda(d.getMedAssoc()).getAgenda()
 	post d not in set tasks and d.getSchedule() in set getAgenda(d.getMedAssoc()).getAgenda();
-	
 	
 	-- Adds a training to the hospital
 	public addTraining: Training ==> ()
