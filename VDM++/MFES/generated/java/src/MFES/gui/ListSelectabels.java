@@ -54,8 +54,6 @@ public class ListSelectabels<T> extends Menu {
             return null;
         }
 
-        System.out.println(selectabels.length);
-
         selected = (T)selectabels[option - 1];
 		return nextMenu;
 	}

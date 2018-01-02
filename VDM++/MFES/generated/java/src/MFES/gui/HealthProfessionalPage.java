@@ -5,7 +5,6 @@ import java.util.Scanner;
 
 import org.overture.codegen.runtime.VDMSet;
 
-import MFES.Agenda;
 import MFES.HealthProfessional;
 import MFES.Hospital;
 import MFES.Specialty;
