@@ -1,0 +1,38 @@
+\begin{vdmpp}[breaklines=true]
+class Specialty
+
+instance variables
+  private name: Types`String;
+operations
+ -- Specialty constructor
+(*@
+\label{Specialty:7}
+@*)
+ public Specialty : Types`String ==> Specialty
+  Specialty(n) == (name := n; return self)
+ post name = n;
+ 
+ -- Returns the specialty's name
+(*@
+\label{getName:12}
+@*)
+ pure public getName : () ==> Types`String
+  getName() == (return name);
+
+end Specialty
+\end{vdmpp}
+\bigskip
+\begin{longtable}{|l|r|r|r|}
+\hline
+Function or operation & Line & Coverage & Calls \\
+\hline
+\hline
+\hyperref[Specialty:7]{Specialty} & 7&100.0\% & 8 \\
+\hline
+\hyperref[getName:12]{getName} & 12&100.0\% & 8 \\
+\hline
+\hline
+Specialty.vdmpp & & 100.0\% & 16 \\
+\hline
+\end{longtable}
+

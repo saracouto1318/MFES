@@ -38,8 +38,8 @@ public class SafetyNetHospital {
     Number max = 0L;
     Hospital hosp = null;
     max = -1L;
-    for (Iterator iterator_13 = hospitals.iterator(); iterator_13.hasNext(); ) {
-      Hospital h = (Hospital) iterator_13.next();
+    for (Iterator iterator_15 = hospitals.iterator(); iterator_15.hasNext(); ) {
+      Hospital h = (Hospital) iterator_15.next();
       if (h.getTasksByType(((Object) t)).size() > max.longValue()) {
         max = h.getTasksByType(((Object) t)).size();
         hosp = h;
@@ -52,16 +52,16 @@ public class SafetyNetHospital {
 
     VDMSet doctors = null;
     doctors = SetUtil.set();
-    for (Iterator iterator_14 = hospitals.iterator(); iterator_14.hasNext(); ) {
-      Hospital h = (Hospital) iterator_14.next();
+    for (Iterator iterator_16 = hospitals.iterator(); iterator_16.hasNext(); ) {
+      Hospital h = (Hospital) iterator_16.next();
       VDMSet med = null;
       VDMSet list = null;
       med = h.getMedicalAssociatedByType(((Object) t));
       list = SetUtil.diff(Utils.copy(hospitals), SetUtil.set(h));
-      for (Iterator iterator_15 = med.iterator(); iterator_15.hasNext(); ) {
-        HealthProfessional m = (HealthProfessional) iterator_15.next();
-        for (Iterator iterator_16 = list.iterator(); iterator_16.hasNext(); ) {
-          Hospital l = (Hospital) iterator_16.next();
+      for (Iterator iterator_17 = med.iterator(); iterator_17.hasNext(); ) {
+        HealthProfessional m = (HealthProfessional) iterator_17.next();
+        for (Iterator iterator_18 = list.iterator(); iterator_18.hasNext(); ) {
+          Hospital l = (Hospital) iterator_18.next();
           Boolean andResult_28 = false;
 
           if (Utils.equals(m.getType(), t)) {
@@ -93,12 +93,12 @@ public class SafetyNetHospital {
     VDMSet med = null;
     maps = MapUtil.map();
     med = SetUtil.set();
-    for (Iterator iterator_17 = hospitals.iterator(); iterator_17.hasNext(); ) {
-      Hospital h = (Hospital) iterator_17.next();
-      for (Iterator iterator_18 = h.getMedicalAssociatedByType(((Object) t)).iterator();
-          iterator_18.hasNext();
+    for (Iterator iterator_19 = hospitals.iterator(); iterator_19.hasNext(); ) {
+      Hospital h = (Hospital) iterator_19.next();
+      for (Iterator iterator_20 = h.getMedicalAssociatedByType(((Object) t)).iterator();
+          iterator_20.hasNext();
           ) {
-        HealthProfessional m = (HealthProfessional) iterator_18.next();
+        HealthProfessional m = (HealthProfessional) iterator_20.next();
         if (SetUtil.inSet(p, m.getPatients())) {
           med = SetUtil.union(Utils.copy(med), SetUtil.set(m));
         }
@@ -113,8 +113,8 @@ public class SafetyNetHospital {
 
     VDMMap maps = null;
     maps = MapUtil.map();
-    for (Iterator iterator_19 = hospitals.iterator(); iterator_19.hasNext(); ) {
-      Hospital h = (Hospital) iterator_19.next();
+    for (Iterator iterator_21 = hospitals.iterator(); iterator_21.hasNext(); ) {
+      Hospital h = (Hospital) iterator_21.next();
       maps =
           MapUtil.munion(
               Utils.copy(maps),

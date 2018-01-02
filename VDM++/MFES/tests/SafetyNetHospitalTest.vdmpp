@@ -178,8 +178,7 @@ operations
 					
 					agenda1.addSchedule(schedule);
 					agenda1.addSchedule(schedule3);
-					assertTrue(card agenda1.getAgenda() = 2);
-							
+					assertTrue(card agenda1.getAgenda() = 2);							
 		);
 		
 				public testAddRemoveTaskHospital : () ==> ()
@@ -283,6 +282,23 @@ operations
 				assertTrue(mapTest(hospital) = {doctor, doctor2});
 			);
 			
+			public testGetMedAssociatedBySpecialty : () ==> ()
+			testGetMedAssociatedBySpecialty() == (				
+				dcl test : set of (HealthProfessional), spec1 : Specialty, spec2 : Specialty;
+				
+				spec1 := new Specialty("Cardio");
+				spec2 := new Specialty("General");
+				
+				doctor.addSpecialty(spec1);
+				doctor.addSpecialty(spec2);
+				
+				IO`print("\n\n Getting Doctors associated by specialty \n");
+				test := hospital.getMedicalAssociatedBySpecialty("Cardio");
+				
+				assertTrue(card test = 1);
+				assertTrue(test = {doctor});
+			);
+			
 		public testGetMedByHospital : () ==> ()
 			testGetMedByHospital() == (
 				dcl mapTest : map Hospital to set of (HealthProfessional);
@@ -309,6 +325,7 @@ operations
  			safetyNetTest.testGetHospitalsMoreAppointments();
  			safetyNetTest.testGetMedMoreHospitals();
  			safetyNetTest.testGetMedAssociatedByPatient();
+ 			safetyNetTest.testGetMedAssociatedBySpecialty();
  			safetyNetTest.testGetMedByHospital();
  		);
 						

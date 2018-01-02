@@ -1,0 +1,57 @@
+\begin{vdmpp}[breaklines=true]
+class Appointment is subclass of Task
+
+instance variables
+  private priority : Types`Priority;
+  
+  inv priority <> nil;
+  inv medicalAssoc.getType() = <Doctor>;
+operations
+ -- Appointment constructor
+(*@
+\label{Appointment:10}
+@*)
+ public Appointment: HealthProfessional * Schedule * Patient * Hospital==> Appointment
+  Appointment(d, s, p, h) == (medicalAssoc := d; priority := <Medium>; Task(d, s, p, h, <Appointment>))
+ post medicalAssoc = d and priority = <Medium>;
+ 
+ -- Urgency Apppointment constructor
+ public Appointment: HealthProfessional * Types`Priority * Schedule * Patient * Hospital ==> Appointment
+  Appointment(d, p, s, pat, h) == (medicalAssoc := d; priority := p; Task(d, s, pat, h, <Urgencies>))
+ pre p <> nil
+ post medicalAssoc = d and priority = p;
+
+ -- Returns the appointment's priority
+(*@
+\label{getPriority:21}
+@*)
+ pure public getPriority : () ==> Types`Priority
+  getPriority() == (return priority);
+
+  -- Sets the appointment's priority
+(*@
+\label{setPriority:25}
+@*)
+  public setPriority : Types`Priority ==> ()
+   setPriority(p) == (priority := p)
+  pre taskType = <Urgencies>;
+  
+end Appointment
+\end{vdmpp}
+\bigskip
+\begin{longtable}{|l|r|r|r|}
+\hline
+Function or operation & Line & Coverage & Calls \\
+\hline
+\hline
+\hyperref[Appointment:10]{Appointment} & 10&100.0\% & 12 \\
+\hline
+\hyperref[getPriority:21]{getPriority} & 21&100.0\% & 9 \\
+\hline
+\hyperref[setPriority:25]{setPriority} & 25&100.0\% & 3 \\
+\hline
+\hline
+Appointment.vdmpp & & 100.0\% & 24 \\
+\hline
+\end{longtable}
+

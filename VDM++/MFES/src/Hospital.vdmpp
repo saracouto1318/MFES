@@ -156,4 +156,15 @@ operations
 				if(d.getType() = type)
 					then med := med union {d};
 			return med);
+	
+	-- Returns the healthProfessionals of a hospital by its specialty
+	pure public getMedicalAssociatedBySpecialty: Types`String ==> set of (HealthProfessional)
+		getMedicalAssociatedBySpecialty(spec) == (
+			dcl med: set of(HealthProfessional);
+			med := {};
+			for all d in set medicalAssociated do
+				for all s in set d.getSpecialties() do
+					if(s.getName() = spec)
+						then med := med union {d};
+			return med);
 end Hospital

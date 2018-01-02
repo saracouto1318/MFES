@@ -1,0 +1,52 @@
+\begin{vdmpp}[breaklines=true]
+class Person
+
+instance variables
+  protected address: Types`String;
+  protected firstName: Types`String;
+  protected lastName: Types`String;
+  protected cc : Types`String;
+  protected phoneNumber: Types`String;
+  
+operations
+ -- Person constructor
+(*@
+\label{Person:12}
+@*)
+ public Person: Types`String * Types`String * Types`String * Types`String * Types`String ==> Person
+  Person(a, fn, ln, c, pn) == ( address := a; firstName := fn; lastName := ln; cc := c; phoneNumber := pn; return self)
+ post address = a and firstName = fn and lastName = ln and cc = c and phoneNumber = pn;
+ 
+ -- Returns the person's cc number
+(*@
+\label{getCC:17}
+@*)
+ pure public getCC : () ==> Types`String
+  getCC() == (return cc);
+ 
+ -- Returns all the person's information
+(*@
+\label{getInfo:21}
+@*)
+ pure public getInfo: () ==> Types`String
+  getInfo() == (return "Name: " ^ firstName ^ " " ^ lastName ^ "\nAddress: " ^ address ^ "\nPhone Number: " ^ phoneNumber ^ "\nCC: " ^ cc);
+
+end Person
+\end{vdmpp}
+\bigskip
+\begin{longtable}{|l|r|r|r|}
+\hline
+Function or operation & Line & Coverage & Calls \\
+\hline
+\hline
+\hyperref[Person:12]{Person} & 12&100.0\% & 156 \\
+\hline
+\hyperref[getCC:17]{getCC} & 17&100.0\% & 789 \\
+\hline
+\hyperref[getInfo:21]{getInfo} & 21&100.0\% & 15 \\
+\hline
+\hline
+Person.vdmpp & & 100.0\% & 960 \\
+\hline
+\end{longtable}
+

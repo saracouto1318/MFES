@@ -196,6 +196,22 @@ public class Hospital {
     return Utils.copy(med);
   }
 
+  public VDMSet getMedicalAssociatedBySpecialty(final String spec) {
+
+    VDMSet med = null;
+    med = SetUtil.set();
+    for (Iterator iterator_13 = medicalAssociated.iterator(); iterator_13.hasNext(); ) {
+      HealthProfessional d = (HealthProfessional) iterator_13.next();
+      for (Iterator iterator_14 = d.getSpecialties().iterator(); iterator_14.hasNext(); ) {
+        Specialty s = (Specialty) iterator_14.next();
+        if (Utils.equals(s.getName(), spec)) {
+          med = SetUtil.union(Utils.copy(med), SetUtil.set(d));
+        }
+      }
+    }
+    return Utils.copy(med);
+  }
+
   public Hospital() {}
 
   public String toString() {

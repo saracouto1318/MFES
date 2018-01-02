@@ -123,8 +123,8 @@ public class TaskTest {
     hospital.addMedAssociated(technician);
     hospital.addMedAssociated(nurse);
     hospital.addMedAssociated(secSurgeon);
-    for (Iterator iterator_26 = hospital.getAgendas().iterator(); iterator_26.hasNext(); ) {
-      Agenda a = (Agenda) iterator_26.next();
+    for (Iterator iterator_28 = hospital.getAgendas().iterator(); iterator_28.hasNext(); ) {
+      Agenda a = (Agenda) iterator_28.next();
       if (Utils.equals(a.getHealthProfessional(), doctor)) {
         agenda1 = a;
       } else {

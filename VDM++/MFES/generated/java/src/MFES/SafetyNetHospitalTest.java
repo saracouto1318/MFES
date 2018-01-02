@@ -153,8 +153,8 @@ public class SafetyNetHospitalTest {
     hospital.addMedAssociated(nurse);
     hospital.addMedAssociated(technician);
     IO.print("\n Adding agendas to health professionals \n");
-    for (Iterator iterator_23 = hospital.getAgendas().iterator(); iterator_23.hasNext(); ) {
-      Agenda a = (Agenda) iterator_23.next();
+    for (Iterator iterator_25 = hospital.getAgendas().iterator(); iterator_25.hasNext(); ) {
+      Agenda a = (Agenda) iterator_25.next();
       if (Utils.equals(a.getHealthProfessional(), doctor)) {
         agenda1 = a;
       } else {
@@ -228,8 +228,8 @@ public class SafetyNetHospitalTest {
     IO.print("\n Total number of doctors: ");
     IO.print(hospital.getMedicalAssociatedByType(MFES.quotes.DoctorQuote.getInstance()).size());
     hospital.addMedAssociated(doctor);
-    for (Iterator iterator_24 = hospital.getAgendas().iterator(); iterator_24.hasNext(); ) {
-      Agenda a = (Agenda) iterator_24.next();
+    for (Iterator iterator_26 = hospital.getAgendas().iterator(); iterator_26.hasNext(); ) {
+      Agenda a = (Agenda) iterator_26.next();
       if (Utils.equals(a.getHealthProfessional().getCC(), doctor.getCC())) {
         agenda1 = a;
       }
@@ -350,8 +350,8 @@ public class SafetyNetHospitalTest {
 
   public void testGetMedMoreHospitals() {
 
-    for (Iterator iterator_25 = safetyNet.getHospitals().iterator(); iterator_25.hasNext(); ) {
-      Hospital t = (Hospital) iterator_25.next();
+    for (Iterator iterator_27 = safetyNet.getHospitals().iterator(); iterator_27.hasNext(); ) {
+      Hospital t = (Hospital) iterator_27.next();
       if (!(Utils.equals(t.getName(), "Hospital das Camélias"))) {
         t.addMedAssociated(doctor);
       }
@@ -377,6 +377,21 @@ public class SafetyNetHospitalTest {
     assertTrue(Utils.equals(((VDMSet) Utils.get(mapTest, hospital)), SetUtil.set(doctor, doctor2)));
   }
 
+  public void testGetMedAssociatedBySpecialty() {
+
+    VDMSet test = null;
+    Specialty spec1 = null;
+    Specialty spec2 = null;
+    spec1 = new Specialty("Cardio");
+    spec2 = new Specialty("General");
+    doctor.addSpecialty(spec1);
+    doctor.addSpecialty(spec2);
+    IO.print("\n\n Getting Doctors associated by specialty \n");
+    test = hospital.getMedicalAssociatedBySpecialty("Cardio");
+    assertTrue(Utils.equals(test.size(), 1L));
+    assertTrue(Utils.equals(test, SetUtil.set(doctor)));
+  }
+
   public void testGetMedByHospital() {
 
     VDMMap mapTest = null;
@@ -400,6 +415,7 @@ public class SafetyNetHospitalTest {
     safetyNetTest.testGetHospitalsMoreAppointments();
     safetyNetTest.testGetMedMoreHospitals();
     safetyNetTest.testGetMedAssociatedByPatient();
+    safetyNetTest.testGetMedAssociatedBySpecialty();
     safetyNetTest.testGetMedByHospital();
   }
 
