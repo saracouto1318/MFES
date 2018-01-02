@@ -46,13 +46,8 @@ public class Training {
 
   public String toString() {
 
-    return "Training{"
-        + "medicalAssociated := "
+    return "Treino para"
         + Utils.toString(medicalAssociated)
-        + ", purpose := "
-        + Utils.toString(purpose)
-        + ", schedule := "
-        + Utils.toString(schedule)
-        + "}";
+        + Utils.toString(schedule);
   }
 }

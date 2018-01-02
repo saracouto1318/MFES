@@ -55,8 +55,4 @@ public class Appointment extends Task {
 
   public Appointment() {}
 
-  public String toString() {
-
-    return "Appointment{" + "priority := " + Utils.toString(priority) + "}";
-  }
 }

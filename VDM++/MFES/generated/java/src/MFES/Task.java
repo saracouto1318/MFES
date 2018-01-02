@@ -81,18 +81,13 @@ public class Task {
   public Task() {}
 
   public String toString() {
-
-    return "Task{"
-        + "schedule := "
-        + Utils.toString(schedule)
-        + ", patient := "
-        + Utils.toString(patient)
-        + ", hospital := "
+    return "Tarefa "
         + Utils.toString(hospital)
-        + ", medicalAssoc := "
+        + " de "
+        + Utils.toString(patient)
+        + " para "
         + Utils.toString(medicalAssoc)
-        + ", taskType := "
-        + Utils.toString(taskType)
-        + "}";
+        + " tipo "
+        + Utils.toString(taskType);
   }
 }

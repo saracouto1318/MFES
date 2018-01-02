@@ -87,12 +87,10 @@ public class Surgery extends Task {
   public Surgery() {}
 
   public String toString() {
-
-    return "Surgery{"
-        + "secondaryDoctors := "
+	  return super.toString() 
+	  	+ " mais "
         + Utils.toString(secondaryDoctors)
-        + ", other := "
-        + Utils.toString(other)
-        + "}";
+        + " e "
+        + Utils.toString(other);
   }
 }

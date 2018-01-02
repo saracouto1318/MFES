@@ -154,12 +154,9 @@ public class Schedule {
   public Schedule() {}
 
   public String toString() {
-
-    return "Schedule{"
-        + "startHour := "
+    return "Horario de "
         + Utils.toString(startHour)
-        + ", endHour := "
-        + Utils.toString(endHour)
-        + "}";
+        + " a "
+        + Utils.toString(endHour);
   }
 }
