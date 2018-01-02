@@ -70,7 +70,6 @@ public class CreatePerson extends Menu {
             returnedMenu = input(str);
         }
 
-        createPerson();
 		return returnedMenu;
 	}
 
@@ -111,7 +110,6 @@ public class CreatePerson extends Menu {
             return new HealthProfessionalPage(reader, (HealthProfessional)person);
         case HEALTHNUMBER:
             healthNumber = input;
-            createPerson();
             return new HospitalPicker(reader);
         }
 
@@ -131,29 +129,23 @@ public class CreatePerson extends Menu {
             (type == CreateType.PATIENT && healthNumber != null));
     }
 
-    private Person createPerson() {
-        HealthProfessional h = null;
-
+	private Person createPerson() {
         switch(type) {
         case MEDIC:
-            h = new HealthProfessional(address, firstName, lastName, cc, phoneNumber, medicalNumber, MFES.quotes.DoctorQuote.getInstance());
-            hospital.addMedAssociated(h);
-            person = h;
+            person = new HealthProfessional(address, firstName, lastName, cc, phoneNumber, medicalNumber, MFES.quotes.DoctorQuote.getInstance());
+            hospital.addMedAssociated((HealthProfessional)person);
             break;
         case NURSE:
-            h = new HealthProfessional(address, firstName, lastName, cc, phoneNumber, medicalNumber, MFES.quotes.NurseQuote.getInstance());
-            hospital.addMedAssociated(h);
-            person = h;
+        	person = new HealthProfessional(address, firstName, lastName, cc, phoneNumber, medicalNumber, MFES.quotes.NurseQuote.getInstance());
+            hospital.addMedAssociated((HealthProfessional)person);
             break;
         case TECHNICIAN:
-            h = new HealthProfessional(address, firstName, lastName, cc, phoneNumber, medicalNumber, MFES.quotes.TechnicianQuote.getInstance());
-            hospital.addMedAssociated(h);
-            person = h;
+        	person = new HealthProfessional(address, firstName, lastName, cc, phoneNumber, medicalNumber, MFES.quotes.TechnicianQuote.getInstance());
+            hospital.addMedAssociated((HealthProfessional)person);
             break;
         case SURGEON:
-            h = new HealthProfessional(address, firstName, lastName, cc, phoneNumber, medicalNumber, MFES.quotes.SurgeonQuote.getInstance());
-            hospital.addMedAssociated(h);
-            person = h;
+        	person = new HealthProfessional(address, firstName, lastName, cc, phoneNumber, medicalNumber, MFES.quotes.SurgeonQuote.getInstance());
+            hospital.addMedAssociated((HealthProfessional)person);
             break;
         case PATIENT:
             person = new Patient(address, firstName, lastName, cc, phoneNumber, healthNumber);

@@ -5,6 +5,7 @@ import java.util.Scanner;
 
 import org.overture.codegen.runtime.VDMSet;
 
+import MFES.Agenda;
 import MFES.HealthProfessional;
 import MFES.Hospital;
 import MFES.Specialty;
@@ -85,17 +86,6 @@ public class HealthProfessionalPage extends Menu {
                 m.show();
                 m.action();
                 m.getSelected().addMedAssociated(healthProfessional);
-                
-            	System.out.println("\n");
-            	
-            	VDMSet mHsp = m.getSelected().getMedicalAssociated();
-    			Iterator<HealthProfessional> mIter = mHsp.iterator();
-            	while(mIter.hasNext()) {
-            		System.out.println(mIter.next());
-            	}
-            	
-            	System.out.println("\n");
-                
             } else if(option == 3) {
             	CreateAgenda cAgenda = new CreateAgenda(reader, healthProfessional);
             	cAgenda.show();
@@ -104,18 +94,8 @@ public class HealthProfessionalPage extends Menu {
                 return new HospitalPicker(reader);
             
         	break;
-        case CHOOSE_SPECIALITY:
+        case CHOOSE_SPECIALITY:        	
         	healthProfessional.addSpecialty(new Specialty(input));
-        	
-        	System.out.println("\n");
-        	
-        	VDMSet sps = healthProfessional.getSpecialties();
-        	Iterator<Specialty> sIter= sps.iterator();
-        	while(sIter.hasNext()) {
-        		System.out.println(sIter.next());
-        	}
-        	
-        	System.out.println("\n");
         	
         	state = PageState.MAIN;
         	break;
