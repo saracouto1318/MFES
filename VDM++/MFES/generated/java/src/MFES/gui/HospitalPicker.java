@@ -1,6 +1,15 @@
 package MFES.gui;
 
+import MFES.HealthProfessional;
 import MFES.Hospital;
+import MFES.quotes.AppointmentQuote;
+import MFES.quotes.DoctorQuote;
+import MFES.quotes.NurseQuote;
+import MFES.quotes.OtherQuote;
+import MFES.quotes.SurgeonQuote;
+import MFES.quotes.SurgeryQuote;
+import MFES.quotes.TechnicianQuote;
+import MFES.quotes.UrgenciesQuote;
 
 import java.util.Iterator;
 import java.util.Scanner;
@@ -18,7 +27,9 @@ public class HospitalPicker extends Menu {
 	public void show() {
 		System.out.println("\n1. Criar Hospital");
 		System.out.println("2. Escolher Hospital");
-		System.out.println("3. Sair");
+		System.out.println("4. Medicos em mais do que 1 hospital");
+		System.out.println("3. Hospitais com mais consultas");
+		System.out.println("5. Sair");
 		System.out.print("Opcao: ");
     }
     
@@ -69,7 +80,116 @@ public class HospitalPicker extends Menu {
             m.action();
             return new ManageHospital(reader, m.getSelected());
         }
-        else if(number == 3)
+        else if(number == 3) {
+            System.out.println("\nMedicos");
+            VDMSet healthProfessionals = Main.snh.getMedMoreHospitals(DoctorQuote.getInstance());
+
+            if(healthProfessionals.size() <= 0) {
+                System.out.println("\nNeste momento nao ha medicos disponiveis");
+                show();
+                return null;
+            }
+
+            HealthProfessional[] hArr = new HealthProfessional[healthProfessionals.size()];
+            Iterator<HealthProfessional> iter = healthProfessionals.iterator();
+            int i = 0;
+            while(iter.hasNext()) {
+                hArr[i++] = iter.next();
+            }
+
+            ListSelectabels<HealthProfessional> m = new ListSelectabels<>(reader, hArr, this);
+            m.show();
+            
+            System.out.println("\nEnfermeiros");
+            healthProfessionals = Main.snh.getMedMoreHospitals(NurseQuote.getInstance());
+
+            if(healthProfessionals.size() <= 0) {
+                System.out.println("\nNeste momento nao ha enfermeiros disponiveis");
+                show();
+                return null;
+            }
+
+            hArr = new HealthProfessional[healthProfessionals.size()];
+            iter = healthProfessionals.iterator();
+            i = 0;
+            while(iter.hasNext()) {
+                hArr[i++] = iter.next();
+            }
+
+            m = new ListSelectabels<>(reader, hArr, this);
+            m.show();
+            
+            System.out.println("\nTecnicos");
+            healthProfessionals = Main.snh.getMedMoreHospitals(TechnicianQuote.getInstance());
+
+            if(healthProfessionals.size() <= 0) {
+                System.out.println("\nNeste momento nao ha tecnicos disponiveis");
+                show();
+                return null;
+            }
+
+            hArr = new HealthProfessional[healthProfessionals.size()];
+            iter = healthProfessionals.iterator();
+            i = 0;
+            while(iter.hasNext()) {
+                hArr[i++] = iter.next();
+            }
+
+            m = new ListSelectabels<>(reader, hArr, this);
+            m.show();
+            
+            System.out.println("\nCirurgioes");
+            healthProfessionals = Main.snh.getMedMoreHospitals(SurgeonQuote.getInstance());
+
+            if(healthProfessionals.size() <= 0) {
+                System.out.println("\nNeste momento nao ha cirurgioes disponiveis");
+                show();
+                return null;
+            }
+
+            hArr = new HealthProfessional[healthProfessionals.size()];
+            iter = healthProfessionals.iterator();
+            i = 0;
+            while(iter.hasNext()) {
+                hArr[i++] = iter.next();
+            }
+
+            m = new ListSelectabels<>(reader, hArr, this);
+            m.show();
+            
+            return null;        	
+        }
+        else if(number == 4) {
+            Hospital h = Main.snh.getHospitalsMoreAppointments(AppointmentQuote.getInstance());
+            if(h == null) {
+                System.out.println("\nNeste momento nao ha hospitais disponiveis");
+                show();
+                return null;
+            }
+        	System.out.println("Consulta\n" + h);
+        	h = Main.snh.getHospitalsMoreAppointments(UrgenciesQuote.getInstance());
+            if(h == null) {
+                System.out.println("\nNeste momento nao ha hospitais disponiveis");
+                show();
+                return null;
+            }
+        	System.out.println("\nUrgencias\n" + h);
+        	h = Main.snh.getHospitalsMoreAppointments(OtherQuote.getInstance());
+            if(h == null) {
+                System.out.println("\nNeste momento nao ha hospitais disponiveis");
+                show();
+                return null;
+            }
+        	System.out.println("\nTratamentos\n" + h);
+        	h = Main.snh.getHospitalsMoreAppointments(SurgeryQuote.getInstance());
+            if(h == null) {
+                System.out.println("\nNeste momento nao ha hospitais disponiveis");
+                show();
+                return null;
+            }
+        	System.out.println("\nCirurgias\n" + h);
+        }
+        else if(number == 5)
             exit = true;
         return null;
 	}
