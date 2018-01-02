@@ -40,26 +40,26 @@ public class Schedule {
 
     Boolean orResult_1 = false;
 
-    Boolean andResult_31 = false;
+    Boolean andResult_33 = false;
 
     if (lessThan(d1.startHour, d2.startHour)) {
       if (greaterThan(d1.endHour, d2.startHour)) {
-        andResult_31 = true;
+        andResult_33 = true;
       }
     }
 
-    if (andResult_31) {
+    if (andResult_33) {
       orResult_1 = true;
     } else {
-      Boolean andResult_32 = false;
+      Boolean andResult_34 = false;
 
       if (!(lessThan(d1.startHour, d2.startHour))) {
         if (lessThan(d1.startHour, d2.endHour)) {
-          andResult_32 = true;
+          andResult_34 = true;
         }
       }
 
-      orResult_1 = andResult_32;
+      orResult_1 = andResult_34;
     }
 
     if (orResult_1) {
@@ -154,9 +154,12 @@ public class Schedule {
   public Schedule() {}
 
   public String toString() {
-    return "Horario de "
+
+    return "Schedule{"
+        + "startHour := "
         + Utils.toString(startHour)
-        + " a "
-        + Utils.toString(endHour);
+        + ", endHour := "
+        + Utils.toString(endHour)
+        + "}";
   }
 }
