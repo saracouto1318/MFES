@@ -37,14 +37,14 @@ instance variables
 	private patient3: Patient := new Patient("Rua 1 Maio", "Vitor", "Andrade", "135790864", "912345334", "123432130");
 	private patient4: Patient := new Patient("Rua 1 Maio", "Simone", "Andrade", "234123765", "931238654", "0987654143");
 	
-  private hospital: Hospital := new Hospital("Hospital das Camélias", "Rua de Cima", safetyNet);
+  private hospital: Hospital := new Hospital("Hospital das CamÃ©lias", "Rua de Cima", safetyNet);
   
   private doctor: HealthProfessional := new HealthProfessional("Rua de Cima", "Ana", "Marques", "123432156", "921349076", "111111222", <Doctor>);
   private doctor2: HealthProfessional := new HealthProfessional("Rua de Cima", "Anabela", "Marques", "123432157", "921349077", "111111223", <Doctor>);
   private surgeon: HealthProfessional := new HealthProfessional("Rua 2", "Diogo", "Viana", "234512389", "921349134", "111111232", <Surgeon>);
   private secSurgeon: HealthProfessional := new HealthProfessional("Rua 2", "Diana", "Viana", "234512390", "921349135", "111111235", <Surgeon>);
 	private nurse: HealthProfessional := new HealthProfessional("Rua de Baixo", "Lisete", "Antunes", "123444654", "921378643", "111222333", <Nurse>);
-	private technician: HealthProfessional := new HealthProfessional("Rua de Baixo", "Luís", "Antunes", "123444655", "921377654", "111222345", <Technician>);
+	private technician: HealthProfessional := new HealthProfessional("Rua de Baixo", "LuÃ­s", "Antunes", "123444655", "921377654", "111222345", <Technician>);
 
 	private appointment: Appointment := new Appointment(doctor, schedule, patient, hospital);
 	private appointment2: Appointment := new Appointment(doctor, schedule3, patient4, hospital);
@@ -61,17 +61,18 @@ operations
 		assertTrue(cond) == return
 	pre cond;
 	
+	-- Tests the add and remove hospital operations from a safety net
 	public testAddRemoveHospitals: () ==> ()
 		testAddRemoveHospitals() == (
 						dcl h1: Hospital, h2: Hospital, h3: Hospital;
-						h1 := new Hospital("Hospital dos Lusíadas", "Rua de Cima", safetyNet);
+						h1 := new Hospital("Hospital dos LusÃ­adas", "Rua de Cima", safetyNet);
 						h2 := new Hospital("Hospital Novo", "Rua 1 de Maio", safetyNet);
 						h3 := new Hospital("Hospital da Trofa", "Rua da Trofa", safetyNet);
 						IO`print("\n Number of hospitals: ");
 						IO`print(card safetyNet.getHospitals());
 			
 						IO`print("\n\n Getting hospitals information \n");
-						assertTrue(h1.getName() = "Hospital dos Lusíadas");
+						assertTrue(h1.getName() = "Hospital dos LusÃ­adas");
 						assertTrue(h2.getName() = "Hospital Novo");
 						assertTrue(h3.getName() = "Hospital da Trofa");
 						
@@ -92,6 +93,7 @@ operations
 						IO`print(card safetyNet.getHospitals());
 		);
 		
+		-- Tests the add and remove health professional operations from an hospital
 		public testAddRemoveMedHospital : () ==> ()
 		testAddRemoveMedHospital() == (
 				dcl agenda1 : Agenda, agenda2 : Agenda, agenda3 : Agenda, agenda4: Agenda, agenda5: Agenda;
@@ -181,6 +183,7 @@ operations
 					assertTrue(card agenda1.getAgenda() = 2);							
 		);
 		
+		-- Tests the add and remove tasks operations from an hospital
 				public testAddRemoveTaskHospital : () ==> ()
 				testAddRemoveTaskHospital() == (
 					IO`print("\n Adding tasks \n");							
@@ -225,6 +228,7 @@ operations
 						IO`print(card hospital.getTasksByType(<Appointment>));		
 		);
 		
+		-- Tests the add and remove trainings operations from an hospital
 		public testAddRemoveTrainingHospital : () ==> ()
 			testAddRemoveTrainingHospital() == (
 				IO`print("\n\n Total number of trainings: ");
@@ -250,19 +254,21 @@ operations
 				IO`print(card hospital.getTrainingsByType(<Training>) + card hospital.getTrainingsByType(<AddSkills>));
 		);
 		
+		-- Tests the function that gets the hospital with more tasks by type
 		public testGetHospitalsMoreAppointments : () ==> ()
 			testGetHospitalsMoreAppointments() == (	
 				IO`print("\n Checking Safety Net Hospitals with more appointments, etc \n");
-				assertTrue(safetyNet.getHospitalsMoreAppointments(<Appointment>).getName() = "Hospital das Camélias");
-				assertTrue(safetyNet.getHospitalsMoreAppointments(<Urgencies>).getName() = "Hospital das Camélias");
-				assertTrue(safetyNet.getHospitalsMoreAppointments(<Surgery>).getName() = "Hospital das Camélias");
-				assertTrue(safetyNet.getHospitalsMoreAppointments(<Other>).getName() = "Hospital das Camélias");
+				assertTrue(safetyNet.getHospitalsMoreAppointments(<Appointment>).getName() = "Hospital das CamÃ©lias");
+				assertTrue(safetyNet.getHospitalsMoreAppointments(<Urgencies>).getName() = "Hospital das CamÃ©lias");
+				assertTrue(safetyNet.getHospitalsMoreAppointments(<Surgery>).getName() = "Hospital das CamÃ©lias");
+				assertTrue(safetyNet.getHospitalsMoreAppointments(<Other>).getName() = "Hospital das CamÃ©lias");
 			);
-			
+		
+		-- Tests the function that gets the health professionals by type that work in more than one hospital
 		public testGetMedMoreHospitals : () ==> ()
 			testGetMedMoreHospitals() == (
 				for all t in set safetyNet.getHospitals() do
-					if(t.getName() <> "Hospital das Camélias")
+					if(t.getName() <> "Hospital das CamÃ©lias")
 						then t.addMedAssociated(doctor);
 				
 				IO`print("\n Checking Safety Net Doctors that works in more than 1 hospital \n");
@@ -272,6 +278,7 @@ operations
 				assertTrue(safetyNet.getMedMoreHospitals(<Doctor>) = {doctor}); 	
 			);
 		
+		-- Tests the function that gets the health professionals by hospital and patient
 		public testGetMedAssociatedByPatient : () ==> ()
 			testGetMedAssociatedByPatient() == (
 				dcl mapTest : map Hospital to set of (HealthProfessional);
@@ -282,6 +289,7 @@ operations
 				assertTrue(mapTest(hospital) = {doctor, doctor2});
 			);
 			
+			-- Tests the function that gets the health professionals by specialty
 			public testGetMedAssociatedBySpecialty : () ==> ()
 			testGetMedAssociatedBySpecialty() == (				
 				dcl test : set of (HealthProfessional), spec1 : Specialty, spec2 : Specialty;
@@ -298,7 +306,8 @@ operations
 				assertTrue(card test = 1);
 				assertTrue(test = {doctor});
 			);
-			
+		
+		-- Tests the function that gets the health professionals by hospital
 		public testGetMedByHospital : () ==> ()
 			testGetMedByHospital() == (
 				dcl mapTest : map Hospital to set of (HealthProfessional);
