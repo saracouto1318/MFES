@@ -2,17 +2,7 @@ package MFES.gui;
 
 import java.util.Scanner;
 
-public class ListSelectabels<T> extends Menu {
-    protected T[] selectabels;
-    protected Menu nextMenu;
-    protected T selected;
-
-    public ListSelectabels(Scanner reader, T[] selectabels, Menu nextMenu) {
-        super(reader);
-        this.selectabels = selectabels;
-        this.nextMenu = nextMenu;
-        selected = null;
-    }
+public class ListSelectabelsOption<T> extends ListSelectabels<T> {
 
 	@Override
 	public void show() {
@@ -20,18 +10,14 @@ public class ListSelectabels<T> extends Menu {
         int i = 1;
         for(T t : selectabels)
             System.out.println(i++ + ". " + t.toString());
-        
+
+        System.out.print(i + ". Sair");
         System.out.print("Opcao: ");
 	}
 
 	@Override
 	public Menu action() {
-        Menu next = null;
-        while(next == null) {
-            String str = reader.nextLine();
-            next = input(str);
-        }
-		return next;
+		return super.action();
 	}
 
 	@Override
@@ -49,20 +35,20 @@ public class ListSelectabels<T> extends Menu {
             return null;
         }
 
-        if(option < 1 || option > selectabels.length) {
+        if(option < 1 || option > selectabels.length + 1) {
             show();
             return null;
         }
 
+        if(option == selectabels.length)
+        	return nextMenu;
+        
         selected = (T)selectabels[option - 1];
 		return nextMenu;
 	}
 
-	@Override
-    public void destroy() {}
-    
-    public T getSelected() {
-        return selected;
-    }
+	public ListSelectabelsOption(Scanner reader, T[] selectabels, Menu nextMenu) {
+		super(reader, selectabels, nextMenu);
+	}
 
 }

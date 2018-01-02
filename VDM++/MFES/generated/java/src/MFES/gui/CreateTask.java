@@ -1,6 +1,8 @@
 package MFES.gui;
 
 import java.util.Iterator;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Scanner;
 
 import MFES.HealthProfessional;
@@ -50,6 +52,8 @@ public class CreateTask extends Menu {
     private Hospital hospital;
     private Patient patient = null;
     private HealthProfessional healthProfessional = null;
+    private List<HealthProfessional> medics;
+    private List<HealthProfessional> nurse;
     private Schedule schedule = null;
 
     private boolean invalid;
@@ -59,6 +63,8 @@ public class CreateTask extends Menu {
         state = CreateState.PATIENT_LIST;
         this.type = type;
         this.hospital = hospital;
+        medics = new LinkedList<>();
+        nurse = new LinkedList<>();
         invalid = false;
     }
 
@@ -141,6 +147,91 @@ public class CreateTask extends Menu {
 
                 healthProfessional = medicsList.getSelected();
 
+                if(type == TaskType.SURGERY) {
+                    System.out.println("Adicionar medicos");
+                    medics = hospital.getMedicalAssociatedByType(MFES.quotes.DoctorQuote.getInstance());
+
+                    if(medics.size() <= 0) {
+                        System.out.println("Neste momento nao ha medicos disponiveis");
+                        return new ManageHospital(reader, hospital);
+                    } else {
+	                	boolean finish = false;
+	                	while(!finish) {
+	                		if(medics.size() - nurse.size() <= 0)
+	                			break;
+
+	                		// Get list of doctors
+		                    selectabels = new HealthProfessional[medics.size() - nurse.size()];
+		                    iter = medics.iterator();
+		                    i = 0;
+		                    while(iter.hasNext()) {
+		                    	boolean add = true;
+		                    	HealthProfessional hp = iter.next();
+		                    	for(HealthProfessional hp2 : nurse) {
+		                    		if(hp.getCC().equals(hp2.getCC())) {
+		                    			add = false;
+		                    			break;
+		                    		}
+		                    	}
+		                    	if(add)
+		                    		selectabels[i++] = iter.next();
+		                    	else
+		                    		add = true;
+		                    }
+		                    
+		                    medicsList = new ListSelectabels<>(reader, selectabels, this);
+	                        medicsList.show();
+	                        medicsList.action();
+	                        if(medicsList.getSelected() == null)
+	                        	finish = true;
+	                        else
+	                        	nurse.add(medicsList.getSelected());
+	                	}
+                    }
+                    
+                    System.out.println("Adicionar enfermeiros");
+                	
+                    medics = hospital.getMedicalAssociatedByType(MFES.quotes.NurseQuote.getInstance());
+
+                    if(medics.size() <= 0) {
+                        System.out.println("Neste momento nao ha enfermeiros disponiveis");
+                        return new ManageHospital(reader, hospital);
+                    } else {	                    
+	                	boolean finish = false;
+	                	while(!finish) {
+	                		if(medics.size() - nurse.size() <= 0)
+	                			break;
+
+	                		// Get list of nurses
+		                    selectabels = new HealthProfessional[medics.size() - nurse.size()];
+		                    iter = medics.iterator();
+		                    i = 0;
+		                    while(iter.hasNext()) {
+		                    	boolean add = true;
+		                    	HealthProfessional hp = iter.next();
+		                    	for(HealthProfessional hp2 : nurse) {
+		                    		if(hp.getCC().equals(hp2.getCC())) {
+		                    			add = false;
+		                    			break;
+		                    		}
+		                    	}
+		                    	if(add)
+		                    		selectabels[i++] = iter.next();
+		                    	else
+		                    		add = true;
+		                    }
+		                    
+		                    medicsList = new ListSelectabels<>(reader, selectabels, this);
+	                        medicsList.show();
+	                        medicsList.action();
+	                        if(medicsList.getSelected() == null)
+	                        	finish = true;
+	                        else
+	                        	nurse.add(medicsList.getSelected());
+	                	}
+                	}
+                }
+                
                 state = CreateState.SCHEDULE;
                 break;
             case SCHEDULE:
