@@ -22,6 +22,7 @@ operations
 		assertTrue(cond) == return
 	pre cond;
 	
+	-- Tests the tarinings' main information
 	public testGetsSets : () ==> ()
 		testGetsSets() == (
 			IO`print("\n Testing Training gets and sets \n");
