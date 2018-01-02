@@ -11,7 +11,7 @@ public class ListSelectabelsOption<T> extends ListSelectabels<T> {
         for(T t : selectabels)
             System.out.println(i++ + ". " + t.toString());
 
-        System.out.print(i + ". Sair");
+        System.out.println(i + ". Sair");
         System.out.print("Opcao: ");
 	}
 
@@ -40,7 +40,7 @@ public class ListSelectabelsOption<T> extends ListSelectabels<T> {
             return null;
         }
 
-        if(option == selectabels.length)
+        if(option == selectabels.length + 1)
         	return nextMenu;
         
         selected = (T)selectabels[option - 1];

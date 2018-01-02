@@ -153,7 +153,6 @@ public class CreateTask extends Menu {
 
                     if(medics.size() <= 0) {
                         System.out.println("Neste momento nao ha medicos disponiveis");
-                        return new ManageHospital(reader, hospital);
                     } else {
 	                	boolean finish = false;
 	                	while(!finish) {
@@ -199,7 +198,6 @@ public class CreateTask extends Menu {
 
                     if(medics.size() <= 0) {
                         System.out.println("Neste momento nao ha enfermeiros disponiveis");
-                        return new ManageHospital(reader, hospital);
                     } else {	                    
 	                	boolean finish = false;
 	                	while(!finish) {
