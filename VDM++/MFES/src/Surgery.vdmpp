@@ -65,7 +65,8 @@ operations
 			for all a in set hospital.getAgendas() do
 				if(a.getHealthProfessional().getCC() = s.getCC())
 					then a.addSchedule(schedule))
-	pre s.getType() = <Surgeon> or s.getType() = <Nurse>;
+	pre s.getType() = <Surgeon> or s.getType() = <Nurse> and schedule not in set hospital.getAgenda(s).getAgenda()
+	post schedule in set hospital.getAgenda(s).getAgenda();
 	
 	-- Removes the surgery schedule from the	auxiliary's agenda
 	public removeScheduleAuxiliaries : HealthProfessional ==> ()
@@ -73,6 +74,7 @@ operations
 			for all a in set hospital.getAgendas() do
 				if(a.getHealthProfessional().getCC() = s.getCC())
 					then a.removeSchedule(schedule))
-	pre s.getType() = <Surgeon> or s.getType() = <Nurse>;
+	pre s.getType() = <Surgeon> or s.getType() = <Nurse> and schedule in set hospital.getAgenda(s).getAgenda()
+	post schedule not in set hospital.getAgenda(s).getAgenda();
 	
 end Surgery
