@@ -58,6 +58,7 @@ operations
 		assertTrue(cond) == return
 	pre cond;
 	
+	-- Tests the tasks's main information
 	public testGetsSetsTask : () ==> ()
 		testGetsSetsTask() == (
 			dcl agenda1 : Agenda, agenda2 : Agenda, agenda3 : Agenda, agenda4: Agenda, agenda5: Agenda, agenda6: Agenda;
@@ -182,7 +183,8 @@ operations
 			assertTrue(appointment.getSchedule().getScheduleEnd().time.hour = 12);
 			assertTrue(appointment.getSchedule().getScheduleEnd().time.min = 50);
 		);
-		
+	
+	-- Tests an appointment
 	public testAppointment : () ==> ()
 		testAppointment() == (
 			IO`print("\n Checking appointment priority \n");
@@ -192,7 +194,8 @@ operations
 			urgencies.setPriority(<Low>);
 			assertTrue(urgencies.getPriority() = <Low>);
 		);
-		
+	
+	-- Tests a surgery
 	public testSurgery: () ==> ()
 		testSurgery() == (
 			IO`print("\n Checking surgery informations \n");
@@ -216,6 +219,7 @@ operations
 			assertTrue(surgery.getMedAssoc().getCC() = "234512390");
 	);
 	
+	-- Tests a treatment
 	public testTreatment : () ==> ()
 		testTreatment() == (
 			IO`print("\n Checking treatment informations \n");
@@ -224,6 +228,7 @@ operations
 			assertTrue(treatment.getMed().getCC() = "123444655");
 		);
 		
+		-- Tests the schedule's functions
 		public testScheduleFunctions: () ==> ()
 		testScheduleFunctions() == (
 			dcl sch : Schedule, sch1 : Schedule, sch2 : Schedule, dateNew: Types`Date, dateNew2 : Types`Date;
