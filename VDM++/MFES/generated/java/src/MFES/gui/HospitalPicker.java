@@ -27,7 +27,7 @@ public class HospitalPicker extends Menu {
 	public void show() {
 		System.out.println("\n1. Criar Hospital");
 		System.out.println("2. Escolher Hospital");
-		System.out.println("3. Profissionais de Saúde em mais do que 1 hospital");
+		System.out.println("3. Profissionais de Saude em mais do que 1 hospital");
 		System.out.println("4. Hospitais com mais Tarefas");
 		System.out.println("5. Sair");
 		System.out.print("Opcao: ");
