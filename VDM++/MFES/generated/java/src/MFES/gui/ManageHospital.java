@@ -44,7 +44,7 @@ public class ManageHospital extends Menu {
 			System.out.println("9. Sair");
 			break;
 		case CREATE:
-			System.out.println("1. Medico");
+			System.out.println("\n1. Medico");
 			System.out.println("2. Enfermeiro");
 			System.out.println("3. Tecnico");
 			System.out.println("4. Cirurgiao");
@@ -56,7 +56,7 @@ public class ManageHospital extends Menu {
 		case TECHNICIAN_TREATMENT:
 		case URGENCY:
 		case TRAINING:
-			System.out.println("1. Registar");
+			System.out.println("\n1. Registar");
 			System.out.println("2. Listar");
 			System.out.println("3. Atras");
 			break;
@@ -103,7 +103,7 @@ public class ManageHospital extends Menu {
 			else if(option == 2) {
                 VDMSet hps = hospital.getMedicalAssociated();
                 if(hps.size() <= 0) {
-                	System.out.println("\nNeste momento nao ha medicos disponiveis");
+                	System.out.println("\nNeste momento nao ha profissionais de saude disponiveis");
                 	first = true;
                 	break;
                 }
