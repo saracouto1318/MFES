@@ -110,6 +110,7 @@ public class CreatePerson extends Menu {
             return new HealthProfessionalPage(reader, (HealthProfessional)person);
         case HEALTHNUMBER:
             healthNumber = input;
+            createPerson();
             return new HospitalPicker(reader);
         }
 
