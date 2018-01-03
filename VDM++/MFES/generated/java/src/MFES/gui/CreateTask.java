@@ -111,7 +111,11 @@ public class CreateTask extends Menu {
 	@SuppressWarnings("unchecked")
 	@Override
 	public Menu action() {
-        if(invalid)
+        VDMSet medics = hospital.getMedicalAssociatedByType(type.healthAssociatedType());
+        if(medics.size() <= 0) {
+            System.out.println("Neste momento nao ha profissionais de saude disponiveis");
+            return new ManageHospital(reader, hospital);
+        } else if(invalid)
             return new ManageHospital(reader, hospital);
 
         while(!endCondition() && !invalid) {
@@ -127,13 +131,6 @@ public class CreateTask extends Menu {
 
                 break;
             case HEALTHPROFESSIONAL_LIST:
-                VDMSet medics = hospital.getMedicalAssociatedByType(type.healthAssociatedType());
-
-                if(medics.size() <= 0) {
-                    System.out.println("Neste momento nao ha medicos disponiveis");
-                    return new ManageHospital(reader, hospital);
-                }
-
                 HealthProfessional[] selectabels = new HealthProfessional[medics.size()];
                 Iterator<HealthProfessional> iter = medics.iterator();
                 int i = 0;
@@ -159,8 +156,6 @@ public class CreateTask extends Menu {
 	                		if(medics.size() - additionalMedics.size() <= 0)
 	                			break;
 	                		
-	                        System.out.println(medics.size() + " minus " + additionalMedics.size());
-
 	                		// Get list of doctors
 		                    selectabels = new HealthProfessional[medics.size() - additionalMedics.size()];
 		                    iter = medics.iterator();
@@ -174,10 +169,8 @@ public class CreateTask extends Menu {
 		                    			break;
 		                    		}
 		                    	}
-		                    	if(add) {
-			                        System.out.println("I value " + i);
+		                    	if(add)
 		                    		selectabels[i++] = hp;
-		                    	}
 		                    	else
 		                    		add = true;
 		                    }

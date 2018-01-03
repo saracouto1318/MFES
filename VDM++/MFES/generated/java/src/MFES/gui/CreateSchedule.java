@@ -129,13 +129,7 @@ public class CreateSchedule extends Menu {
     }
 
     private Schedule createSchedule() {
-        //int tmpM = minutes + duration;
         int h = hour, m = minutes;
-        /*if(tmpM > 60) {
-            tmpM = 60;
-        }
-
-        duration = tmpM - minutes;*/
 
         h += ((double)duration-((double)duration%60.0))/60.0;
         duration -= ((double)duration-((double)duration%60.0));

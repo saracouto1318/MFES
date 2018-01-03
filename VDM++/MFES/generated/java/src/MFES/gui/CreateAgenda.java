@@ -50,17 +50,7 @@ public class CreateAgenda extends Menu {
         
         h.getAgenda(hp).addSchedule(s);
         
-        System.out.println("Sucesso");
-        
-    	System.out.println("\n");
-    	
-    	VDMSet hAgenda = h.getAgendas();
-		Iterator<Agenda> aIter = hAgenda.iterator();
-    	while(aIter.hasNext()) {
-    		System.out.println(aIter.next());
-    	}
-    	
-    	System.out.println("\n");
+        System.out.println("\nSucesso");
         
 	}
 
